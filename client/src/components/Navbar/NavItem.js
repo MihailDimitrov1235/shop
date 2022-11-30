@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     Link as RouterLink,
     matchPath,
@@ -18,6 +19,18 @@ const NavItem = ({
         end: false
     }, location.pathname) : false;
 
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseOver = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(false);
+    };
+
+    const condition = (active || isHovering) && !rest.variant;
+
     return (
         <Button
             component={RouterLink}
@@ -28,19 +41,31 @@ const NavItem = ({
                 fontSize: 16,
                 fontWeight: 'medium',
                 letterSpacing: 0,
-                py: rest.paddingY || 0.75,
-                px: rest.paddingX || 0,
+                py: rest.paddingy || 0.75,
+                px: rest.paddingx || 0,
                 mx: 3,
                 textTransform: 'none',
                 width: '100%',
-                ...(active && {
-                    color: 'primary.contrastText'
+                ...(condition  && {
+                    color: 'primary.contrastText',
                 }),
+                ...(condition && {
+                    '&:after': {
+                        content: '""',
+                        width: '100%',
+                        backgroundColor: 'primary.contrastText',
+                        height: '5px',
+                        position: 'absolute',
+                        bottom: -5
+                    }
+                })
                 // '& svg': {
                 //     mr: 1
                 // },
             }}
             to={href}
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
             {...rest}
         >
             <span>

@@ -49,7 +49,7 @@ const Navbar = (props) => {
                         variant="outlined"
                         color="bordoRed"
                         textcolor="bordoRed"
-                        paddingX={4.5}
+                        paddingx={4.5}
                         startIcon={<ShoppingCartIcon />}
                     />
                     <NavItem
