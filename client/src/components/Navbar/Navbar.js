@@ -5,9 +5,10 @@ import NavItem from './NavItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = (props) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -41,6 +42,7 @@ const Navbar = (props) => {
                         title={t('products')}
                         href="/products"
                     />
+                    <LanguageSwitcher />
                     <Divider orientation="vertical" flexItem />
                     <NavItem
                         title={

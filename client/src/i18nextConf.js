@@ -8,7 +8,7 @@ const availableLanguages = ['en', 'bg'];
 
 i18n
   .use(Backend) // load translations using http (default public/assets/locals/en/translations)
-  .use(LanguageDetector) // detect user language
+  //.use(LanguageDetector) // detect user language
   .use(initReactI18next) // pass the i18n instance to react-i18next.
   .init({
     fallbackLng, // fallback language is english.
