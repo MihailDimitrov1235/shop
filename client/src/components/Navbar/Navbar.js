@@ -22,10 +22,10 @@ const Navbar = (props) => {
     return (
         <AppBar
             elevation={0}
-            sx={{ py: 1, px: 55 }}
+            sx={{ py: 1 }}
             {...props}
         >
-            <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between' }}>
+            <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', mx: '300px' }}>
                 <RouterLink to="/">
                     <Logo />
                 </RouterLink>
