@@ -1,1 +1,1 @@
-This is a webstore created on Laravel for the Bulgarian Academy of Sciences.
+# This is a webstore created on React and Laravel for the Bulgarian Academy of Sciences.
