@@ -4,8 +4,11 @@ import Logo from '../Logo';
 import NavItem from './NavItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { styled } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = (props) => {
+    const { t } = useTranslation();
+
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
             position: 'relative',
@@ -31,18 +34,18 @@ const Navbar = (props) => {
                 </RouterLink>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <NavItem
-                        title="Начало"
+                        title={t('home')}
                         href="/"
                     />
                     <NavItem
-                        title="Продукти"
+                        title={t('products')}
                         href="/products"
                     />
                     <Divider orientation="vertical" flexItem />
                     <NavItem
                         title={
                             <StyledBadge badgeContent={4} color="bordoRed">
-                                <span>Количка</span>
+                                <span>{t('cart')}</span>
                             </StyledBadge>
                         }
                         href="/cart"
@@ -53,7 +56,7 @@ const Navbar = (props) => {
                         startIcon={<ShoppingCartIcon />}
                     />
                     <NavItem
-                        title="Вход"
+                        title={t('sign-in')}
                         href="/login"
                         variant="contained"
                         color="bordoRed"
