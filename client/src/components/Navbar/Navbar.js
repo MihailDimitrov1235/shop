@@ -29,7 +29,7 @@ const Navbar = (props) => {
             sx={{ py: 1 }}
             {...props}
         >
-            <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', mx: '300px' }}>
+            <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', width: '85%', margin: '0 auto' }}>
                 <RouterLink to="/">
                     <Logo />
                 </RouterLink>
