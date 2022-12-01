@@ -36,7 +36,7 @@ const Navbar = (props) => {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <NavItem
                         title={t('home')}
-                        href="/"
+                        href="/home"
                     />
                     <NavItem
                         title={t('products')}
