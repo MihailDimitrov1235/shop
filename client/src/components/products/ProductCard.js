@@ -9,11 +9,11 @@ import {
 
 const ProductCard = () => {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 450 }}>
             <CardMedia
                 component="img"
                 alt="green iguana"
-                height="140"
+                height="200"
                 image="https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp"
             />
             <CardContent>
