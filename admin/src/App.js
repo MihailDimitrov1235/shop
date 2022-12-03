@@ -6,6 +6,7 @@ import theme from './theme';
 import routes from './routes';
 import TopBar from './pages/global/TopBar'
 import SideBar from './pages/global/SideBar'
+import {Box} from "@mui/material";
 
 function App() {
 

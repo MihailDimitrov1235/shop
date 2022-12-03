@@ -16,22 +16,29 @@ const SideBar = () =>{
         <Box sx={{
             backgroundColor:`${theme.palette.background.adminMenu}`,
             width:"200px",
+            height:"100%",
         }}>
             <ProSidebarProvider>
-                <Menu>
-                    {!isCollapsed &&(
-                        <MenuItem>
-                            <Box textAlign="center">
-                                <Typography variant='h5'>
-                                    ADMINS
-                                </Typography>
-                                <IconButton>
-                                    <AdminPanelSettingsIcon />
-                                </IconButton>
-                            </Box>
-                        </MenuItem>
-                    )}
-                </Menu>
+                <Box sx={{
+                }}>
+                    <Menu>
+                        {!isCollapsed &&(
+                            <MenuItem>
+                                <Box sx={{
+                                    textAlign:"center",
+                                    padding:'auto',
+                                }}>
+                                    <Typography variant='h5'>
+                                        ADMINS
+                                    </Typography>
+                                    <IconButton>
+                                        <AdminPanelSettingsIcon />
+                                    </IconButton>
+                                </Box>
+                            </MenuItem>
+                        )}
+                    </Menu>
+                </Box>
             </ProSidebarProvider>
         </Box>
     )

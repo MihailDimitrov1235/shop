@@ -12,6 +12,7 @@ const theme = createTheme({
       default: '#f4f6f8',
       paper: '#ffffff',
       adminMenu: '#4f5d73',
+      adminMenuDarker: '#465367',
     },
     primary: {
       contrastText: '#96011c',
@@ -75,7 +76,8 @@ const theme = createTheme({
     h5: {
       fontWeight: 500,
       fontSize: 16,
-      letterSpacing: '-0.05px'
+      letterSpacing: '-0.05px',
+      display:'inline'
     },
     h6: {
       fontWeight: 500,
