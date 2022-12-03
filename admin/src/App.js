@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from './theme';
 import routes from './routes';
 import TopBar from './pages/global/TopBar'
+import SideBar from './pages/global/SideBar'
 
 function App() {
 

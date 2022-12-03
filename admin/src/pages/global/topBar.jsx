@@ -14,7 +14,14 @@ function TopBar (){
 
             {/* Search */}
             <Box display="flex" borderRadius="3px">
-                <InputBase sx={{ ml: 2, flex: 1, backgroundColor: theme.palette.background.paper}} placeholder="Search" />
+                <InputBase sx={{
+                    p: 1, 
+                    ml: 2,
+                    flex: 1,
+                    backgroundColor: theme.palette.background.paper,
+                    border: `2px solid ${theme.palette.primary.contrastText}`, 
+                    borderRadius: '50vh' 
+                    }} placeholder="Search" />
                 <IconButton>
                 <SearchIcon />
                 </IconButton>
