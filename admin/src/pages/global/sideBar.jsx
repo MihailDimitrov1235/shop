@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ProSidebarProvider , Menu, MenuItem} from 'react-pro-sidebar';
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 //import 'react-pro-sidebar/dist/styles';
 import { Box, useTheme } from "@mui/system";
 import Typography from '@mui/material/Typography';
@@ -9,37 +9,24 @@ import { IconButton } from "@mui/material";
 
 const SideBar = () =>{
     const theme = useTheme();
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    const [selected, setSelected] = useState('Dashboard');
 
     return (
         <Box sx={{
-            backgroundColor:`${theme.palette.background.adminMenu}`,
-            width:"200px",
-            height:"100%",
+            height:'100%',
+            width:'300px',
+
         }}>
-            <ProSidebarProvider>
-                <Box sx={{
-                }}>
-                    <Menu>
-                        {!isCollapsed &&(
-                            <MenuItem>
-                                <Box sx={{
-                                    textAlign:"center",
-                                    padding:'auto',
-                                }}>
-                                    <Typography variant='h5'>
-                                        ADMINS
-                                    </Typography>
-                                    <IconButton>
-                                        <AdminPanelSettingsIcon />
-                                    </IconButton>
-                                </Box>
-                            </MenuItem>
-                        )}
-                    </Menu>
-                </Box>
-            </ProSidebarProvider>
+            <Menu>
+                <SubMenu label="People" >
+                    <MenuItem> Users </MenuItem>
+                    <MenuItem> Admins </MenuItem> 
+                </SubMenu>
+                <SubMenu label="Projects">
+                    <MenuItem> Add Project </MenuItem>
+                    <MenuItem> View Projects </MenuItem>
+                </SubMenu>
+                <MenuItem> Calendar </MenuItem>
+            </Menu>
         </Box>
     )
 }
