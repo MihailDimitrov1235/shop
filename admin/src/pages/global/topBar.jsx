@@ -6,14 +6,25 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchIcon from '@mui/icons-material/Search';
+import { width } from "@mui/system";
 
 function TopBar (){
     const theme = useTheme();
     return (
-        <Box display="flex" justifyContent='space-between' p={2} height="40px" width="100%">
+        <Box sx={{
+            display:"flex",
+            justifyContent:"space-between",
+            p:2,
+            height:"40px",
+            width:"100%",
+            backgroundColor:`${theme.palette.background.default}`,
+        }}>
 
             {/* Search */}
-            <Box display="flex" borderRadius="3px">
+            <Box sx={{
+                display:'flex',
+                borderRadius:"3px"
+            }}>
                 <InputBase sx={{
                     p: 1, 
                     ml: 2,

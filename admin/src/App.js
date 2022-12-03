@@ -14,6 +14,7 @@ function App() {
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
+        <SideBar />
         <TopBar />
         {content}
       </ThemeProvider>
