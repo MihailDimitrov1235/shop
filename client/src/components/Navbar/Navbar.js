@@ -1,14 +1,22 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Box, Divider, Badge } from '@mui/material';
+import {
+    AppBar,
+    Toolbar,
+    Box,
+    Divider,
+    Badge,
+    
+} from '@mui/material';
 import Logo from '../Logo';
 import NavItem from './NavItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
+import HamburgerMenu from './HamburgerMenu';
 
 const Navbar = (props) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -29,11 +37,11 @@ const Navbar = (props) => {
             sx={{ py: 1 }}
             {...props}
         >
-            <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', width: '85%', margin: '0 auto' }}>
+            <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', width: { sm: '100%', md: '85%' }, margin: { sm: 'none', md: '0 auto' } }}>
                 <RouterLink to="/">
                     <Logo />
                 </RouterLink>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Box sx={{ justifyContent: 'space-between', display: { xs: 'none', md: 'flex' } }}>
                     <NavItem
                         title={t('home')}
                         href="/home"
@@ -65,6 +73,8 @@ const Navbar = (props) => {
                         textcolor="text.white"
                     />
                 </Box>
+                
+                <HamburgerMenu />
             </Toolbar>
         </AppBar>
     );
