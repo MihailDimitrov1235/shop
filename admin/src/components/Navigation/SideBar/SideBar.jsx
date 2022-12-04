@@ -10,6 +10,8 @@ import ReactRoundedImage from "react-rounded-image";
 
 import MenuIcon from '@mui/icons-material/Menu';
 
+import DashboardIcon from '@mui/icons-material/Dashboard';
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -22,27 +24,35 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const SideBar = () =>{
     const theme = useTheme();
     const { collapseSidebar } = useProSidebar();
+    const hoverStyle = {
+        backgroundColor:`${theme.palette.background.adminMenu}`,
+        color:`${theme.palette.primary.main}`,
+    }
 
     return (
         <Box sx={{
             display:'flex',
             height:'100%',
-
+            p:"10px",
         }}>
             <Sidebar backgroundColor={theme.palette.background.adminMenu} width="300px">
                 <Box height="auto" pl="15px" pr="auto" backgroundColor={theme.palette.background.adminMenuDarker}>
                     <IconButton onClick={() => collapseSidebar()}>
                         <MenuIcon/>
                     </IconButton>
-                    {/* <img
-                    alt="Account image"
-                    width="100px"
-                    height="100px"
-                    src="/static/AccountIMG.jpg"
-                    style={{ borderRadius:"50%", cursor:"pointer"}}
-                    /> */}
                 </Box>
-                <Menu>
+                <Menu menuItemStyles={{
+                    button: ({ level, active, disabled }) => {
+                        // only apply styles on first level elements of the tree
+                        return {
+                            color: disabled ? `${theme.palette.primary.main}` : `${theme.palette.primary.mainDarker}`,
+                            //backgroundColor: active ? '#eecef9' : undefined,
+                            backgroundColor: `${theme.palette.background.adminMenu}`,
+                            ":hover":hoverStyle,
+                        };
+                    },
+                }}>
+                    <MenuItem active='true' disabled='false' icon=<DashboardIcon/> > Dashboard </MenuItem>
                     <SubMenu label="Accounts" icon=<ManageAccountsIcon/> >
                         <MenuItem> Users </MenuItem>
                         <MenuItem> Admins </MenuItem> 
