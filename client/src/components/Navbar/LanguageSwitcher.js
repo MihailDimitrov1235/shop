@@ -29,6 +29,7 @@ const LanguageSwitcher = () => {
                             sx={{
                                 display: 'flex',
                                 alignItems: 'center',
+                                justifyContent: 'center'
                             }}
                         >
                             <img

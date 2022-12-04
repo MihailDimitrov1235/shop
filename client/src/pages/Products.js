@@ -1,4 +1,4 @@
-import { Container, Grid, Box } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import ProductFilters from '../components/products/ProductFilters';
 import ProductList from "../components/products/ProductList";
 

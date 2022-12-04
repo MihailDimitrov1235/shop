@@ -1,4 +1,4 @@
-import { Container, List, ListItem } from '@mui/material';
+import { Container } from '@mui/material';
 import FilterCard from '../filters/FilterCard';
 
 const ProductFilters = () => {

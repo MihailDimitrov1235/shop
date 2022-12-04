@@ -43,7 +43,7 @@ const NavItem = ({
                 letterSpacing: 0,
                 py: rest.paddingy || 0.75,
                 px: rest.paddingx || 0,
-                mx: 3,
+                mx: rest.marginx || 3,
                 textTransform: 'none',
                 width: '100%',
                 ...(condition  && {
