@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -12,13 +14,13 @@ class ProjectController extends Controller
         $projects = Project::all();   
 
         return $projects;
-        
     }
 
     public function store(Request $request) {
         $project = Project::create([
             'ProjectName' => $request->ProjectName,
             'Name' => $request->Name,
+            'stripe_plan' => $request->Name,
             'ShortDescription' => $request->ShortDescription,
             'Description' => $request->Description
         ]);   

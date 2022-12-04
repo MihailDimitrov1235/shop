@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_project', function (Blueprint $table) {
+        Schema::create('subscription_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('subscription_id');
+            $table->string('stripe_id')->unique();
+            $table->string('stripe_product');
+            $table->string('stripe_price');
+            $table->integer('quantity')->nullable();
             $table->timestamps();
-            $table->String('ProjectName');
-            $table->String('Name');
-            $table->String('stripe_plan');
-            //$table->text('ShortDescriptionEN')->NULL;
-            $table->text('ShortDescriptionBG');
-            //$table->longText('DescriptionEN')->NULL;
-            $table->longText('DescriptionBG');
+
+            $table->unique(['subscription_id', 'stripe_price']);
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_project');
+        Schema::dropIfExists('subscription_items');
     }
 };

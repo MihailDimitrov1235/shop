@@ -1,0 +1,33 @@
+/* my-app/public/css/app.css */
+body {
+    background: #00B4DB;
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #0083B0, #00B4DB);
+    color: #514B64;
+    min-height: 100vh;
+}
+.rounded-lg {
+    border-radius: 1rem !important;
+  }
+   
+  .text-small {
+    font-size: 0.9rem !important;
+  }
+   
+  .custom-separator {
+    width: 5rem;
+    height: 6px;
+    border-radius: 1rem;
+  }
+   
+  .text-uppercase {
+    letter-spacing: 0.2em;
+  }
+   
+  body {
+    background: #00B4DB;
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #0083B0, #00B4DB);
+    color: #514B64;
+    min-height: 100vh;
+  }

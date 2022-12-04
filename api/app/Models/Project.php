@@ -9,7 +9,16 @@ class Project extends Model
 {
     use HasFactory;
     protected $table = '_project';
-    // protected $casts = [
-    //     'toppings' => 'array'
-    // ];
+
+    protected $fillable = [
+        'ProjectName',
+        'Name',
+        'stripe_plan',
+        'ShortDescriptionBG',
+        'DescriptionBG',
+    ];
+
+    public function getRouteKeyName(){
+        return 'ProjectName';
+    }
 }
