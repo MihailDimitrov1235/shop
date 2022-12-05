@@ -19,9 +19,10 @@ function App() {
         <ProSidebarProvider>
           <SideBar />
           </ProSidebarProvider>
+          <div style={{width:"100%"}}>
           <TopBar />
           {content}
-        
+          </div>
       </ThemeProvider>
     </div>
   );
