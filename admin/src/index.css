@@ -9,6 +9,8 @@ body,
   width: 100%;
   font-family: 'Source sans pro', sans-serif;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .app{
