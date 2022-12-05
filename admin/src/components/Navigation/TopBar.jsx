@@ -16,7 +16,6 @@ function TopBar (){
             justifyContent:"space-between",
             p:2,
             height:"40px",
-            width:"100%",
             backgroundColor:`${theme.palette.background.default}`,
         }}>
 
