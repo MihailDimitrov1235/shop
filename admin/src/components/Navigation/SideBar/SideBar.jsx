@@ -33,7 +33,6 @@ const SideBar = () =>{
         <Box sx={{
             display:'flex',
             height:'100%',
-            p:"10px",
         }}>
             <Sidebar backgroundColor={theme.palette.background.adminMenu} width="300px">
                 <Box height="auto" pl="15px" pr="auto" backgroundColor={theme.palette.background.adminMenuDarker}>
