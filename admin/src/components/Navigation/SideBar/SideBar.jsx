@@ -25,8 +25,8 @@ const SideBar = () =>{
     const theme = useTheme();
     const { collapseSidebar } = useProSidebar();
     const hoverStyle = {
-        backgroundColor:`${theme.palette.background.adminMenu}`,
-        color:`${theme.palette.primary.main}`,
+        backgroundColor:`${theme.palette.background.paper}`,
+        color:`${theme.palette.primary.contrastText}`,
     }
 
     return (
@@ -34,19 +34,19 @@ const SideBar = () =>{
             display:'flex',
             height:'100%',
         }}>
-            <Sidebar backgroundColor={theme.palette.background.adminMenu} width="300px">
-                <Box height="auto" pl="15px" pr="auto" backgroundColor={theme.palette.background.adminMenuDarker}>
+            <Sidebar backgroundColor={theme.palette.background.paper} width="300px">
+                <Box height="auto" pl="15px" pr="auto" backgroundColor={theme.palette.primary.contrastText}>
                     <IconButton onClick={() => collapseSidebar()}>
-                        <MenuIcon/>
+                        <MenuIcon sx={{ color: theme.palette.primary.main }} />
                     </IconButton>
                 </Box>
                 <Menu menuItemStyles={{
                     button: ({ level, active, disabled }) => {
                         // only apply styles on first level elements of the tree
                         return {
-                            color: disabled ? `${theme.palette.primary.main}` : `${theme.palette.primary.mainDarker}`,
+                            color: disabled ? `${theme.palette.primary.contrastText}` : `${theme.palette.primary.mainDarker}`,
                             //backgroundColor: active ? '#eecef9' : undefined,
-                            backgroundColor: `${theme.palette.background.adminMenu}`,
+                            backgroundColor: `${theme.palette.background.paper}`,
                             ":hover":hoverStyle,
                         };
                     },
