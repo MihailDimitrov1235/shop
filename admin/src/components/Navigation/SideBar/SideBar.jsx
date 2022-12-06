@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import MenuItemText from './MenuItemText';
 import { Sidebar, useProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 //import 'react-pro-sidebar/dist/styles';
-import { Box, typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
@@ -28,8 +28,8 @@ const SideBar = () => {
             display: 'flex',
             height: '100%',
         }}>
-            <Sidebar backgroundColor={theme.palette.background.paper} width="300px">
-            <Box height="auto" pl="15px" pr="auto" backgroundColor={theme.palette.primary.contrastText}>
+            <Sidebar backgroundColor={theme.palette.background.paper} width="250px">
+            <Box height="auto" pl="18px" pr="auto" backgroundColor={theme.palette.primary.contrastText}>
                 <IconButton onClick={() => collapseSidebar()}>
                     <MenuIcon sx={{ color: theme.palette.primary.main }} />
                 </IconButton>
@@ -49,20 +49,20 @@ const SideBar = () => {
                 <MenuItem active={true} disabled={true} icon={<DashboardIcon/>} > Dashboard </MenuItem>
                 {/* <MenuItemText>Client Facing</MenuItemText> */}
                 <SubMenu label="Client Facing" icon={<ComputerIcon/>} >
-                    <MenuItem> Products </MenuItem>
-                    <MenuItem> Users </MenuItem> 
-                    <MenuItem> Transactions </MenuItem> 
+                    <MenuItem routerLink={<Link to={'/products'}/>}> Products </MenuItem>
+                    <MenuItem routerLink={<Link to={'/users'}/>}> Users </MenuItem> 
+                    <MenuItem routerLink={<Link to={'/transactions'}/>}> Transactions </MenuItem> 
                 </SubMenu>
                 {/* <MenuItemText>Sales</MenuItemText> */}
                 <SubMenu label="Sales" icon={<ShoppingBagIcon/>} >
-                    <MenuItem> Overview </MenuItem>
-                    <MenuItem> Daily </MenuItem>
-                    <MenuItem> Monthly </MenuItem>
-                    <MenuItem> Breakdown </MenuItem>
+                    <MenuItem routerLink={<Link to={'/products'}/>}> Overview </MenuItem>
+                    <MenuItem routerLink={<Link to={'/products'}/>}> Daily </MenuItem>
+                    <MenuItem routerLink={<Link to={'/products'}/>}> Monthly </MenuItem>
+                    <MenuItem routerLink={<Link to={'/products'}/>}> Breakdown </MenuItem>
                 </SubMenu>
                 {/* <MenuItemText>Management</MenuItemText> */}
                 <SubMenu label="Management" icon={<ManageAccountsIcon/>} >
-                    <MenuItem> Admins </MenuItem>
+                    <MenuItem routerLink={<Link to={'/admins'}/>}> Admins </MenuItem>
                 </SubMenu>
             </Menu>
         </Sidebar>
