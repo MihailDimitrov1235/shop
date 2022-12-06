@@ -10,8 +10,8 @@ const routes = [
     path: '/',
     // element: <MainLayout />,
     children: [
-      { path: 'home', element: <Dashboard /> },
-      { path: '/', element: <Navigate to="/home" /> },
+      { path: 'dashboard', element: <Dashboard /> },
+      { path: '/', element: <Navigate to="/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }
