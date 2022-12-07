@@ -20,7 +20,7 @@ class ProjectController extends Controller
         $project = Project::create([
             'ProjectName' => $request->ProjectName,
             'Name' => $request->Name,
-            'stripe_plan' => $request->Name,
+            'stripe_plan' => $request->stripe_plan,
             'ShortDescription' => $request->ShortDescription,
             'Description' => $request->Description
         ]);   
