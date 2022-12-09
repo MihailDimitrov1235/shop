@@ -8,9 +8,9 @@ const SideBarContent = ({ items }) => {
             {items.map((item, index) => {
                 const { type, label, icon: Icon } = item;
 
-                if(type == 'item') {
+                if(type === 'item') {
                     return <MenuItem key={index} icon={<Icon />}> {label} </MenuItem>
-                }else if(type == 'subMenu') {
+                }else if(type === 'subMenu') {
                     return (
                         <SubMenu label={label}  icon={<Icon />} key={index}>
                             {item.items.map((el, i) => (
@@ -19,6 +19,8 @@ const SideBarContent = ({ items }) => {
                         </SubMenu>
                     );
                 }
+
+                return <></>
             })}
         </>
     );
