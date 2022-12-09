@@ -6,7 +6,6 @@ const SideBarContent = ({ items }) => {
     return (
         <>
             {items.map((item, index) => {
-                console.log(item)
                 const { type, label, icon: Icon } = item;
 
                 if(type == 'item') {
