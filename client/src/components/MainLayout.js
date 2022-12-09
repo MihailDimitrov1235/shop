@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { styled } from '@mui/styles';
+import { styled } from '@mui/material';
 import Navbar from './Navbar/Navbar';
 
 const MainLayoutRoot = styled('div')(

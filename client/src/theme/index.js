@@ -10,11 +10,15 @@ const theme = createTheme({
     bordoRed: bordoRedColor,
     background: {
       default: '#f4f6f8',
-      paper: '#ffffff'
+      paper: '#ffffff',
+      adminMenu: '#4f5d73',
+      adminMenuDarker: '#465367',
     },
     primary: {
       contrastText: '#96011c',
-      main: '#ffffff'
+      main: '#ffffff',
+      mainDarker: '#aaaaaa',
+      border: '#efefef',
     },
     text: {
       primary: '#172b4d',
