@@ -1,12 +1,7 @@
-import { useState } from "react";
-import React, { Component } from "react";
-import { Sidebar, useProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-//import 'react-pro-sidebar/dist/styles';
-import { Box, useTheme } from "@mui/material";
-import Typography from '@mui/material/Typography';
-import { Link } from "react-router-dom";
-import { IconButton } from "@mui/material";
-import ReactRoundedImage from "react-rounded-image";
+import React from "react";
+import { Sidebar, useProSidebar, Menu } from 'react-pro-sidebar';
+import { Box, useTheme, IconButton } from "@mui/material";
+import SideBarContent from "./SideBarContent";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -21,6 +16,25 @@ const SideBar = () => {
         backgroundColor: `${theme.palette.background.paper}`,
         color: `${theme.palette.primary.contrastText}`,
     }
+
+    const items = [
+        { type: 'item', icon: DashboardIcon, label: 'Dashboard' },
+        { type: 'subMenu', icon: ComputerIcon, label: 'Client Facing', items: [
+            { href: '/products', label: 'Products' },
+            { href: '/products', label: 'Users' },
+            { href: '/products', label: 'Transactions' },
+        ]},
+        { type: 'subMenu', icon: ShoppingBagIcon, label: 'Sales', items: [
+            { href: '/products', label: 'Overview' },
+            { href: '/products', label: 'Daily' },
+            { href: '/products', label: 'Monthly' },
+            { href: '/products', label: 'Breakdown' },
+        ]},
+        { type: 'subMenu', icon: ManageAccountsIcon, label: 'Management', items: [
+            { href: '/products', label: 'Admins' },
+        ]},
+
+    ]
 
     return (
         <Box sx={{
@@ -44,25 +58,7 @@ const SideBar = () => {
                         };
                     },
                 }}>
-
-                    <MenuItem active={true} disabled={true} icon={<DashboardIcon />} > Dashboard </MenuItem>
-                    {/* <MenuItemText>Client Facing</MenuItemText> */}
-                    <SubMenu label="Client Facing" icon={<ComputerIcon />} >
-                        <MenuItem routerLink={<Link to={'/products'} />}> Products </MenuItem>
-                        <MenuItem routerLink={<Link to={'/users'} />}> Users </MenuItem>
-                        <MenuItem routerLink={<Link to={'/transactions'} />}> Transactions </MenuItem>
-                    </SubMenu>
-                    {/* <MenuItemText>Sales</MenuItemText> */}
-                    <SubMenu label="Sales" icon={<ShoppingBagIcon />} >
-                        <MenuItem routerLink={<Link to={'/products'} />}> Overview </MenuItem>
-                        <MenuItem routerLink={<Link to={'/products'} />}> Daily </MenuItem>
-                        <MenuItem routerLink={<Link to={'/products'} />}> Monthly </MenuItem>
-                        <MenuItem routerLink={<Link to={'/products'} />}> Breakdown </MenuItem>
-                    </SubMenu>
-                    {/* <MenuItemText>Management</MenuItemText> */}
-                    <SubMenu label="Management" icon={<ManageAccountsIcon />} >
-                        <MenuItem routerLink={<Link to={'/admins'} />}> Admins </MenuItem>
-                    </SubMenu>
+                    <SideBarContent items={items}/>
                 </Menu>
             </Sidebar>
         </Box>
