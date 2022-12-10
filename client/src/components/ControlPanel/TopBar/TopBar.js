@@ -1,11 +1,11 @@
-import {Box, IconButton, AppBar} from "@mui/material";
+import {Box, IconButton} from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-import { width } from "@mui/system";
+import LanguageSwitcher from "../../Navbar/LanguageSwitcher";
 
 function TopBar (){
     const theme = useTheme();
@@ -42,6 +42,7 @@ function TopBar (){
 
             {/* Icons */}
             <Box display="flex">
+                <LanguageSwitcher />
                 <IconButton sx={{ml: 'auto'}}>
                     <NotificationsOutlinedIcon />
                 </IconButton>
