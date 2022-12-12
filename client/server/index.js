@@ -11,32 +11,46 @@ import Backend from 'i18next-http-backend';
 const app = express()
 const port = 3000
 const cdnHost = `http://localhost:4000`; // [D]
-
-await i18n
-    .use(Backend)
-    .use(i18nextMiddleware.LanguageDetector)
-
 const path = require('path')
+
+i18n
+    //.use(i18nextMiddleware.LanguageDetector)
+    .use(Backend).init({
+        lng: "bg",
+        fallbackLng: "bg",
+        lowerCaseLng: true,
+        preload: ["bg", "en"],
+        backend: {
+            //loadPath: `${path.resolve(__dirname, '../client/public/locales')}/{{lng}}/{{ns}}.json`,
+            loadPath: `${cdnHost}/public/locales/{{lng}}/{{ns}}.json`
+        },
+        useCookie: false
+    });
+
+
 app.use(express.static(path.resolve(__dirname, '../client/public')))
-app.use(i18nextMiddleware.handle(i18n));
+app.use(
+    i18nextMiddleware.handle(i18n, {
+        removeLngFromUrl: false
+    })
+);
 app.use('/locales', express.static(path.resolve(__dirname, '../client/public/locales')));
 
 app.get('*', (req, res) => {
     let jsx = ReactDOMServer.renderToString(
-        <StaticRouter location={req.url}>
-            <I18nextProvider i18n={req.i18n}>
+        <I18nextProvider i18n={req.i18n}>
+            <StaticRouter location={req.url}>
                 <App />
-            </I18nextProvider>
-        </StaticRouter>
+            </StaticRouter>
+        </I18nextProvider>
     ) // [A]
 
     const initialI18nStore = {};
     req.i18n.languages.forEach(l => {
         initialI18nStore[l] = req.i18n.services.resourceStore.data[l];
     });
+    const initialLanguage = req.i18n.options.lng;
 
-    const initialLanguage = req.i18n.language;
-    console.log(req.i18n.services);
     const clientBundleStyle = `<link rel="stylesheet" href="${cdnHost}/styles/bundle.css">` // [B]
     const clientBundleScript = `<script src="${cdnHost}/scripts/bundle.js"></script>` // [C]
 
@@ -70,10 +84,6 @@ app.get('*', (req, res) => {
         </html>
     `)
 })
-
-// app.use('/static', express.static(`${cdnHost}/public/static`));
-// app.use('/static/flags', express.static(`${cdnHost}/public/static/flags`));
-
 
 app.listen(port, () => {
     console.log(`App listening on http://localhost:${port}`)

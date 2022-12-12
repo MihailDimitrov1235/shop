@@ -24,7 +24,7 @@ const Dashboard = () =>{
             </Box>
             {/* CONTENT */}
             <Box>
-
+                <p>content</p>
             </Box>
         </Box>
     );

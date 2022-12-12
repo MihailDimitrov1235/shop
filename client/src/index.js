@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -9,12 +9,15 @@ import { useSSR } from "react-i18next";
 
 const AppContainer = () => {
   useSSR(window.initialI18nStore, window.initialLanguage);
+
   return (
-    <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
+    <Suspense fallback={<span>Loading...</span>}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </Suspense>
   );
 };
 
