@@ -1,4 +1,5 @@
 import { Box, IconButton, Typography } from "@mui/material";
+import SalesLine from "./Charts/SalesLine";
 import DownloadIcon from '@mui/icons-material/Download';
 
 const Dashboard = () =>{
@@ -23,8 +24,8 @@ const Dashboard = () =>{
                 </Box>
             </Box>
             {/* CONTENT */}
-            <Box>
-                <p>content</p>
+            <Box height={"300px"} width={"40vw"}>
+                <SalesLine />
             </Box>
         </Box>
     );
