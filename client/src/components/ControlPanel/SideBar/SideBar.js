@@ -20,7 +20,7 @@ const SideBar = () => {
     const items = [
         { type: 'item', icon: DashboardIcon, label: 'Dashboard' },
         { type: 'subMenu', icon: ComputerIcon, label: 'Client Facing', items: [
-            { href: '/products', label: 'Products' },
+            { href: '/admin/products', label: 'Products' },
             { href: '/products', label: 'Users' },
             { href: '/products', label: 'Transactions' },
         ]},

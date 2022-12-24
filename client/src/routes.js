@@ -6,6 +6,7 @@ import Landing from './pages/PublicWebsite/Landing';
 import Products from './pages/PublicWebsite/Products';
 
 import Dashboard from './pages/ControlPanel/Dashboard';
+import AdminProducts from './pages/ControlPanel/AdminProduct';
 
 const routes = [
   {
@@ -23,6 +24,7 @@ const routes = [
     element: <ControlPanelLayout />,
     children: [
       { path: 'dashboard', element: <Dashboard /> },
+      { path: 'products', element: <AdminProducts /> },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
