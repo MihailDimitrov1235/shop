@@ -16,7 +16,7 @@ const NavItem = ({
 
     const active = href ? !!matchPath({
         path: href,
-        end: false
+        end: true
     }, location.pathname) : false;
 
     const [isHovering, setIsHovering] = useState(false);
