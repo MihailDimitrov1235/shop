@@ -53,6 +53,7 @@ const Navbar = (props) => {
         items.push({ type: 'profile' })
     }else {
         items.push({
+            type: 'link',
             title: t('sign-in'),
             href: '/login',
             variant: 'contained',

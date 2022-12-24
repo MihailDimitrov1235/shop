@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -27,5 +28,13 @@ class UserController extends Controller
         $user = auth()->user();
 
         return response()->json($user, 200);
+    }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        $user->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Successfully logged out'], 200);
     }
 }

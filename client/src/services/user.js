@@ -17,9 +17,18 @@ function profile() {
     });
 }
 
+function logout() {
+    const url = `${servicesHelper.url}/users/logout`;
+
+    return axios.post(url, {}, {
+        headers: servicesHelper.header()
+    });
+}
+
 const userService = {
     login,
-    profile
+    profile,
+    logout
 }
 
 export default userService;
