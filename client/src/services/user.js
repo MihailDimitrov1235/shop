@@ -9,8 +9,17 @@ function login(data) {
     });
 }
 
+function profile() {
+    const url = `${servicesHelper.url}/users/profile`;
+
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    });
+}
+
 const userService = {
-    login
+    login,
+    profile
 }
 
 export default userService;

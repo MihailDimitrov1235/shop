@@ -16,6 +16,10 @@ Route::post('/payment', [PaymentController::class, 'pay'])->middleware('auth');
 
 Route::post('/users/login', [UserController::class, 'login']);
 
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/users/profile', [UserController::class, 'profile']);
+});
+
 Route::prefix('products')->group(function () {
     Route::get('/', [ProjectController::class, 'index']);
     Route::post('/', [ProjectController::class, 'store'])->middleware('auth');
