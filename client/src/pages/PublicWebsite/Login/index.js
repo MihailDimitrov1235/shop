@@ -7,8 +7,10 @@ import { Helmet } from 'react-helmet';
 import FormBuilder from "../../../components/FormBuilder";
 import * as Yup from 'yup';
 import userService from '../../../services/user';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
 
     const initialValues = {
         email: '',
@@ -23,7 +25,8 @@ const Login = () => {
     const onSubmit = (values, { setSubmitting }) => {
         userService.login(values)
         .then((res) => {
-            console.log(res);
+            localStorage.setItem('refresh-token', res.data.token);
+            navigate('/admin', { replace: true });
         })
         .catch((err) => {
             setSubmitting(false);
@@ -47,11 +50,12 @@ const Login = () => {
             </Helmet>
             <Box
                 sx={{
-                    backgroundColor: 'background.default',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '100%',
-                    justifyContent: 'center'
+                    mt: 10
+                    // backgroundColor: 'background.default',
+                    // display: 'flex',
+                    // flexDirection: 'column',
+                    // height: '100%',
+                    // justifyContent: 'center'
                 }}
             >
                 <Container maxWidth="sm">

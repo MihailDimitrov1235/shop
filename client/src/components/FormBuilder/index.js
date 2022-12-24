@@ -42,6 +42,7 @@ const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submit
                                     value={values[field.name]}
                                     variant={Object.hasOwn(field, 'variant') ? field.variant : 'outlined'}
                                     key={index}
+                                    color="bordoRed"
                                 />
                             );
                         }
