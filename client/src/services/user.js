@@ -8,3 +8,9 @@ function login(data) {
         headers: servicesHelper.header()
     });
 }
+
+const userService = {
+    login
+}
+
+export default userService;
