@@ -1,10 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
+import {
+  TableCell,
+  TableHead,
+  TableRow,
+  Checkbox,
+  TableSortLabel
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
   visuallyHidden: {
