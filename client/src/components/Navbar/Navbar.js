@@ -3,20 +3,19 @@ import {
     AppBar,
     Toolbar,
     Box,
-    Divider,
-    Badge,
-    
+    Badge
 } from '@mui/material';
 import Logo from '../Logo';
-import NavItem from './NavItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from './LanguageSwitcher';
 import HamburgerMenu from './HamburgerMenu';
+import useAuth from '../../hooks/useAuth';
+import NavbarContent from './NavbarContent';
 
 const Navbar = (props) => {
     const { t } = useTranslation();
+    const { user } = useAuth();
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -31,6 +30,37 @@ const Navbar = (props) => {
         },
     }));
 
+    const items = [
+        { type: 'link', title: t('home'), href: '/' },
+        { type: 'link', title: t('products'), href: '/products' },
+        { type: 'langSwitcher' },
+        { type: 'devider' },
+        {
+            type: 'link',
+            title: <StyledBadge badgeContent={4} color="bordoRed">
+                    <span>{t('cart')}</span>
+                </StyledBadge>,
+            href: '/cart',
+            variant: "outlined",
+            color: "bordoRed",
+            textcolor: "bordoRed",
+            paddingx: 4.5,
+            startIcon: <ShoppingCartIcon />
+        }
+    ]
+
+    if(user) {
+        items.push({ type: 'profile' })
+    }else {
+        items.push({
+            title: t('sign-in'),
+            href: '/login',
+            variant: 'contained',
+            color: 'bordoRed',
+            textcolor: "text.white"
+        })
+    }
+
     return (
         <AppBar
             elevation={0}
@@ -42,38 +72,9 @@ const Navbar = (props) => {
                     <Logo />
                 </RouterLink>
                 <Box sx={{ justifyContent: 'space-between', display: { xs: 'none', md: 'flex' } }}>
-                    <NavItem
-                        title={t('home')}
-                        href="/"
-                    />
-                    <NavItem
-                        title={t('products')}
-                        href="/products"
-                    />
-                    <LanguageSwitcher />
-                    <Divider orientation="vertical" flexItem />
-                    <NavItem
-                        title={
-                            <StyledBadge badgeContent={4} color="bordoRed">
-                                <span>{t('cart')}</span>
-                            </StyledBadge>
-                        }
-                        href="/cart"
-                        variant="outlined"
-                        color="bordoRed"
-                        textcolor="bordoRed"
-                        paddingx={4.5}
-                        startIcon={<ShoppingCartIcon />}
-                    />
-                    <NavItem
-                        title={t('sign-in')}
-                        href="/login"
-                        variant="contained"
-                        color="bordoRed"
-                        textcolor="text.white"
-                    />
+                    <NavbarContent items={items} />
                 </Box>
-                
+
                 <HamburgerMenu />
             </Toolbar>
         </AppBar>

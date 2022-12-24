@@ -8,10 +8,12 @@ import FormBuilder from "../../../components/FormBuilder";
 import * as Yup from 'yup';
 import userService from '../../../services/user';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const navigate = useNavigate();
-
+    const { setUser } = useAuth();
+    
     const initialValues = {
         email: '',
         password: ''
@@ -26,6 +28,7 @@ const Login = () => {
         userService.login(values)
         .then((res) => {
             localStorage.setItem('refresh-token', res.data.token);
+            setUser(res.data.user);
             navigate('/admin', { replace: true });
         })
         .catch((err) => {
