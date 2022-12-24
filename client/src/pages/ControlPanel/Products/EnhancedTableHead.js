@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const headCells = [
   { id: 'id', numeric: true, disablePadding: false, label: 'Product ID' },
   { id: 'name', numeric: false, disablePadding: false, label: 'Product Name' },
+  { id: 'authorIds', numeric: false, disablePadding: false, label: 'Author IDs' },
   { id: 'shortDescription', numeric: false, disablePadding: false, label: 'Short Description' },
   { id: 'longDescription', numeric: false, disablePadding: false, label: 'Long Description' },
   { id: 'categoryIds', numeric: false, disablePadding: false, label: 'Category IDs' },
@@ -47,6 +48,7 @@ function EnhancedTableHead(props) {
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={rowCount > 0 && numSelected === rowCount}
               onChange={onSelectAllClick}
+              color="default"
             />
           </TableCell>
           {headCells.map((headCell) => (

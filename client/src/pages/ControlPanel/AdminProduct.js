@@ -23,7 +23,7 @@ const AdminProducts = () =>{
                 </Box>
             </Box>
             {/* CONTENT */}
-            <Box height={"300px"} width={"40vw"}>
+            <Box height={"300px"} width={"100%"} ml={"auto"} mr={"auto"}>
                 <ProductTable/>
             </Box>
         </Box>

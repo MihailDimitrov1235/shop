@@ -10,20 +10,26 @@ import {
 import { makeStyles } from '@mui/styles';
 import EnhancedTableHead from './EnhancedTableHead';
 import { stableSort, getComparator } from './utils';
+import { useState } from 'react';
+import TablePagination from '@material-ui/core/TablePagination';
+
+
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  
 });
 
-function createData(id, name, shortDescription, longDescription, categoryIds, parts, createdAt, updatedAt) {
-  return { id, name, shortDescription, longDescription, categoryIds, parts, createdAt, updatedAt };
+function createData(id, name, authorIds, shortDescription, longDescription, categoryIds, parts, createdAt, updatedAt) {
+  return { id, name, authorIds, shortDescription, longDescription, categoryIds, parts, createdAt, updatedAt };
 }
 
+
 const rows = [
-  createData(1, 'Product 1', 'Short description 1', 'Long description 1', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
-  createData(2, 'Product 2', 'Short description 2', 'Long description 2', [4, 5], 20, '2022-01-03', '2022-01-04'),
+  createData(1, 'Product 1', [1, 2], 'Short description 1', 'Long description 1', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
+  createData(2, 'Product 2', [3, 4], 'Short description 2', 'Long description 2', [4, 5], 20, '2022-01-03', '2022-01-04'),
   // Add more rows as needed
 ];
 
@@ -32,6 +38,8 @@ export default function ProductTable() {
     const [selected, setSelected] = React.useState([]);
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('id');
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(3);
   
     const handleCheckboxClick = (event, id) => {
       const selectedIndex = selected.indexOf(id);
@@ -68,10 +76,19 @@ export default function ProductTable() {
       setOrderBy(property);
     };
 
+    // const handleChangePage = (event, newPage) => {
+    //   setPage(newPage);
+    // };
+  
+    // const handleChangeRowsPerPage = (event) => {
+    //   setRowsPerPage(parseInt(event.target.value, 10));
+    //   setPage(0);
+    // };
+
     const sortedRows = stableSort(rows, getComparator(order, orderBy));
 
   return (
-    <Table className={classes.table} aria-label="product table">
+    <Table className={classes.table} aria-label="product table" style={{ width: '100%' }}>
       <EnhancedTableHead
         classes={classes}
         numSelected={selected.length}
@@ -82,7 +99,7 @@ export default function ProductTable() {
         rowCount={rows.length}
       />
       <TableBody>
-        {sortedRows.map((row) => {
+        {sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
           const isSelected = selected.indexOf(row.id) !== -1;
           return (
             <TableRow key={row.id} selected={isSelected}>
@@ -90,12 +107,14 @@ export default function ProductTable() {
                 <Checkbox
                   checked={isSelected}
                   onChange={(event) => handleCheckboxClick(event, row.id)}
+                  color="default"
                 />
               </TableCell>
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
               <TableCell>{row.name}</TableCell>
+              <TableCell>{row.authorIds.join(', ')}</TableCell>
               <TableCell>
                 <Tooltip title={row.shortDescription}>
                   <span>{row.shortDescription}</span>
@@ -114,6 +133,19 @@ export default function ProductTable() {
           );
         })}
       </TableBody>
+      {/* <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        // onChangePage={handleChangePage}
+        // onChangeRowsPerPage={handleChangeRowsPerPage}
+        sx={{
+          marginleft:"auto",
+          marginRight:"auto",
+        }}
+      /> */}
     </Table>
   );
 }
