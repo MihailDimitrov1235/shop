@@ -17,6 +17,10 @@ import Button from '@material-ui/core/Button';
 import { Box } from '@mui/material';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteDialog from './DeleteDialog';
 
 
 
@@ -127,29 +131,39 @@ export default function ProductTable() {
 
   return (
     <Box>
-    <Input
-      placeholder="Search..."
-      value={searchQuery || ''}
-      onChange={(event) => setSearchQuery(event.target.value)}
-      endAdornment={
-        <Box>
-          <Select
-            value={searchColumn || 'id'}
-            onChange={(event) => setSearchColumn(event.target.value)}
-          >
-            <MenuItem value="id">ID</MenuItem>
-            <MenuItem value="name">Name</MenuItem>
-            <MenuItem value="authorIds">Author IDs</MenuItem>
-            <MenuItem value="shortDescription">Short Description</MenuItem>
-            <MenuItem value="longDescription">Long Description</MenuItem>
-            <MenuItem value="categoryIds">Category IDs</MenuItem>
-            <MenuItem value="parts">Parts</MenuItem>
-            <MenuItem value="createdAt">Created At</MenuItem>
-            <MenuItem value="updatedAt">Updated At</MenuItem>
-          </Select>
-          </Box>
-      }
-    />
+      <Box display={"flex"} justifyContent='space-between'>
+        <Input
+          placeholder="Search..."
+          value={searchQuery || ''}
+          onChange={(event) => setSearchQuery(event.target.value)}
+          endAdornment={
+            <Box>
+              <Select
+                value={searchColumn || 'id'}
+                onChange={(event) => setSearchColumn(event.target.value)}
+              >
+                <MenuItem value="id">ID</MenuItem>
+                <MenuItem value="name">Name</MenuItem>
+                <MenuItem value="authorIds">Author IDs</MenuItem>
+                <MenuItem value="shortDescription">Short Description</MenuItem>
+                <MenuItem value="longDescription">Long Description</MenuItem>
+                <MenuItem value="categoryIds">Category IDs</MenuItem>
+                <MenuItem value="parts">Parts</MenuItem>
+                <MenuItem value="createdAt">Created At</MenuItem>
+                <MenuItem value="updatedAt">Updated At</MenuItem>
+              </Select>
+              </Box>
+          }
+        />
+        <Box display={"flex"}>
+          <Link to="/admin/products/create">
+            <IconButton>
+              <AddIcon />
+            </IconButton>
+          </Link>
+          <DeleteDialog selected={selected} setSelected={setSelected} />
+        </Box>  
+      </Box>
     <Box>
     <Table className={classes.table} aria-label="product table" style={{ width: '100%' }}>
       <EnhancedTableHead

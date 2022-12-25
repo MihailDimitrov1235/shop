@@ -8,6 +8,7 @@ import Login from './pages/PublicWebsite/Login';
 
 import Dashboard from './pages/ControlPanel/Dashboard';
 import AdminProducts from './pages/ControlPanel/AdminProduct';
+import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
 
 const routes = [
   {
@@ -26,6 +27,7 @@ const routes = [
     element: <ControlPanelLayout />,
     children: [
       { path: 'dashboard', element: <Dashboard /> },
+      { path: 'products/create', element: <AddProductForm /> },
       { path: 'products', element: <AdminProducts /> },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
