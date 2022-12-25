@@ -12,6 +12,12 @@ import EnhancedTableHead from './EnhancedTableHead';
 import { stableSort, getComparator } from './utils';
 import { useState } from 'react';
 import TablePagination from '@material-ui/core/TablePagination';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+import { Box } from '@mui/material';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 
 
@@ -19,6 +25,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  tableCell: {
+    textAlign:"center",
+  }
   
 });
 
@@ -28,8 +37,12 @@ function createData(id, name, authorIds, shortDescription, longDescription, cate
 
 
 const rows = [
-  createData(1, 'Product 1', [1, 2], 'Short description 1', 'Long description 1', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
+  createData(1, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
   createData(2, 'Product 2', [3, 4], 'Short description 2', 'Long description 2', [4, 5], 20, '2022-01-03', '2022-01-04'),
+  createData(3, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
+  createData(4, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
+  createData(5, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
+  createData(6, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
   // Add more rows as needed
 ];
 
@@ -39,7 +52,9 @@ export default function ProductTable() {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('id');
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(3);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [searchQuery, setSearchQuery] = useState(null);
+    const [searchColumn, setSearchColumn] = useState("id");
   
     const handleCheckboxClick = (event, id) => {
       const selectedIndex = selected.indexOf(id);
@@ -61,14 +76,15 @@ export default function ProductTable() {
       setSelected(newSelected);
     };
   
-    const handleSelectAllClick = (event) => {
-      if (event.target.checked) {
-        const newSelected = rows.map((row) => row.id);
+    function handleSelectAllClick(event) {
+      const { checked } = event.target;
+      if (checked) {
+        const newSelected = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => row.id);
         setSelected(newSelected);
         return;
       }
       setSelected([]);
-    };
+    }
   
     const handleRequestSort = (event, property) => {
       const isAsc = orderBy === property && order === 'asc';
@@ -76,27 +92,74 @@ export default function ProductTable() {
       setOrderBy(property);
     };
 
-    // const handleChangePage = (event, newPage) => {
-    //   setPage(newPage);
-    // };
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
   
-    // const handleChangeRowsPerPage = (event) => {
-    //   setRowsPerPage(parseInt(event.target.value, 10));
-    //   setPage(0);
-    // };
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
 
-    const sortedRows = stableSort(rows, getComparator(order, orderBy));
+
+    function getNumSelectedRowsOnCurrentPage() {
+      const selectedRowsOnCurrentPage = selected.filter((id) => {
+        const index = rows.findIndex((row) => row.id === id);
+        return index >= page * rowsPerPage && index < (page + 1) * rowsPerPage;
+      });
+      return selectedRowsOnCurrentPage.length;
+    }
+
+    const sortedRows = stableSort(rows, getComparator(order, orderBy))
+    .filter((row) => {
+      if (searchQuery == null || searchColumn == null) {
+        return true;
+      }
+      // Check if the value of the selected column contains the search query
+      let value = row[searchColumn];
+      if (Array.isArray(value)) {
+        value = value.sort().join(', ');
+      } else if (typeof value !== 'string') {
+        value = value.toString();
+      }
+      return value.toLowerCase().includes(searchQuery.toLowerCase());
+    });
 
   return (
+    <Box>
+    <Input
+      placeholder="Search..."
+      value={searchQuery || ''}
+      onChange={(event) => setSearchQuery(event.target.value)}
+      endAdornment={
+        <Box>
+          <Select
+            value={searchColumn || 'id'}
+            onChange={(event) => setSearchColumn(event.target.value)}
+          >
+            <MenuItem value="id">ID</MenuItem>
+            <MenuItem value="name">Name</MenuItem>
+            <MenuItem value="authorIds">Author IDs</MenuItem>
+            <MenuItem value="shortDescription">Short Description</MenuItem>
+            <MenuItem value="longDescription">Long Description</MenuItem>
+            <MenuItem value="categoryIds">Category IDs</MenuItem>
+            <MenuItem value="parts">Parts</MenuItem>
+            <MenuItem value="createdAt">Created At</MenuItem>
+            <MenuItem value="updatedAt">Updated At</MenuItem>
+          </Select>
+          </Box>
+      }
+    />
+    <Box>
     <Table className={classes.table} aria-label="product table" style={{ width: '100%' }}>
       <EnhancedTableHead
         classes={classes}
-        numSelected={selected.length}
+        numSelected={getNumSelectedRowsOnCurrentPage()}
         order={order}
         orderBy={orderBy}
         onSelectAllClick={handleSelectAllClick}
         onRequestSort={handleRequestSort}
-        rowCount={rows.length}
+        rowCount={rowsPerPage}
       />
       <TableBody>
         {sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
@@ -110,42 +173,44 @@ export default function ProductTable() {
                   color="default"
                 />
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell className={classes.tableCell} component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.authorIds.join(', ')}</TableCell>
-              <TableCell>
+              <TableCell className={classes.tableCell} style={{ maxWidth: '1.5em', maxHeight: '1.5em', overflow: 'hidden' }} >{row.name}</TableCell>
+              <TableCell className={classes.tableCell} >{row.authorIds.join(', ')}</TableCell>
+              <TableCell className={classes.tableCell} style={{ maxWidth: '1.5em', maxHeight: '1.5em', overflow: 'hidden' }}>
                 <Tooltip title={row.shortDescription}>
                   <span>{row.shortDescription}</span>
                 </Tooltip>
               </TableCell>
-              <TableCell>
+              <TableCell className={classes.tableCell} style={{ maxWidth: '1.5em', maxHeight: '1.5em', overflow: 'hidden' }} >
                 <Tooltip title={row.longDescription}>
                   <span>{row.longDescription}</span>
                 </Tooltip>
               </TableCell>
-              <TableCell>{row.categoryIds.join(', ')}</TableCell>
-              <TableCell>{row.parts}</TableCell>
-              <TableCell>{row.createdAt}</TableCell>
-              <TableCell>{row.updatedAt}</TableCell>
+              <TableCell className={classes.tableCell} >{row.categoryIds.join(', ')}</TableCell>
+              <TableCell className={classes.tableCell} >{row.parts}</TableCell>
+              <TableCell className={classes.tableCell} >{row.createdAt}</TableCell>
+              <TableCell className={classes.tableCell} >{row.updatedAt}</TableCell>
             </TableRow>
           );
         })}
       </TableBody>
-      {/* <TablePagination
+    </Table>
+    <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        // onChangePage={handleChangePage}
-        // onChangeRowsPerPage={handleChangeRowsPerPage}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
         sx={{
           marginleft:"auto",
           marginRight:"auto",
         }}
-      /> */}
-    </Table>
+      />
+      </Box>
+    </Box>
   );
 }
