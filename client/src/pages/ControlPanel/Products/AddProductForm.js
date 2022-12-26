@@ -1,9 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import { FormControl, TextField, Button } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Box } from '@mui/material';
-import { makeStyles } from '@material-ui/core/styles';
+import { 
+  Box,
+  Autocomplete,
+  FormControl,
+  TextField,
+  Button
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
   textField: {
