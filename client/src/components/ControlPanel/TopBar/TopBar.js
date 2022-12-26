@@ -14,33 +14,12 @@ function TopBar (){
     return (
         <Box sx={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-end',
             py: 1,
             px: 3,
             backgroundColor: `${theme.palette.background.paper}`,
             borderBottom: `1px solid ${theme.palette.primary.border}`
         }}>
-
-            {/* Search */}
-            <Box sx={{
-                display: 'flex',
-                borderRadius: '3px'
-            }}>
-                <InputBase
-                    sx={{
-                        px: 1,
-                        flex: 1,
-                        backgroundColor: theme.palette.background.paper,
-                        border: `2px solid ${theme.palette.primary.contrastText}`, 
-                        borderRadius: '50vh' 
-                    }}
-                    placeholder="Search" 
-                />
-                <IconButton>
-                    <SearchIcon />
-                </IconButton>
-            </Box>
-
             {/* Icons */}
             <Box display="flex">
                 <LanguageSwitcher />
