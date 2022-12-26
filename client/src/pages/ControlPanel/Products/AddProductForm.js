@@ -1,141 +1,155 @@
-import React from "react";
-import { Formik, Form, Field } from "formik";
-import { Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import React from 'react';
+import { useState } from 'react';
+import { FormControl, TextField, Button } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { Box } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  field: {
-    "& label": {
-      fontWeight: "bold",
-      marginBottom: "8px",
-    },
-    "& input": {
-      width: "300px",
-      height: "32px",
-      padding: "8px",
-      borderRadius: "4px",
-      border: "1px solid #ccc",
-      resize: "none",
-      "&:focus": {
-        outline: "none",
-        borderColor: "#666",
-      },
-    },
-    "& textarea": {
-      width: "300px",
-      height: "80px",
-      padding: "8px",
-      borderRadius: "4px",
-      border: "1px solid #ccc",
-      resize: "none !important",
-      "&:focus": {
-        outline: "none",
-        borderColor: "#666",
-      },
-    },
-  },
-  button: {
-    width: "100px",
-    height: "32px",
-    marginTop: "16px",
-    backgroundColor: "#3f51b5",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    "&:hover": {
-      cursor: "pointer",
-    },
-    "&:focus": {
-      outline: "none",
-    },
-  },
-});
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    width:"35vw",
+    paddingTop:"10px",
+    paddingRight:"10px",
+  }
+}));
 
 const AddProductForm = () => {
-  const classes = useStyles();
-  const initialValues = {
-    productName: "",
-    authorName: "",
-    shortDescription: "",
-    description: "",
-  };
 
-  const onSubmit = (values) => {
-    // handle form submission here
-  };
+  const classes = useStyles();
+
+  const AuthorOptions = [
+    'Miroslav Dianov Balev',
+    'Mihail Vladimirov Dimitrov',
+    'Stefan Ivanov? Kojuharov',
+  ];
+
+  const CategoryOptions = [
+    'Zelen',
+    'Biologi4en',
+    'Grozen',
+  ];
+
+  const [state, setState] = useState({
+    ProductName : "",
+    Author : "",
+    ShortDescription : "",
+    LongDescription : "",
+    Category : "",
+    Parts : "",
+  });
+
+  const [Authors, setAuthors] = useState([]);
+  const [Categories, setCategories] = useState([]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // gather form data and call onSubmit callback function
+  }
+
+  function handleAddAuthorClick() {
+    if(!Authors.includes(state.Author) && state.Author != ""){
+      setAuthors([...Authors, state.Author]);
+    }
+  }
+
+  function handleRemoveAuthorClick(index) {
+    const newValues = [...Authors];
+    newValues.splice(index, 1);
+    setAuthors(newValues);
+  }
+
+  function handleAddCategoryClick() {
+    console.log()
+    if(!Categories.includes(state.Category) && state.Category != ""){
+      setCategories([...Categories, state.Category]);
+    }
+  }
+
+  function handleRemoveCategoryClick(index) {
+    const newValues = [...Categories];
+    newValues.splice(index, 1);
+    setCategories(newValues);
+  }
+
   return (
-    <Box
-      width="400px"
-      height="500px"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      style={{ margin: "0 auto" }}
-    >
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {({ isSubmitting }) => (
-          <Form className={classes.form}>
-            <Field name="productName" className={classes.field}>
-              {({ field, form }) => (
-                <Box>
-                  <label>Product Name:</label>
-                  <input type="text" {...field} />
-                  {form.errors.productName && form.touched.productName && (
-                    <div>{form.errors.productName}</div>
-                  )}
-                </Box>
-              )}
-            </Field>
-            <Field name="authorName" className={classes.field}>
-              {({ field, form }) => (
-                <Box>
-                  <label>Author Name:</label>
-                  <input type="text" {...field} />
-                  {form.errors.authorName && form.touched.authorName && (
-                    <div>{form.errors.authorName}</div>
-                  )}
-                </Box>
-              )}
-            </Field>
-            <Field name="shortDescription" className={classes.field}>
-              {({ field, form }) => (
-                <Box>
-                  <label>Short Description:</label>
-                  <textarea {...field} maxLength={50} />
-                  {form.errors.shortDescription &&
-                    form.touched.shortDescription && (
-                      <div>{form.errors.shortDescription}</div>
-                    )}
-                </Box>
-              )}
-            </Field>
-            <Field name="description" className={classes.field}>
-              {({ field, form }) => (
-                <Box>
-                  <label>Description:</label>
-                  <textarea {...field} />
-                  {form.errors.description && form.touched.description && (
-                    <div>{form.errors.description}</div>
-                  )}
-                </Box>
-              )}
-            </Field>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={classes.button}
-            >
-              Submit
-            </button>
-          </Form>
+    <FormControl onSubmit={handleSubmit} style={{
+      marginLeft:"auto",
+      marginRight: "auto",
+    }}>
+      <Box display={"flex"} justifyContent={"space-between"}>
+      <Box>
+      <TextField className={classes.textField} label="Product Name" type="text" required />
+      <Autocomplete
+        name="Authors"
+        options={AuthorOptions}
+        value={state.Author}
+        onChange={(event, newValue) => {
+          setState({ ...state, Author: newValue });
+        }}
+        freeSolo
+        renderInput={(params) => (
+          <TextField className={classes.textField} {...params} label="Authors" variant="outlined" onChange={(event) => {
+            const newValue = event.target.value;
+            setState({ ...state, Author: newValue});
+          }}/>
         )}
-      </Formik>
-    </Box>
+      />
+      <Button onClick={handleAddAuthorClick}>Add</Button>
+      <ul>
+        {Authors.map((value, index) => (
+          <li key={index}>
+            {value}
+            <Button onClick={() => handleRemoveAuthorClick(index)}>Remove</Button>
+          </li>
+        ))}
+      </ul>
+      <TextField
+        className={classes.textField}
+        name="ShortDescription"
+        label="Short Description"
+        multiline
+      />
+      </Box>
+      <Box>
+      <TextField className={classes.textField} label="Parts" type="number" required />
+      <Autocomplete
+        name="Categories"
+        options={CategoryOptions}
+        value={state.Category}
+        onChange={(event, newValue) => {
+          setState({ ...state, Category: newValue });
+        }}
+        freeSolo
+        renderInput={(params) => (
+          <TextField className={classes.textField} {...params} label="Category" variant="outlined" onChange={(event) => {
+            const newValue = event.target.value;
+            setState({ ...state, Category: newValue});
+          }}/>
+        )}
+      />
+      <Button onClick={handleAddCategoryClick}>Add</Button>
+      <ul>
+        {Categories.map((value, index) => (
+          <li key={index}>
+            {value}
+            <Button onClick={() => handleRemoveCategoryClick(index)}>Remove</Button>
+          </li>
+        ))}
+      </ul>
+
+      <TextField
+        className={classes.textField}
+        name="LongDescription"
+        label="Long Description"
+        multiline
+      />
+      </Box>
+      </Box>
+
+      <Button variant="contained" color="primary" type="submit">
+        Submit
+      </Button>
+    </FormControl>
   );
 };
 
