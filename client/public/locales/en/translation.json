@@ -33,5 +33,19 @@
 
     "email-invalid": "Email is invalid",
 
-    "password-required": "Password is required"
+    "password-required": "Password is required",
+
+    "name": "Name",
+
+    "repeat-password": "Repeat password",
+
+    "have-account": "Have an account?",
+
+    "sign-up-text": "Enter your registration details",
+
+    "name-required": "Name is required",
+
+    "password-invalid": "Password must be at least 8 characters long",
+
+    "passwords-not-match": "Passwords do not match"
 }

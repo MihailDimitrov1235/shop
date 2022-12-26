@@ -12,9 +12,10 @@ import * as Yup from 'yup';
 import userService from '../../../services/user';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
-
+    const { t } = useTranslation();
 
     const initialValues = {
         name: '',
@@ -24,10 +25,10 @@ const Register = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().max(255).required('Името e задължително'),
-        email: Yup.string().email('Имейлът не е валиден').max(255).required('Имейлът е задължителен'),
-        password: Yup.string().max(255).required('Паролата е задължителна').min(8, 'Паролата трябва да бъде поне 8 символа'),
-        repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Паролите не съвпадат'),
+        name: Yup.string().max(255).required(t('name-required')),
+        email: Yup.string().email(t('email-invalid')).max(255).required(t('email-required')),
+        password: Yup.string().max(255).required(t('password-required')).min(8, t('password-invalid')),
+        repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], t('passwords-not-match')),
     });
 
     const onSubmit = (values, { setSubmitting }) => {
@@ -35,21 +36,21 @@ const Register = () => {
     };
 
     const fields = [
-        { type: 'text', name: 'name', label: 'Име' },
-        { type: 'email', name: 'email', label: 'Имейл' },
-        { type: 'password', name: 'password', label: 'Парола' },
-        { type: 'password', name: 'repeatPassword', label: 'Повторете паролата' } 
+        { type: 'text', name: 'name', label: t('name') },
+        { type: 'email', name: 'email', label: t('email') },
+        { type: 'password', name: 'password', label: t('password') },
+        { type: 'password', name: 'repeatPassword', label: t('repeat-password') } 
     ];
 
     const submitButton = {
-        label: 'Регистрация',
+        label: t('sign-up'),
         color: 'bordoRed'
     };
 
     return (
         <>
             <Helmet>
-                <title>Регистрация | БАН</title>
+                <title>{t('sign-up')} | {t('ban')}</title>
             </Helmet>
             <Box sx={{ mt: 10 }}>
                 <Container maxWidth="sm">
@@ -59,14 +60,14 @@ const Register = () => {
                                 color="textPrimary"
                                 variant="h2"
                             >
-                                Регистриране
+                                {t('sign-up')}
                             </Typography>
                             <Typography
                                 color="textSecondary"
                                 gutterBottom
                                 variant="body2"
                             >
-                                Въведете данните за регистрация
+                                {t('sign-up-text')}
                             </Typography>
                         </Box>
 
@@ -84,10 +85,10 @@ const Register = () => {
                             color="textSecondary"
                             variant="body1"
                         >
-                            Вече имате регистрация?
+                            {t('have-account')}
                             {' '}
                             <Link component={RouterLink} to='/login' variant='h5' underline='hover' color='primary.contrastText'>
-                                Вход
+                                {t('sign-in')}
                             </Link>
                         </Typography>
                     </Card>
