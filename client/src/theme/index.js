@@ -85,6 +85,9 @@ const theme = createTheme({
       fontSize: 14,
       letterSpacing: '-0.05px'
     },
+    span: {
+      color: '#96011c'
+    },
     overline: {
       fontWeight: 500
     }

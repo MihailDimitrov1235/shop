@@ -3,12 +3,13 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import {
     Box,
     Tooltip,
-    IconButton,
+    Divider,
     Avatar,
     Menu,
     MenuItem,
     Typography,
-    ListItemIcon
+    ListItemIcon,
+    Button
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import PersonIcon from '@mui/icons-material/Person';
@@ -20,7 +21,7 @@ import useAuth from '../../hooks/useAuth';
 const ProfileItem = () => {
     const [anchorElUser, setAnchorElUser] = useState(null);
     const { t } = useTranslation();
-    const { setUser } = useAuth();
+    const { user, setUser } = useAuth();
     const navigate = useNavigate();
 
     const handleOpenUserMenu = (event) => {
@@ -34,6 +35,7 @@ const ProfileItem = () => {
     const items = [
         { type: 'link', title: t('account'), href: '/account', icon: PersonIcon },
         { type: 'link', title: t('dashboard'), href: '/admin', icon: DashboardIcon },
+        { type: 'divider' },
         { type: 'button', title: t('logout'), href: '/logout', icon: LogoutIcon, handler: () => {
             userService.logout()
             .then((res) => {
@@ -54,13 +56,40 @@ const ProfileItem = () => {
     return (
         <Box>
             <Tooltip title={t('profile')}>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Button variant='text' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar alt="Remy Sharp" />
-                </IconButton>
+                    <Typography variant='span' component='span' sx={{ ml: 1 }}>{user.name}</Typography>
+                </Button>
             </Tooltip>
             <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: '50px' }}
                 anchorEl={anchorElUser}
+                PaperProps={{
+                    elevation: 0,
+                    sx: {
+                      overflow: 'visible',
+                      filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                      mt: 1.5,
+                      '& .MuiAvatar-root': {
+                        width: 32,
+                        height: 32,
+                        ml: -0.5,
+                        mr: 1,
+                      },
+                      '&:before': {
+                        content: '""',
+                        display: 'block',
+                        position: 'absolute',
+                        top: 0,
+                        right: 14,
+                        width: 10,
+                        height: 10,
+                        bgcolor: 'background.paper',
+                        transform: 'translateY(-50%) rotate(45deg)',
+                        zIndex: 0,
+                      },
+                    },
+                  }}
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
@@ -80,6 +109,10 @@ const ProfileItem = () => {
                         href,
                         icon: Icon
                     } = item;
+
+                    if(type === 'divider') {
+                        return <Divider key={index} />
+                    }
                     
                     return (
                         <MenuItem
