@@ -1,14 +1,11 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Card } from '@mui/material';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import FilteredTable from '../../../components/ControlPanel/Table/FilteredTable';
-import axios from 'axios';
-
-
 
 function createData(id, name, author_ids, short_description, long_description, category_ids, parts, created_at, updated_at) {
   return { id, name, author_ids, short_description, long_description, category_ids, parts, created_at, updated_at };
 }
-
 
 const rows = [
   createData(1, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
@@ -35,13 +32,17 @@ function ProductTable() {
   ];
 
   return (
-    <Box>
-      <FilteredTable
-        rows={rows}
-        columns={columns}
-        checkbox
-      />
-    </Box>
+    <Card sx={{ p: 2 }}>
+      <PerfectScrollbar>
+        <Box>
+          <FilteredTable
+            rows={rows}
+            columns={columns}
+            checkbox
+          />
+        </Box>
+      </PerfectScrollbar>
+    </Card>
   );
 }
 
