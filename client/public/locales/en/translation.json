@@ -15,5 +15,23 @@
 
     "logout": "Logout",
 
-    "store": "Store"
+    "store": "Store",
+
+    "email": "Email",
+
+    "password": "Password",
+
+    "ban": "BAS",
+
+    "sign-in-text": "Enter email and password to log in",
+
+    "no-account": "Don't have an account?",
+
+    "sign-up": "Sign Up",
+
+    "email-required": "Email is required",
+
+    "email-invalid": "Email is invalid",
+
+    "password-required": "Password is required"
 }

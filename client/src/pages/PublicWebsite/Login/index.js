@@ -12,10 +12,12 @@ import * as Yup from 'yup';
 import userService from '../../../services/user';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
     const navigate = useNavigate();
     const { setUser } = useAuth();
+    const { t } = useTranslation();
 
     const initialValues = {
         email: '',
@@ -23,8 +25,8 @@ const Login = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email('Имейлът не е валиден').max(255).required('Имейлът е задължителен'),
-        password: Yup.string().max(255).required('Паролата е задължителна')
+        email: Yup.string().email(t('email-invalid')).max(255).required(t('email-required')),
+        password: Yup.string().max(255).required(t('password-required'))
     });
 
     const onSubmit = (values, { setSubmitting }) => {
@@ -45,19 +47,19 @@ const Login = () => {
     };
 
     const fields = [
-        { type: 'email', name: 'email', label: 'Имейл' },
-        { type: 'password', name: 'password', label: 'Парола' }
+        { type: 'email', name: 'email', label: t('email') },
+        { type: 'password', name: 'password', label: t('password') }
     ];
 
     const submitButton = {
-        label: 'Влизане',
+        label: t('sign-in'),
         color: 'bordoRed'
     };
 
     return (
         <>
             <Helmet>
-                <title>Логин | БАН</title>
+                <title>{t('sign-in')} | {t('ban')}</title>
             </Helmet>
             <Box
                 sx={{
@@ -76,14 +78,14 @@ const Login = () => {
                                 color="textPrimary"
                                 variant="h2"
                             >
-                                Вход
+                                {t('sign-in')}
                             </Typography>
                             <Typography
                                 color="textSecondary"
                                 gutterBottom
                                 variant="body2"
                             >
-                                Въведете имейл и парола, за да влезете в системата
+                                {t('sign-in-text')}
                             </Typography>
                         </Box>
 
@@ -101,10 +103,10 @@ const Login = () => {
                             color="textSecondary"
                             variant="body1"
                         >
-                            Нямате акаунт?
+                            {t('no-account')}
                             {' '}
                             <Link component={RouterLink} to='/register' variant='h5' underline='hover' color='primary.contrastText'>
-                                Регистрация
+                                {t('sign-up')}
                             </Link>
                         </Typography>
                     </Card>
