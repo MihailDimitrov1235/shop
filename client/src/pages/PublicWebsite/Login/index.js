@@ -1,7 +1,8 @@
 import {
     Box,
     Container,
-    Typography
+    Typography,
+    Card
 } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import FormBuilder from "../../../components/FormBuilder";
@@ -26,19 +27,19 @@ const Login = () => {
 
     const onSubmit = (values, { setSubmitting }) => {
         userService.login(values)
-        .then((res) => {
-            localStorage.setItem('refresh-token', res.data.token);
-            const user = res.data.user;
-            setUser(user);
-            if(user.role_id === 1) {
-                navigate('/admin', { replace: true });
-            }else {
-                navigate('/', { replace: true });
-            }
-        })
-        .catch((err) => {
-            setSubmitting(false);
-        })
+            .then((res) => {
+                localStorage.setItem('refresh-token', res.data.token);
+                const user = res.data.user;
+                setUser(user);
+                if (user.role_id === 1) {
+                    navigate('/admin', { replace: true });
+                } else {
+                    navigate('/', { replace: true });
+                }
+            })
+            .catch((err) => {
+                setSubmitting(false);
+            })
     };
 
     const fields = [
@@ -67,31 +68,33 @@ const Login = () => {
                 }}
             >
                 <Container maxWidth="sm">
-                    <Box sx={{ mb: 2 }}>
-                        <Typography
-                            color="textPrimary"
-                            variant="h2"
-                        >
-                            Вход
-                        </Typography>
-                        <Typography
-                            color="textSecondary"
-                            gutterBottom
-                            variant="body2"
-                        >
-                            Въведете имейл и парола, за да влезете в системата
-                        </Typography>
-                    </Box>
+                    <Card sx={{ p: 3 }}>
+                        <Box sx={{ mb: 2 }}>
+                            <Typography
+                                color="textPrimary"
+                                variant="h2"
+                            >
+                                Вход
+                            </Typography>
+                            <Typography
+                                color="textSecondary"
+                                gutterBottom
+                                variant="body2"
+                            >
+                                Въведете имейл и парола, за да влезете в системата
+                            </Typography>
+                        </Box>
 
-                    <Box>
-                        <FormBuilder
-                            fields={fields}
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={onSubmit}
-                            submitButton={submitButton}
-                        />
-                    </Box>
+                        <Box>
+                            <FormBuilder
+                                fields={fields}
+                                initialValues={initialValues}
+                                validationSchema={validationSchema}
+                                onSubmit={onSubmit}
+                                submitButton={submitButton}
+                            />
+                        </Box>
+                    </Card>
                 </Container>
             </Box>
         </>
