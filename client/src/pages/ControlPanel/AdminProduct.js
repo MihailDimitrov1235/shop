@@ -1,6 +1,6 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import ProductTable from "./Products/ProductTable";
 import DownloadIcon from '@mui/icons-material/Download';
+import { Outlet } from 'react-router-dom';
 
 const AdminProducts = () =>{
     return (
@@ -12,7 +12,7 @@ const AdminProducts = () =>{
                 display:'flex',
             }}>
                 <Box>
-                    <Typography variant="h2">Products</Typography>
+                    <Typography variant="h3" style={{ fontSize: "40px" }}>Products</Typography>
                 </Box>
                 <Box sx ={{
                     ml:'auto',
@@ -24,7 +24,7 @@ const AdminProducts = () =>{
             </Box>
             {/* CONTENT */}
             <Box height={"100%"} width={"100%"} ml={"auto"} mr={"auto"}>
-                <ProductTable/>
+                <Outlet />
             </Box>
         </Box>
     );

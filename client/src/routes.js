@@ -9,6 +9,7 @@ import Login from './pages/PublicWebsite/Login';
 import Dashboard from './pages/ControlPanel/Dashboard';
 import AdminProducts from './pages/ControlPanel/AdminProduct';
 import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
+import ProductTable from "./pages/ControlPanel/Products/ProductTable";
 
 const routes = [
   {
@@ -27,8 +28,11 @@ const routes = [
     element: <ControlPanelLayout />,
     children: [
       { path: 'dashboard', element: <Dashboard /> },
-      { path: 'products/create', element: <AddProductForm /> },
-      { path: 'products', element: <AdminProducts /> },
+      { path: 'products', element: <AdminProducts />, children: [
+        { path: '/admin/products', element: <Navigate to="/admin/products/data" />},
+        { path: 'create', element: <AddProductForm />},
+        { path: 'data', element: <ProductTable />}
+      ] },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]

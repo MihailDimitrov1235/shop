@@ -32,7 +32,7 @@ const useStyles = makeStyles({
       padding: "8px",
       borderRadius: "4px",
       border: "1px solid #ccc",
-      resize: "none",
+      resize: "none !important",
       "&:focus": {
         outline: "none",
         borderColor: "#666",
