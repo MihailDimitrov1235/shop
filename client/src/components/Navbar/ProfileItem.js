@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import {
+    Link as RouterLink,
+    useNavigate,
+    matchPath,
+    useLocation
+} from 'react-router-dom';
 import {
     Box,
     Tooltip,
@@ -23,6 +28,12 @@ const ProfileItem = () => {
     const { t } = useTranslation();
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isInAdmin = !!matchPath({
+        path: '/admin',
+        end: false
+    }, location.pathname);
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -52,8 +63,12 @@ const ProfileItem = () => {
         }}
     ];
 
-    if(user.role_id === 1) {
-        items.splice(1, 0, { type: 'link', title: t('dashboard'), href: '/admin', icon: DashboardIcon })
+    if(user && user.role_id === 1) {
+        if(isInAdmin) {
+            items.splice(1, 0, { type: 'link', title: t('store'), href: '/', icon: DashboardIcon });
+        }else {
+            items.splice(1, 0, { type: 'link', title: t('dashboard'), href: '/admin', icon: DashboardIcon });
+        }
     }
 
     return (
@@ -61,7 +76,7 @@ const ProfileItem = () => {
             <Tooltip title={t('profile')}>
                 <Button variant='text' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar alt="Remy Sharp" />
-                    <Typography variant='span' component='span' sx={{ ml: 1 }}>{user.name}</Typography>
+                    <Typography variant='span' component='span' sx={{ ml: 1 }}>{user && user.name}</Typography>
                 </Button>
             </Tooltip>
             <Menu

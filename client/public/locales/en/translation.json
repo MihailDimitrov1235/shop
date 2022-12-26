@@ -13,5 +13,7 @@
 
     "dashboard": "Dashboard",
 
-    "logout": "Logout"
+    "logout": "Logout",
+
+    "store": "Store"
 }
