@@ -22,28 +22,27 @@ const rows = [
 
 function ProductTable() {
 
-    const columns = [
-      { id: 'id', label: 'Product ID'},
-      { id: 'name', label: 'Name'},
-      { id: 'author_ids', label: 'Author IDs'},
-      { id: 'short_description', label: 'Short Description'},
-      { id: 'long_description', label: 'Long Description'},
-      { id: 'category_ids', label: 'Category IDs'},
-      { id: 'parts', label: 'Parts'},
-      { id: 'created_at', label: 'Created At'},
-      { id: 'updated_at', label: 'Updated At' },
-    ];
+  const columns = [
+    { id: 'id', label: 'Product ID' },
+    { id: 'name', label: 'Name' },
+    { id: 'author_ids', label: 'Author IDs' },
+    { id: 'short_description', label: 'Short Description' },
+    { id: 'long_description', label: 'Long Description' },
+    { id: 'category_ids', label: 'Category IDs' },
+    { id: 'parts', label: 'Parts' },
+    { id: 'created_at', label: 'Created At' },
+    { id: 'updated_at', label: 'Updated At' },
+  ];
 
-    return (
-        <Box>
-      
-        <FilteredTable
-          rows={rows}
-          columns={columns}
-          checkbox
-        />
-      </Box>
-    );
-  }
-  
-  export default ProductTable;
+  return (
+    <Box>
+      <FilteredTable
+        rows={rows}
+        columns={columns}
+        checkbox
+      />
+    </Box>
+  );
+}
+
+export default ProductTable;
