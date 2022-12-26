@@ -11,17 +11,18 @@ const NavbarContent = ({ items }) => {
                 if (item.type === 'link') {
                     return (
                         <NavItem
+                            key={index}
                             title={item.title}
                             href={item.href}
                             {...item}
                         />
                     );
                 } else if (item.type === 'langSwitcher') {
-                    return <LanguageSwitcher />
-                } else if (item.type === 'devider') {
-                    return <Divider orientation="vertical" flexItem />
+                    return <LanguageSwitcher key={index} />
+                } else if (item.type === 'divider') {
+                    return <Divider orientation="vertical" flexItem key={index} />
                 } else if (item.type === 'profile') {
-                    return <ProfileItem />
+                    return <ProfileItem key={index} />
                 }
             })}
         </>

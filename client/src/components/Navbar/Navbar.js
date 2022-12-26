@@ -34,7 +34,7 @@ const Navbar = (props) => {
         { type: 'link', title: t('home'), href: '/' },
         { type: 'link', title: t('products'), href: '/products' },
         { type: 'langSwitcher' },
-        { type: 'devider' },
+        { type: 'divider' },
         {
             type: 'link',
             title: <StyledBadge badgeContent={4} color="bordoRed">

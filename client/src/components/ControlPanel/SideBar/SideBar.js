@@ -18,7 +18,7 @@ const SideBar = () => {
     }
 
     const items = [
-        { type: 'item', icon: DashboardIcon, label: 'Dashboard' },
+        { type: 'item', icon: DashboardIcon, label: 'Dashboard', href: '/admin/dashboard' },
         { type: 'subMenu', icon: ComputerIcon, label: 'Client Facing', items: [
             { href: '/admin/products', label: 'Products' },
             { href: '/products', label: 'Users' },

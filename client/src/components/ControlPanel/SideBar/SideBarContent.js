@@ -9,7 +9,7 @@ const SideBarContent = ({ items }) => {
                 const { type, label, icon: Icon } = item;
 
                 if(type === 'item') {
-                    return <MenuItem key={index} icon={<Icon />}> {label} </MenuItem>
+                    return <MenuItem routerLink={<Link to={item.href} />} key={index} icon={<Icon />}> {label} </MenuItem>
                 }else if(type === 'subMenu') {
                     return (
                         <SubMenu label={label}  icon={<Icon />} key={index}>
