@@ -30,11 +30,14 @@ const routes = [
     element: <ControlPanelLayout />,
     children: [
       { path: 'dashboard', element: <Dashboard /> },
-      { path: 'products', element: <AdminProducts />, children: [
-        { path: '/admin/products', element: <Navigate to="/admin/products/data" />},
-        { path: 'create', element: <AddProductForm />},
-        { path: 'data', element: <ProductTable />}
-      ] },
+      {
+        path: 'products',
+        element: <AdminProducts />,
+        children: [
+          { path: '', element: <ProductTable />},
+          { path: 'create', element: <AddProductForm />},
+        ] 
+      },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
