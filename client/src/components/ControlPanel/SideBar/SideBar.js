@@ -50,8 +50,9 @@ const SideBar = () => {
                 <Menu menuItemStyles={{
                     button: ({ level, active, disabled }) => {
                         // only apply styles on first level elements of the tree
+
                         return {
-                            color: disabled ? `${theme.palette.primary.contrastText}` : `${theme.palette.primary.mainDarker}`,
+                            color: active ? `${theme.palette.primary.contrastText}` : `${theme.palette.primary.mainDarker}`,
                             //backgroundColor: active ? '#eecef9' : undefined,
                             backgroundColor: `${theme.palette.background.paper}`,
                             ":hover": hoverStyle,
