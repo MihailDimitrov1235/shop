@@ -15,6 +15,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/payment', [PaymentController::class, 'pay'])->middleware('auth');
 
 Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/users/register', [UserController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('users')->group(function() {

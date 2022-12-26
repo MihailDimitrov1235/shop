@@ -9,6 +9,14 @@ function login(data) {
     });
 }
 
+function register(data) {
+    const url = `${servicesHelper.url}/users/register`;
+
+    return axios.post(url, data, {
+        headers: servicesHelper.header()
+    });
+}
+
 function profile() {
     const url = `${servicesHelper.url}/users/profile`;
 
@@ -27,6 +35,7 @@ function logout() {
 
 const userService = {
     login,
+    register,
     profile,
     logout
 }

@@ -15,6 +15,8 @@ import useAuth from '../../../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 
 const Register = () => {
+    const navigate = useNavigate();
+    const { setUser } = useAuth();
     const { t } = useTranslation();
 
     const initialValues = {
@@ -32,14 +34,23 @@ const Register = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-       
+        userService.register(values)
+            .then((res) => {
+                localStorage.setItem('refresh-token', res.data.token);
+                const user = res.data.user;
+                setUser(user);
+                navigate('/', { replace: true });
+            })
+            .catch((err) => {
+                setSubmitting(false);
+            })
     };
 
     const fields = [
         { type: 'text', name: 'name', label: t('name') },
         { type: 'email', name: 'email', label: t('email') },
         { type: 'password', name: 'password', label: t('password') },
-        { type: 'password', name: 'repeatPassword', label: t('repeat-password') } 
+        { type: 'password', name: 'repeatPassword', label: t('repeat-password') }
     ];
 
     const submitButton = {
