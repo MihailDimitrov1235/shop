@@ -13,62 +13,45 @@ import userService from '../../../services/user';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
-const Login = () => {
-    const navigate = useNavigate();
-    const { setUser } = useAuth();
+const Register = () => {
+
 
     const initialValues = {
+        name: '',
         email: '',
-        password: ''
+        password: '',
+        repeatPassword: ''
     };
 
     const validationSchema = Yup.object().shape({
+        name: Yup.string().max(255).required('Името e задължително'),
         email: Yup.string().email('Имейлът не е валиден').max(255).required('Имейлът е задължителен'),
-        password: Yup.string().max(255).required('Паролата е задължителна')
+        password: Yup.string().max(255).required('Паролата е задължителна').min(8, 'Паролата трябва да бъде поне 8 символа'),
+        repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Паролите не съвпадат'),
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        userService.login(values)
-            .then((res) => {
-                localStorage.setItem('refresh-token', res.data.token);
-                const user = res.data.user;
-                setUser(user);
-                if (user.role_id === 1) {
-                    navigate('/admin', { replace: true });
-                } else {
-                    navigate('/', { replace: true });
-                }
-            })
-            .catch((err) => {
-                setSubmitting(false);
-            })
+       
     };
 
     const fields = [
+        { type: 'text', name: 'name', label: 'Име' },
         { type: 'email', name: 'email', label: 'Имейл' },
-        { type: 'password', name: 'password', label: 'Парола' }
+        { type: 'password', name: 'password', label: 'Парола' },
+        { type: 'password', name: 'repeatPassword', label: 'Повторете паролата' } 
     ];
 
     const submitButton = {
-        label: 'Влизане',
+        label: 'Регистрация',
         color: 'bordoRed'
     };
 
     return (
         <>
             <Helmet>
-                <title>Логин | БАН</title>
+                <title>Регистрация | БАН</title>
             </Helmet>
-            <Box
-                sx={{
-                    mt: 10
-                    // backgroundColor: 'background.default',
-                    // display: 'flex',
-                    // flexDirection: 'column',
-                    // height: '100%',
-                    // justifyContent: 'center'
-                }}
-            >
+            <Box sx={{ mt: 10 }}>
                 <Container maxWidth="sm">
                     <Card sx={{ p: 3 }}>
                         <Box sx={{ mb: 2 }}>
@@ -76,14 +59,14 @@ const Login = () => {
                                 color="textPrimary"
                                 variant="h2"
                             >
-                                Вход
+                                Регистриране
                             </Typography>
                             <Typography
                                 color="textSecondary"
                                 gutterBottom
                                 variant="body2"
                             >
-                                Въведете имейл и парола, за да влезете в системата
+                                Въведете данните за регистрация
                             </Typography>
                         </Box>
 
@@ -101,10 +84,10 @@ const Login = () => {
                             color="textSecondary"
                             variant="body1"
                         >
-                            Нямате акаунт?
+                            Вече имате регистрация?
                             {' '}
-                            <Link component={RouterLink} to='/register' variant='h5' underline='hover' color='primary.contrastText'>
-                                Регистрация
+                            <Link component={RouterLink} to='/login' variant='h5' underline='hover' color='primary.contrastText'>
+                                Вход
                             </Link>
                         </Typography>
                     </Card>
@@ -114,4 +97,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Register;
