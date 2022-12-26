@@ -13,7 +13,7 @@ import useAuth from '../../../hooks/useAuth';
 const Login = () => {
     const navigate = useNavigate();
     const { setUser } = useAuth();
-    
+
     const initialValues = {
         email: '',
         password: ''
@@ -28,8 +28,13 @@ const Login = () => {
         userService.login(values)
         .then((res) => {
             localStorage.setItem('refresh-token', res.data.token);
-            setUser(res.data.user);
-            navigate('/admin', { replace: true });
+            const user = res.data.user;
+            setUser(user);
+            if(user.role_id === 1) {
+                navigate('/admin', { replace: true });
+            }else {
+                navigate('/', { replace: true });
+            }
         })
         .catch((err) => {
             setSubmitting(false);

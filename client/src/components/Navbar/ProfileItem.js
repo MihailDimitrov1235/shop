@@ -34,7 +34,6 @@ const ProfileItem = () => {
 
     const items = [
         { type: 'link', title: t('account'), href: '/account', icon: PersonIcon },
-        { type: 'link', title: t('dashboard'), href: '/admin', icon: DashboardIcon },
         { type: 'divider' },
         { type: 'button', title: t('logout'), href: '/logout', icon: LogoutIcon, handler: () => {
             userService.logout()
@@ -52,6 +51,10 @@ const ProfileItem = () => {
             })
         }}
     ];
+
+    if(user.role_id === 1) {
+        items.splice(1, 0, { type: 'link', title: t('dashboard'), href: '/admin', icon: DashboardIcon })
+    }
 
     return (
         <Box>
