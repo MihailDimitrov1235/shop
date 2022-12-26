@@ -21,8 +21,8 @@ const SideBar = () => {
         { type: 'item', icon: DashboardIcon, label: 'Dashboard', href: '/admin/dashboard' },
         { type: 'subMenu', icon: ComputerIcon, label: 'Client Facing', items: [
             { href: '/admin/products', label: 'Products' },
-            { href: '/products', label: 'Users' },
-            { href: '/products', label: 'Transactions' },
+            { href: '/admin/users', label: 'Users' },
+            { href: '/admin/transactions', label: 'Transactions' },
         ]},
         { type: 'subMenu', icon: ShoppingBagIcon, label: 'Sales', items: [
             { href: '/products', label: 'Overview' },
@@ -31,7 +31,7 @@ const SideBar = () => {
             { href: '/products', label: 'Breakdown' },
         ]},
         { type: 'subMenu', icon: ManageAccountsIcon, label: 'Management', items: [
-            { href: '/products', label: 'Admins' },
+            { href: '/admin/admins', label: 'Admins' },
         ]},
 
     ]

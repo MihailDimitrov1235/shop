@@ -39,6 +39,14 @@ const routes = [
           { path: 'create', element: <AddProductForm />},
         ] 
       },
+      {
+        path: 'users',
+        element: <PageLayout title='users' />,
+        children: [
+          { path: '', element: <ProductTable />},
+          { path: 'create', element: <AddProductForm />},
+        ] 
+      },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
