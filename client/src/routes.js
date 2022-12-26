@@ -8,9 +8,10 @@ import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
 
 import Dashboard from './pages/ControlPanel/Dashboard';
-import AdminProducts from './pages/ControlPanel/AdminProduct';
 import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
 import ProductTable from "./pages/ControlPanel/Products/ProductTable";
+
+import PageLayout from './components/ControlPanel/PageLayout';
 
 const routes = [
   {
@@ -32,7 +33,7 @@ const routes = [
       { path: 'dashboard', element: <Dashboard /> },
       {
         path: 'products',
-        element: <AdminProducts />,
+        element: <PageLayout title='products' />,
         children: [
           { path: '', element: <ProductTable />},
           { path: 'create', element: <AddProductForm />},
