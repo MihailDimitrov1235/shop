@@ -119,5 +119,15 @@
 
     "delete": "Delete",
 
-    "rows-per-page": "Rows per page"
+    "rows-per-page": "Rows per page",
+
+    "author-required": "Аuthor is required",
+
+    "short-description-required": "Short description is required",
+
+    "long-description-required": "Long description is required",
+
+    "category-required": "Category is required",
+
+    "parts-required": "Number of parts is required"
 }

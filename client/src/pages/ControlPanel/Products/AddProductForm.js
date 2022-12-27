@@ -1,161 +1,75 @@
 import React from 'react';
-import { useState } from 'react';
-import { 
-  Box,
-  Autocomplete,
-  FormControl,
-  TextField,
-  Button
-} from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Card } from '@mui/material';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'react-i18next';
-
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    width:"35vw",
-    paddingTop:"10px",
-    paddingRight:"10px",
-  }
-}));
+import FormBuilder from '../../../components/FormBuilder';
+import * as Yup from 'yup';
 
 const AddProductForm = () => {
-
   const { t } = useTranslation();
-  const classes = useStyles();
 
-  const AuthorOptions = [
-    'Miroslav Dianov Balev',
-    'Mihail Vladimirov Dimitrov',
-    'Stefan Ivanov? Kojuharov',
+  const authorOptions = [
+    { label: 'Miroslav Dianov Balev', value: 1 },
+    { label: 'Mihail Vladimirov Dimitrov', value: 2 },
+    { label: 'Stefan Ivanov? Kojuharov', value: 3 }
   ];
 
-  const CategoryOptions = [
-    'Zelen',
-    'Biologi4en',
-    'Grozen',
+  const categoryOptions = [
+    { label: 'Zelen', value: 1 },
+    { label: 'Biologi4en', value: 2 },
+    { label: 'Grozen', value: 3 }
   ];
 
-  const [state, setState] = useState({
-    ProductName : "",
-    Author : "",
-    ShortDescription : "",
-    LongDescription : "",
-    Category : "",
-    Parts : "",
+  const initialValues = {
+    name: '',
+    author: '',
+    shortDescription: '',
+    longDescription: '',
+    category: '',
+    parts: ''
+  };
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().max(255).required(t('name-required')),
+    author: Yup.object().required(t('author-required')),
+    shortDescription: Yup.string().required(t('short-description-required')),
+    longDescription: Yup.string().required(t('long-description-required')),
+    category: Yup.object().required(t('category-required')),
+    parts: Yup.number().required(t('parts-required'))
   });
 
-  const [Authors, setAuthors] = useState([]);
-  const [Categories, setCategories] = useState([]);
+  const onSubmit = (values, { setSubmitting }) => {
+    console.log(values);
+    setSubmitting(false);
+  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // gather form data and call onSubmit callback function
-  }
+  const fields = [
+    { type: 'text', name: 'name', label: t('product-name') },
+    { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions },
+    { type: 'number', name: 'parts', label: t('parts') },
+    { type: 'multiline', name: 'shortDescription', label: t('short-description') },
+    { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
+    { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions }
+  ];
 
-  function handleAddAuthorClick() {
-    if(!Authors.includes(state.Author) && state.Author != ""){
-      setAuthors([...Authors, state.Author]);
-    }
-  }
-
-  function handleRemoveAuthorClick(index) {
-    const newValues = [...Authors];
-    newValues.splice(index, 1);
-    setAuthors(newValues);
-  }
-
-  function handleAddCategoryClick() {
-    console.log()
-    if(!Categories.includes(state.Category) && state.Category != ""){
-      setCategories([...Categories, state.Category]);
-    }
-  }
-
-  function handleRemoveCategoryClick(index) {
-    const newValues = [...Categories];
-    newValues.splice(index, 1);
-    setCategories(newValues);
-  }
+  const submitButton = {
+    color: 'bordoRed'
+  };
 
   return (
-    <FormControl onSubmit={handleSubmit} style={{
-      marginLeft:"auto",
-      marginRight: "auto",
-    }}>
-      <Box display={"flex"} justifyContent={"space-between"}>
-      <Box>
-      <TextField className={classes.textField} label={t("product-name")} type="text" required />
-      <Autocomplete
-        name="Authors"
-        options={AuthorOptions}
-        value={state.Author}
-        onChange={(event, newValue) => {
-          setState({ ...state, Author: newValue });
-        }}
-        freeSolo
-        renderInput={(params) => (
-          <TextField className={classes.textField} {...params} label={t("authors")} variant="outlined" onChange={(event) => {
-            const newValue = event.target.value;
-            setState({ ...state, Author: newValue});
-          }}/>
-        )}
-      />
-      <Button onClick={handleAddAuthorClick}>{t("add")}</Button>
-      <ul>
-        {Authors.map((value, index) => (
-          <li key={index}>
-            {value}
-            <Button onClick={() => handleRemoveAuthorClick(index)}>{t("remove")}</Button>
-          </li>
-        ))}
-      </ul>
-      <TextField
-        className={classes.textField}
-        name="ShortDescription"
-        label={t("short-description")}
-        multiline
-      />
-      </Box>
-      <Box>
-      <TextField className={classes.textField} label={t("parts")} type="number" required />
-      <Autocomplete
-        name="Categories"
-        options={CategoryOptions}
-        value={state.Category}
-        onChange={(event, newValue) => {
-          setState({ ...state, Category: newValue });
-        }}
-        freeSolo
-        renderInput={(params) => (
-          <TextField className={classes.textField} {...params} label={t("category")} variant="outlined" onChange={(event) => {
-            const newValue = event.target.value;
-            setState({ ...state, Category: newValue});
-          }}/>
-        )}
-      />
-      <Button onClick={handleAddCategoryClick}>{t("add")}</Button>
-      <ul>
-        {Categories.map((value, index) => (
-          <li key={index}>
-            {value}
-            <Button onClick={() => handleRemoveCategoryClick(index)}>{t("remove")}</Button>
-          </li>
-        ))}
-      </ul>
-
-      <TextField
-        className={classes.textField}
-        name="LongDescription"
-        label={t("long-description")}
-        multiline
-      />
-      </Box>
-      </Box>
-
-      <Button variant="contained" color="primary" type="submit">
-        {t("create")}
-      </Button>
-    </FormControl>
+    <Card sx={{ p: 2 }}>
+      <PerfectScrollbar>
+        <Box>
+          <FormBuilder
+            fields={fields}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+            submitButton={submitButton}
+          />
+        </Box>
+      </PerfectScrollbar>
+    </Card>
   );
 };
 

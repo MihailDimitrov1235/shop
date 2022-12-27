@@ -119,5 +119,15 @@
 
     "delete": "Изтрии",
 
-    "rows-per-page": "Редове на страница"
+    "rows-per-page": "Редове на страница",
+
+    "author-required": "Авторът е задължителен",
+
+    "short-description-required": "Kраткото описание е задължително",
+
+    "long-description-required": "Дългото описание е задължително",
+
+    "category-required": "Категорията е задължителна",
+
+    "parts-required": "Броят части е задължителен"
 }
