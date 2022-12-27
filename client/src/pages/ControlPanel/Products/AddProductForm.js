@@ -8,6 +8,7 @@ import {
   Button
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AddProductForm = () => {
 
+  const { t } = useTranslation();
   const classes = useStyles();
 
   const AuthorOptions = [
@@ -82,7 +84,7 @@ const AddProductForm = () => {
     }}>
       <Box display={"flex"} justifyContent={"space-between"}>
       <Box>
-      <TextField className={classes.textField} label="Product Name" type="text" required />
+      <TextField className={classes.textField} label={t("product-name")} type="text" required />
       <Autocomplete
         name="Authors"
         options={AuthorOptions}
@@ -92,30 +94,30 @@ const AddProductForm = () => {
         }}
         freeSolo
         renderInput={(params) => (
-          <TextField className={classes.textField} {...params} label="Authors" variant="outlined" onChange={(event) => {
+          <TextField className={classes.textField} {...params} label={t("authors")} variant="outlined" onChange={(event) => {
             const newValue = event.target.value;
             setState({ ...state, Author: newValue});
           }}/>
         )}
       />
-      <Button onClick={handleAddAuthorClick}>Add</Button>
+      <Button onClick={handleAddAuthorClick}>{t("add")}</Button>
       <ul>
         {Authors.map((value, index) => (
           <li key={index}>
             {value}
-            <Button onClick={() => handleRemoveAuthorClick(index)}>Remove</Button>
+            <Button onClick={() => handleRemoveAuthorClick(index)}>{t("remove")}</Button>
           </li>
         ))}
       </ul>
       <TextField
         className={classes.textField}
         name="ShortDescription"
-        label="Short Description"
+        label={t("short-description")}
         multiline
       />
       </Box>
       <Box>
-      <TextField className={classes.textField} label="Parts" type="number" required />
+      <TextField className={classes.textField} label={t("parts")} type="number" required />
       <Autocomplete
         name="Categories"
         options={CategoryOptions}
@@ -125,18 +127,18 @@ const AddProductForm = () => {
         }}
         freeSolo
         renderInput={(params) => (
-          <TextField className={classes.textField} {...params} label="Category" variant="outlined" onChange={(event) => {
+          <TextField className={classes.textField} {...params} label={t("category")} variant="outlined" onChange={(event) => {
             const newValue = event.target.value;
             setState({ ...state, Category: newValue});
           }}/>
         )}
       />
-      <Button onClick={handleAddCategoryClick}>Add</Button>
+      <Button onClick={handleAddCategoryClick}>{t("add")}</Button>
       <ul>
         {Categories.map((value, index) => (
           <li key={index}>
             {value}
-            <Button onClick={() => handleRemoveCategoryClick(index)}>Remove</Button>
+            <Button onClick={() => handleRemoveCategoryClick(index)}>{t("remove")}</Button>
           </li>
         ))}
       </ul>
@@ -144,14 +146,14 @@ const AddProductForm = () => {
       <TextField
         className={classes.textField}
         name="LongDescription"
-        label="Long Description"
+        label={t("long-description")}
         multiline
       />
       </Box>
       </Box>
 
       <Button variant="contained" color="primary" type="submit">
-        Submit
+        {t("create")}
       </Button>
     </FormControl>
   );

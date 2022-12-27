@@ -47,5 +47,77 @@
 
     "password-invalid": "Password must be at least 8 characters long",
 
-    "passwords-not-match": "Passwords do not match"
+    "passwords-not-match": "Passwords do not match",
+
+    "dashboard-text": "Welcome to your Dashboard",
+
+    "product-id": "Product ID",
+
+    "author-ids": "Author IDs",
+
+    "short-description": "Short Description",
+
+    "long-description": "Long Description",
+
+    "category-ids": "Category IDs",
+
+    "parts": "Number of parts",
+
+    "created-at": "Created At",
+
+    "updated-at": "Updated At",
+
+    "product-name": "Product Name",
+
+    "authors": "Authors",
+
+    "add": "Add",
+
+    "remove": "Remove",
+
+    "create": "Create",
+
+    "user-id": "User ID",
+
+    "email-verified-at": "Email Verified At",
+
+    "purchase-ids": "Purchase IDs",
+
+    "create-user": "Create a new user",
+
+    "create-user-text": "text",
+
+    "create-user-title": "Create User",
+
+    "admin-id": "Admin ID",
+
+    "username": "Username",
+
+    "role": "Role",
+
+    "create-admin": "Create a new admin",
+
+    "create-admin-text": "text",
+
+    "create-admin-title": "Create Admin",
+
+    "create-product": "Create a new Product",
+
+    "create-product-text": "text",
+
+    "create-product-title": "Create Product",
+
+    "category": "Category",
+
+    "search-in": "Search in ",
+
+    "delete-msg": "Are you sure you want to delete",
+
+    "rows": " rows",
+
+    "cancel": "Cancel",
+
+    "delete": "Delete",
+
+    "rows-per-page": "Rows per page"
 }

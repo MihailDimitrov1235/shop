@@ -1,8 +1,10 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import SalesLine from "./Charts/SalesLine";
 import DownloadIcon from '@mui/icons-material/Download';
+import { useTranslation } from 'react-i18next';
 
 const Dashboard = () =>{
+    const { t } = useTranslation();
     return (
         <Box sx={{
             p:4,
@@ -12,8 +14,8 @@ const Dashboard = () =>{
                 display:'flex',
             }}>
                 <Box>
-                    <Typography variant="h2">Dashboard</Typography>
-                    <Typography variant="h6">Welcome to your Dashboard</Typography>
+                    <Typography variant="h2">{t('dashboard')}</Typography>
+                    <Typography variant="h6">{t('dashboard-text')}</Typography>
                 </Box>
                 <Box sx ={{
                     ml:'auto',

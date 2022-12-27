@@ -10,9 +10,11 @@ import {
   Box
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useTranslation } from 'react-i18next';
 
 export default function DeleteDialog({ selected, setSelected }) {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   function handleClickOpen() {
     setOpen(true);
@@ -46,15 +48,15 @@ export default function DeleteDialog({ selected, setSelected }) {
         <DialogTitle>Delete</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete {selected.length} rows?
+            {t('delete-msg')} {selected.length} {t('rows')}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button onClick={handleDelete} color="secondary">
-        Delete
+            {t('delete')}
             </Button>
             </DialogActions>
         </Dialog>

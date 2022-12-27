@@ -47,5 +47,77 @@
 
     "password-invalid": "Паролата трябва да бъде поне 8 символа",
 
-    "passwords-not-match": "Паролите не съвпадат"
+    "passwords-not-match": "Паролите не съвпадат",
+
+    "dashboard-text": "Добре дошли",
+
+    "product-id": "ID на продукта",
+
+    "author-ids": "ID-та на Авторите",
+
+    "short-description": "Кратко описание",
+
+    "long-description": "Дълго описание",
+
+    "category-ids": "ID-та на категориите",
+
+    "parts": "Брой части",
+
+    "created-at": "Създадено на",
+
+    "updated-at": "Актуализирано на",
+
+    "product-name": "Име на продукта",
+
+    "authors": "Автори",
+
+    "add": "Добави",
+
+    "remove": "Премахни",
+
+    "create": "Създай",
+
+    "user-id": "ID на потребителя",
+
+    "email-verified-at": "Имейлът е потвърден на",
+
+    "purchase-ids": "ID-та на покупките",
+
+    "create-user": "Създай нов потребител",
+
+    "create-user-text": "text",
+
+    "create-user-title": "Създай Потребител",
+
+    "admin-id": "ID на администратора",
+
+    "username": "Потребителско име",
+
+    "role": "Роля",
+
+    "create-admin": "Създай нов администратор",
+
+    "create-admin-text": "text",
+
+    "create-admin-title": "Създай Администратор",
+
+    "create-product": "Създай нов продукт",
+
+    "create-product-text": "text",
+
+    "create-product-title": "Създай Продукт",
+
+    "category": "Категория",
+
+    "search-in": "Търси в ",
+
+    "delete-msg": "Сигурни ли сте, че искате да изтриете",
+
+    "rows": "реда",
+
+    "cancel": "Отмени",
+
+    "delete": "Изтрии",
+
+    "rows-per-page": "Редове на страница"
 }

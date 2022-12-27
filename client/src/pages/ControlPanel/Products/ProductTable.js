@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import FilteredTable from '../../../components/ControlPanel/Table/FilteredTable';
+import { useTranslation } from 'react-i18next';
 
 function createData(id, name, author_ids, short_description, long_description, category_ids, parts, created_at, updated_at) {
   return { id, name, author_ids, short_description, long_description, category_ids, parts, created_at, updated_at };
@@ -19,16 +20,18 @@ const rows = [
 
 function ProductTable() {
 
+  const { t } = useTranslation();
+
   const columns = [
-    { id: 'id', label: 'Product ID' },
-    { id: 'name', label: 'Name' },
-    { id: 'author_ids', label: 'Author IDs' },
-    { id: 'short_description', label: 'Short Description' },
-    { id: 'long_description', label: 'Long Description' },
-    { id: 'category_ids', label: 'Category IDs' },
-    { id: 'parts', label: 'Parts' },
-    { id: 'created_at', label: 'Created At' },
-    { id: 'updated_at', label: 'Updated At' },
+    { id: 'id', label: t("product-id") },
+    { id: 'name', label: t("name") },
+    { id: 'author_ids', label: t("author-ids") },
+    { id: 'short_description', label: t("short-description") },
+    { id: 'long_description', label: t("long-description") },
+    { id: 'category_ids', label: t("category-ids") },
+    { id: 'parts', label: t("parts") },
+    { id: 'created_at', label: t("created-at") },
+    { id: 'updated_at', label: t("updated-at") },
   ];
 
   return (

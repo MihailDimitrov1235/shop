@@ -5,6 +5,7 @@ import {
   TablePagination,
 } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 
 function FilteredTable(props) {
@@ -13,6 +14,7 @@ function FilteredTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
+  const { t } = useTranslation();
 
   const [searches, setSearches] = React.useState(
     columns.map((column, index) => ({
@@ -71,6 +73,7 @@ function FilteredTable(props) {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage={t("rows-per-page")}
         sx={{
           marginleft: "auto",
           marginRight: "auto",
