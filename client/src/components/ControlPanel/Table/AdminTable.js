@@ -9,7 +9,6 @@ import {
   TableCell,
   Checkbox,
   IconButton,
-  TablePagination
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import EnhancedTableHead from './EnhancedTableHead';
@@ -40,52 +39,11 @@ const useStyles = makeStyles((theme) => ({
 
 function AdminTable(props) {
   const classes = useStyles();
-  const { rows, columns, checkbox, rowClick, dense } = props;
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
+  const { rows, columns, checkbox, rowClick, dense, searches, handleSearchChange, order, orderBy, handleRequestSort, handleRowClick } = props;
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
-  const handleRowClick = (event, id) => {
-    if (rowClick) {
-      rowClick(id);
-    }
-  };
-
+  
   const isSelected = (id) => selected.indexOf(id) !== -1;
-
-  const stableSort = (array, comparator) => {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
-  };
-
-  const getComparator = (order, orderBy) => {
-    return order === 'desc'
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-  };
-
-  const descendingComparator = (a, b, orderBy) => {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
-  };
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -116,15 +74,6 @@ function AdminTable(props) {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   return (
     <div className={classes.root}>
       <Box display={"flex"} justifyContent='space-between'>
@@ -143,6 +92,8 @@ function AdminTable(props) {
         size={dense ? 'small' : 'medium'}
       >
         <EnhancedTableHead
+          searches={searches}
+          handleSearchChange={handleSearchChange}
           checkbox={checkbox}
           classes={classes}
           numSelected={selected.length}
@@ -154,9 +105,7 @@ function AdminTable(props) {
           headCells={columns}
         />
         <TableBody>
-          {stableSort(rows, getComparator(order, orderBy))
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => {
+          {rows.map((row, index) => {
               const isItemSelected = isSelected(row.id);
               const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -196,19 +145,6 @@ function AdminTable(props) {
             })}
         </TableBody>
       </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        sx={{
-          marginleft: "auto",
-          marginRight: "auto",
-        }}
-      />
     </div>
   );
 

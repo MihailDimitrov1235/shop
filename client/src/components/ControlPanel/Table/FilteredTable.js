@@ -2,67 +2,79 @@ import AdminTable from "./AdminTable";
 import {
   Input,
   Box,
-  Select,
-  MenuItem,
+  TablePagination,
 } from '@mui/material';
-import { useState } from 'react';
+import React from 'react';
 
 
 function FilteredTable(props) {
-  const { rows, columns, checkbox } = props;
+  const { rows, columns, checkbox, rowClick } = props;
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('id');
 
-  const [searchQuery, setSearchQuery] = useState(null);
-  const [searchColumn, setSearchColumn] = useState("id");
+  const [searches, setSearches] = React.useState(
+    columns.map((column, index) => ({
+      value: '',
+      label: [column.label],
+    }))
+  );
 
-  function getFilteredRows() {
-    if (searchColumn != null && searchQuery != null) {
-      let result = [];
-      rows.forEach(row => {
-        let value = row[searchColumn];
-        if (Array.isArray(value)) {
-          value = value.sort().join(', ');
-        } else if (typeof value !== 'string') {
-          value = value.toString();
-        }
-        if (value.toLowerCase().includes(searchQuery.toLowerCase())) {
-          result.push(row);
-        }
-      });
-      return result;
-    } else {
-      return rows;
+  const handleSearchChange = (index) => (event) => {
+    const newSearches = [...searches];
+    console.log(newSearches[index].value);
+    newSearches[index].value = event.target.value;
+    setSearches(newSearches);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const handleRowClick = (event, id) => {
+    if (rowClick) {
+      rowClick(id);
     }
-  }
-  const FilteredRows = getFilteredRows();
+  };
+
 
   return (
     <Box>
-      <Input
-        placeholder="Search..."
-        value={searchQuery || ''}
-        onChange={(event) => setSearchQuery(event.target.value)}
-        color="bordoRed"
-        endAdornment={
-          <Box>
-            <Select
-              value={searchColumn || 'id'}
-              onChange={(event) => setSearchColumn(event.target.value)}
-            >
-              {props.columns.map((column, index) => {
-                const value = column.label;
-                console.log(column.label);
-                return (
-                  <MenuItem value={column.id} key={index}>{value}</MenuItem>
-                );
-              })}
-            </Select>
-          </Box>
-        }
-      />
       <AdminTable
-        rows={FilteredRows}
+        rows={rows}
         columns={columns}
         checkbox={checkbox}
+        searches={searches}
+        handleSearchChange={handleSearchChange}
+        order={order}
+        orderBy={orderBy}
+        handleRequestSort={handleRequestSort}
+        handleRowClick={handleRowClick}
+      />
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          marginleft: "auto",
+          marginRight: "auto",
+        }}
       />
     </Box>
   );

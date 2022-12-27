@@ -7,6 +7,10 @@ import {
   TableSortLabel
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import {
+  Input,
+  Box,
+} from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function EnhancedTableHead(props) {
   const classes = useStyles();
-  const { checkbox, classes: propClasses, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
+  const { searches, handleSearchChange, checkbox, classes: propClasses, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -52,7 +56,7 @@ function EnhancedTableHead(props) {
             />
           </TableCell>
         )}
-        {headCells.map((headCell) => (
+        {headCells.map((headCell, index) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
@@ -71,6 +75,13 @@ function EnhancedTableHead(props) {
                 </span>
               ) : null}
             </TableSortLabel>
+            <Box>
+              <Input
+              placeholder={"Search in " + [searches[index].label]}
+              value={searches[index].value}
+              onChange={handleSearchChange(index)}
+              />
+            </Box>
           </TableCell>
         ))}
       </TableRow>
