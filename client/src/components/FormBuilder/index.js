@@ -1,10 +1,12 @@
 import { Formik } from 'formik';
-import { 
+import {
     Box,
     Button,
     Checkbox,
     FormHelperText,
-    TextField
+    TextField,
+    MenuItem,
+    Autocomplete
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
@@ -21,28 +23,72 @@ const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submit
                 handleBlur,
                 handleChange,
                 handleSubmit,
+                setFieldValue,
                 isSubmitting,
                 touched,
                 values
             }) => (
                 <form onSubmit={handleSubmit}>
                     {fields.map((field, index) => {
-                        if(field.type === 'text' || field.type === 'email' || field.type === 'password') {
+
+                        const baseProps = {
+                            label: field.label,
+                            name: field.name,
+                            onBlur: handleBlur,
+                            onChange: handleChange,
+                            fullWidth: Object.hasOwn(field, 'fullWidth') ? field.fullWidth : true,
+                            error: Boolean(touched[field.name] && errors[field.name]),
+                            margin: Object.hasOwn(field, 'margin') ? field.margin : 'normal',
+                            value: values[field.name],
+                            variant: Object.hasOwn(field, 'variant') ? field.variant : 'outlined',
+                            helperText: touched[field.name] && errors[field.name],
+                            key: index,
+                            color: 'bordoRed'
+                        };
+
+                        if (field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number') {
                             return (
                                 <TextField
                                     type={field.type}
-                                    error={Boolean(touched[field.name] && errors[field.name])}
-                                    fullWidth={Object.hasOwn(field, 'fullWidth') ? field.fullWidth : true}
-                                    helperText={touched[field.name] && errors[field.name]}
-                                    label={field.label}
-                                    margin={Object.hasOwn(field, 'margin') ? field.margin : 'normal'}
-                                    name={field.name}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values[field.name]}
-                                    variant={Object.hasOwn(field, 'variant') ? field.variant : 'outlined'}
+                                    {...baseProps}
+                                />
+                            );
+                        } else if (field.type === 'multiline') {
+                            return (
+                                <TextField
+                                    rows={field.rows || 2}
+                                    multiline
+                                    {...baseProps}
+                                />
+                            );
+                        } else if (field.type === 'select') {
+                            return (
+                                <TextField
+                                    select
+                                    {...baseProps}
+                                >
+                                    {field.options.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            );
+                        } else if (field.type === 'autocomplete') {
+                            return (
+                                <Autocomplete
+                                    disablePortal
+                                    options={field.options}
+                                    onChange={(e, value) => (
+                                        setFieldValue(field.name, value)
+                                    )}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            {...params}
+                                            {...baseProps}
+                                        />
+                                    )}
                                     key={index}
-                                    color="bordoRed"
                                 />
                             );
                         }
@@ -62,7 +108,7 @@ const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submit
                             disabled={isSubmitting}
                             type="submit"
                         >
-                            {submitButton ? submitButton.label : 'Добавяне'}
+                            {submitButton && submitButton.label ? submitButton.label : 'Добавяне'}
                         </Button>
                     </Box>
                 </form>
