@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  IconButton,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -35,12 +34,15 @@ export default function DeleteDialog({ selected, setSelected }) {
 
   return (
     <Box>
-      <IconButton
+      <Button
+        variant="outlined"
+        color="bordoRed"
+        textcolor="bordoRed"
         disabled={selected.length === 0}
         onClick={handleClickOpen}
       >
-        <DeleteForeverIcon />
-      </IconButton>
+        {t('delete-selected')}
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -57,8 +59,9 @@ export default function DeleteDialog({ selected, setSelected }) {
           </Button>
           <Button onClick={handleDelete} color="secondary">
             {t('delete')}
-            </Button>
-            </DialogActions>
-        </Dialog>
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
-  )};
+  )
+};
