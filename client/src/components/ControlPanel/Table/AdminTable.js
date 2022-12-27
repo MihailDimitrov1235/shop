@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Card,
   Box,
   Tooltip,
   Table,
@@ -39,8 +38,9 @@ const useStyles = makeStyles((theme) => ({
 
 function AdminTable(props) {
   const classes = useStyles();
-  const { rows, columns, checkbox, rowClick, dense, searches, handleSearchChange, order, orderBy, handleRequestSort, handleRowClick } = props;
+  const { rows, columns, checkbox, dense, searches, handleSearchChange, order, orderBy, handleRequestSort, handleRowClick } = props;
   const [selected, setSelected] = React.useState([]);
+  
 
   
   const isSelected = (id) => selected.indexOf(id) !== -1;
@@ -78,7 +78,7 @@ function AdminTable(props) {
     <div className={classes.root}>
       <Box display={"flex"} justifyContent='space-between'>
         <Box display={"flex"}>
-          <Link to="/admin/products/create">
+          <Link to="create">
             <IconButton>
               <AddIcon />
             </IconButton>

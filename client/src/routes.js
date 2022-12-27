@@ -10,6 +10,10 @@ import Register from './pages/PublicWebsite/Register';
 import Dashboard from './pages/ControlPanel/Dashboard';
 import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
 import ProductTable from "./pages/ControlPanel/Products/ProductTable";
+import UsersTable from './pages/ControlPanel/Users/UsersTable';
+import AddUserForm from './pages/ControlPanel/Users/AddUserForm';
+import AdminsTable from './pages/ControlPanel/Admins/AdminsTable';
+import AddAdminForm from './pages/ControlPanel/Admins/AddAdminForm';
 
 import PageLayout from './components/ControlPanel/PageLayout';
 
@@ -43,8 +47,16 @@ const routes = [
         path: 'users',
         element: <PageLayout title='users' />,
         children: [
-          { path: '', element: <ProductTable />},
-          { path: 'create', element: <AddProductForm />},
+          { path: '', element: <UsersTable />},
+          { path: 'create', element: <AddUserForm />},
+        ] 
+      },
+      {
+        path: 'admins',
+        element: <PageLayout title='admins' />,
+        children: [
+          { path: '', element: <AdminsTable />},
+          { path: 'create', element: <AddAdminForm />},
         ] 
       },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },

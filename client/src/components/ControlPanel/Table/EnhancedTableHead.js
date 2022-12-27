@@ -6,42 +6,18 @@ import {
   Checkbox,
   TableSortLabel
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import {
   Input,
   Box,
 } from '@mui/material';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    minWidth: 750,
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-}));
+import { useTranslation } from 'react-i18next';
 
 function EnhancedTableHead(props) {
-  const classes = useStyles();
   const { searches, handleSearchChange, checkbox, classes: propClasses, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
+  const { t } = useTranslation();
 
   return (
     <TableHead>
@@ -77,7 +53,7 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
             <Box>
               <Input
-              placeholder={"Search in " + [searches[index].label]}
+              placeholder={t('search-in') + [searches[index].label]}
               value={searches[index].value}
               onChange={handleSearchChange(index)}
               />
