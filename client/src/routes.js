@@ -41,6 +41,7 @@ const routes = [
         children: [
           { path: '', element: <ProductTable />},
           { path: 'create', element: <AddProductForm />},
+          { path: 'edit/:id', element: <AddProductForm />},
         ] 
       },
       {
@@ -49,6 +50,7 @@ const routes = [
         children: [
           { path: '', element: <UsersTable />},
           { path: 'create', element: <AddUserForm />},
+          { path: 'edit/:id', element: <AddProductForm />},
         ] 
       },
       {
@@ -57,6 +59,7 @@ const routes = [
         children: [
           { path: '', element: <AdminsTable />},
           { path: 'create', element: <AddAdminForm />},
+          { path: 'edit/:id', element: <AddProductForm />},
         ] 
       },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },

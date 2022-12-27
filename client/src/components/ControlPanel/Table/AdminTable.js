@@ -14,6 +14,7 @@ import EnhancedTableHead from './EnhancedTableHead';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteDialog from './DeleteDialog';
+import EditIcon from '@mui/icons-material/Edit';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -140,6 +141,13 @@ function AdminTable(props) {
                       </TableCell>
                     );
                   })}
+                  <TableCell align='right'>
+                    <Link to={`edit/${row.id}`}>
+                      <IconButton>
+                        <EditIcon />
+                      </IconButton>
+                    </Link>
+                  </TableCell>
                 </TableRow>
               );
             })}
