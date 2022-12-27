@@ -82,6 +82,7 @@ const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submit
                                     onChange={(e, value) => (
                                         setFieldValue(field.name, value)
                                     )}
+                                    freeSolo
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
