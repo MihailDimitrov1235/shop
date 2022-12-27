@@ -31,7 +31,7 @@ const AddProductForm = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().max(255).required(t('name-required')),
-    author: Yup.object().required(t('author-required')),
+    author: Yup.array().required(t('author-required')),
     shortDescription: Yup.string().required(t('short-description-required')),
     longDescription: Yup.string().required(t('long-description-required')),
     category: Yup.object().required(t('category-required')),
@@ -45,7 +45,7 @@ const AddProductForm = () => {
 
   const fields = [
     { type: 'text', name: 'name', label: t('product-name') },
-    { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions },
+    { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
     { type: 'number', name: 'parts', label: t('parts') },
     { type: 'multiline', name: 'shortDescription', label: t('short-description') },
     { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
