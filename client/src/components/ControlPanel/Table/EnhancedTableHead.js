@@ -13,7 +13,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 function EnhancedTableHead(props) {
-  const { searches, handleSearchChange, checkbox, classes: propClasses, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
+  const { searches, handleSearchChange, checkbox, editOption, deleteOption, classes: propClasses, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -60,6 +60,12 @@ function EnhancedTableHead(props) {
             </Box>
           </TableCell>
         ))}
+        {editOption && (
+          <TableCell></TableCell>
+        )}
+        {deleteOption && (
+          <TableCell></TableCell>
+        )}
       </TableRow>
     </TableHead>
   );
