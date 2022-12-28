@@ -20,15 +20,6 @@ const AddProductForm = () => {
     { label: 'Grozen', value: 3 }
   ];
 
-  const initialValues = {
-    name: '',
-    author: '',
-    shortDescription: '',
-    longDescription: '',
-    category: '',
-    parts: ''
-  };
-
   const validationSchema = Yup.object().shape({
     name: Yup.string().max(255).required(t('name-required')),
     author: Yup.array().required(t('author-required')),
@@ -62,7 +53,6 @@ const AddProductForm = () => {
         <Box>
           <FormBuilder
             fields={fields}
-            initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
             submitButton={submitButton}

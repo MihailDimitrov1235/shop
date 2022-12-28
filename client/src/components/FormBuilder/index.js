@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submitButton }) => {
+const FormBuilder = ({ fields, initialValues = {}, validationSchema, onSubmit, submitButton }) => {
 
     return (
         <Formik
