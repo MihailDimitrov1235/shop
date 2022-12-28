@@ -1,28 +1,16 @@
 import {
     Box,
-    Container,
-    Typography,
     Card
 } from '@mui/material';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Helmet } from 'react-helmet';
 import FormBuilder from "../../../components/FormBuilder";
 import * as Yup from 'yup';
 import userService from '../../../services/user';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 
 const AddUserForm = () => {
-    const navigate = useNavigate();
-    const { setUser } = useAuth();
     const { t } = useTranslation();
-
-    const initialValues = {
-        name: '',
-        email: '',
-        password: '',
-        repeatPassword: ''
-    };
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().max(255).required(t('name-required')),
@@ -32,16 +20,7 @@ const AddUserForm = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        userService.register(values)
-            .then((res) => {
-                localStorage.setItem('refresh-token', res.data.token);
-                const user = res.data.user;
-                setUser(user);
-                navigate('/', { replace: true });
-            })
-            .catch((err) => {
-                setSubmitting(false);
-            })
+
     };
 
     const fields = [
@@ -52,47 +31,22 @@ const AddUserForm = () => {
     ];
 
     const submitButton = {
-        label: t('create'),
         color: 'bordoRed'
     };
 
     return (
-        <>
-            <Helmet>
-                <title>{t('create-user-title')}</title>
-            </Helmet>
-            <Box sx={{ mt: 10 }}>
-                <Container maxWidth="sm">
-                    <Card sx={{ p: 3 }}>
-                        <Box sx={{ mb: 2 }}>
-                            <Typography
-                                color="textPrimary"
-                                variant="h2"
-                            >
-                                {t('create-user')}
-                            </Typography>
-                            <Typography
-                                color="textSecondary"
-                                gutterBottom
-                                variant="body2"
-                            >
-                                {t('create-user-text')}
-                            </Typography>
-                        </Box>
-
-                        <Box>
-                            <FormBuilder
-                                fields={fields}
-                                initialValues={initialValues}
-                                validationSchema={validationSchema}
-                                onSubmit={onSubmit}
-                                submitButton={submitButton}
-                            />
-                        </Box>
-                    </Card>
-                </Container>
-            </Box>
-        </>
+        <Card sx={{ p: 2 }}>
+            <PerfectScrollbar>
+                <Box>
+                    <FormBuilder
+                        fields={fields}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit}
+                        submitButton={submitButton}
+                    />
+                </Box>
+            </PerfectScrollbar>
+        </Card>
     );
 }
 
