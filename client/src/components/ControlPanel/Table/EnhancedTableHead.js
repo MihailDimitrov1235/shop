@@ -1,16 +1,21 @@
 import React from 'react';
 import {
-  TableHead,
+  TableHead as MuiTableHead,
   TableRow,
   TableCell,
   Checkbox,
-  TableSortLabel
-} from '@mui/material';
-import {
+  TableSortLabel,
   Input,
   Box,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { withStyles } from '@mui/styles';
+
+const TableHead = withStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.primary.grey
+  }
+}))(MuiTableHead);
 
 function EnhancedTableHead(props) {
   const { searches, handleSearchChange, checkbox, editOption, deleteOption, classes: propClasses, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
