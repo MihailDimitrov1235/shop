@@ -25,6 +25,7 @@ function EnhancedTableHead(props) {
         {checkbox && (
           <TableCell padding='checkbox'>
             <Checkbox
+              color='bordoRed'
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={rowCount > 0 && numSelected === rowCount}
               onChange={onSelectAllClick}

@@ -131,6 +131,7 @@ function AdminTable(props) {
                 {checkbox && (
                   <TableCell padding='checkbox'>
                     <Checkbox
+                      color='bordoRed'
                       checked={isItemSelected}
                       inputProps={{ 'aria-labelledby': labelId }}
                       onClick={(event) => event.stopPropagation()}

@@ -43,7 +43,7 @@ function UsersTable() {
       userService.getUsers()
       .then((res) => {
         setData(res.data.data);
-        setTotal(res.total.total);
+        setTotal(res.data.total);
       })
       .catch((error) => {
         console.log(error)
