@@ -8,13 +8,15 @@ import {
   TableCell,
   Checkbox,
   IconButton,
+  Button
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import EnhancedTableHead from './EnhancedTableHead';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteDialog from './DeleteDialog';
 import EditIcon from '@mui/icons-material/Edit';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,9 +43,9 @@ function AdminTable(props) {
   const classes = useStyles();
   const { rows, columns, checkbox, dense, searches, handleSearchChange, order, orderBy, handleRequestSort, handleRowClick } = props;
   const [selected, setSelected] = React.useState([]);
-  
+  const { t } = useTranslation();
 
-  
+
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const handleSelectAllClick = (event) => {
@@ -77,15 +79,18 @@ function AdminTable(props) {
 
   return (
     <div className={classes.root}>
-      <Box display={"flex"} justifyContent='space-between'>
-        <Box display={"flex"}>
-          <Link to="create">
-            <IconButton>
-              <AddIcon />
-            </IconButton>
-          </Link>
-          <DeleteDialog selected={selected} setSelected={setSelected} />
-        </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mb: 3 }}>
+        <DeleteDialog selected={selected} setSelected={setSelected} />
+        <Button
+          component={RouterLink}
+          variant="contained"
+          color="bordoRed"
+          textcolor="bordoRed"
+          startIcon={<AddIcon />}
+          to="create"
+        >
+          {t('add')}
+        </Button>
       </Box>
       <Table
         className={classes.table}
@@ -107,50 +112,50 @@ function AdminTable(props) {
         />
         <TableBody>
           {rows.map((row, index) => {
-              const isItemSelected = isSelected(row.id);
-              const labelId = `enhanced-table-checkbox-${index}`;
+            const isItemSelected = isSelected(row.id);
+            const labelId = `enhanced-table-checkbox-${index}`;
 
-              return (
-                <TableRow
-                  hover
-                  onClick={(event) => handleRowClick(event, row.id)}
-                  role='checkbox'
-                  aria-checked={isItemSelected}
-                  tabIndex={-1}
-                  key={row.id}
-                  selected={isItemSelected}
-                >
-                  {checkbox && (
-                    <TableCell padding='checkbox'>
-                      <Checkbox
-                        checked={isItemSelected}
-                        inputProps={{ 'aria-labelledby': labelId }}
-                        onClick={(event) => event.stopPropagation()}
-                        onChange={(event) => handleClick(event, row.id)}
-                      />
-                    </TableCell>
-                  )}
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    console.log(row);
-                    return (
-                      <TableCell key={column.id} align={column.align} style={{ maxHeight: "20px", maxWidth: "40px", overflow: "hidden" }}>
-                        <Tooltip title={value}>
-                          <span>{value}</span>
-                        </Tooltip>
-                      </TableCell>
-                    );
-                  })}
-                  <TableCell align='right'>
-                    <Link to={`edit/${row.id}`}>
-                      <IconButton>
-                        <EditIcon />
-                      </IconButton>
-                    </Link>
+            return (
+              <TableRow
+                hover
+                onClick={(event) => handleRowClick(event, row.id)}
+                role='checkbox'
+                aria-checked={isItemSelected}
+                tabIndex={-1}
+                key={row.id}
+                selected={isItemSelected}
+              >
+                {checkbox && (
+                  <TableCell padding='checkbox'>
+                    <Checkbox
+                      checked={isItemSelected}
+                      inputProps={{ 'aria-labelledby': labelId }}
+                      onClick={(event) => event.stopPropagation()}
+                      onChange={(event) => handleClick(event, row.id)}
+                    />
                   </TableCell>
-                </TableRow>
-              );
-            })}
+                )}
+                {columns.map((column) => {
+                  const value = row[column.id];
+                  console.log(row);
+                  return (
+                    <TableCell key={column.id} align={column.align} style={{ maxHeight: "20px", maxWidth: "40px", overflow: "hidden" }}>
+                      <Tooltip title={value}>
+                        <span>{value}</span>
+                      </Tooltip>
+                    </TableCell>
+                  );
+                })}
+                <TableCell align='right'>
+                  <RouterLink to={`edit/${row.id}`}>
+                    <IconButton>
+                      <EditIcon />
+                    </IconButton>
+                  </RouterLink>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>

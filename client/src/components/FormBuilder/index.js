@@ -77,6 +77,7 @@ const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submit
                         } else if (field.type === 'autocomplete') {
                             return (
                                 <Autocomplete
+                                    multiple={Object.hasOwn(field, 'multiple') ? field.multiple : false}
                                     disablePortal
                                     options={field.options}
                                     onChange={(e, value) => (
