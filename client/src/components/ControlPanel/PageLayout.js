@@ -5,16 +5,17 @@ import {
     Breadcrumbs,
     Link
 } from "@mui/material";
-import DownloadIcon from '@mui/icons-material/Download';
-import { Outlet, useLocation, Link as RouterLink } from 'react-router-dom';
+import { Outlet, useLocation, Link as RouterLink, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 const PageLayout = ({ title }) => {
     const { t } = useTranslation();
     const location = useLocation();
-    const parts = location.pathname.split('/').slice(2);
+    const params = useParams();
+    const parts = location.pathname.split('/').filter(x => x && !Object.values(params).includes(x)).slice(1);
 
+    console.log(parts);
     return (
         <Box sx={{
             p: 4,
