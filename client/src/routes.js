@@ -6,6 +6,7 @@ import Landing from './pages/PublicWebsite/Landing';
 import Products from './pages/PublicWebsite/Products';
 import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
+import Account from './pages/PublicWebsite/Account';
 
 import Dashboard from './pages/ControlPanel/Dashboard';
 import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
@@ -26,6 +27,7 @@ const routes = [
       { path: 'products', element: <Products /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+      { path: 'account', element: <Account /> },
       // { path: '/', element: <Navigate to="/home" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]

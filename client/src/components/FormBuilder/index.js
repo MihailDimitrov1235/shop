@@ -6,7 +6,8 @@ import {
     FormHelperText,
     TextField,
     MenuItem,
-    Autocomplete
+    Autocomplete,
+    Divider
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
@@ -92,6 +93,8 @@ const FormBuilder = ({ fields, initialValues = {}, validationSchema, onSubmit, s
                                     key={index}
                                 />
                             );
+                        } else if (field.type === 'divider') {
+                            return <Divider key={index} sx={{ my: 1 }} />
                         }
                     })}
 

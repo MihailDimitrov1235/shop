@@ -131,5 +131,11 @@
 
     "parts-required": "Number of parts is required",
 
-    "delete-selected": "Delete selected"
+    "delete-selected": "Delete selected",
+
+    "profile-edit-information": "The information can be edited",
+
+    "upload-picture": "Upload picture",
+    
+    "save": "Save"
 }

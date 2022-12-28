@@ -131,5 +131,11 @@
 
     "parts-required": "Броят части е задължителен",
 
-    "delete-selected": "Изтриване на избраните"
+    "delete-selected": "Изтриване на избраните",
+
+    "profile-edit-information": "Информацията може да се редактира",
+
+    "upload-picture": "Качи снимка",
+
+    "save": "Запази"
 }
