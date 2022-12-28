@@ -139,6 +139,7 @@ const ProfileItem = () => {
                                 e.preventDefault();
                                 item.handler();
                             }} : {} )}
+                            onClick={handleCloseUserMenu}
                             to={href}
                             sx={{ width: '100%' }}
                             key={index}
