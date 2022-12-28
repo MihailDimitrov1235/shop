@@ -11,6 +11,19 @@ use App\Models\{
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $query = User::where('role_id', 2);
+
+        if(request()->query('total')) {
+            $users = $query->paginate(request()->query('total'))->withQueryString();
+        }else {
+            $users = $query->paginate(10)->withQueryString();
+        }
+
+        return $users;
+    }
+
     public function login(Request $request)
     {
         $data = [
@@ -54,7 +67,7 @@ class UserController extends Controller
         ]);
 
         $token = $user->createToken('authToken')->plainTextToken;
-        
+
         return response()->json(['token' => $token, 'user' => $user], 200);
     }
 

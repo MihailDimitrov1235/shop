@@ -42,6 +42,8 @@ function ProductTable() {
             rows={rows}
             columns={columns}
             checkbox
+            editOption
+            deleteOption
           />
         </Box>
       </PerfectScrollbar>

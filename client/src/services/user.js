@@ -1,6 +1,14 @@
 import servicesHelper from ".";
 import axios from "axios";
 
+function getUsers(data) {
+    const url = `${servicesHelper.url}/users`;
+
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    });
+}
+
 function login(data) {
     const url = `${servicesHelper.url}/users/login`;
 
@@ -34,6 +42,7 @@ function logout() {
 }
 
 const userService = {
+    getUsers,
     login,
     register,
     profile,

@@ -19,6 +19,7 @@ Route::post('/users/register', [UserController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('users')->group(function() {
+        Route::get('/', [UserController::class, 'index']);
         Route::get('/profile', [UserController::class, 'profile']);
         Route::post('/logout', [UserController::class, 'logout']);
     });
