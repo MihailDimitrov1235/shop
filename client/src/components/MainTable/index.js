@@ -189,7 +189,7 @@ const MainTable = ({
                             {headings.map((heading, index) => {
                                 if (headFilters[heading.id]) {
                                     return (
-                                        <TableCell key={heading.id}>
+                                        <TableCell key={heading.id} sx={{ pt: 0.5 }}>
                                             {headFilters[heading.id].type === 'search' && (
                                                 <Input
                                                     placeholder={t('search-in') + [searches[index].label]}
@@ -200,7 +200,7 @@ const MainTable = ({
                                         </TableCell>
                                     );
                                 }else {
-                                    return <TableCell></TableCell>
+                                    return <TableCell key={heading.id} sx={{ pt: 0.5 }}></TableCell>
                                 }
                             })}
 

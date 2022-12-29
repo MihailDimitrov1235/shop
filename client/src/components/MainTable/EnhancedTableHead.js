@@ -41,7 +41,10 @@ const EnhancedTableHead = ({
         <TableHead>
             <TableRow>
                 {options.checkbox && (
-                    <TableCell padding='checkbox' sx={ Object.keys(headFilters).length > 0 && { border: 'none' } }>
+                    <TableCell
+                        padding='checkbox'
+                        sx={ Object.keys(headFilters).length > 0 && { border: 'none', pb: 0, pt: 2 } }
+                    >
                         <Checkbox
                             color='bordoRed'
                             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -57,7 +60,7 @@ const EnhancedTableHead = ({
                         align={heading.numeric ? 'right' : 'left'}
                         padding={heading.disablePadding ? 'none' : 'normal'}
                         sortDirection={orderBy === heading.id ? order : false}
-                        sx={ Object.keys(headFilters).length > 0 && { border: 'none' } }
+                        sx={ Object.keys(headFilters).length > 0 && { border: 'none', pb: 0 } }
                     >
                         {heading.order ?
                             (
@@ -97,10 +100,10 @@ const EnhancedTableHead = ({
                     </TableCell>
                 ))}
                 {options.edit && (
-                    <TableCell sx={ Object.keys(headFilters).length > 0 && { border: 'none' } }></TableCell>
+                    <TableCell sx={ Object.keys(headFilters).length > 0 && { border: 'none', pb: 0 } }></TableCell>
                 )}
                 {options.delete && (
-                    <TableCell sx={ Object.keys(headFilters).length > 0 && { border: 'none' } }></TableCell>
+                    <TableCell sx={ Object.keys(headFilters).length > 0 && { border: 'none', pb: 0 } }></TableCell>
                 )}
             </TableRow>
         </TableHead>
