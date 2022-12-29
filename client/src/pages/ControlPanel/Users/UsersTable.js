@@ -5,6 +5,8 @@ import FilteredTable from '../../../components/ControlPanel/Table/FilteredTable'
 import { useTranslation } from 'react-i18next';
 import userService from '../../../services/user';
 
+import MainTable from '../../../components/MainTable';
+
 // function createData(id, name, email, email_verified_at, password, purchase_ids, created_at, updated_at) {
 //   return { id, name, email, email_verified_at, password, purchase_ids, created_at, updated_at };
 // }
@@ -25,48 +27,55 @@ function UsersTable() {
     const { t } = useTranslation();
 
     useEffect(() => {
-      newRequest();
+        newRequest();
     }, []);
 
-    const columns = [
-      { id: 'id', label: t('user-id') },
-      { id: 'name', label: t('name') },
-      { id: 'email', label: t('email') },
-      //{ id: 'email_verified_at', label: t('email-verified-at') },
-      //{ id: 'password', label: t('password') },
-      //{ id: 'purchase_ids', label: t('purchase-ids') },
-      //{ id: 'created_at', label: t('created-at') },
-      //{ id: 'updated_at', label: t('updated-at') },
+    const headings = [
+        { id: 'id', label: t('user-id'), order: true },
+        { id: 'name', label: t('name') },
+        { id: 'email', label: t('email') },
+        //{ id: 'email_verified_at', label: t('email-verified-at') },
+        //{ id: 'password', label: t('password') },
+        //{ id: 'purchase_ids', label: t('purchase-ids') },
+        //{ id: 'created_at', label: t('created-at') },
+        //{ id: 'updated_at', label: t('updated-at') },
     ];
 
+    const headFilters = {
+        'id': { type: 'search', name: 'id', placeholder: 'Search id' }
+    }
+
     const newRequest = (page, total) => {
-      userService.getUsers()
-      .then((res) => {
-        setData(res.data.data);
-        setTotal(res.data.total);
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+        userService.getUsers()
+            .then((res) => {
+                setData(res.data.data);
+                setTotal(res.data.total);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     return (
-    <Card sx={{ p: 2 }}>
-        <PerfectScrollbar>
-        <Box>
-            <FilteredTable
-              newRequest={newRequest}
-              rows={data}
-              total={total}
-              columns={columns}
-              checkbox
-              editOption
-              deleteOption
-            />
-        </Box>
-        </PerfectScrollbar>
-    </Card>
+        <Card sx={{ p: 2 }}>
+            <PerfectScrollbar>
+                <Box>
+                    <MainTable
+                        headings={headings}
+                        headFilters={headFilters}
+                        rows={data}
+                        total={total}
+                        options={{
+                            checkbox: true,
+                            add: true,
+                            delete: true,
+                            edit: true
+                        }}
+                    />
+                </Box>
+            </PerfectScrollbar>
+        </Card>
     );
-    }
+}
 
-    export default UsersTable;
+export default UsersTable;
