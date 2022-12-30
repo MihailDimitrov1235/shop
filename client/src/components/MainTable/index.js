@@ -251,7 +251,7 @@ const MainTable = ({
                                     const value = row[heading.id];
 
                                     return (
-                                        <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", maxWidth: "40px", overflow: "hidden" }}>
+                                        <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
                                             <Tooltip title={value}>
                                                 <span>{value}</span>
                                             </Tooltip>
