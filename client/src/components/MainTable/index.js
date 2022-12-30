@@ -74,7 +74,7 @@ const MainTable = ({
     const [searches, setSearches] = useState(
         headings.map((heading, index) => ({
             value: '',
-            label: heading.label,
+            label: heading.id,
         }))
     );
 
