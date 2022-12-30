@@ -23,6 +23,7 @@ const ControlPanelLayoutContainer = styled('div')({
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
+    height: '100%',
     paddingTop: 0,
 });
 
