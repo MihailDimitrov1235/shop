@@ -42,11 +42,16 @@ function UsersTable() {
     ];
 
     const headFilters = {
-        'id': { type: 'search', name: 'id', placeholder: 'Search id' }
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') }
     }
 
     const newRequest = (page, total) => {
-        userService.getUsers()
+        const pagination = {
+            page: page || 1,
+            total: total || 10
+        }
+
+        userService.getUsers(pagination)
             .then((res) => {
                 setData(res.data.data);
                 setTotal(res.data.total);
@@ -65,6 +70,7 @@ function UsersTable() {
                         headFilters={headFilters}
                         rows={data}
                         total={total}
+                        method={newRequest}
                         options={{
                             checkbox: true,
                             add: true,

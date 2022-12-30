@@ -1,8 +1,8 @@
 import servicesHelper from ".";
 import axios from "axios";
 
-function getUsers(data) {
-    const url = `${servicesHelper.url}/users`;
+function getUsers(pagination, data) {
+    const url = `${servicesHelper.url}/users?page=${pagination.page}&total=${pagination.total}`;
 
     return axios.get(url, {
         headers: servicesHelper.header()

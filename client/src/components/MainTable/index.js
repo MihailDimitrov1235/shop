@@ -10,7 +10,7 @@ import {
     Checkbox,
     IconButton,
     Button,
-    Input
+    TextField
 } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
 import { Link as RouterLink } from 'react-router-dom';
@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
         clip: 'rect(0 0 0 0)',
         height: 1,
         margin: -1,
-        overflow: 'hidden',
         padding: 0,
         position: 'absolute',
         top: 20,
@@ -54,6 +53,7 @@ const MainTable = ({
     total,
     headings,
     headFilters = {},
+    method: newRequest,
     options = {
         checkbox: false,
         add: false,
@@ -68,7 +68,7 @@ const MainTable = ({
 
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('id');
     const [searches, setSearches] = useState(
@@ -87,11 +87,15 @@ const MainTable = ({
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
+
+        newRequest(newPage + 1, rowsPerPage);
     };
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
+        setRowsPerPage(event.target.value);
         setPage(0);
+
+        newRequest(1, event.target.value);
     };
 
     const handleRequestSort = (event, property) => {
@@ -191,10 +195,14 @@ const MainTable = ({
                                     return (
                                         <TableCell key={heading.id} sx={{ pt: 0.5 }}>
                                             {headFilters[heading.id].type === 'search' && (
-                                                <Input
-                                                    placeholder={t('search-in') + [searches[index].label]}
+                                                <TextField
+                                                    placeholder={headFilters[heading.id].placeholder}
                                                     value={searches[index].value}
                                                     onChange={handleSearchChange(index)}
+                                                    size='small'
+                                                    fullWidth
+                                                    sx={{ backgroundColor: 'white' }}
+                                                    color='bordoRed'
                                                 />
                                             )}
                                         </TableCell>
@@ -213,6 +221,7 @@ const MainTable = ({
                             )}
                         </FiltersTableRow>
                     )}
+                    
                     {rows.map((row, index) => {
                         const isItemSelected = isSelected(row.id);
                         const labelId = `enhanced-table-checkbox-${index}`;
@@ -294,6 +303,7 @@ MainTable.propTypes = {
     total: PropTypes.number.isRequired,
     headings: PropTypes.array.isRequired,
     headFilters: PropTypes.object,
+    method: PropTypes.func.isRequired,
     options: PropTypes.shape({
         checkbox: PropTypes.bool,
         add: PropTypes.bool,
