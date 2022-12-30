@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Box,
     Tooltip,
@@ -69,8 +69,8 @@ const MainTable = ({
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [order, setOrder] = useState('asc');
-    const [orderBy, setOrderBy] = useState('id');
+    const [order, setOrder] = useState();
+    const [orderBy, setOrderBy] = useState();
     const [searches, setSearches] = useState(
         headings.map((heading, index) => ({
             value: '',
@@ -78,29 +78,29 @@ const MainTable = ({
         }))
     );
 
+    useEffect(() => {
+        newRequest(page + 1, rowsPerPage, searches, { field: orderBy, direction: order });
+    }, [page, rowsPerPage, searches, order, orderBy])
+
     const handleSearchChange = (index) => (event) => {
         const newSearches = [...searches];
-        console.log(newSearches[index].value);
         newSearches[index].value = event.target.value;
         setSearches(newSearches);
     };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-
-        newRequest(newPage + 1, rowsPerPage);
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(event.target.value);
         setPage(0);
-
-        newRequest(1, event.target.value);
     };
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
-        setOrder(isAsc ? 'desc' : 'asc');
+        const direction = isAsc ? 'desc' : 'asc';
+        setOrder(direction);
         setOrderBy(property);
     };
 
