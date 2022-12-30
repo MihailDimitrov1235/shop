@@ -42,14 +42,18 @@ function UsersTable() {
     ];
 
     const headFilters = {
-        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') }
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') },
+        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('name') },
+        'email': { type: 'search', name: 'email', placeholder: t('search-in') + t('email') }
     }
 
-    const newRequest = (page, total) => {
+    const newRequest = (page, total, filters = {}, order = {}) => {
         const pagination = {
             page: page || 1,
             total: total || 10
         }
+        console.log(filters)
+        console.log(order)
 
         userService.getUsers(pagination)
             .then((res) => {
