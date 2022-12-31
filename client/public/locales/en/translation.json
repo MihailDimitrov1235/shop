@@ -141,5 +141,7 @@
 
     "users": "Users",
 
-    "edit": "Edit"
+    "edit": "Edit",
+
+    "user-successfuly-deleted": "User deleted successfully"
 }

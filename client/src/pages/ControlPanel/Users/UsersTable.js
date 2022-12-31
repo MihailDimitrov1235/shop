@@ -3,6 +3,7 @@ import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'react-i18next';
 import userService from '../../../services/user';
+import useMessage from '../../../hooks/useMessage';
 
 import MainTable from '../../../components/MainTable';
 
@@ -10,6 +11,7 @@ function UsersTable() {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
     const { t } = useTranslation();
+    const { addMessage } = useMessage();
 
     useEffect(() => {
         newRequest();
@@ -43,6 +45,17 @@ function UsersTable() {
             })
     }
 
+    const deleteHandler = (selected) => {
+        userService.deleteUsers(selected)
+            .then((res) => {
+                console.log(res)
+                addMessage(t('user-successfuly-deleted'), 'success')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     return (
         <Card sx={{ p: 2 }}>
             <PerfectScrollbar>
@@ -53,6 +66,7 @@ function UsersTable() {
                         rows={data}
                         total={total}
                         method={newRequest}
+                        deleteHandler={deleteHandler}
                         options={{
                             checkbox: true,
                             add: true,

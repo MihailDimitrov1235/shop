@@ -53,7 +53,9 @@ const MainTable = ({
     total,
     headings,
     headFilters = {},
-    method: newRequest,
+    method,
+    editHandler,
+    deleteHandler,
     options = {
         checkbox: false,
         add: false,
@@ -78,9 +80,14 @@ const MainTable = ({
         }))
     );
 
+    const newRequest = () => {
+        method(page + 1, rowsPerPage, searches, { field: orderBy, direction: order });
+    }
+
     useEffect(() => {
-        newRequest(page + 1, rowsPerPage, searches, { field: orderBy, direction: order });
+        newRequest();
     }, [page, rowsPerPage, searches, order, orderBy])
+    
 
     const handleSearchChange = (index) => (event) => {
         const newSearches = [...searches];
@@ -146,7 +153,12 @@ const MainTable = ({
             {(options.delete || options.add) && (
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mb: 3 }}>
                     {options.delete && (
-                        <DeleteDialog selected={selected} setSelected={setSelected} />
+                        <DeleteDialog
+                            selected={selected}
+                            setSelected={setSelected}
+                            deleteHandler={deleteHandler}
+                            newRequest={newRequest}
+                        />
                     )}
                     {options.add && (
                         <Button
@@ -304,6 +316,8 @@ MainTable.propTypes = {
     headings: PropTypes.array.isRequired,
     headFilters: PropTypes.object,
     method: PropTypes.func.isRequired,
+    editHandler: PropTypes.func,
+    deleteHandler: PropTypes.func,
     options: PropTypes.shape({
         checkbox: PropTypes.bool,
         add: PropTypes.bool,

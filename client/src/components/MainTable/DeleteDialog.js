@@ -9,8 +9,9 @@ import {
     Box
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-export default function DeleteDialog({ selected, setSelected }) {
+const DeleteDialog = ({ selected, setSelected, deleteHandler, newRequest }) => {
     const [open, setOpen] = useState(false);
     const { t } = useTranslation();
 
@@ -23,10 +24,9 @@ export default function DeleteDialog({ selected, setSelected }) {
     }
 
     function handleDelete() {
-        // Send a delete request to the database for the selected rows
-        selected.forEach(row => {
-            console.log(row); // id
-        });
+        deleteHandler(selected);
+        newRequest();
+
         setOpen(false);
         setSelected([]);
     }
@@ -46,7 +46,7 @@ export default function DeleteDialog({ selected, setSelected }) {
                 open={open}
                 onClose={handleClose}
             >
-                <DialogTitle>Delete</DialogTitle>
+                <DialogTitle>{t('delete')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         {t('delete-msg')} {selected.length} {t('rows')}?
@@ -63,4 +63,13 @@ export default function DeleteDialog({ selected, setSelected }) {
             </Dialog>
         </Box>
     )
-};
+}
+
+DeleteDialog.propTypes = {
+    selected: PropTypes.array.isRequired,
+    setSelected: PropTypes.func.isRequired,
+    deleteHandler: PropTypes.func.isRequired,
+    newRequest: PropTypes.func.isRequired
+}
+
+export default DeleteDialog;

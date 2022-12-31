@@ -8,6 +8,7 @@ import {
 import { Outlet, useLocation, Link as RouterLink, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import Message from "../Message";
 
 const PageLayout = ({ title }) => {
     const { t } = useTranslation();
@@ -22,7 +23,7 @@ const PageLayout = ({ title }) => {
         }}>
             {/* HEADER */}
             <Box>
-                <Box sx={{ pb: 2 }}>
+                <Box sx={{ pb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Breadcrumbs
                         aria-label="breadcrumb"
                         sx={{
@@ -50,6 +51,8 @@ const PageLayout = ({ title }) => {
                             }
                         })}
                     </Breadcrumbs>
+                    
+                    <Message />
                 </Box>
                 <Divider sx={{ mb: 5 }} />
             </Box>

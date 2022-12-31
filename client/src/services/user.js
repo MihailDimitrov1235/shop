@@ -51,12 +51,22 @@ function logout() {
     });
 }
 
+function deleteUsers(selected) {
+    const url = `${servicesHelper.url}/users`;
+
+    return axios.delete(url, {
+        data: { selected: selected },
+        headers: servicesHelper.header()
+    });
+}
+
 const userService = {
     getUsers,
     login,
     register,
     profile,
-    logout
+    logout,
+    deleteUsers
 }
 
 export default userService;

@@ -101,4 +101,18 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Successfully logged out'], 200);
     }
+
+    public function edit(Request $request, $id)
+    {
+
+    }
+
+    public function delete(Request $request)
+    {
+        $ids = $request->selected;
+
+        User::whereIn('id', $ids)->delete();
+
+        return response()->json(['message' => 'Deleted'], 200);
+    }
 }
