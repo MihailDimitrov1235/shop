@@ -79,6 +79,8 @@ const MainTable = ({
             label: heading.id,
         }))
     );
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const [deleteId, setDeleteId] = useState(0);
 
     const newRequest = () => {
         method(page + 1, rowsPerPage, searches, { field: orderBy, direction: order });
@@ -87,7 +89,7 @@ const MainTable = ({
     useEffect(() => {
         newRequest();
     }, [page, rowsPerPage, searches, order, orderBy])
-    
+
 
     const handleSearchChange = (index) => (event) => {
         const newSearches = [...searches];
@@ -148,17 +150,42 @@ const MainTable = ({
         setSelected(newSelected);
     };
 
+    const handleOpenDeleteDialog = () => {
+        setOpenDeleteDialog(true);
+    }
+
+    const handleDeleteClick = (id) => {
+        setOpenDeleteDialog(true);
+        setDeleteId(id)
+    }
+
     return (
         <Box>
             {(options.delete || options.add) && (
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mb: 3 }}>
                     {options.delete && (
-                        <DeleteDialog
-                            selected={selected}
-                            setSelected={setSelected}
-                            deleteHandler={deleteHandler}
-                            newRequest={newRequest}
-                        />
+                        <>
+                            <Button
+                                variant="outlined"
+                                color="bordoRed"
+                                textcolor="bordoRed"
+                                disabled={selected.length === 0}
+                                onClick={handleOpenDeleteDialog}
+                            >
+                                {t('delete-selected')}
+                            </Button>
+
+                            <DeleteDialog
+                                selected={selected}
+                                setSelected={setSelected}
+                                deleteId={deleteId}
+                                setDeleteId={setDeleteId}
+                                deleteHandler={deleteHandler}
+                                newRequest={newRequest}
+                                open={openDeleteDialog}
+                                setOpen={setOpenDeleteDialog}
+                            />
+                        </>
                     )}
                     {options.add && (
                         <Button
@@ -219,7 +246,7 @@ const MainTable = ({
                                             )}
                                         </TableCell>
                                     );
-                                }else {
+                                } else {
                                     return <TableCell key={heading.id} sx={{ pt: 0.5 }}></TableCell>
                                 }
                             })}
@@ -233,7 +260,7 @@ const MainTable = ({
                             )}
                         </FiltersTableRow>
                     )}
-                    
+
                     {rows.map((row, index) => {
                         const isItemSelected = isSelected(row.id);
                         const labelId = `enhanced-table-checkbox-${index}`;
@@ -281,7 +308,7 @@ const MainTable = ({
                                 )}
                                 {options.delete && (
                                     <TableCell align='right'>
-                                        <IconButton color='error'>
+                                        <IconButton color='error' onClick={() => handleDeleteClick(row['id'])}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </TableCell>
