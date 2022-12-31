@@ -50,7 +50,7 @@ function UsersTable() {
         userService.deleteUsers(selected)
             .then((res) => {
                 console.log(res)
-                addMessage(t('user-successfuly-deleted'), 'success')
+                addMessage(t('user-deleted'), 'success')
             })
             .catch((error) => {
                 console.log(error)
