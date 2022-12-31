@@ -133,7 +133,28 @@ class UserController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $validator = validator($request->only('name', 'email'), 
+            [
+                'name' => 'required|string',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $id
+            ],
+            [
+                'email' => 'email-registered-error'
+            ]
+        );
 
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()->all()], 422);
+        }
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email
+        ]);
+
+        return response()->json(['user' => $user], 200);
     }
 
     public function delete(Request $request)
@@ -143,5 +164,12 @@ class UserController extends Controller
         User::whereIn('id', $ids)->delete();
 
         return response()->json(['message' => 'Deleted'], 200);
+    }
+
+    public function getById($id)
+    {
+        $user = User::findOrFail($id);
+
+        return $user;
     }
 }

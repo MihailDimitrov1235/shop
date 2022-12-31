@@ -11,13 +11,14 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-const FormBuilder = ({ fields, initialValues = {}, validationSchema, onSubmit, submitButton }) => {
+const FormBuilder = ({fields, initialValues = {}, validationSchema, onSubmit, submitButton, enableReinitialize = false }) => {
 
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            enableReinitialize={enableReinitialize}
         >
             {({
                 errors,
@@ -126,7 +127,8 @@ FormBuilder.propTypes = {
     initialValues: PropTypes.object,
     validationSchema: PropTypes.object,
     onSubmit: PropTypes.func.isRequired,
-    submitButton: PropTypes.object
+    submitButton: PropTypes.object,
+    enableReinitialize: PropTypes.bool
 };
 
 export default FormBuilder;

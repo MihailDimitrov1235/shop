@@ -59,6 +59,14 @@ function createUser(data) {
     });
 }
 
+function editUser(data, id) {
+    const url = `${servicesHelper.url}/users/${id}`;
+
+    return axios.put(url, data, {
+        headers: servicesHelper.header()
+    });
+}
+
 function deleteUsers(selected) {
     const url = `${servicesHelper.url}/users`;
 
@@ -68,6 +76,14 @@ function deleteUsers(selected) {
     });
 }
 
+function getUserById(id) {
+    const url = `${servicesHelper.url}/users/${id}`;
+
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    })
+}
+
 const userService = {
     getUsers,
     login,
@@ -75,7 +91,9 @@ const userService = {
     profile,
     logout,
     createUser,
-    deleteUsers
+    editUser,
+    deleteUsers,
+    getUserById
 }
 
 export default userService;

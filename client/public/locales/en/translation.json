@@ -149,5 +149,9 @@
 
     "email-registered-error": "Email is already registered",
 
-    "users-create": "Create user"
+    "users-create": "Create user",
+
+    "user-edited": "User edited successfully",
+
+    "users-edit": "Edit user"
 }

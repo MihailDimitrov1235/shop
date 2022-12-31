@@ -9,10 +9,14 @@ import Register from './pages/PublicWebsite/Register';
 import Account from './pages/PublicWebsite/Account';
 
 import Dashboard from './pages/ControlPanel/Dashboard';
+
 import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
 import ProductTable from "./pages/ControlPanel/Products/ProductTable";
+
 import UsersTable from './pages/ControlPanel/Users/UsersTable';
-import AddUserForm from './pages/ControlPanel/Users/AddUserForm';
+import AddUser from './pages/ControlPanel/Users/AddUser';
+import EditUser from './pages/ControlPanel/Users/EditUser';
+
 import AdminsTable from './pages/ControlPanel/Admins/AdminsTable';
 import AddAdminForm from './pages/ControlPanel/Admins/AddAdminForm';
 
@@ -51,8 +55,8 @@ const routes = [
         element: <PageLayout title='users' />,
         children: [
           { path: '', element: <UsersTable />},
-          { path: 'create', element: <AddUserForm />},
-          { path: 'edit/:id', element: <AddProductForm />},
+          { path: 'create', element: <AddUser />},
+          { path: 'edit/:id', element: <EditUser />},
         ] 
       },
       {

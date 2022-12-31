@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import useMessage from '../../../hooks/useMessage';
 import { useNavigate } from 'react-router-dom';
 
-const AddUserForm = () => {
+const AddUser = () => {
     const { t } = useTranslation();
     const { addMessage } = useMessage();
     const navigate = useNavigate();
@@ -70,4 +70,4 @@ const AddUserForm = () => {
     );
 }
 
-export default AddUserForm;
+export default AddUser;
