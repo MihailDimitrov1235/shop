@@ -143,5 +143,9 @@
 
     "edit": "Edit",
 
-    "user-successfuly-deleted": "User deleted successfully"
+    "user-successfuly-deleted": "User deleted successfully",
+
+    "user-created": "User created successfully",
+
+    "email-registered-error": "Email is already registered"
 }

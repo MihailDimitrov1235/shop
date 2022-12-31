@@ -8,9 +8,13 @@ import FormBuilder from "../../../components/FormBuilder";
 import * as Yup from 'yup';
 import userService from '../../../services/user';
 import { useTranslation } from 'react-i18next';
+import useMessage from '../../../hooks/useMessage';
+import { useNavigate } from 'react-router-dom';
 
 const AddUserForm = () => {
     const { t } = useTranslation();
+    const { addMessage } = useMessage();
+    const navigate = useNavigate();
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().max(255).required(t('name-required')),
@@ -20,7 +24,18 @@ const AddUserForm = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
+        userService.createUser(values)
+            .then((res) => {
+                addMessage(t('user-created'), 'success');
+                navigate('/admin/users');
+            })
+            .catch((error) => {
+                if(error.response.status == 422) {
+                    addMessage(t(error.response.data.errors[0]), 'error');
+                }
 
+                setSubmitting(false)
+            })
     };
 
     const fields = [

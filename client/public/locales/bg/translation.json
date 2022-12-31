@@ -143,5 +143,9 @@
 
     "edit": "Редакция",
 
-    "user-successfuly-deleted": "Потребителят е изтрит успешно"
+    "user-successfuly-deleted": "Потребителят е изтрит успешно",
+
+    "user-created": "Потребителят е създаден успешно",
+
+    "email-registered-error": "Имейлът вече е регистриран"
 }

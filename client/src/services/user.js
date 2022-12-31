@@ -51,6 +51,14 @@ function logout() {
     });
 }
 
+function createUser(data) {
+    const url = `${servicesHelper.url}/users`;
+
+    return axios.post(url, data, {
+        headers: servicesHelper.header()
+    });
+}
+
 function deleteUsers(selected) {
     const url = `${servicesHelper.url}/users`;
 
@@ -66,6 +74,7 @@ const userService = {
     register,
     profile,
     logout,
+    createUser,
     deleteUsers
 }
 
