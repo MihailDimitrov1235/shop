@@ -30,7 +30,7 @@ const AddUserForm = () => {
                 navigate('/admin/users');
             })
             .catch((error) => {
-                if(error.response.status == 422) {
+                if (error.response.status == 422) {
                     addMessage(t(error.response.data.errors[0]), 'error');
                 }
 
@@ -50,18 +50,23 @@ const AddUserForm = () => {
     };
 
     return (
-        <Card sx={{ p: 2 }}>
-            <PerfectScrollbar>
-                <Box>
-                    <FormBuilder
-                        fields={fields}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
-                        submitButton={submitButton}
-                    />
-                </Box>
-            </PerfectScrollbar>
-        </Card>
+        <>
+            <Helmet>
+                <title>{t('users-create')} | {t('ban')}</title>
+            </Helmet>
+            <Card sx={{ p: 2 }}>
+                <PerfectScrollbar>
+                    <Box>
+                        <FormBuilder
+                            fields={fields}
+                            validationSchema={validationSchema}
+                            onSubmit={onSubmit}
+                            submitButton={submitButton}
+                        />
+                    </Box>
+                </PerfectScrollbar>
+            </Card>
+        </>
     );
 }
 

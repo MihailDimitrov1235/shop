@@ -16,7 +16,6 @@ const PageLayout = ({ title }) => {
     const params = useParams();
     const parts = location.pathname.split('/').filter(x => x && !Object.values(params).includes(x)).slice(1);
 
-    console.log(parts);
     return (
         <Box sx={{
             p: 4,

@@ -147,5 +147,7 @@
 
     "user-created": "Потребителят е създаден успешно",
 
-    "email-registered-error": "Имейлът вече е регистриран"
+    "email-registered-error": "Имейлът вече е регистриран",
+
+    "users-create": "Добавяне на потребител"
 }

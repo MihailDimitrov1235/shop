@@ -147,5 +147,7 @@
 
     "user-created": "User created successfully",
 
-    "email-registered-error": "Email is already registered"
+    "email-registered-error": "Email is already registered",
+
+    "users-create": "Create user"
 }

@@ -4,6 +4,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'react-i18next';
 import userService from '../../../services/user';
 import useMessage from '../../../hooks/useMessage';
+import { Helmet } from 'react-helmet';
 
 import MainTable from '../../../components/MainTable';
 
@@ -57,26 +58,31 @@ function UsersTable() {
     }
 
     return (
-        <Card sx={{ p: 2 }}>
-            <PerfectScrollbar>
-                <Box>
-                    <MainTable
-                        headings={headings}
-                        headFilters={headFilters}
-                        rows={data}
-                        total={total}
-                        method={newRequest}
-                        deleteHandler={deleteHandler}
-                        options={{
-                            checkbox: true,
-                            add: true,
-                            delete: true,
-                            edit: true
-                        }}
-                    />
-                </Box>
-            </PerfectScrollbar>
-        </Card>
+        <>
+            <Helmet>
+                <title>{t('users')} | {t('ban')}</title>
+            </Helmet>
+            <Card sx={{ p: 2 }}>
+                <PerfectScrollbar>
+                    <Box>
+                        <MainTable
+                            headings={headings}
+                            headFilters={headFilters}
+                            rows={data}
+                            total={total}
+                            method={newRequest}
+                            deleteHandler={deleteHandler}
+                            options={{
+                                checkbox: true,
+                                add: true,
+                                delete: true,
+                                edit: true
+                            }}
+                        />
+                    </Box>
+                </PerfectScrollbar>
+            </Card>
+        </>
     );
 }
 
