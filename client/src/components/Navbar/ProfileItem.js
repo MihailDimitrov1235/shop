@@ -44,7 +44,7 @@ const ProfileItem = () => {
     };
 
     const items = [
-        { type: 'link', title: t('account'), href: '/account', icon: PersonIcon },
+        { type: 'link', title: t('account'), href: isInAdmin ? '/admin/account' : '/account', icon: PersonIcon },
         { type: 'divider' },
         { type: 'button', title: t('logout'), href: '/logout', icon: LogoutIcon, handler: () => {
             userService.logout()

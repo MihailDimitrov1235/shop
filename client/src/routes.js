@@ -22,16 +22,18 @@ import AddAdminForm from './pages/ControlPanel/Admins/AddAdminForm';
 
 import PageLayout from './components/ControlPanel/PageLayout';
 
+import Page404 from './pages/Page404';
+
 const routes = [
   {
     path: '/',
     element: <MainLayout />,
     children: [
       { path: '/', element: <Landing /> },
+      { path: '/404', element: <Page404 /> },
       { path: 'products', element: <Products /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      { path: 'account', element: <Account /> },
       // { path: '/', element: <Navigate to="/home" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
@@ -40,6 +42,7 @@ const routes = [
     path: 'admin',
     element: <ControlPanelLayout />,
     children: [
+      { path: 'account', element: <Account /> },
       { path: 'dashboard', element: <Dashboard /> },
       {
         path: 'products',
