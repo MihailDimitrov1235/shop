@@ -16,6 +16,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteDialog from './DeleteDialog';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AdminTable(props) {
   const classes = useStyles();
-  const { rows, columns, checkbox, dense, searches, handleSearchChange, order, orderBy, handleRequestSort, handleRowClick } = props;
+  const { rows, columns, checkbox, editOption, deleteOption, dense, searches, handleSearchChange, order, orderBy, handleRequestSort, handleRowClick } = props;
   const [selected, setSelected] = React.useState([]);
   const { t } = useTranslation();
 
@@ -101,6 +102,8 @@ function AdminTable(props) {
           searches={searches}
           handleSearchChange={handleSearchChange}
           checkbox={checkbox}
+          deleteOption={deleteOption}
+          editOption={editOption}
           classes={classes}
           numSelected={selected.length}
           order={order}
@@ -128,6 +131,7 @@ function AdminTable(props) {
                 {checkbox && (
                   <TableCell padding='checkbox'>
                     <Checkbox
+                      color='bordoRed'
                       checked={isItemSelected}
                       inputProps={{ 'aria-labelledby': labelId }}
                       onClick={(event) => event.stopPropagation()}
@@ -146,13 +150,22 @@ function AdminTable(props) {
                     </TableCell>
                   );
                 })}
-                <TableCell align='right'>
-                  <RouterLink to={`edit/${row.id}`}>
-                    <IconButton>
-                      <EditIcon />
-                    </IconButton>
-                  </RouterLink>
-                </TableCell>
+                {editOption && (
+                  <TableCell align='right'>
+                    <RouterLink to={`edit/${row.id}`}>
+                      <IconButton>
+                        <EditIcon />
+                      </IconButton>
+                    </RouterLink>
+                  </TableCell>
+                )}
+                {deleteOption && (
+                  <TableCell align='right'>
+                      <IconButton color='error'>
+                        <DeleteIcon />
+                      </IconButton>
+                  </TableCell>
+                )}
               </TableRow>
             );
           })}

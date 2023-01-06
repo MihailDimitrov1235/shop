@@ -4,19 +4,27 @@ import {
   Box,
   TablePagination,
 } from '@mui/material';
-import React from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 
-function FilteredTable(props) {
-  const { rows, columns, checkbox, rowClick } = props;
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('id');
+function FilteredTable({
+  rows,
+  total = rows.length,
+  newRequest,
+  columns,
+  checkbox,
+  editOption = false,
+  deleteOption = false,
+  rowClick 
+}) {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('id');
   const { t } = useTranslation();
 
-  const [searches, setSearches] = React.useState(
+  const [searches, setSearches] = useState(
     columns.map((column, index) => ({
       value: '',
       label: [column.label],
@@ -58,6 +66,8 @@ function FilteredTable(props) {
         rows={rows}
         columns={columns}
         checkbox={checkbox}
+        editOption={editOption}
+        deleteOption={deleteOption}
         searches={searches}
         handleSearchChange={handleSearchChange}
         order={order}
@@ -68,7 +78,7 @@ function FilteredTable(props) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={rows.length}
+        count={total}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

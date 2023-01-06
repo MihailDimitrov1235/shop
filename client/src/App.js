@@ -1,9 +1,10 @@
 import { useRoutes } from 'react-router-dom';
-import { ThemeProvider, StyledEngineProvider  } from '@mui/material';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material';
 import GlobalStyles from './components/GlobalStyles';
 import theme from './theme';
 import routes from './routes';
 import AuthProvider from './providers/AuthProvider';
+import MessageProvider from './providers/MessageProvider';
 
 function App() {
   const content = useRoutes(routes);
@@ -13,7 +14,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <AuthProvider>
-          {content}
+          <MessageProvider>
+            {content}
+          </MessageProvider>
         </AuthProvider>
       </ThemeProvider>
     </StyledEngineProvider>

@@ -19,13 +19,6 @@ const Register = () => {
     const { setUser } = useAuth();
     const { t } = useTranslation();
 
-    const initialValues = {
-        name: '',
-        email: '',
-        password: '',
-        repeatPassword: ''
-    };
-
     const validationSchema = Yup.object().shape({
         name: Yup.string().max(255).required(t('name-required')),
         email: Yup.string().email(t('email-invalid')).max(255).required(t('email-required')),
@@ -85,7 +78,6 @@ const Register = () => {
                         <Box>
                             <FormBuilder
                                 fields={fields}
-                                initialValues={initialValues}
                                 validationSchema={validationSchema}
                                 onSubmit={onSubmit}
                                 submitButton={submitButton}

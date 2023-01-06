@@ -6,17 +6,19 @@ import {
     FormHelperText,
     TextField,
     MenuItem,
-    Autocomplete
+    Autocomplete,
+    Divider
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submitButton }) => {
+const FormBuilder = ({fields, initialValues = {}, validationSchema, onSubmit, submitButton, enableReinitialize = false }) => {
 
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            enableReinitialize={enableReinitialize}
         >
             {({
                 errors,
@@ -93,6 +95,8 @@ const FormBuilder = ({ fields, initialValues, validationSchema, onSubmit, submit
                                     key={index}
                                 />
                             );
+                        } else if (field.type === 'divider') {
+                            return <Divider key={index} sx={{ my: 1 }} />
                         }
                     })}
 
@@ -124,7 +128,8 @@ FormBuilder.propTypes = {
     initialValues: PropTypes.object,
     validationSchema: PropTypes.object,
     onSubmit: PropTypes.func.isRequired,
-    submitButton: PropTypes.object
+    submitButton: PropTypes.object,
+    enableReinitialize: PropTypes.bool
 };
 
 export default FormBuilder;

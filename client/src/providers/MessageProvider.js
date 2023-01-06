@@ -1,0 +1,27 @@
+import React, { useState, useCallback } from 'react';
+
+export const MessageContext = React.createContext({
+    message: null,
+    addMessage: () => { },
+    removeMessage: () => { }
+});
+
+export default function MessageProvider({ children }) {
+    const [message, setMessage] = useState(null);
+
+    const removeMessage = () => setMessage(null);
+
+    const addMessage = (text, status) => setMessage({ text, status });
+
+    const contextValue = {
+        message,
+        addMessage: useCallback((text, status) => addMessage(text, status), []),
+        removeMessage: useCallback(() => removeMessage(), [])
+    };
+
+    return (
+        <MessageContext.Provider value={contextValue}>
+            {children}
+        </MessageContext.Provider>
+    );
+}

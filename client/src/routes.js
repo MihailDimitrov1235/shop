@@ -6,16 +6,23 @@ import Landing from './pages/PublicWebsite/Landing';
 import Products from './pages/PublicWebsite/Products';
 import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
+import Account from './pages/PublicWebsite/Account';
 
 import Dashboard from './pages/ControlPanel/Dashboard';
+
 import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
 import ProductTable from "./pages/ControlPanel/Products/ProductTable";
+
 import UsersTable from './pages/ControlPanel/Users/UsersTable';
-import AddUserForm from './pages/ControlPanel/Users/AddUserForm';
+import AddUser from './pages/ControlPanel/Users/AddUser';
+import EditUser from './pages/ControlPanel/Users/EditUser';
+
 import AdminsTable from './pages/ControlPanel/Admins/AdminsTable';
 import AddAdminForm from './pages/ControlPanel/Admins/AddAdminForm';
 
 import PageLayout from './components/ControlPanel/PageLayout';
+
+import Page404 from './pages/Page404';
 
 const routes = [
   {
@@ -23,6 +30,7 @@ const routes = [
     element: <MainLayout />,
     children: [
       { path: '/', element: <Landing /> },
+      { path: '/404', element: <Page404 /> },
       { path: 'products', element: <Products /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
@@ -34,6 +42,7 @@ const routes = [
     path: 'admin',
     element: <ControlPanelLayout />,
     children: [
+      { path: 'account', element: <Account /> },
       { path: 'dashboard', element: <Dashboard /> },
       {
         path: 'products',
@@ -49,8 +58,8 @@ const routes = [
         element: <PageLayout title='users' />,
         children: [
           { path: '', element: <UsersTable />},
-          { path: 'create', element: <AddUserForm />},
-          { path: 'edit/:id', element: <AddProductForm />},
+          { path: 'create', element: <AddUser />},
+          { path: 'edit/:id', element: <EditUser />},
         ] 
       },
       {
