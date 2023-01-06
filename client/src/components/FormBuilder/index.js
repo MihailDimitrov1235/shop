@@ -10,6 +10,7 @@ import {
     Divider
 } from '@mui/material';
 import PropTypes from 'prop-types';
+import RichTextEditor from './RichTextEditor';
 
 const FormBuilder = ({fields, initialValues = {}, validationSchema, onSubmit, submitButton, enableReinitialize = false }) => {
 
@@ -57,10 +58,14 @@ const FormBuilder = ({fields, initialValues = {}, validationSchema, onSubmit, su
                             );
                         } else if (field.type === 'multiline') {
                             return (
-                                <TextField
-                                    rows={field.rows || 2}
-                                    multiline
-                                    {...baseProps}
+                                // <TextField
+                                //     rows={field.rows || 2}
+                                //     multiline
+                                //     {...baseProps}
+                                // />
+                                <RichTextEditor
+                                rows={field.rows || 2}
+                                {...baseProps}
                                 />
                             );
                         } else if (field.type === 'select') {
