@@ -1,14 +1,24 @@
 import React from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
 import "./index.css";
-import "../../../../node_modules/draft-js/dist/Draft.css"
+import "../../../../node_modules/draft-js/dist/Draft.css";
+import { useTranslation } from 'react-i18next';
 
 class RichTextEditor extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {editorState: EditorState.createEmpty()};
-
-      this.focus = () => this.refs.editor.focus();
+      console.log(props);
+      this.state = {
+        editorState: EditorState.createEmpty(),
+        isFocused: false,
+      }
+      this.onFocus = () => {
+        this.setState({ isFocused: true });
+      }
+      
+      this.onBlur = () => {
+        this.setState({ isFocused: false });
+      }
       this.onChange = (editorState) => this.setState({editorState});
 
       this.handleKeyCommand = this._handleKeyCommand.bind(this);
@@ -73,7 +83,7 @@ class RichTextEditor extends React.Component {
       }
 
       return (
-        <div className="RichEditor-root">
+        <div className={this.state.isFocused ? 'RichEditor-root focused' : 'RichEditor-root'}>
           <BlockStyleControls
             editorState={editorState}
             onToggle={this.toggleBlockType}
@@ -90,9 +100,11 @@ class RichTextEditor extends React.Component {
               handleKeyCommand={this.handleKeyCommand}
               keyBindingFn={this.mapKeyToEditorCommand}
               onChange={this.onChange}
-              placeholder="Tell a story..."
+              placeholder={'text-pholder'}
               ref="editor"
               spellCheck={true}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
             />
           </div>
         </div>
