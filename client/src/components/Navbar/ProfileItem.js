@@ -138,8 +138,7 @@ const ProfileItem = () => {
                             {...(type === 'button' ? { onClick: (e) => {
                                 e.preventDefault();
                                 item.handler();
-                            }} : {} )}
-                            onClick={handleCloseUserMenu}
+                            }} : { onClick: handleCloseUserMenu } )}
                             to={href}
                             sx={{ width: '100%' }}
                             key={index}

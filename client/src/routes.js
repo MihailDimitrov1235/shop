@@ -34,6 +34,7 @@ const routes = [
       { path: 'products', element: <Products /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+      { path: 'account', element: <Account /> },
       // { path: '/', element: <Navigate to="/home" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
