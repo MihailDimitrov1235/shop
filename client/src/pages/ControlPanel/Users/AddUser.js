@@ -1,7 +1,4 @@
-import {
-    Box,
-    Card
-} from '@mui/material';
+import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Helmet } from 'react-helmet';
 import FormBuilder from "../../../components/FormBuilder";
