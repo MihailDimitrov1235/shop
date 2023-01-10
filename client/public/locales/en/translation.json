@@ -159,5 +159,13 @@
 
     "admins-create": "Create admin",
 
-    "admins-edit": "Edit admin"
+    "admins-edit": "Edit admin",
+
+    "management": "Management",
+
+    "sales": "Sales",
+
+    "client-facing": "Client Facing",
+
+    "transactions": "Transactions"
 }

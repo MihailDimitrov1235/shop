@@ -2,6 +2,7 @@ import React from "react";
 import { Sidebar, useProSidebar, Menu } from 'react-pro-sidebar';
 import { Box, useTheme, IconButton } from "@mui/material";
 import SideBarContent from "./SideBarContent";
+import { useTranslation } from 'react-i18next';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -15,23 +16,24 @@ const SideBar = () => {
     const hoverStyle = {
         backgroundColor: `${theme.palette.background.paper}`,
         color: `${theme.palette.primary.contrastText}`,
-    }
+    };
+    const { t } = useTranslation();
 
     const items = [
-        { type: 'item', icon: DashboardIcon, label: 'Dashboard', href: '/admin/dashboard' },
-        { type: 'subMenu', icon: ComputerIcon, label: 'Client Facing', items: [
-            { href: '/admin/products', label: 'Products' },
-            { href: '/admin/users', label: 'Users' },
-            { href: '/admin/transactions', label: 'Transactions' },
+        { type: 'item', icon: DashboardIcon, label: t('dashboard'), href: '/admin/dashboard' },
+        { type: 'subMenu', icon: ComputerIcon, label: t('client-facing'), items: [
+            { href: '/admin/products', label: t('products') },
+            { href: '/admin/users', label: t('users') },
+            { href: '/admin/transactions', label: t('transactions') },
         ]},
-        { type: 'subMenu', icon: ShoppingBagIcon, label: 'Sales', items: [
+        { type: 'subMenu', icon: ShoppingBagIcon, label: t('sales'), items: [
             { href: '/products', label: 'Overview' },
             { href: '/products', label: 'Daily' },
             { href: '/products', label: 'Monthly' },
             { href: '/products', label: 'Breakdown' },
         ]},
-        { type: 'subMenu', icon: ManageAccountsIcon, label: 'Management', items: [
-            { href: '/admin/admins', label: 'Admins' },
+        { type: 'subMenu', icon: ManageAccountsIcon, label: t('management'), items: [
+            { href: '/admin/admins', label: t('admins') },
         ]},
 
     ]

@@ -25,11 +25,11 @@ const PageLayout = ({ title }) => {
                 <Box sx={{ pb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Breadcrumbs
                         aria-label="breadcrumb"
-                        sx={{
-                            '.MuiBreadcrumbs-separator': {
-                                fontSize: 20
-                            }
-                        }}
+                        // sx={{
+                        //     '.MuiBreadcrumbs-separator': {
+                        //         fontSize: 20
+                        //     }
+                        // }}
                     >
                         {parts.map((el, index, parts) => {
                             if (index + 1 === parts.length) {
