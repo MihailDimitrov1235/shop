@@ -38,11 +38,17 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::put('/{id}', [AdminController::class, 'edit']);
         Route::get('/{id}', [AdminController::class, 'getById']);
     });
+
+    Route::prefix('products')->group(function () {
+        Route::get('/', [AdminController::class, 'index']);
+        Route::post('/', [AdminController::class, 'store']);
+        Route::delete('/', [AdminController::class, 'delete']);
+        Route::put('/{id}', [AdminController::class, 'edit']);
+        Route::get('/{id}', [AdminController::class, 'getById']);
+    });
 });
 
 Route::prefix('products')->group(function () {
-    Route::get('/', [ProjectController::class, 'index']);
-    Route::post('/', [ProjectController::class, 'store'])->middleware('auth');
-    Route::delete('/{id}', [ProjectController::class, 'destroy']);
-    Route::get('/{id}', [ProjectController::class, 'view']);
+    Route::get('/', [AdminController::class, 'index']);
+    Route::get('/{id}', [AdminController::class, 'getById']);
 });

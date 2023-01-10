@@ -1,54 +1,93 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import FilteredTable from '../../../components/ControlPanel/Table/FilteredTable';
 import { useTranslation } from 'react-i18next';
+import productService from '../../../services/product';
+import useMessage from '../../../hooks/useMessage';
+import { Helmet } from 'react-helmet';
 
-function createData(id, name, author_ids, short_description, long_description, category_ids, parts, created_at, updated_at) {
-  return { id, name, author_ids, short_description, long_description, category_ids, parts, created_at, updated_at };
-}
-
-const rows = [
-  createData(1, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
-  createData(2, 'Product 2', [3, 4], 'Short description 2', 'Long description 2', [4, 5], 20, '2022-01-03', '2022-01-04'),
-  createData(3, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
-  createData(4, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
-  createData(5, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
-  createData(6, 'Product 1', [1, 2], 'Short description 1', 'Long description 1uhfffffhfiiiiiiiiiiiiiiiiiweugyuwegyfuwefgyweugfuyewffffffffffffffwe', [1, 2, 3], 10, '2022-01-01', '2022-01-02'),
-  // Add more rows as needed
-];
+import MainTable from '../../../components/MainTable';
 
 function ProductTable() {
+    const [data, setData] = useState([]);
+    const [total, setTotal] = useState(0);
+    const { t } = useTranslation();
+    const { addMessage } = useMessage();
 
-  const { t } = useTranslation();
+    useEffect(() => {
+        newRequest();
+    }, []);
 
-  const columns = [
-    { id: 'id', label: t("product-id") },
-    { id: 'name', label: t("name") },
-    { id: 'author_ids', label: t("author-ids") },
-    { id: 'short_description', label: t("short-description") },
-    { id: 'long_description', label: t("long-description") },
-    { id: 'category_ids', label: t("category-ids") },
-    { id: 'parts', label: t("parts") },
-    { id: 'created_at', label: t("created-at") },
-    { id: 'updated_at', label: t("updated-at") },
-  ];
+    const headings = [
+        { id: 'id', label: t('user-id'), order: true },
+        { id: 'name', label: t('product-name'), order: true },
+        { id: 'authors', label: t('authors'), order: true },
+        { id: 'categories', label: t('categories'), order: true },
+        { id: 'parts', label: t('parts'), order: true },
+    ];
 
-  return (
-    <Card sx={{ p: 2 }}>
-      <PerfectScrollbar>
-        <Box>
-          <FilteredTable
-            rows={rows}
-            columns={columns}
-            checkbox
-            editOption
-            deleteOption
-          />
-        </Box>
-      </PerfectScrollbar>
-    </Card>
-  );
+    const headFilters = {
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') },
+        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('product-name') },
+        'authors': { type: 'search', name: 'authors', placeholder: t('search-in') + t('authors') },
+        'categories': { type: 'search', name: 'categories', placeholder: t('search-in') + t('categories') },
+        'parts': { type: 'search', name: 'parts', placeholder: t('search-in') + t('parts') },
+    }
+
+    const newRequest = (page, total, filters = [], order = {}) => {
+        const pagination = {
+            page: page || 1,
+            total: total || 10
+        }
+
+        productService.getProducts(pagination, filters, order)
+            .then((res) => {
+                setData(res.data.data);
+                setTotal(res.data.total);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const deleteHandler = (selected) => {
+      productService.deleteProducts(selected)
+            .then((res) => {
+                console.log(res)
+                addMessage(t('product-deleted'), 'success')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    return (
+        <>
+            <Helmet>
+                <title>{t('products')} | {t('ban')}</title>
+            </Helmet>
+            <Card sx={{ p: 2 }}>
+                <PerfectScrollbar>
+                    <Box>
+                        <MainTable
+                            headings={headings}
+                            headFilters={headFilters}
+                            rows={data}
+                            total={total}
+                            method={newRequest}
+                            deleteHandler={deleteHandler}
+                            options={{
+                                checkbox: true,
+                                add: true,
+                                delete: true,
+                                edit: true
+                            }}
+                        />
+                    </Box>
+                </PerfectScrollbar>
+            </Card>
+        </>
+    );
 }
 
 export default ProductTable;

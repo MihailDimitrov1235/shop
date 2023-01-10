@@ -1,12 +1,17 @@
-import React from 'react';
 import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { useTranslation } from 'react-i18next';
-import FormBuilder from '../../../components/FormBuilder';
+import { Helmet } from 'react-helmet';
+import FormBuilder from "../../../components/FormBuilder";
 import * as Yup from 'yup';
+import productService from '../../../services/product';
+import { useTranslation } from 'react-i18next';
+import useMessage from '../../../hooks/useMessage';
+import { useNavigate } from 'react-router-dom';
 
 const AddProductForm = () => {
   const { t } = useTranslation();
+  const { addMessage } = useMessage();
+  const navigate = useNavigate();
 
   const authorOptions = [
     { label: 'Miroslav Dianov Balev', value: 1 },
@@ -30,9 +35,19 @@ const AddProductForm = () => {
   });
 
   const onSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    setSubmitting(false);
-  };
+    productService.createService(values)
+        .then((res) => {
+            addMessage(t('product-created'), 'success');
+            navigate('/admin/products');
+        })
+        .catch((error) => {
+            if (error.response.status == 422) {
+                addMessage(t(error.response.data.errors[0]), 'error');
+            }
+
+            setSubmitting(false)
+        })
+};
 
   const fields = [
     { type: 'text', name: 'name', label: t('product-name') },
@@ -48,18 +63,23 @@ const AddProductForm = () => {
   };
 
   return (
-    <Card sx={{ p: 2 }}>
-      <PerfectScrollbar>
-        <Box>
-          <FormBuilder
-            fields={fields}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-            submitButton={submitButton}
-          />
-        </Box>
-      </PerfectScrollbar>
-    </Card>
+    <>
+            <Helmet>
+                <title>{t('products-create')} | {t('ban')}</title>
+            </Helmet>
+            <Card sx={{ p: 2 }}>
+                <PerfectScrollbar>
+                    <Box>
+                        <FormBuilder
+                            fields={fields}
+                            validationSchema={validationSchema}
+                            onSubmit={onSubmit}
+                            submitButton={submitButton}
+                        />
+                    </Box>
+                </PerfectScrollbar>
+            </Card>
+        </>
   );
 };
 
