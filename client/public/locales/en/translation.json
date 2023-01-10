@@ -153,5 +153,11 @@
 
     "user-edited": "User edited successfully",
 
-    "users-edit": "Edit user"
+    "users-edit": "Edit user",
+
+    "admins": "Admins",
+
+    "admins-create": "Create admin",
+
+    "admins-edit": "Edit admin"
 }

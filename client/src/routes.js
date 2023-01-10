@@ -18,7 +18,8 @@ import AddUser from './pages/ControlPanel/Users/AddUser';
 import EditUser from './pages/ControlPanel/Users/EditUser';
 
 import AdminsTable from './pages/ControlPanel/Admins/AdminsTable';
-import AddAdminForm from './pages/ControlPanel/Admins/AddAdminForm';
+import AddAdmin from './pages/ControlPanel/Admins/AddAdmin';
+import EditAdmin from './pages/ControlPanel/Admins/EditAdmin';
 
 import PageLayout from './components/ControlPanel/PageLayout';
 
@@ -68,8 +69,8 @@ const routes = [
         element: <PageLayout title='admins' />,
         children: [
           { path: '', element: <AdminsTable />},
-          { path: 'create', element: <AddAdminForm />},
-          { path: 'edit/:id', element: <AddProductForm />},
+          { path: 'create', element: <AddAdmin />},
+          { path: 'edit/:id', element: <EditAdmin />},
         ] 
       },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },

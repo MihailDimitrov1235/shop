@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     UserController,
     ProjectController,
-    PaymentController
+    PaymentController,
+    AdminController
 };
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -28,6 +29,14 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/', [UserController::class, 'delete']);
         
         Route::get('/{id}', [UserController::class, 'getById']);
+    });
+
+    Route::prefix('admins')->group(function () {
+        Route::get('/', [AdminController::class, 'index']);
+        Route::post('/', [AdminController::class, 'store']);
+        Route::delete('/', [AdminController::class, 'delete']);
+        Route::put('/{id}', [AdminController::class, 'edit']);
+        Route::get('/{id}', [AdminController::class, 'getById']);
     });
 });
 

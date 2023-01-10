@@ -1,51 +1,89 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import FilteredTable from '../../../components/ControlPanel/Table/FilteredTable';
 import { useTranslation } from 'react-i18next';
+import useMessage from '../../../hooks/useMessage';
+import adminService from '../../../services/admin';
 
-function createData(id, name, username, password, email, role, created_at, updated_at) {
-  return { id, name, username, password, email, role, created_at, updated_at };
-}
-
-const rows = [
-  createData(1, 'Admin 1', 'zevs', 'password', 'zelkata@abv.bg', 'administrator', '2022-01-01', '2022-01-02'),
-  createData(2, 'Admin 2', 'zevs', 'password', 'zelkata@abv.bg', 'administrator', '2022-01-03', '2022-01-04'),
-  createData(3, 'Admin 1', 'zevs', 'password', 'zelkata@abv.bg', 'administrator', '2022-01-01', '2022-01-02'),
-  createData(4, 'Admin 1', 'zevs', 'password', 'zelkata@abv.bg', 'administrator', '2022-01-01', '2022-01-02'),
-  createData(5, 'Admin 1', 'zevs', 'password', 'zelkata@abv.bg', 'administrator', '2022-01-01', '2022-01-02'),
-  createData(6, 'Admin 1', 'zevs', 'password', 'zelkata@abv.bg', 'administrator', '2022-01-01', '2022-01-02'),
-  // Add more rows as needed
-];
+import MainTable from '../../../components/MainTable';
 
 function AdminsTable() {
-
+    const [data, setData] = useState([]);
+    const [total, setTotal] = useState(0);
     const { t } = useTranslation();
+    const { addMessage } = useMessage();
 
-    const columns = [
-    { id: 'id', label: t('admin-id') },
-    { id: 'name', label: t('name') },
-    { id: 'username', label: t('username') },
-    { id: 'password', label: t('password') },
-    { id: 'email', label: t('email') },
-    { id: 'role', label: t('role') },
-    { id: 'created_at', label: t('created-at') },
-    { id: 'updated_at', label: t('updated-at') },
+    useEffect(() => {
+        newRequest();
+    }, []);
+
+    const headings = [
+        { id: 'id', label: t('user-id'), order: true },
+        { id: 'name', label: t('name'), order: true },
+        { id: 'email', label: t('email'), order: true },
     ];
 
-    return (
-    <Card sx={{ p: 2 }}>
-        <PerfectScrollbar>
-        <Box>
-            <FilteredTable
-            rows={rows}
-            columns={columns}
-            checkbox
-            />
-        </Box>
-        </PerfectScrollbar>
-    </Card>
-    );
+    const headFilters = {
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') },
+        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('name') },
+        'email': { type: 'search', name: 'email', placeholder: t('search-in') + t('email') }
     }
 
-    export default AdminsTable;
+    const newRequest = (page, total, filters = [], order = {}) => {
+        const pagination = {
+            page: page || 1,
+            total: total || 10
+        }
+
+        adminService.getAdmins(pagination, filters, order)
+            .then((res) => {
+                setData(res.data.data);
+                setTotal(res.data.total);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const deleteHandler = (selected) => {
+        adminService.deleteAdmins(selected)
+            .then((res) => {
+                console.log(res)
+                addMessage(t('user-deleted'), 'success')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    return (
+        <>
+            <Helmet>
+                <title>{t('admins')} | {t('ban')}</title>
+            </Helmet>
+            <Card sx={{ p: 2 }}>
+                <PerfectScrollbar>
+                    <Box>
+                        <MainTable
+                            headings={headings}
+                            headFilters={headFilters}
+                            rows={data}
+                            total={total}
+                            method={newRequest}
+                            deleteHandler={deleteHandler}
+                            options={{
+                                checkbox: true,
+                                add: true,
+                                delete: true,
+                                edit: true
+                            }}
+                        />
+                    </Box>
+                </PerfectScrollbar>
+            </Card>
+        </>
+    );
+}
+
+export default AdminsTable;
