@@ -56,7 +56,7 @@ const PageLayout = ({ title }) => {
                 <Divider sx={{ mb: 5 }} />
             </Box>
             {/* CONTENT */}
-            <Box height={"100%"} width={"100%"} ml={"auto"} mr={"auto"}>
+            <Box sx={{ pb: 5 }} height={"100%"} width={"100%"} ml={"auto"} mr={"auto"}>
                 <Outlet />
             </Box>
         </Box>
