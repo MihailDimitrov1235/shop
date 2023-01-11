@@ -1,9 +1,11 @@
+import { useState, useEffect } from 'react';
 import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Helmet } from 'react-helmet';
 import FormBuilder from "../../../components/FormBuilder";
 import * as Yup from 'yup';
 import productService from '../../../services/product';
+import categoryService from '../../../services/category';
 import { useTranslation } from 'react-i18next';
 import useMessage from '../../../hooks/useMessage';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +14,7 @@ const AddProductForm = () => {
   const { t } = useTranslation();
   const { addMessage } = useMessage();
   const navigate = useNavigate();
+  const [categoryOptions, setCategoryOptions] = useState([]);
 
   const authorOptions = [
     { label: 'Miroslav Dianov Balev', value: 1 },
@@ -19,11 +22,21 @@ const AddProductForm = () => {
     { label: 'Stefan Ivanov? Kojuharov', value: 3 }
   ];
 
-  const categoryOptions = [
-    { label: 'Zelen', value: 1 },
-    { label: 'Biologi4en', value: 2 },
-    { label: 'Grozen', value: 3 }
-  ];
+  useEffect(() => {
+    categoryService.getAll()
+      .then((res) => {
+        let newCategoryOptions = [];
+
+        res.data.forEach((el) => {
+          newCategoryOptions.push({ label: el.name, value: el.id });
+        })
+
+        setCategoryOptions(newCategoryOptions);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, []);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().max(255).required(t('name-required')),
@@ -55,7 +68,7 @@ const AddProductForm = () => {
     { type: 'number', name: 'parts', label: t('parts') },
     { type: 'multiline', name: 'shortDescription', label: t('short-description') },
     { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
-    { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions }
+    { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true }
   ];
 
   const submitButton = {

@@ -65,4 +65,11 @@ class CategoryController extends Controller
 
         return $category;
     }
+
+    public function getAll()
+    {
+        $categories = Category::all();
+
+        return $categories;
+    }
 }

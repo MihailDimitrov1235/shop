@@ -52,12 +52,21 @@ function getCategoryById(id) {
     })
 }
 
+function getAll() {
+    const url = `${servicesHelper.url}/categories/all`;
+
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    })
+}
+
 const categoryService = {
     getCategories,
     createCategory,
     editCategory,
     deleteCategories,
-    getCategoryById
+    getCategoryById,
+    getAll
 }
 
 export default categoryService;
