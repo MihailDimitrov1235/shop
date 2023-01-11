@@ -81,6 +81,7 @@ const MainTable = ({
     );
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [deleteId, setDeleteId] = useState(0);
+    const [allColsNum, setAllColsNum] = useState(headings.length);
 
     const newRequest = () => {
         method(page + 1, rowsPerPage, searches, { field: orderBy, direction: order });
@@ -88,6 +89,22 @@ const MainTable = ({
 
     useEffect(() => {
         newRequest();
+
+        let colsNum = headings.length;
+
+        if (options.delete) {
+            colsNum++;
+        }
+
+        if (options.edit) {
+            colsNum++;
+        }
+
+        if (options.checkbox) {
+            colsNum++;
+        }
+
+        setAllColsNum(colsNum);
     }, [page, rowsPerPage, searches, order, orderBy])
 
 
@@ -261,61 +278,70 @@ const MainTable = ({
                         </FiltersTableRow>
                     )}
 
-                    {rows.map((row, index) => {
-                        const isItemSelected = isSelected(row.id);
-                        const labelId = `enhanced-table-checkbox-${index}`;
+                    {rows.length > 0 ? (
+                        <>
+                            {rows.map((row, index) => {
+                                const isItemSelected = isSelected(row.id);
+                                const labelId = `enhanced-table-checkbox-${index}`;
 
-                        return (
-                            <TableRow
-                                hover
-                                onClick={(event) => handleRowClick(event, row.id)}
-                                role='checkbox'
-                                aria-checked={isItemSelected}
-                                tabIndex={-1}
-                                key={row.id}
-                                selected={isItemSelected}
-                            >
-                                {options.checkbox && (
-                                    <TableCell padding='checkbox'>
-                                        <Checkbox
-                                            color='bordoRed'
-                                            checked={isItemSelected}
-                                            inputProps={{ 'aria-labelledby': labelId }}
-                                            onClick={(event) => event.stopPropagation()}
-                                            onChange={(event) => handleClick(event, row.id)}
-                                        />
-                                    </TableCell>
-                                )}
-                                {headings.map((heading) => {
-                                    const value = row[heading.id];
+                                return (
+                                    <TableRow
+                                        hover
+                                        onClick={(event) => handleRowClick(event, row.id)}
+                                        role='checkbox'
+                                        aria-checked={isItemSelected}
+                                        tabIndex={-1}
+                                        key={row.id}
+                                        selected={isItemSelected}
+                                    >
+                                        {options.checkbox && (
+                                            <TableCell padding='checkbox'>
+                                                <Checkbox
+                                                    color='bordoRed'
+                                                    checked={isItemSelected}
+                                                    inputProps={{ 'aria-labelledby': labelId }}
+                                                    onClick={(event) => event.stopPropagation()}
+                                                    onChange={(event) => handleClick(event, row.id)}
+                                                />
+                                            </TableCell>
+                                        )}
+                                        {headings.map((heading) => {
+                                            const value = row[heading.id];
 
-                                    return (
-                                        <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
-                                            <Tooltip title={value}>
-                                                <span>{value}</span>
-                                            </Tooltip>
-                                        </TableCell>
-                                    );
-                                })}
-                                {options.edit && (
-                                    <TableCell align='right'>
-                                        <RouterLink to={`edit/${row.id}`}>
-                                            <IconButton>
-                                                <EditIcon />
-                                            </IconButton>
-                                        </RouterLink>
-                                    </TableCell>
-                                )}
-                                {options.delete && (
-                                    <TableCell align='right'>
-                                        <IconButton color='error' onClick={() => handleDeleteClick(row['id'])}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </TableCell>
-                                )}
-                            </TableRow>
-                        );
-                    })}
+                                            return (
+                                                <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
+                                                    <Tooltip title={value}>
+                                                        <span>{value}</span>
+                                                    </Tooltip>
+                                                </TableCell>
+                                            );
+                                        })}
+                                        {options.edit && (
+                                            <TableCell align='right'>
+                                                <RouterLink to={`edit/${row.id}`}>
+                                                    <IconButton>
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                </RouterLink>
+                                            </TableCell>
+                                        )}
+                                        {options.delete && (
+                                            <TableCell align='right'>
+                                                <IconButton color='error' onClick={() => handleDeleteClick(row['id'])}>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </TableCell>
+                                        )}
+                                    </TableRow>
+                                );
+                            })}
+                        </>
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={allColsNum} sx={{ textAlign: 'center' }}>{t('no-records')}</TableCell>
+                        </TableRow>
+                    )}
+
                 </TableBody>
             </Table>
 
