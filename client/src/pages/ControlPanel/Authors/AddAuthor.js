@@ -22,7 +22,7 @@ const AddUserForm = () => {
     const onSubmit = (values, { setSubmitting }) => {
         authorService.createAuthor(values)
             .then((res) => {
-                addMessage(t('user-created'), 'success');
+                addMessage(t('author-created'), 'success');
                 navigate('/admin/authors');
             })
             .catch((error) => {

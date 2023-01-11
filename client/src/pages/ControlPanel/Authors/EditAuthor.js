@@ -14,12 +14,12 @@ const EditAuthor = () => {
     const { addMessage } = useMessage();
     const navigate = useNavigate();
     const { id } = useParams();
-    const [authorInitValues, setAuthorInitValues] = useState({ name: '', email: '' });
+    const [authorInitValues, setAuthorInitValues] = useState({ name: '', email: '', phone: '' });
 
     useEffect(() => {
         authorService.getAuthorById(id)
             .then((res) => {
-                setAuthorInitValues({ name: res.data.name, email: res.data.email });
+                setAuthorInitValues({ name: res.data.name, email: res.data.email, phone: res.data.phone });
             })
     }, []);
 
@@ -30,10 +30,10 @@ const EditAuthor = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        authorService.editAdmin(values, id)
+        authorService.editAuthor(values, id)
             .then((res) => {
-                addMessage(t('user-edited'), 'success');
-                navigate('/admin/admins');
+                addMessage(t('author-edited'), 'success');
+                navigate('/admin/authors');
             })
             .catch((error) => {
                 if (error.response.status == 422) {
@@ -58,7 +58,7 @@ const EditAuthor = () => {
     return (
         <>
             <Helmet>
-                <title>{t('admins-edit')} | {t('ban')}</title>
+                <title>{t('authors-edit')} | {t('ban')}</title>
             </Helmet>
             <Card sx={{ p: 2 }}>
                 <PerfectScrollbar>

@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('product_trans', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("shortDescription");
-            $table->string("longDescription");
+            $table->string('name');
+            $table->string('shortDescription');
+            $table->string('longDescription');
             $table->foreignId('product_id')->constrained('products');
-            $table->string("lang");
+            $table->string('lang');
             $table->timestamps();
         });
     }

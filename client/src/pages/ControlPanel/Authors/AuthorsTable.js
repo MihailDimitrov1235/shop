@@ -22,7 +22,7 @@ function AuthorsTable() {
         { id: 'id', label: t('user-id'), order: true },
         { id: 'name', label: t('name'), order: true },
         { id: 'email', label: t('email'), order: true },
-        { id: 'phone', label: t('phone'), order: true},
+        { id: 'phone', label: t('phone'), order: false},
     ];
 
     const headFilters = {

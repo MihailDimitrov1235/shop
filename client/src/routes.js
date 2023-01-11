@@ -25,6 +25,10 @@ import CategoriesTable from './pages/ControlPanel/Categories/CategoriesTable';
 import AddCategory from './pages/ControlPanel/Categories/AddCategory';
 import EditCategory from './pages/ControlPanel/Categories/EditCategory';
 
+import AuthorsTable from './pages/ControlPanel/Authors/AuthorsTable';
+import AddAuthor from './pages/ControlPanel/Authors/AddAuthor';
+import EditAuthor from './pages/ControlPanel/Authors/EditAuthor';
+
 import PageLayout from './components/ControlPanel/PageLayout';
 
 import Page404 from './pages/Page404';
@@ -90,9 +94,9 @@ const routes = [
         path: 'authors',
         element: <PageLayout title='authors' />,
         children: [
-          { path: '', element: <AdminsTable />},
-          { path: 'create', element: <AddAdmin />},
-          { path: 'edit/:id', element: <EditAdmin />},
+          { path: '', element: <AuthorsTable />},
+          { path: 'create', element: <AddAuthor />},
+          { path: 'edit/:id', element: <EditAuthor/>},
         ] 
       },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },

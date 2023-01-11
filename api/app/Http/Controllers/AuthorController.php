@@ -9,7 +9,7 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $query = Author::select('id', 'name', 'tel', 'email');
+        $query = Author::select('id', 'name', 'phone', 'email');
 
         if(request()->query('id')) {
             $query->where('id', 'LIKE', '%'.request()->query('id').'%');
@@ -19,8 +19,8 @@ class AuthorController extends Controller
             $query->where('name', 'LIKE', '%'.request()->query('name').'%');
         }
 
-        if(request()->query('tel')) {
-            $query->where('tel', 'LIKE', '%'.request()->query('tel').'%');
+        if(request()->query('phone')) {
+            $query->where('phone', 'LIKE', '%'.request()->query('phone').'%');
         }
 
         if(request()->query('email')) {
@@ -42,11 +42,11 @@ class AuthorController extends Controller
 
     public function store(Request $request)
     {
-        $validator = validator($request->only('name', 'email', 'tel'), 
+        $validator = validator($request->only('name', 'email', 'phone'), 
             [
                 'name' => 'required|string',
                 'email' => 'required|string|email|max:255|unique:authors',
-                'tel' => 'required|string'
+                'phone' => 'required|string'
             ],
             [
                 'email' => 'email-registered-error'
@@ -59,7 +59,7 @@ class AuthorController extends Controller
 
         $auhtor = Author::create([
             'name' => $request->name,
-            'tel' => $request->tel,
+            'phone' => $request->phone,
             'email' => $request->email
         ]);
 
@@ -70,18 +70,18 @@ class AuthorController extends Controller
     {
         $ids = $request->selected;
 
-        Authors::whereIn('id', $ids)->delete();
+        Author::whereIn('id', $ids)->delete();
 
         return response()->json(['message' => 'Deleted'], 200);
     }
 
     public function edit(Request $request, $id)
     {
-        $validator = validator($request->only('name', 'email', 'tel'), 
+        $validator = validator($request->only('name', 'email', 'phone'), 
             [
                 'name' => 'required|string',
                 'email' => 'required|string|email|max:255|unique:authors,email,' . $id,
-                'tel' => 'required|string'
+                'phone' => 'required|string'
             ],
             [
                 'email' => 'email-registered-error'
@@ -96,11 +96,11 @@ class AuthorController extends Controller
 
         $author->update([
             'name' => $request->name,
-            'tel' => $request->tel,
+            'phone' => $request->phone,
             'email' => $request->email
         ]);
 
-        return response()->json(['category' => $author], 200); 
+        return response()->json(['author' => $author], 200); 
     }
 
     public function getById($id)
