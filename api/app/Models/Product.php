@@ -11,10 +11,14 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'ProjectName',
-        'Name',
-        'stripe_plan',
-        'ShortDescriptionBG',
-        'DescriptionBG',
+        'name',
+        'authors',
+        'categories',
+        'parts',
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,'categories');
+    }
 }
