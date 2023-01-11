@@ -52,12 +52,24 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/', [CategoryController::class, 'delete']);
         Route::put('/{id}', [CategoryController::class, 'edit']);
     });
+
+    Route::prefix('authors')->group(function () {
+        Route::post('/', [AuthorController::class, 'store']);
+        Route::delete('/', [AuthorController::class, 'delete']);
+        Route::put('/{id}', [AuthorController::class, 'edit']);
+    });
 });
 
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);
     Route::get('/all', [CategoryController::class, 'getAll']);
     Route::get('/{id}', [CategoryController::class, 'getById']);
+});
+
+Route::prefix('authors')->group(function () {
+    Route::get('/', [AuthorController::class, 'index']);
+    Route::get('/all', [AuthorController::class, 'getAll']);
+    Route::get('/{id}', [AuthorController::class, 'getById']);
 });
 
 Route::prefix('products')->group(function () {
