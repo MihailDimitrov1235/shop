@@ -167,5 +167,7 @@
 
     "client-facing": "Client Facing",
 
-    "transactions": "Transactions"
+    "transactions": "Transactions",
+
+    "categories": "Categories"
 }

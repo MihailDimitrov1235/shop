@@ -167,5 +167,7 @@
 
     "client-facing": "Относно клиента",
 
-    "transactions": "Транзакции"
+    "transactions": "Транзакции",
+
+    "categories": "Категории"
 }
