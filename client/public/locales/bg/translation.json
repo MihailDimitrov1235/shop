@@ -169,5 +169,15 @@
 
     "transactions": "Транзакции",
 
-    "categories": "Категории"
+    "categories": "Категории",
+
+    "category-create": "Създаване на категория",
+
+    "category-edit": "Редактиране на категория",
+
+    "category-created": "Категорията е създадена успешно",
+
+    "category-edited": "Категорията е редактирана успешно",
+
+    "category-deleted": "Категорията е изтрита успешно"
 }

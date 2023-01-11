@@ -22,6 +22,8 @@ const SideBar = () => {
     const items = [
         { type: 'item', icon: DashboardIcon, label: t('dashboard'), href: '/admin/dashboard' },
         { type: 'subMenu', icon: ComputerIcon, label: t('client-facing'), items: [
+            { href: '/admin/categories', label: t('categories') },
+            { href: '/admin/authors', label: t('authors') },
             { href: '/admin/products', label: t('products') },
             { href: '/admin/users', label: t('users') },
             { href: '/admin/transactions', label: t('transactions') },

@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Project;
+use App\Models\Product;
 
-class ProjectController extends Controller
+class ProductController extends Controller
 {
     public function index() {
 
-        $projects = Project::all();   
+        $projects = Product::all();   
 
         return $projects;
     }
 
     public function store(Request $request) {
-        $project = Project::create([
+        $project = Product::create([
             'ProjectName' => $request->ProjectName,
             'Name' => $request->Name,
             'stripe_plan' => $request->stripe_plan,
@@ -28,14 +28,14 @@ class ProjectController extends Controller
 
     public function view($id) {
 
-        $project = Project::findOrFail($id);   
+        $project = Product::findOrFail($id);   
 
         return $project;
     }
 
     public function destroy($id) {
 
-        $project = Project::findOrFail($id);   
+        $project = Product::findOrFail($id);   
         $project->delete();
         return "This project no longer exists.";
     }

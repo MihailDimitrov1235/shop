@@ -6,7 +6,9 @@ use App\Http\Controllers\{
     UserController,
     ProjectController,
     PaymentController,
-    AdminController
+    AdminController,
+    CategoryController,
+    AuthorController
 };
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -40,15 +42,24 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     Route::prefix('products')->group(function () {
-        Route::get('/', [AdminController::class, 'index']);
-        Route::post('/', [AdminController::class, 'store']);
-        Route::delete('/', [AdminController::class, 'delete']);
-        Route::put('/{id}', [AdminController::class, 'edit']);
-        Route::get('/{id}', [AdminController::class, 'getById']);
+        Route::post('/', [ProductController::class, 'store']);
+        Route::delete('/', [ProductController::class, 'delete']);
+        Route::put('/{id}', [ProductController::class, 'edit']);
+    });
+
+    Route::prefix('categories')->group(function () {
+        Route::post('/', [CategoryController::class, 'store']);
+        Route::delete('/', [CategoryController::class, 'delete']);
+        Route::put('/{id}', [CategoryController::class, 'edit']);
     });
 });
 
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::get('/{id}', [CategoryController::class, 'getById']);
+});
+
 Route::prefix('products')->group(function () {
-    Route::get('/', [AdminController::class, 'index']);
-    Route::get('/{id}', [AdminController::class, 'getById']);
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{id}', [ProductController::class, 'getById']);
 });

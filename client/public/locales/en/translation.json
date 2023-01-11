@@ -169,5 +169,15 @@
 
     "transactions": "Transactions",
 
-    "categories": "Categories"
+    "categories": "Categories",
+
+    "category-create": "Create category",
+
+    "category-edit": "Edit category",
+
+    "category-created": "Category created successfully",
+
+    "category-edited": "Category edited successfully",
+
+    "category-deleted": "Category deleted successfully"
 }
