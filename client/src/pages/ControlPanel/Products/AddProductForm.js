@@ -6,6 +6,7 @@ import FormBuilder from "../../../components/FormBuilder";
 import * as Yup from 'yup';
 import productService from '../../../services/product';
 import categoryService from '../../../services/category';
+import authorService from '../../../services/author';
 import { useTranslation } from 'react-i18next';
 import useMessage from '../../../hooks/useMessage';
 import { useNavigate } from 'react-router-dom';
@@ -15,12 +16,7 @@ const AddProductForm = () => {
   const { addMessage } = useMessage();
   const navigate = useNavigate();
   const [categoryOptions, setCategoryOptions] = useState([]);
-
-  const authorOptions = [
-    { label: 'Miroslav Dianov Balev', value: 1 },
-    { label: 'Mihail Vladimirov Dimitrov', value: 2 },
-    { label: 'Stefan Ivanov? Kojuharov', value: 3 }
-  ];
+  const [authorOptions, setAuthorOptions] = useState([]);
 
   useEffect(() => {
     categoryService.getAll()
@@ -32,6 +28,20 @@ const AddProductForm = () => {
         })
 
         setCategoryOptions(newCategoryOptions);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+    authorService.getAll()
+      .then((res) => {
+        let newAuthorOptions = [];
+
+        res.data.forEach((el) => {
+          newAuthorOptions.push({ label: el.name, value: el.id });
+        })
+
+        setAuthorOptions(newAuthorOptions);
       })
       .catch((error) => {
         console.log(error);

@@ -52,12 +52,21 @@ function getAuthorById(id) {
     })
 }
 
+function getAll() {
+    const url = `${servicesHelper.url}/authors/all`;
+
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    })
+}
+
 const adminService = {
     getAuthors,
     createAuthor,
     editAuthor,
     deleteAuthors,
-    getAuthorById
+    getAuthorById,
+    getAll
 }
 
 export default adminService;
