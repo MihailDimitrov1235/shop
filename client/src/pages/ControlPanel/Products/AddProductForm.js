@@ -61,27 +61,37 @@ const AddProductForm = () => {
     console.log(values)
 
     productService.createProduct(values)
-        .then((res) => {
-            addMessage(t('product-created'), 'success');
-            navigate('/admin/products');
-        })
-        .catch((error) => {
-            if (error.response.status == 422) {
-                addMessage(t(error.response.data.errors[0]), 'error');
-            }
+      .then((res) => {
+        addMessage(t('product-created'), 'success');
+        navigate('/admin/products');
+      })
+      .catch((error) => {
+        if (error.response.status == 422) {
+          addMessage(t(error.response.data.errors[0]), 'error');
+        }
 
-            setSubmitting(false)
-        })
-};
+        setSubmitting(false)
+      })
+  };
 
-  const fields = [
-    { type: 'text', name: 'name', label: t('product-name') },
-    { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
-    { type: 'number', name: 'parts', label: t('parts') },
-    { type: 'multiline', name: 'shortDescription', label: t('short-description') },
-    { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
-    { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true }
-  ];
+  const menus = [
+    { id: 'information', label: 'Product', icon: '' },
+    { id: 'parts', label: 'Parts', icon: '' }
+  ]
+
+  const fields = {
+    'information': [
+      { type: 'text', name: 'name', label: t('product-name') },
+      { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
+      { type: 'number', name: 'parts', label: t('parts') },
+      { type: 'multiline', name: 'shortDescription', label: t('short-description') },
+      { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
+      { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true }
+    ],
+    'parts': [
+      { type: 'text', name: 'name', label: t('product-name') },
+    ]
+  };
 
   const submitButton = {
     color: 'bordoRed'
@@ -89,22 +99,23 @@ const AddProductForm = () => {
 
   return (
     <>
-            <Helmet>
-                <title>{t('products-create')} | {t('ban')}</title>
-            </Helmet>
-            <Card sx={{ p: 2 }}>
-                <PerfectScrollbar>
-                    <Box>
-                        <FormBuilder
-                            fields={fields}
-                            validationSchema={validationSchema}
-                            onSubmit={onSubmit}
-                            submitButton={submitButton}
-                        />
-                    </Box>
-                </PerfectScrollbar>
-            </Card>
-        </>
+      <Helmet>
+        <title>{t('products-create')} | {t('ban')}</title>
+      </Helmet>
+      <Card sx={{ p: 2 }}>
+        <PerfectScrollbar>
+          <Box>
+            <FormBuilder
+              fields={fields}
+              menus={menus}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+              submitButton={submitButton}
+            />
+          </Box>
+        </PerfectScrollbar>
+      </Card>
+    </>
   );
 };
 
