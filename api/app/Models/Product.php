@@ -11,9 +11,6 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name',
-        'authors',
-        'categories',
         'parts',
     ];
 
@@ -21,4 +18,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class,'categories');
     }
+
+    // public function authors()
+    // {
+    //     return $this->belongsToMany(Author::class,'authors');
+    // }
 }

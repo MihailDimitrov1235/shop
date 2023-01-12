@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('author_id')->constrained('authors');
+            $table->json('authors')->nullable();
             $table->json('categories')->nullable();
             $table->integer('parts');
             $table->timestamps();
@@ -30,9 +29,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['categories_id']);
-        });
+        // Schema::table('products', function (Blueprint $table) {
+        //     $table->dropForeign(['categories']);
+        //     $table->dropForeign(['authors']);
+        // });
         Schema::dropIfExists('products');
     }
 };

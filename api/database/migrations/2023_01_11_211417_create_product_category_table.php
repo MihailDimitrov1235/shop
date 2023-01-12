@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_category', function (Blueprint $table) {
-            $table->bigInteger('product_id')->unsigned()->index();
-            $table->bigInteger('category_id')->unsigned()->index();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->primary(['product_id', 'category_id']);
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('category_id')->constrained();
+            // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            // $table->primary(['product_id', 'category_id']);
         });
     }
 
