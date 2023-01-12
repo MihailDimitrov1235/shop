@@ -181,5 +181,9 @@
 
     "category-deleted": "Category deleted successfully",
 
-    "no-records": "No records"
+    "no-records": "No records",
+
+    "category-id": "Category ID",
+
+    "author-id": "Author ID"
 }

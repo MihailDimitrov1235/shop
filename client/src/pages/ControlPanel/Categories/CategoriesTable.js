@@ -19,12 +19,12 @@ function CategoriesTable() {
     }, []);
 
     const headings = [
-        { id: 'id', label: t('user-id'), order: true },
+        { id: 'id', label: t('category-id'), order: true },
         { id: 'name', label: t('name'), order: true },
     ];
 
     const headFilters = {
-        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') },
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('category-id') },
         'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('name') },
     }
 

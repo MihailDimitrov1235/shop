@@ -19,14 +19,14 @@ function AuthorsTable() {
     }, []);
 
     const headings = [
-        { id: 'id', label: t('user-id'), order: true },
+        { id: 'id', label: t('author-id'), order: true },
         { id: 'name', label: t('name'), order: true },
         { id: 'email', label: t('email'), order: true },
         { id: 'phone', label: t('phone'), order: false},
     ];
 
     const headFilters = {
-        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') },
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('author-id') },
         'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('name') },
         'email': { type: 'search', name: 'email', placeholder: t('search-in') + t('email') },
         'phone': { type: 'search', name: 'phone', placeholder: t('search-in') + t('phone') }

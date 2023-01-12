@@ -181,5 +181,9 @@
 
     "category-deleted": "Категорията е изтрита успешно",
 
-    "no-records": "Няма записи"
+    "no-records": "Няма записи",
+
+    "category-id": "ID на категорията",
+
+    "author-id": "ID на автора"
 }
