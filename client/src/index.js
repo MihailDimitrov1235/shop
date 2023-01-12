@@ -7,30 +7,35 @@ import { BrowserRouter } from 'react-router-dom';
 import './i18nextConf';
 import { useSSR } from "react-i18next";
 
-const AppContainer = () => {
-  useSSR(window.initialI18nStore, window.initialLanguage);
+//for SSR
 
-  return (
-    <Suspense fallback={<span>Loading...</span>}>
-      <React.StrictMode>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </React.StrictMode>
-    </Suspense>
-  );
-};
+// const AppContainer = () => {
+//   useSSR(window.initialI18nStore, window.initialLanguage);
 
-ReactDOM.hydrateRoot(document.getElementById('root'),
-  <AppContainer />
-);
-// root.render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <App />
-//     </BrowserRouter>
-//   </React.StrictMode>
+//   return (
+//     <Suspense fallback={<span>Loading...</span>}>
+//       <React.StrictMode>
+//         <BrowserRouter>
+//           <App />
+//         </BrowserRouter>
+//       </React.StrictMode>
+//     </Suspense>
+//   );
+// };
+
+// ReactDOM.hydrateRoot(document.getElementById('root'),
+//   <AppContainer />
 // );
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
