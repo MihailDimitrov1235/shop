@@ -313,21 +313,30 @@ const MainTable = ({
 
                                             if(Array.isArray(value)){
                                                 return(
-                                                <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
-
-                                                    {value.forEach(element => {
-                                                        const name = element[heading.arrayId]['name'];
-                                                        console.log(name);
-                                                        return (
-                                                                <Tooltip title={name}>
-                                                                    <span>{name}</span>
-                                                                </Tooltip>
-                                                            
-                                                        );
-                                                    })}
-
-                                                </TableCell>
-                                                )
+                                                    <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
+                                                        {value.map((element) => {
+                                                            const name = element[heading.arrayId]['name'];
+                                                            console.log(typeof(name));
+                                                            return (
+                                                                <Box style={{
+                                                                    borderRadius:"30px",
+                                                                    backgroundColor:'red',
+                                                                    paddingTop:"7px",
+                                                                    paddingBottom:"7px",
+                                                                    paddingLeft:"15px",
+                                                                    paddingRight:"10px",
+                                                                    margin:"10px",
+                                                                }}>
+                                                                    <Tooltip title={name}>
+                                                                        <span style={{
+                                                                            color:"white",
+                                                                        }}>{name}</span>
+                                                                    </Tooltip>
+                                                                </Box>
+                                                            );
+                                                        })}
+                                                    </TableCell>
+                                                );
                                             }else{
 
                                                 return (
