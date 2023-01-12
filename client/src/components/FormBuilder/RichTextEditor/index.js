@@ -1,5 +1,6 @@
 import React from "react";
-import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
+import { Editor, EditorState, getDefaultKeyBinding, RichUtils, convertToRaw } from "draft-js";
+import draftToHtml from 'draftjs-to-html';
 import "./index.css";
 import "../../../../node_modules/draft-js/dist/Draft.css";
 import { useTranslation } from 'react-i18next';
@@ -19,7 +20,15 @@ class RichTextEditor extends React.Component {
       this.onBlur = () => {
         this.setState({ isFocused: false });
       }
-      this.onChange = (editorState) => this.setState({editorState});
+      this.onChange = (editorState) => {
+        const rawContentState = convertToRaw(editorState.getCurrentContent());
+        const markup = draftToHtml(
+          rawContentState, 
+        );
+
+        this.props.setFieldValue(this.props.name, markup);
+        this.setState({editorState});
+      };
 
       this.handleKeyCommand = this._handleKeyCommand.bind(this);
       this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
