@@ -5,15 +5,11 @@ import {
     Button,
     Checkbox,
     FormHelperText,
-    TextField,
-    MenuItem,
-    Autocomplete,
-    Divider,
     Tab,
     Tabs
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import RichTextEditor from './RichTextEditor';
+import Fields from './Fields';
 import TabPanel from './TabPanel';
 
 function a11yProps(index) {
@@ -90,7 +86,6 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
 
                             {menus.map((menu, index) => (
                                 <TabPanel value={selectedMenu} index={index} key={index}>
-                                    {menu.label}
                                     {fields[menu.id].map((field, index) => {
 
                                         const baseProps = {
@@ -108,68 +103,14 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                             color: 'bordoRed'
                                         };
 
-                                        if (field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number') {
-                                            return (
-                                                <TextField
-                                                    type={field.type}
-                                                    {...baseProps}
-                                                />
-                                            );
-                                        } else if (field.type === 'multiline') {
-                                            return (
-                                                // <TextField
-                                                //     rows={field.rows || 2}
-                                                //     multiline
-                                                //     {...baseProps}
-                                                // />
-                                                <RichTextEditor
-                                                    rows={field.rows || 2}
-                                                    setFieldValue={setFieldValue}
-                                                    {...baseProps}
-                                                />
-                                            );
-                                        } else if (field.type === 'select') {
-                                            return (
-                                                <TextField
-                                                    select
-                                                    {...baseProps}
-                                                >
-                                                    {field.options.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            );
-                                        } else if (field.type === 'autocomplete') {
-                                            return (
-                                                <Autocomplete
-                                                    multiple={Object.hasOwn(field, 'multiple') ? field.multiple : false}
-                                                    disablePortal
-                                                    options={field.options}
-                                                    onChange={(e, value) => (
-                                                        setFieldValue(field.name, value)
-                                                    )}
-                                                    freeSolo
-                                                    renderInput={(params) => (
-                                                        <TextField
-                                                            {...params}
-                                                            {...baseProps}
-                                                        />
-                                                    )}
-                                                    key={index}
-                                                />
-                                            );
-                                        } else if (field.type === 'divider') {
-                                            return <Divider key={index} sx={{ my: 1 }} />
-                                        }
+                                        return <Fields field={field} baseProps={baseProps} setFieldValue={setFieldValue} key={index} />
                                     })}
 
                                     {/* {Boolean(touched.policy && errors.policy) && (
-                                <FormHelperText error>
-                                {errors.policy}
-                                </FormHelperText>
-                                )} */}
+                                    <FormHelperText error>
+                                    {errors.policy}
+                                    </FormHelperText>
+                                    )} */}
                                     <Box sx={{ py: 2 }}>
                                         <Button
                                             color={submitButton && submitButton.color ? submitButton.color : 'primary'}
@@ -204,61 +145,7 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                     color: 'bordoRed'
                                 };
 
-                                if (field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number') {
-                                    return (
-                                        <TextField
-                                            type={field.type}
-                                            {...baseProps}
-                                        />
-                                    );
-                                } else if (field.type === 'multiline') {
-                                    return (
-                                        // <TextField
-                                        //     rows={field.rows || 2}
-                                        //     multiline
-                                        //     {...baseProps}
-                                        // />
-                                        <RichTextEditor
-                                            rows={field.rows || 2}
-                                            setFieldValue={setFieldValue}
-                                            {...baseProps}
-                                        />
-                                    );
-                                } else if (field.type === 'select') {
-                                    return (
-                                        <TextField
-                                            select
-                                            {...baseProps}
-                                        >
-                                            {field.options.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </MenuItem>
-                                            ))}
-                                        </TextField>
-                                    );
-                                } else if (field.type === 'autocomplete') {
-                                    return (
-                                        <Autocomplete
-                                            multiple={Object.hasOwn(field, 'multiple') ? field.multiple : false}
-                                            disablePortal
-                                            options={field.options}
-                                            onChange={(e, value) => (
-                                                setFieldValue(field.name, value)
-                                            )}
-                                            freeSolo
-                                            renderInput={(params) => (
-                                                <TextField
-                                                    {...params}
-                                                    {...baseProps}
-                                                />
-                                            )}
-                                            key={index}
-                                        />
-                                    );
-                                } else if (field.type === 'divider') {
-                                    return <Divider key={index} sx={{ my: 1 }} />
-                                }
+                                return <Fields field={field} baseProps={baseProps} setFieldValue={setFieldValue} key={index} />
                             })}
 
                             {/* {Boolean(touched.policy && errors.policy) && (
