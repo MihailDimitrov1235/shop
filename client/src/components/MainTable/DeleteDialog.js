@@ -66,7 +66,7 @@ DeleteDialog.propTypes = {
     selected: PropTypes.array.isRequired,
     setSelected: PropTypes.func.isRequired,
     deleteId: PropTypes.number.isRequired,
-    setDeleteId: PropTypes.number.isRequired,
+    setDeleteId: PropTypes.func.isRequired,
     deleteHandler: PropTypes.func.isRequired,
     newRequest: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
