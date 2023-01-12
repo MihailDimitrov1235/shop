@@ -51,14 +51,16 @@ const AddProductForm = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().max(255).required(t('name-required')),
     author: Yup.array().required(t('author-required')),
-    shortDescription: Yup.string().required(t('short-description-required')),
-    longDescription: Yup.string().required(t('long-description-required')),
-    category: Yup.object().required(t('category-required')),
+    // shortDescription: Yup.string().required(t('short-description-required')),
+    // longDescription: Yup.string().required(t('long-description-required')),
+    category: Yup.array().required(t('category-required')),
     parts: Yup.number().required(t('parts-required'))
   });
 
   const onSubmit = (values, { setSubmitting }) => {
-    productService.createService(values)
+    console.log(values)
+
+    productService.createProduct(values)
         .then((res) => {
             addMessage(t('product-created'), 'success');
             navigate('/admin/products');

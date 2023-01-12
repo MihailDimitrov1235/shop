@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\{
+    ProductCategory,
+    ProductAuthor,
+    ProductTrans
+};
 
 class Product extends Model
 {
@@ -14,13 +19,18 @@ class Product extends Model
         'parts',
     ];
 
-    public function categories()
+    public function trans()
     {
-        return $this->belongsToMany(Category::class,'categories');
+        return $this->hasMany(ProductTrans::class);
     }
 
-    // public function authors()
-    // {
-    //     return $this->belongsToMany(Author::class,'authors');
-    // }
+    public function categories()
+    {
+        return $this->hasMany(ProductCategory::class);
+    }
+
+    public function authors()
+    {
+        return $this->hasMany(ProductAuthor::class);
+    }
 }

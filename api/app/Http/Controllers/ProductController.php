@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
+use App\Models\{
+    Product,
+    ProductTrans,
+    ProductCategory,
+    ProductAuthor
+};
 
 class ProductController extends Controller
 {
     public function index() {
-        // $query = Product::select('id', 'name', 'authors', 'categories', 'parts');
+        $query = Product::with(['trans', 'categories', 'authors', 'categories.category', 'authors.author']);
 
         // if(request()->query('id')) {
         //     $query->where('id', 'LIKE', '%'.request()->query('id').'%');
@@ -35,26 +40,43 @@ class ProductController extends Controller
         //     $query->orderBy(request()->query('field'), request()->query('direction'));
         // }
 
-        // if(request()->query('total')) {
-        //     $categories = $query->paginate(request()->query('total'))->withQueryString();
-        // }else {
-        //     $categories = $query->paginate(10)->withQueryString();
-        // }
+        if(request()->query('total')) {
+            $products = $query->paginate(request()->query('total'))->withQueryString();
+        }else {
+            $products = $query->paginate(10)->withQueryString();
+        } 
 
-        // return $categories;
-        $projects = Product::all();   
-
-        return $projects;
+        return $products;
     }
 
     public function store(Request $request) {
-        $project = Product::create([
-            'name' => $request->Name,
-            'stripe_plan' => $request->stripe_plan,
-            'ShortDescription' => $request->ShortDescription,
-            'Description' => $request->Description
-        ]);   
-        return $project;
+
+        $product = Product::create(['parts' => $request->parts]);
+
+        ProductTrans::create([
+            'name' => $request->name,
+            'shortDescription' => $request->shortDescription,
+            'longDescription' => $request->longDescription,
+            'product_id' => $product->id,
+            'lang' => 'bg'
+        ]);
+
+        foreach($request->category as $category) {
+            ProductCategory::create([
+                'product_id' => $product->id,
+                'category_id' => $category['value']
+            ]);
+        }
+
+        foreach($request->author as $author) {
+            ProductAuthor::create([
+                'product_id' => $product->id,
+                'author_id' => $author['value']
+            ]);
+        }
+
+
+        return $product;
     }
 
     public function view($id) {

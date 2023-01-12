@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->json('authors')->nullable();
-            $table->json('categories')->nullable();
             $table->integer('parts');
             $table->timestamps();
         });

@@ -20,9 +20,9 @@ function ProductTable() {
 
     const headings = [
         { id: 'id', label: t('user-id'), order: true },
-        { id: 'name', label: t('product-name'), order: true },
-        { id: 'authors', label: t('authors'), order: true },
-        { id: 'categories', label: t('categories'), order: true },
+        //{ id: 'name', label: t('product-name'), order: true },
+        // { id: 'authors', label: t('authors'), order: true },
+        // { id: 'categories', label: t('categories'), order: true },
         { id: 'parts', label: t('parts'), order: true },
     ];
 
@@ -51,14 +51,14 @@ function ProductTable() {
     }
 
     const deleteHandler = (selected) => {
-      productService.deleteProducts(selected)
-            .then((res) => {
-                console.log(res)
-                addMessage(t('product-deleted'), 'success')
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+    //   productService.deleteProducts(selected)
+    //         .then((res) => {
+    //             console.log(res)
+    //             addMessage(t('product-deleted'), 'success')
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
     }
 
     return (
