@@ -15,6 +15,8 @@ class ProductController extends Controller
 {
     public function index() {
         $query = Product::with(['trans', 'categories', 'authors', 'categories.category', 'authors.author']);
+        //$categoryNames = $query->categories->pluck('name');
+        //$query = Product::with(['trans', $categoryNames, 'authors', 'categories.category', 'authors.author']);
 
         // if(request()->query('id')) {
         //     $query->where('id', 'LIKE', '%'.request()->query('id').'%');

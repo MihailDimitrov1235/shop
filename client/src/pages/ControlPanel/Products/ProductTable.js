@@ -21,14 +21,14 @@ function ProductTable() {
     const headings = [
         { id: 'id', label: t('product-id'), order: true },
         //{ id: 'name', label: t('product-name'), order: true },
-        // { id: 'authors', label: t('authors'), order: true },
-        // { id: 'categories', label: t('categories'), order: true },
+         { id: 'authors', label: t('authors'), order: true, arrayId: 'author' },
+         { id: 'categories', label: t('categories'), order: true, arrayId: 'category' },
         { id: 'parts', label: t('parts'), order: true },
     ];
 
     const headFilters = {
         'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('product-id') },
-        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('product-name') },
+        // 'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('product-name') },
         'authors': { type: 'search', name: 'authors', placeholder: t('search-in') + t('authors') },
         'categories': { type: 'search', name: 'categories', placeholder: t('search-in') + t('categories') },
         'parts': { type: 'search', name: 'parts', placeholder: t('search-in') + t('parts') },

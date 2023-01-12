@@ -284,6 +284,9 @@ const MainTable = ({
                                 const isItemSelected = isSelected(row.id);
                                 const labelId = `enhanced-table-checkbox-${index}`;
 
+                                console.log(row);
+                                
+
                                 return (
                                     <TableRow
                                         hover
@@ -308,13 +311,33 @@ const MainTable = ({
                                         {headings.map((heading) => {
                                             const value = row[heading.id];
 
-                                            return (
+                                            if(Array.isArray(value)){
+                                                return(
                                                 <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
-                                                    <Tooltip title={value}>
-                                                        <span>{value}</span>
-                                                    </Tooltip>
+
+                                                    {value.forEach(element => {
+                                                        const name = element[heading.arrayId]['name'];
+                                                        console.log(name);
+                                                        return (
+                                                                <Tooltip title={name}>
+                                                                    <span>{name}</span>
+                                                                </Tooltip>
+                                                            
+                                                        );
+                                                    })}
+
                                                 </TableCell>
-                                            );
+                                                )
+                                            }else{
+
+                                                return (
+                                                    <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
+                                                        <Tooltip title={value}>
+                                                            <span>{value}</span>
+                                                        </Tooltip>
+                                                    </TableCell>
+                                                );
+                                            }
                                         })}
                                         {options.edit && (
                                             <TableCell align='right'>
