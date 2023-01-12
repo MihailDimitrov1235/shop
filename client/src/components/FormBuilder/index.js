@@ -194,9 +194,6 @@ const FormBuilder = ({ fields, initialValues = {}, validationSchema, onSubmit, s
                             Item Seven
                         </TabPanel>
                     </Box>
-
-
-
                 </form>
             )}
         </Formik>
