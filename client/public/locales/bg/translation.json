@@ -61,7 +61,9 @@
 
     "category-ids": "ID-та на категориите",
 
-    "parts": "Брой части",
+    "parts": "Части",
+
+    "parts-count": "Брой части",
 
     "created-at": "Създадено на",
 
@@ -185,5 +187,7 @@
 
     "category-id": "ID на категорията",
 
-    "author-id": "ID на автора"
+    "author-id": "ID на автора",
+
+    "product": "Продукт"
 }

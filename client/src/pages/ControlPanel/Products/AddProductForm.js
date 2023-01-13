@@ -11,6 +11,9 @@ import { useTranslation } from 'react-i18next';
 import useMessage from '../../../hooks/useMessage';
 import { useNavigate } from 'react-router-dom';
 
+import InfoIcon from '@mui/icons-material/Info';
+import InventoryIcon from '@mui/icons-material/Inventory';
+
 const AddProductForm = () => {
   const { t } = useTranslation();
   const { addMessage } = useMessage();
@@ -74,14 +77,14 @@ const AddProductForm = () => {
   };
 
   const menus = [
-    { id: 'information', label: 'Product', icon: '' },
-    { id: 'parts', label: 'Parts', icon: '' }
+    { id: 'information', label: t('product'), icon: InfoIcon },
+    { id: 'parts', label: t('parts'), icon: InventoryIcon }
   ]
 
   const fields = {
     'information': [
       { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
-      { type: 'number', name: 'parts', label: t('parts') },
+      { type: 'number', name: 'parts', label: t('parts-count') },
       { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true },
       {
         type: 'lang', name: 'lang', selectors: [ 'bg', 'en' ], fields: [

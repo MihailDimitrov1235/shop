@@ -95,9 +95,11 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                     '& .Mui-selected': { color: '#96011c!important' },
                                 }}
                             >
-                                {menus.map((menu, index) => (
-                                    <Tab label={menu.label} {...a11yProps(index)} key={index} />
-                                ))}
+                                {menus.map((menu, index) => {
+                                    const { icon: Icon } = menu;
+
+                                    return <Tab label={menu.label} icon={<Icon />} {...a11yProps(index)} key={index} />
+                                })}
                             </Tabs>
 
                             {menus.map((menu, index) => (
