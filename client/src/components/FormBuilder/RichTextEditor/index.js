@@ -34,6 +34,8 @@ class RichTextEditor extends React.Component {
       this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
       this.toggleBlockType = this._toggleBlockType.bind(this);
       this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
+
+      this.editorRef = React.createRef();
     }
 
     _handleKeyCommand(command, editorState) {
@@ -110,7 +112,7 @@ class RichTextEditor extends React.Component {
               keyBindingFn={this.mapKeyToEditorCommand}
               onChange={this.onChange}
               placeholder={'text-pholder'}
-              ref="editor"
+              ref={this.editorRef}
               spellCheck={true}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
