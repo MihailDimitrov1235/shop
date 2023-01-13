@@ -6,9 +6,10 @@ import {
 } from '@mui/material';
 import RichTextEditor from '../RichTextEditor';
 import LangFields from './LangFields';
+import FileUpload from './FileUpload';
 import PropTypes from 'prop-types';
 
-const Fields = ({ field, baseProps, setFieldValue, values, touched, errors }) => {
+const Fields = ({ field, baseProps, setFieldValue, values, touched, errors, updateUploadedFiles }) => {
     return (
         <>
             {(field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number') && (
@@ -70,6 +71,15 @@ const Fields = ({ field, baseProps, setFieldValue, values, touched, errors }) =>
                     values={values}
                     touched={touched}
                     errors={errors}
+                />
+            )}
+
+            {field.type === 'upload' && (
+                <FileUpload
+                    accept={field.accept}
+                    label={field.label}
+                    multiple={field.multiple}
+                    updateFilesCb={updateUploadedFiles}
                 />
             )}
         </>

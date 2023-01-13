@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import Fields from './Fields';
 import TabPanel from './TabPanel';
 import { useTranslation } from 'react-i18next';
+import FileUpload from './Fields/FileUpload';
 
 function a11yProps(index) {
     return {
@@ -56,6 +57,10 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                 });
             }
         }
+    }
+
+    const updateUploadedFiles = (files) => {
+        console.log(files)
     }
 
     return (
@@ -128,6 +133,7 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                                 field={field}
                                                 baseProps={baseProps}
                                                 setFieldValue={setFieldValue}
+                                                updateUploadedFiles={updateUploadedFiles}
                                                 key={index}
                                                 values={values}
                                                 touched={touched}
