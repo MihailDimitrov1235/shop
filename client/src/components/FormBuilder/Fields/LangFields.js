@@ -34,6 +34,7 @@ const LangFields = ({ field, baseProps, values, touched, errors, setFieldValue }
                     aria-label="basic tabs example"
                     sx={{
                         borderRight: 1,
+                        borderRight: 'none',
                         borderColor: 'divider',
                         '& .MuiTabs-indicator': { backgroundColor: '#96011c!important' },
                         //'& .MuiTab-root': { color: blue[700] },
