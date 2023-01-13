@@ -10,7 +10,10 @@ import {
     Checkbox,
     IconButton,
     Button,
-    TextField
+    TextField,
+    Chip,
+    TableContainer,
+    Grid,
 } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
 import { Link as RouterLink } from 'react-router-dom';
@@ -219,164 +222,158 @@ const MainTable = ({
 
                 </Box>
             )}
+            <TableContainer>
+                <Table
+                    className={classes.table}
+                    aria-labelledby='tableTitle'
+                    size={dense ? 'small' : 'medium'}
+                >
+                    <EnhancedTableHead
+                        searches={searches}
+                        handleSearchChange={handleSearchChange}
+                        options={options}
+                        classes={classes}
+                        numSelected={selected.length}
+                        order={order}
+                        orderBy={orderBy}
+                        onSelectAllClick={handleSelectAllClick}
+                        onRequestSort={handleRequestSort}
+                        rowCount={rows.length}
+                        headings={headings}
+                        headFilters={headFilters}
+                    />
+                    <TableBody>
+                        {Object.keys(headFilters).length > 0 && (
+                            <FiltersTableRow>
+                                {options.checkbox && (
+                                    <TableCell></TableCell>
+                                )}
 
-            <Table
-                className={classes.table}
-                aria-labelledby='tableTitle'
-                size={dense ? 'small' : 'medium'}
-            >
-                <EnhancedTableHead
-                    searches={searches}
-                    handleSearchChange={handleSearchChange}
-                    options={options}
-                    classes={classes}
-                    numSelected={selected.length}
-                    order={order}
-                    orderBy={orderBy}
-                    onSelectAllClick={handleSelectAllClick}
-                    onRequestSort={handleRequestSort}
-                    rowCount={rows.length}
-                    headings={headings}
-                    headFilters={headFilters}
-                />
-                <TableBody>
-                    {Object.keys(headFilters).length > 0 && (
-                        <FiltersTableRow>
-                            {options.checkbox && (
-                                <TableCell></TableCell>
-                            )}
+                                {headings.map((heading, index) => {
+                                    if (headFilters[heading.id]) {
+                                        return (
+                                            <TableCell key={heading.id} sx={{ pt: 0.5 }}>
+                                                {headFilters[heading.id].type === 'search' && (
+                                                    <TextField
+                                                        placeholder={headFilters[heading.id].placeholder}
+                                                        value={searches[index].value}
+                                                        onChange={handleSearchChange(index)}
+                                                        size='small'
+                                                        fullWidth
+                                                        sx={{ backgroundColor: 'white' }}
+                                                        color='bordoRed'
+                                                    />
+                                                )}
+                                            </TableCell>
+                                        );
+                                    } else {
+                                        return <TableCell key={heading.id} sx={{ pt: 0.5 }}></TableCell>
+                                    }
+                                })}
 
-                            {headings.map((heading, index) => {
-                                if (headFilters[heading.id]) {
+                                {options.edit && (
+                                    <TableCell></TableCell>
+                                )}
+
+                                {options.delete && (
+                                    <TableCell></TableCell>
+                                )}
+                            </FiltersTableRow>
+                        )}
+
+                        {rows.length > 0 ? (
+                            <>
+                                {rows.map((row, index) => {
+                                    const isItemSelected = isSelected(row.id);
+                                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                                    console.log(row);
+
+
                                     return (
-                                        <TableCell key={heading.id} sx={{ pt: 0.5 }}>
-                                            {headFilters[heading.id].type === 'search' && (
-                                                <TextField
-                                                    placeholder={headFilters[heading.id].placeholder}
-                                                    value={searches[index].value}
-                                                    onChange={handleSearchChange(index)}
-                                                    size='small'
-                                                    fullWidth
-                                                    sx={{ backgroundColor: 'white' }}
-                                                    color='bordoRed'
-                                                />
+                                        <TableRow
+                                            hover
+                                            onClick={(event) => handleRowClick(event, row.id)}
+                                            role='checkbox'
+                                            aria-checked={isItemSelected}
+                                            tabIndex={-1}
+                                            key={row.id}
+                                            selected={isItemSelected}
+                                        >
+                                            {options.checkbox && (
+                                                <TableCell padding='checkbox'>
+                                                    <Checkbox
+                                                        color='bordoRed'
+                                                        checked={isItemSelected}
+                                                        inputProps={{ 'aria-labelledby': labelId }}
+                                                        onClick={(event) => event.stopPropagation()}
+                                                        onChange={(event) => handleClick(event, row.id)}
+                                                    />
+                                                </TableCell>
                                             )}
-                                        </TableCell>
-                                    );
-                                } else {
-                                    return <TableCell key={heading.id} sx={{ pt: 0.5 }}></TableCell>
-                                }
-                            })}
+                                            {headings.map((heading) => {
+                                                const value = row[heading.id];
 
-                            {options.edit && (
-                                <TableCell></TableCell>
-                            )}
+                                                if (Array.isArray(value)) {
+                                                    return (
+                                                        <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
+                                                            <Grid container spacing={1}>
 
-                            {options.delete && (
-                                <TableCell></TableCell>
-                            )}
-                        </FiltersTableRow>
-                    )}
+                                                                {value.map((element) => {
+                                                                    const name = element[heading.arrayId][heading.selector];
+                                                                    console.log(typeof (name));
+                                                                    return (
+                                                                        <Grid item>
+                                                                            <Tooltip title={name}>
+                                                                                <Chip label={name} sx={{ maxWidth: '150px' }} />
+                                                                            </Tooltip>
+                                                                        </Grid>
+                                                                    );
+                                                                })}
 
-                    {rows.length > 0 ? (
-                        <>
-                            {rows.map((row, index) => {
-                                const isItemSelected = isSelected(row.id);
-                                const labelId = `enhanced-table-checkbox-${index}`;
+                                                            </Grid>
+                                                        </TableCell>
+                                                    );
+                                                } else {
 
-                                console.log(row);
-                                
-
-                                return (
-                                    <TableRow
-                                        hover
-                                        onClick={(event) => handleRowClick(event, row.id)}
-                                        role='checkbox'
-                                        aria-checked={isItemSelected}
-                                        tabIndex={-1}
-                                        key={row.id}
-                                        selected={isItemSelected}
-                                    >
-                                        {options.checkbox && (
-                                            <TableCell padding='checkbox'>
-                                                <Checkbox
-                                                    color='bordoRed'
-                                                    checked={isItemSelected}
-                                                    inputProps={{ 'aria-labelledby': labelId }}
-                                                    onClick={(event) => event.stopPropagation()}
-                                                    onChange={(event) => handleClick(event, row.id)}
-                                                />
-                                            </TableCell>
-                                        )}
-                                        {headings.map((heading) => {
-                                            const value = row[heading.id];
-
-                                            if(Array.isArray(value)){
-                                                return(
-                                                    <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
-                                                        {value.map((element) => {
-                                                            const name = element[heading.arrayId]['name'];
-                                                            console.log(typeof(name));
-                                                            return (
-                                                                <Box style={{
-                                                                    borderRadius:"30px",
-                                                                    backgroundColor:'red',
-                                                                    paddingTop:"7px",
-                                                                    paddingBottom:"7px",
-                                                                    paddingLeft:"15px",
-                                                                    paddingRight:"10px",
-                                                                    margin:"10px",
-                                                                }}>
-                                                                    <Tooltip title={name}>
-                                                                        <span style={{
-                                                                            color:"white",
-                                                                        }}>{name}</span>
-                                                                    </Tooltip>
-                                                                </Box>
-                                                            );
-                                                        })}
-                                                    </TableCell>
-                                                );
-                                            }else{
-
-                                                return (
-                                                    <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
-                                                        <Tooltip title={value}>
-                                                            <span>{value}</span>
-                                                        </Tooltip>
-                                                    </TableCell>
-                                                );
-                                            }
-                                        })}
-                                        {options.edit && (
-                                            <TableCell align='right'>
-                                                <RouterLink to={`edit/${row.id}`}>
-                                                    <IconButton>
-                                                        <EditIcon />
+                                                    return (
+                                                        <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
+                                                            <Tooltip title={value}>
+                                                                <span>{value}</span>
+                                                            </Tooltip>
+                                                        </TableCell>
+                                                    );
+                                                }
+                                            })}
+                                            {options.edit && (
+                                                <TableCell align='right'>
+                                                    <RouterLink to={`edit/${row.id}`}>
+                                                        <IconButton>
+                                                            <EditIcon />
+                                                        </IconButton>
+                                                    </RouterLink>
+                                                </TableCell>
+                                            )}
+                                            {options.delete && (
+                                                <TableCell align='right'>
+                                                    <IconButton color='error' onClick={() => handleDeleteClick(row['id'])}>
+                                                        <DeleteIcon />
                                                     </IconButton>
-                                                </RouterLink>
-                                            </TableCell>
-                                        )}
-                                        {options.delete && (
-                                            <TableCell align='right'>
-                                                <IconButton color='error' onClick={() => handleDeleteClick(row['id'])}>
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                        )}
-                                    </TableRow>
-                                );
-                            })}
-                        </>
-                    ) : (
-                        <TableRow>
-                            <TableCell colSpan={allColsNum} sx={{ textAlign: 'center' }}>{t('no-records')}</TableCell>
-                        </TableRow>
-                    )}
+                                                </TableCell>
+                                            )}
+                                        </TableRow>
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <TableRow>
+                                <TableCell colSpan={allColsNum} sx={{ textAlign: 'center' }}>{t('no-records')}</TableCell>
+                            </TableRow>
+                        )}
 
-                </TableBody>
-            </Table>
-
+                    </TableBody>
+                </Table>
+            </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"

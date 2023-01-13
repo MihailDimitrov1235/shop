@@ -21,9 +21,9 @@ function ProductTable() {
     const headings = [
         { id: 'id', label: t('product-id'), order: true },
         //{ id: 'name', label: t('product-name'), order: true },
-         { id: 'authors', label: t('authors'), order: true, arrayId: 'author' },
-         { id: 'categories', label: t('categories'), order: true, arrayId: 'category' },
-        { id: 'parts', label: t('parts'), order: true },
+        { id: 'authors', label: t('authors'), order: false, arrayId: 'author', selector: 'name' },
+        { id: 'categories', label: t('categories'), order: false, arrayId: 'category', selector: 'name' },
+        { id: 'parts', label: t('parts'), order: true, align: 'center' },
     ];
 
     const headFilters = {
