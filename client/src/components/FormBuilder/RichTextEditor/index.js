@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 class RichTextEditor extends React.Component {
     constructor(props) {
       super(props);
-      console.log(props);
+
       this.state = {
         editorState: EditorState.createEmpty(),
         isFocused: false,

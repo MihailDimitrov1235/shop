@@ -49,7 +49,6 @@ const AddProductForm = () => {
   }, []);
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().max(255).required(t('name-required')),
     author: Yup.array().required(t('author-required')),
     // shortDescription: Yup.string().required(t('short-description-required')),
     // longDescription: Yup.string().required(t('long-description-required')),
