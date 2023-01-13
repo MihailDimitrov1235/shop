@@ -1,7 +1,11 @@
+import HeroSection from "../../../components/HeroSection/HeroSection";
+import ProductDisplay from "../../../components/products/ProductDisplay";
+
 const Landing = () => {
     return (
         <div>
-            <p>landing</p>
+            <HeroSection/>
+            <ProductDisplay/>
         </div>
     );
 }
