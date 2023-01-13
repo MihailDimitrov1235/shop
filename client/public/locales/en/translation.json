@@ -61,7 +61,9 @@
 
     "category-ids": "Category IDs",
 
-    "parts": "Number of parts",
+    "parts": "Parts",
+
+    "parts-count": "Number of parts",
 
     "created-at": "Created At",
 
@@ -185,5 +187,9 @@
 
     "category-id": "Category ID",
 
-    "author-id": "Author ID"
+    "author-id": "Author ID",
+
+    "product": "Product",
+
+    "next": "Next"
 }

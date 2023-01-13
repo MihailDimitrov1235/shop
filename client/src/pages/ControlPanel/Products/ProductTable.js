@@ -23,7 +23,7 @@ function ProductTable() {
         { id: 'name', label: t('product-name'), order: true },
         { id: 'authors', label: t('authors'), order: false, arrayId: 'author', selector: 'name' },
         { id: 'categories', label: t('categories'), order: false, arrayId: 'category', selector: 'name' },
-        { id: 'parts', label: t('parts'), order: true, align: 'center' },
+        { id: 'parts', label: t('parts-count'), order: true, align: 'center' },
     ];
 
     const headFilters = {
@@ -31,7 +31,7 @@ function ProductTable() {
         'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('product-name') },
         'authors': { type: 'search', name: 'authors', placeholder: t('search-in') + t('authors') },
         'categories': { type: 'search', name: 'categories', placeholder: t('search-in') + t('categories') },
-        'parts': { type: 'search', name: 'parts', placeholder: t('search-in') + t('parts') },
+        'parts': { type: 'search', name: 'parts', placeholder: t('search-in') + t('parts-count') },
     }
 
     const newRequest = (page, total, filters = [], order = {}) => {

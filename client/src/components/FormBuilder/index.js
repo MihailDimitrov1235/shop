@@ -11,6 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import Fields from './Fields';
 import TabPanel from './TabPanel';
+import { useTranslation } from 'react-i18next';
 
 function a11yProps(index) {
     return {
@@ -21,6 +22,7 @@ function a11yProps(index) {
 
 const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSubmit, submitButton, enableReinitialize = false }) => {
     const [selectedMenu, setSelectedMenu] = useState(0);
+    const { t } = useTranslation();
 
     const handleTabChange = (event, newValue) => {
         setSelectedMenu(newValue);
@@ -95,9 +97,11 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                     '& .Mui-selected': { color: '#96011c!important' },
                                 }}
                             >
-                                {menus.map((menu, index) => (
-                                    <Tab label={menu.label} {...a11yProps(index)} key={index} />
-                                ))}
+                                {menus.map((menu, index) => {
+                                    const { icon: Icon } = menu;
+
+                                    return <Tab label={menu.label} icon={<Icon />} {...a11yProps(index)} key={index} />
+                                })}
                             </Tabs>
 
                             {menus.map((menu, index) => (
@@ -137,19 +141,35 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                     {errors.policy}
                                     </FormHelperText>
                                     )} */}
+                                    {index + 1 === menus.length ? (
+                                        <Box sx={{ py: 2 }}>
+                                            <Button
+                                                color={submitButton && submitButton.color ? submitButton.color : 'primary'}
+                                                size={submitButton && submitButton.size ? submitButton.size : 'large'}
+                                                variant={submitButton && submitButton.variant ? submitButton.variant : 'contained'}
+                                                fullWidth={submitButton && Object.hasOwn(submitButton, 'fullWidth') ? submitButton.fullWidth : true}
+                                                disabled={isSubmitting}
+                                                type="submit"
+                                            >
+                                                {submitButton && submitButton.label ? submitButton.label : t('add')}
+                                            </Button>
+                                        </Box>
+                                    ) : (
+                                        <Box sx={{ py: 2 }}>
+                                            <Button
+                                                color={submitButton && submitButton.color ? submitButton.color : 'primary'}
+                                                size={submitButton && submitButton.size ? submitButton.size : 'large'}
+                                                variant={submitButton && submitButton.variant ? submitButton.variant : 'contained'}
+                                                fullWidth={submitButton && Object.hasOwn(submitButton, 'fullWidth') ? submitButton.fullWidth : true}
+                                                disabled={isSubmitting}
+                                                onClick={() => setSelectedMenu(index + 1)}
+                                                type="button"
+                                            >
+                                                {t('next')}
+                                            </Button>
+                                        </Box>
+                                    )}
 
-                                    <Box sx={{ py: 2 }}>
-                                        <Button
-                                            color={submitButton && submitButton.color ? submitButton.color : 'primary'}
-                                            size={submitButton && submitButton.size ? submitButton.size : 'large'}
-                                            variant={submitButton && submitButton.variant ? submitButton.variant : 'contained'}
-                                            fullWidth={submitButton && Object.hasOwn(submitButton, 'fullWidth') ? submitButton.fullWidth : true}
-                                            disabled={isSubmitting}
-                                            type="submit"
-                                        >
-                                            {submitButton && submitButton.label ? submitButton.label : 'Добавяне'}
-                                        </Button>
-                                    </Box>
                                 </TabPanel>
                             ))}
                         </Box>
