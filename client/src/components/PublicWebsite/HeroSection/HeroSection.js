@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Typography, Button, CardMedia } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Grid, Typography, Button, CardMedia } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import heroImage from './hero_image.png';
 

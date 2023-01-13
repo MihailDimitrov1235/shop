@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import FilterCard from '../filters/FilterCard';
+import FilterCard from '../../filters/FilterCard';
 
 const ProductFilters = () => {
     //nau4na oblast

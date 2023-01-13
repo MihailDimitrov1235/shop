@@ -1,5 +1,5 @@
-import HeroSection from "../../../components/HeroSection/HeroSection";
-import ProductDisplay from "../../../components/products/ProductDisplay";
+import HeroSection from "../../../components/PublicWebsite/HeroSection/HeroSection";
+import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
 
 const Landing = () => {
     return (

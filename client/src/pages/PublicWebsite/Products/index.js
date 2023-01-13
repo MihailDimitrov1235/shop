@@ -1,6 +1,6 @@
 import { Container, Grid } from "@mui/material";
-import ProductFilters from '../../../components/products/ProductFilters';
-import ProductList from "../../../components/products/ProductList";
+import ProductFilters from '../../../components/PublicWebsite/products/ProductFilters';
+import ProductList from "../../../components/PublicWebsite/products/ProductList";
 
 const Products = () => {
     return (
