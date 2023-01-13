@@ -26,15 +26,31 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
         setSelectedMenu(newValue);
     };
 
-    if (Object.keys(initialValues).length === 0) {
-        if(Array.isArray(fields)) {
-            fields.forEach((field) => {
-                initialValues[field.name] = '';
+    const constructInitialValues = (field) => {
+        if (Object.hasOwn(field, 'fields')) {
+            initialValues[field.name] = {};
+
+            field.selectors.forEach((selector) => {
+                initialValues[field.name][selector] = {};
+
+                field.fields.forEach((f) => {
+                    initialValues[field.name][selector][f.name] = '';
+                });
             });
-        }else {
-            for(let key in fields) {
+        } else {
+            initialValues[field.name] = '';
+        }
+    }
+
+    if (Object.keys(initialValues).length === 0) {
+        if (Array.isArray(fields)) {
+            fields.forEach((field) => {
+                constructInitialValues(field);
+            });
+        } else {
+            for (let key in fields) {
                 fields[key].forEach((field) => {
-                    initialValues[field.name] = '';
+                    constructInitialValues(field);
                 });
             }
         }
@@ -80,7 +96,7 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                 }}
                             >
                                 {menus.map((menu, index) => (
-                                    <Tab label={menu.label} {...a11yProps(index)} key={index}/>
+                                    <Tab label={menu.label} {...a11yProps(index)} key={index} />
                                 ))}
                             </Tabs>
 
@@ -103,7 +119,17 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                             color: 'bordoRed'
                                         };
 
-                                        return <Fields field={field} baseProps={baseProps} setFieldValue={setFieldValue} key={index} />
+                                        return (
+                                            <Fields
+                                                field={field}
+                                                baseProps={baseProps}
+                                                setFieldValue={setFieldValue}
+                                                key={index}
+                                                values={values}
+                                                touched={touched}
+                                                errors={errors}
+                                            />
+                                        );
                                     })}
 
                                     {/* {Boolean(touched.policy && errors.policy) && (
@@ -111,6 +137,7 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                     {errors.policy}
                                     </FormHelperText>
                                     )} */}
+
                                     <Box sx={{ py: 2 }}>
                                         <Button
                                             color={submitButton && submitButton.color ? submitButton.color : 'primary'}
@@ -145,7 +172,17 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                     color: 'bordoRed'
                                 };
 
-                                return <Fields field={field} baseProps={baseProps} setFieldValue={setFieldValue} key={index} />
+                                return (
+                                    <Fields
+                                        field={field}
+                                        baseProps={baseProps}
+                                        setFieldValue={setFieldValue}
+                                        key={index}
+                                        values={values}
+                                        touched={touched}
+                                        errors={errors}
+                                    />
+                                );
                             })}
 
                             {/* {Boolean(touched.policy && errors.policy) && (

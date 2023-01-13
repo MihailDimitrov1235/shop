@@ -11,7 +11,7 @@ import MainTable from '../../../components/MainTable';
 function ProductTable() {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { addMessage } = useMessage();
 
     useEffect(() => {
@@ -40,7 +40,7 @@ function ProductTable() {
             total: total || 10
         }
 
-        productService.getProducts(pagination, filters, order)
+        productService.getProducts(pagination, filters, order, i18n.language)
             .then((res) => {
                 setData(res.data.data);
                 setTotal(res.data.total);

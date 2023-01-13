@@ -72,13 +72,17 @@ class ProductController extends Controller
 
         $product = Product::create(['parts' => $request->parts]);
 
-        ProductTrans::create([
-            'name' => $request->name,
-            'shortDescription' => $request->shortDescription,
-            'longDescription' => $request->longDescription,
-            'product_id' => $product->id,
-            'lang' => 'bg'
-        ]);
+        foreach($request->lang as $key=>$lang) {
+
+            ProductTrans::create([
+                'name' => $lang['name'],
+                'shortDescription' => $lang['shortDescription'],
+                'longDescription' => $lang['longDescription'],
+                'product_id' => $product->id,
+                'lang' => $key
+            ]);
+        }
+
 
         foreach($request->category as $category) {
             ProductCategory::create([

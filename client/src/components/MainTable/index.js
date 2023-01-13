@@ -69,7 +69,7 @@ const MainTable = ({
     rowClick
 }) => {
     const classes = useStyles();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
@@ -108,7 +108,7 @@ const MainTable = ({
         }
 
         setAllColsNum(colsNum);
-    }, [page, rowsPerPage, searches, order, orderBy])
+    }, [page, rowsPerPage, searches, order, orderBy, i18n.language])
 
 
     const handleSearchChange = (index) => (event) => {

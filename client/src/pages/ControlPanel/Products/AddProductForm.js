@@ -81,12 +81,16 @@ const AddProductForm = () => {
 
   const fields = {
     'information': [
-      { type: 'text', name: 'name', label: t('product-name') },
       { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
       { type: 'number', name: 'parts', label: t('parts') },
-      { type: 'multiline', name: 'shortDescription', label: t('short-description') },
-      { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
-      { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true }
+      { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true },
+      {
+        type: 'lang', name: 'lang', selectors: [ 'bg', 'en' ], fields: [
+          { type: 'text', name: 'name', label: t('product-name') },
+          { type: 'multiline', name: 'shortDescription', label: t('short-description') },
+          { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
+        ]
+      }
     ],
     'parts': [
       { type: 'text', name: 'name', label: t('product-name') },

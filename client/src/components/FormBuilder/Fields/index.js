@@ -5,9 +5,10 @@ import {
     Divider
 } from '@mui/material';
 import RichTextEditor from '../RichTextEditor';
+import LangFields from './LangFields';
 import PropTypes from 'prop-types';
 
-const Fields = ({ field, baseProps, setFieldValue }) => {
+const Fields = ({ field, baseProps, setFieldValue, values, touched, errors }) => {
     return (
         <>
             {(field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number') && (
@@ -58,6 +59,17 @@ const Fields = ({ field, baseProps, setFieldValue }) => {
 
             {field.type === 'divider' && (
                 <Divider sx={{ my: 1 }} />
+            )}
+
+            {field.type === 'lang' && (
+                <LangFields
+                    field={field}
+                    baseProps={baseProps}
+                    setFieldValue={setFieldValue}
+                    values={values}
+                    touched={touched}
+                    errors={errors}
+                />
             )}
         </>
     )
