@@ -64,7 +64,8 @@
     "start:client": "PORT=4000 serve build/client",
     "start:server": "node build/server/bundle.js",
     "start:local": "run-p start:client start:server",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build-app": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
