@@ -18,7 +18,7 @@ const useStyles = makeStyles({
       marginBottom: '10px',
     },
     heroImage: {
-      width: '50%',
+      width: '30%',
       height: 'auto',
     },
     heroSubtitle: {
@@ -44,13 +44,12 @@ function HeroSection() {
           Shop Now
         </Button>
       </Grid>
-      <Grid item xs={12} sm={4}>
         <CardMedia
           className={classes.heroImage}
-          image="https://cdn.discordapp.com/attachments/1008571217004990565/1063523481897156739/Knifsy_laboratory_glass_filled_with_red_crystals_on_a_white_bac_0855b009-84b9-4466-b89e-5c4fdc9cdc01.png"
+          component='img'
+          image="https://cdn.discordapp.com/attachments/1008571197572775966/1063814791317180526/Knifsy_lab_glass_filled_with_red_stuff_on_white_background_97def308-e59c-40f6-bab1-3b12137430ad.png"
           title="Hero Image"
         />
-      </Grid>
     </Grid>
   );
   };
