@@ -21,7 +21,6 @@ const AddProductForm = () => {
   const navigate = useNavigate();
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [authorOptions, setAuthorOptions] = useState([]);
-  const [files, setFiles] = useState([]);
 
   useEffect(() => {
     categoryService.getAll()
@@ -62,7 +61,7 @@ const AddProductForm = () => {
   });
 
   const onSubmit = (values, { setSubmitting }) => {
-    const data = formData(values, files);
+    const data = formData(values, [], ['picture', 'uploader']);
 
     productService.createProduct(data)
       .then((res) => {
@@ -85,6 +84,7 @@ const AddProductForm = () => {
 
   const fields = {
     'information': [
+      { type: 'upload', name: 'picture', label: t('picture'), accept: '.jpg,.png,.jpeg', multiple: false },
       { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
       { type: 'number', name: 'parts', label: t('parts-count') },
       { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true },
@@ -100,13 +100,6 @@ const AddProductForm = () => {
       { type: 'upload', name: 'uploader', accept: '.jpg,.png,.jpeg,.docx,.pdf,.doc', multiple: true },
     ]
   };
-
-  const uploaders = {
-    'uploader': (files) => {
-      console.log(files)
-      setFiles(files);
-    },
-  }
 
   const submitButton = {
     color: 'bordoRed'
@@ -126,7 +119,6 @@ const AddProductForm = () => {
               validationSchema={validationSchema}
               onSubmit={onSubmit}
               submitButton={submitButton}
-              uploaders={uploaders}
             />
           </Box>
         </PerfectScrollbar>

@@ -52,7 +52,6 @@ const FileUpload = ({
     const removeFile = (fileName) => {
         delete files[fileName];
         setFiles({ ...files });
-        setFieldValue(otherProps.name, { ...files });
         callUpdateFilesCb({ ...files });
     };
 
@@ -61,6 +60,7 @@ const FileUpload = ({
 
     const callUpdateFilesCb = (files) => {
         const filesAsArray = convertNestedObjectToArray(files);
+        setFieldValue(otherProps.name, filesAsArray);
         updateFilesCb(filesAsArray);
     };
 
@@ -69,7 +69,6 @@ const FileUpload = ({
         if (newFiles.length) {
             let updatedFiles = addNewFiles(newFiles);
             setFiles(updatedFiles);
-            setFieldValue(otherProps.name, updatedFiles);
             callUpdateFilesCb(updatedFiles);
         }
     };

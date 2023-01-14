@@ -27,8 +27,7 @@ const FormBuilder = ({
     validationSchema,
     onSubmit,
     submitButton,
-    enableReinitialize = false,
-    uploaders = {}
+    enableReinitialize = false
 }) => {
     const [selectedMenu, setSelectedMenu] = useState(0);
     const { t } = useTranslation();
@@ -137,7 +136,7 @@ const FormBuilder = ({
                                                 field={field}
                                                 baseProps={baseProps}
                                                 setFieldValue={setFieldValue}
-                                                updateUploadedFiles={uploaders[field.name]}
+                                                updateUploadedFiles={() => {}}
                                                 key={index}
                                                 values={values}
                                                 touched={touched}
@@ -207,7 +206,7 @@ const FormBuilder = ({
                                         field={field}
                                         baseProps={baseProps}
                                         setFieldValue={setFieldValue}
-                                        updateUploadedFiles={uploaders[field.name]}
+                                        updateUploadedFiles={() => {}}
                                         key={index}
                                         values={values}
                                         touched={touched}
@@ -251,8 +250,7 @@ FormBuilder.propTypes = {
     validationSchema: PropTypes.object,
     onSubmit: PropTypes.func.isRequired,
     submitButton: PropTypes.object,
-    enableReinitialize: PropTypes.bool,
-    uploaders: PropTypes.object
+    enableReinitialize: PropTypes.bool
 };
 
 export default FormBuilder;

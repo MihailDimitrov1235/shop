@@ -100,19 +100,25 @@ class ProductController extends Controller
             ]);
         }
 
-        $request_file = $request->file('files');
-        $type = Product::class;
+        $product_file = $request->file('picture');
+        $this->uploadProductFiles($product_file, Product::class, $product->id);
 
-        foreach ($request_file as $key => $file) {
+        $parts_file = $request->file('uploader');
+        $this->uploadProductFiles($parts_file, ProductPart::class, $product->id);
+
+        return $product;
+    }
+
+    private function uploadProductFiles($files, $type, $productId) {
+        foreach ($files as $key => $file) {
             $file_path = $file->store('products', 'public');
+
             ProductFile::create([
                 'path' => $file_path,
-                'parent_id' => $product->id,
+                'parent_id' => $productId,
                 'type' => $type
             ]);
         }
-
-        return $product;
     }
 
     public function view($id) {
