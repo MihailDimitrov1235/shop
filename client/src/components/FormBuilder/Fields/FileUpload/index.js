@@ -26,11 +26,13 @@ const FileUpload = ({
     label,
     updateFilesCb,
     maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
+    setFieldValue,
+    values,
     ...otherProps
 }) => {
     const fileInputField = useRef(null);
-    const [files, setFiles] = useState({});
-
+    const [files, setFiles] = useState(values[otherProps.name] || {});
+  
     const handleUploadBtnClick = () => {
         fileInputField.current.click();
     };
@@ -50,6 +52,7 @@ const FileUpload = ({
     const removeFile = (fileName) => {
         delete files[fileName];
         setFiles({ ...files });
+        setFieldValue(otherProps.name, { ...files });
         callUpdateFilesCb({ ...files });
     };
 
@@ -66,6 +69,7 @@ const FileUpload = ({
         if (newFiles.length) {
             let updatedFiles = addNewFiles(newFiles);
             setFiles(updatedFiles);
+            setFieldValue(otherProps.name, updatedFiles);
             callUpdateFilesCb(updatedFiles);
         }
     };
