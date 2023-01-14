@@ -145,7 +145,7 @@ const FileUpload = ({
                         );
                     })}
                 </PreviewList> */}
-                <Grid container spacing={1} sx={{ maxWidth: '1500px' }}>
+                <Grid container spacing={1} sx={{ maxWidth: '1570px' }}>
                     {Object.keys(files).map((fileName, index) => {
                         let file = files[fileName];
                         let isImageFile = file.type.split("/")[0] === "image";
