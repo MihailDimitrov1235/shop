@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor, EditorState, getDefaultKeyBinding, RichUtils, convertToRaw } from "draft-js";
+import { Editor, EditorState, getDefaultKeyBinding, RichUtils, convertToRaw, convertFromHTML, ContentState } from "draft-js";
 import draftToHtml from 'draftjs-to-html';
 import "./index.css";
 import "../../../../node_modules/draft-js/dist/Draft.css";
@@ -9,10 +9,17 @@ class RichTextEditor extends React.Component {
     constructor(props) {
       super(props);
 
+      const blocksFromHTML = convertFromHTML(this.props.value);
+      const state = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap,
+      );
+
       this.state = {
-        editorState: EditorState.createEmpty(),
+        editorState: EditorState.createWithContent(state),
         isFocused: false,
       }
+      
       this.onFocus = () => {
         this.setState({ isFocused: true });
       }
