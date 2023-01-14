@@ -81,6 +81,9 @@ const Fields = ({ field, baseProps, setFieldValue, values, touched, errors, upda
                     label={field.label}
                     multiple={field.multiple}
                     updateFilesCb={updateUploadedFiles}
+                    setFieldValue={setFieldValue}
+                    name={baseProps.name}
+                    values={values}
                 />
             )}
         </>
