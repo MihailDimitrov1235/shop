@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\{
     ProductCategory,
     ProductAuthor,
-    ProductTrans
+    ProductTrans,
+    ProductPart,
+    ProductFile
 };
 
 class Product extends Model
@@ -32,5 +34,15 @@ class Product extends Model
     public function authors()
     {
         return $this->hasMany(ProductAuthor::class);
+    }
+
+    public function parts()
+    {
+        return $this->hasMany(ProductPart::class);
+    }
+
+    public function files()
+    {
+        return $this->morphMany(ProductFile::class, 'parent','type');
     }
 }
