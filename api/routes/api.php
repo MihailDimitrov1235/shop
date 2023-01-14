@@ -43,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::prefix('products')->group(function () {
         Route::post('/', [ProductController::class, 'store']);
+        Route::post('/upload', [ProductController::class, 'uploadFiles']);
         Route::delete('/', [ProductController::class, 'delete']);
         Route::put('/{id}', [ProductController::class, 'edit']);
     });

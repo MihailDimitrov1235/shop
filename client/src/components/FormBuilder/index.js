@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
 import Fields from './Fields';
 import TabPanel from './TabPanel';
 import { useTranslation } from 'react-i18next';
-import FileUpload from './Fields/FileUpload';
 
 function a11yProps(index) {
     return {
@@ -21,7 +20,16 @@ function a11yProps(index) {
     };
 }
 
-const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSubmit, submitButton, enableReinitialize = false }) => {
+const FormBuilder = ({
+    fields,
+    initialValues = {},
+    menus,
+    validationSchema,
+    onSubmit,
+    submitButton,
+    enableReinitialize = false,
+    uploaders = {}
+}) => {
     const [selectedMenu, setSelectedMenu] = useState(0);
     const { t } = useTranslation();
 
@@ -57,10 +65,6 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                 });
             }
         }
-    }
-
-    const updateUploadedFiles = (files) => {
-        console.log(files)
     }
 
     return (
@@ -133,7 +137,7 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                                 field={field}
                                                 baseProps={baseProps}
                                                 setFieldValue={setFieldValue}
-                                                updateUploadedFiles={updateUploadedFiles}
+                                                updateUploadedFiles={uploaders[field.name]}
                                                 key={index}
                                                 values={values}
                                                 touched={touched}
@@ -203,6 +207,7 @@ const FormBuilder = ({ fields, initialValues = {}, menus, validationSchema, onSu
                                         field={field}
                                         baseProps={baseProps}
                                         setFieldValue={setFieldValue}
+                                        updateUploadedFiles={uploaders[field.name]}
                                         key={index}
                                         values={values}
                                         touched={touched}
@@ -246,7 +251,8 @@ FormBuilder.propTypes = {
     validationSchema: PropTypes.object,
     onSubmit: PropTypes.func.isRequired,
     submitButton: PropTypes.object,
-    enableReinitialize: PropTypes.bool
+    enableReinitialize: PropTypes.bool,
+    uploaders: PropTypes.object
 };
 
 export default FormBuilder;

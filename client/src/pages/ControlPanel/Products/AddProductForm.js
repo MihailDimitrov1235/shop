@@ -10,6 +10,7 @@ import authorService from '../../../services/author';
 import { useTranslation } from 'react-i18next';
 import useMessage from '../../../hooks/useMessage';
 import { useNavigate } from 'react-router-dom';
+import formData from '../../../components/FormBuilder/utils/formData';
 
 import InfoIcon from '@mui/icons-material/Info';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -20,6 +21,7 @@ const AddProductForm = () => {
   const navigate = useNavigate();
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [authorOptions, setAuthorOptions] = useState([]);
+  const [files, setFiles] = useState([]);
 
   useEffect(() => {
     categoryService.getAll()
@@ -60,9 +62,9 @@ const AddProductForm = () => {
   });
 
   const onSubmit = (values, { setSubmitting }) => {
-    console.log(values)
+    const data = formData(values, files);
 
-    productService.createProduct(values)
+    productService.createProduct(data)
       .then((res) => {
         addMessage(t('product-created'), 'success');
         navigate('/admin/products');
@@ -86,9 +88,8 @@ const AddProductForm = () => {
       { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
       { type: 'number', name: 'parts', label: t('parts-count') },
       { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true },
-      { type: 'upload', name: 'uploader', accept: '.jpg,.png,.jpeg,.docx,.pdf,.doc', multiple: true },
       {
-        type: 'lang', name: 'lang', selectors: [ 'bg', 'en' ], fields: [
+        type: 'lang', name: 'lang', selectors: ['bg', 'en'], fields: [
           { type: 'text', name: 'name', label: t('product-name') },
           { type: 'multiline', name: 'shortDescription', label: t('short-description') },
           { type: 'multiline', name: 'longDescription', label: t('long-description'), rows: 4 },
@@ -96,9 +97,16 @@ const AddProductForm = () => {
       },
     ],
     'parts': [
-      { type: 'text', name: 'name', label: t('product-name') },
+      { type: 'upload', name: 'uploader', accept: '.jpg,.png,.jpeg,.docx,.pdf,.doc', multiple: true },
     ]
   };
+
+  const uploaders = {
+    'uploader': (files) => {
+      console.log(files)
+      setFiles(files);
+    },
+  }
 
   const submitButton = {
     color: 'bordoRed'
@@ -118,6 +126,7 @@ const AddProductForm = () => {
               validationSchema={validationSchema}
               onSubmit={onSubmit}
               submitButton={submitButton}
+              uploaders={uploaders}
             />
           </Box>
         </PerfectScrollbar>

@@ -23,7 +23,10 @@ function createProduct(data) {
     const url = `${servicesHelper.url}/products`;
 
     return axios.post(url, data, {
-        headers: servicesHelper.header()
+        headers: {
+            ...servicesHelper.header(),
+            'Content-Type': 'multipart/form-data',
+        }
     });
 }
 
@@ -52,12 +55,25 @@ function getProductById(id) {
     })
 }
 
+function uploadFiles(data) {
+    const url = `${servicesHelper.url}/products/upload`;
+
+    return axios.post(url, data, {
+        headers: {
+            ...servicesHelper.header(),
+            'Content-Type': 'multipart/form-data',
+        }
+            
+    });
+}
+
 const productService = {
     getProducts,
     createProduct,
     editProduct,
     deleteProducts,
-    getProductById
+    getProductById,
+    uploadFiles
 }
 
 export default productService;

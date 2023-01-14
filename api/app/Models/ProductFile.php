@@ -11,6 +11,7 @@ class ProductFile extends Model
 
     protected $fillable = [
         'path',
-        'product_id'
+        'parent_id',
+        'type'
     ];
 }

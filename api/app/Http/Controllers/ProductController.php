@@ -8,7 +8,9 @@ use App\Models\{
     Product,
     ProductTrans,
     ProductCategory,
-    ProductAuthor
+    ProductAuthor,
+    ProductPart,
+    ProductFile
 };
 
 class ProductController extends Controller
@@ -72,7 +74,7 @@ class ProductController extends Controller
 
         $product = Product::create(['parts' => $request->parts]);
 
-        foreach($request->lang as $key=>$lang) {
+        foreach(json_decode($request->lang, true) as $key=>$lang) {
 
             ProductTrans::create([
                 'name' => $lang['name'],
@@ -84,20 +86,31 @@ class ProductController extends Controller
         }
 
 
-        foreach($request->category as $category) {
+        foreach(json_decode($request->category, true) as $category) {
             ProductCategory::create([
                 'product_id' => $product->id,
                 'category_id' => $category['value']
             ]);
         }
 
-        foreach($request->author as $author) {
+        foreach(json_decode($request->author, true) as $author) {
             ProductAuthor::create([
                 'product_id' => $product->id,
                 'author_id' => $author['value']
             ]);
         }
 
+        $request_file = $request->file('files');
+        $type = Product::class;
+
+        foreach ($request_file as $key => $file) {
+            $file_path = $file->store('products', 'public');
+            ProductFile::create([
+                'path' => $file_path,
+                'parent_id' => $product->id,
+                'type' => $type
+            ]);
+        }
 
         return $product;
     }
@@ -114,5 +127,18 @@ class ProductController extends Controller
         $project = Product::findOrFail($id);   
         $project->delete();
         return "This project no longer exists.";
+    }
+
+    public function uploadFiles(Request $request) {
+        // $this->validate($request, [
+        //     'path' => 'required|image|mimes:jpg,png,jpeg,gif,svg,docx,do|max:2048',
+        // ]);
+        $file_path = $request->file('file')->store('products', 'public');
+
+        // $data = ProductFile::create([
+        //     'image' => $file_path,
+        // ]);
+
+        return response($file_path, 201);
     }
 }
