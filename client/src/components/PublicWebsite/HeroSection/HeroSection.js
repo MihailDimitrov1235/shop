@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 function HeroSection() {
     const classes = useStyles();
   return (
-    <Grid container className={classes.heroContainer} justify="center" alignItems="center">
+    <Grid container className={classes.heroContainer} justifyContent="space-between" alignItems="center">
       <Grid item xs={12} sm={8}>
         <Typography variant="h2" className={classes.heroText}>
           Welcome to the webstore of the Bulgarian Academy of sciences

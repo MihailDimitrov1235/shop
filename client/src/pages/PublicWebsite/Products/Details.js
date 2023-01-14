@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FormControl, MenuItem, InputLabel, Select, Box, Button, Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';

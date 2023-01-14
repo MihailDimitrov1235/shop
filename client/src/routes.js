@@ -4,7 +4,7 @@ import ControlPanelLayout from './components/ControlPanel/ControlPanelLayout';
 
 import Landing from './pages/PublicWebsite/Landing';
 import Products from './pages/PublicWebsite/Products';
-import ProductPage from './pages/PublicWebsite/ProductPage';
+import ProductPage from './pages/PublicWebsite/Products/Details';
 import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
 import Account from './pages/PublicWebsite/Account';
