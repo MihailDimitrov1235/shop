@@ -319,11 +319,11 @@ const MainTable = ({
                                                         <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
                                                             <Grid container spacing={1}>
 
-                                                                {value.map((element) => {
+                                                                {value.map((element, index) => {
                                                                     const name = element[heading.arrayId][heading.selector];
                                                                     console.log(typeof (name));
                                                                     return (
-                                                                        <Grid item>
+                                                                        <Grid item key={index}>
                                                                             <Tooltip title={name}>
                                                                                 <Chip label={name} sx={{ maxWidth: '150px' }} />
                                                                             </Tooltip>
