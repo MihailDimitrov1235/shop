@@ -75,7 +75,7 @@ const FileUpload = ({
     };
 
     return (
-        <Box>
+        <Box {...(!otherProps.multiple ? { sx: { display: 'flex', gap: 5 } } : {})}>
             <FileUploadContainer>
                 <Typography
                     component='label'
@@ -116,14 +116,55 @@ const FileUpload = ({
                     {...otherProps}
                 />
             </FileUploadContainer>
-            <FilePreviewContainer>
-                <Typography component='span'>To Upload</Typography>
-                {/* <PreviewList>
+
+            {otherProps.multiple ? (
+                <FilePreviewContainer>
+                    <Typography component='span'>To Upload</Typography>
+
+                    <Grid container spacing={1} sx={{ maxWidth: '1570px' }}>
+                        {Object.keys(files).map((fileName, index) => {
+                            let file = files[fileName];
+                            let isImageFile = file.type.split("/")[0] === "image";
+                            return (
+                                <Grid
+                                    item
+                                    sm={12} md={6} lg={3}
+                                    key={fileName}
+                                >
+                                    <PreviewContainer>
+                                        <div>
+                                            {isImageFile && (
+                                                <ImagePreview
+                                                    src={URL.createObjectURL(file)}
+                                                    alt={`file preview ${index}`}
+                                                />
+                                            )}
+                                            <FileMetaData isImageFile={isImageFile}>
+                                                <span>{file.name}</span>
+                                                <aside>
+                                                    <span>{convertBytesToKB(file.size)} kb</span>
+                                                    <IconButton sx={{ p: 0 }} onClick={() => removeFile(fileName)}>
+                                                        <DeleteIcon color='error' />
+                                                    </IconButton>
+                                                </aside>
+                                            </FileMetaData>
+                                        </div>
+                                    </PreviewContainer>
+                                </Grid>
+                            );
+                        })}
+                    </Grid>
+                </FilePreviewContainer>
+            ) : (
+                <FilePreviewContainer>
+                    <Typography component='span'>To Upload</Typography>
+
                     {Object.keys(files).map((fileName, index) => {
                         let file = files[fileName];
                         let isImageFile = file.type.split("/")[0] === "image";
                         return (
-                            <PreviewContainer key={fileName}>
+
+                            <PreviewContainer>
                                 <div>
                                     {isImageFile && (
                                         <ImagePreview
@@ -135,7 +176,7 @@ const FileUpload = ({
                                         <span>{file.name}</span>
                                         <aside>
                                             <span>{convertBytesToKB(file.size)} kb</span>
-                                            <IconButton sx={{ p:0 }} onClick={() => removeFile(fileName)}>
+                                            <IconButton sx={{ p: 0 }} onClick={() => removeFile(fileName)}>
                                                 <DeleteIcon color='error' />
                                             </IconButton>
                                         </aside>
@@ -144,41 +185,9 @@ const FileUpload = ({
                             </PreviewContainer>
                         );
                     })}
-                </PreviewList> */}
-                <Grid container spacing={1} sx={{ maxWidth: '1570px' }}>
-                    {Object.keys(files).map((fileName, index) => {
-                        let file = files[fileName];
-                        let isImageFile = file.type.split("/")[0] === "image";
-                        return (
-                            <Grid
-                                item
-                                sm={12} md={6} lg={3}
-                                key={fileName}
-                            >
-                                <PreviewContainer>
-                                    <div>
-                                        {isImageFile && (
-                                            <ImagePreview
-                                                src={URL.createObjectURL(file)}
-                                                alt={`file preview ${index}`}
-                                            />
-                                        )}
-                                        <FileMetaData isImageFile={isImageFile}>
-                                            <span>{file.name}</span>
-                                            <aside>
-                                                <span>{convertBytesToKB(file.size)} kb</span>
-                                                <IconButton sx={{ p: 0 }} onClick={() => removeFile(fileName)}>
-                                                    <DeleteIcon color='error' />
-                                                </IconButton>
-                                            </aside>
-                                        </FileMetaData>
-                                    </div>
-                                </PreviewContainer>
-                            </Grid>
-                        );
-                    })}
-                </Grid>
-            </FilePreviewContainer>
+                </FilePreviewContainer>
+            )}
+
         </Box>
     );
 }
