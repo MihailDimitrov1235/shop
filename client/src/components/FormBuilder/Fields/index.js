@@ -54,6 +54,7 @@ const Fields = ({ field, baseProps, setFieldValue, values, touched, errors, upda
                         <TextField
                             {...params}
                             {...baseProps}
+                            onChange={() => {}}
                         />
                     )}
                 />
