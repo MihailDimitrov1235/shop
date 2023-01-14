@@ -177,8 +177,6 @@ export const RemoveFileIcon = styled.i`
 `;
 
 export const PreviewContainer = styled.section`
-  padding: 0.25rem;
-  width: 20%;
   height: 120px;
   border-radius: 6px;
   box-sizing: border-box;
@@ -196,18 +194,18 @@ export const PreviewContainer = styled.section`
     position: relative;
   }
 
-  @media only screen and (max-width: 750px) {
-    width: 25%;
-  }
+//   @media only screen and (max-width: 750px) {
+//     width: 25%;
+//   }
 
-  @media only screen and (max-width: 500px) {
-    width: 50%;
-  }
+//   @media only screen and (max-width: 500px) {
+//     width: 50%;
+//   }
 
-  @media only screen and (max-width: 400px) {
-    width: 100%;
-    padding: 0 0 0.4em;
-  }
+//   @media only screen and (max-width: 400px) {
+//     width: 100%;
+//     padding: 0 0 0.4em;
+//   }
 `;
 
 export const ImagePreview = styled.img`

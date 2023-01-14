@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { IconButton, Typography, Button } from '@mui/material';
+import { IconButton, Typography, Button, Box, Grid } from '@mui/material';
 import {
     FileUploadContainer,
     FormField,
@@ -32,7 +32,7 @@ const FileUpload = ({
 }) => {
     const fileInputField = useRef(null);
     const [files, setFiles] = useState(values[otherProps.name] || {});
-  
+
     const handleUploadBtnClick = () => {
         fileInputField.current.click();
     };
@@ -75,7 +75,7 @@ const FileUpload = ({
     };
 
     return (
-        <>
+        <Box>
             <FileUploadContainer>
                 <Typography
                     component='label'
@@ -118,7 +118,7 @@ const FileUpload = ({
             </FileUploadContainer>
             <FilePreviewContainer>
                 <Typography component='span'>To Upload</Typography>
-                <PreviewList>
+                {/* <PreviewList>
                     {Object.keys(files).map((fileName, index) => {
                         let file = files[fileName];
                         let isImageFile = file.type.split("/")[0] === "image";
@@ -144,9 +144,42 @@ const FileUpload = ({
                             </PreviewContainer>
                         );
                     })}
-                </PreviewList>
+                </PreviewList> */}
+                <Grid container spacing={1} sx={{ maxWidth: '1500px' }}>
+                    {Object.keys(files).map((fileName, index) => {
+                        let file = files[fileName];
+                        let isImageFile = file.type.split("/")[0] === "image";
+                        return (
+                            <Grid
+                                item
+                                sm={12} md={6} lg={3}
+                                key={fileName}
+                            >
+                                <PreviewContainer>
+                                    <div>
+                                        {isImageFile && (
+                                            <ImagePreview
+                                                src={URL.createObjectURL(file)}
+                                                alt={`file preview ${index}`}
+                                            />
+                                        )}
+                                        <FileMetaData isImageFile={isImageFile}>
+                                            <span>{file.name}</span>
+                                            <aside>
+                                                <span>{convertBytesToKB(file.size)} kb</span>
+                                                <IconButton sx={{ p: 0 }} onClick={() => removeFile(fileName)}>
+                                                    <DeleteIcon color='error' />
+                                                </IconButton>
+                                            </aside>
+                                        </FileMetaData>
+                                    </div>
+                                </PreviewContainer>
+                            </Grid>
+                        );
+                    })}
+                </Grid>
             </FilePreviewContainer>
-        </>
+        </Box>
     );
 }
 
