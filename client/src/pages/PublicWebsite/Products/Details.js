@@ -23,7 +23,6 @@ const useStyles = makeStyles({
 const data = {
     title: "Knifsy",
     description: "This is a high-quality knife with a wood handle and a sharp blade.",
-    price: 99.99,
     parts:[
       {id:1, price:999},
       {id:2, price:990}

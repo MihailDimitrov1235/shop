@@ -5,6 +5,7 @@ import ControlPanelLayout from './components/ControlPanel/ControlPanelLayout';
 import Landing from './pages/PublicWebsite/Landing';
 import Products from './pages/PublicWebsite/Products';
 import ProductPage from './pages/PublicWebsite/Products/Details';
+import Cart from './pages/PublicWebsite/Cart';
 import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
 import Account from './pages/PublicWebsite/Account';
@@ -46,6 +47,7 @@ const routes = [
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: 'account', element: <Account /> },
+      { path: 'cart', element: <Cart /> },
       // { path: '/', element: <Navigate to="/home" /> },
       // { path: '*', element: <Navigate to="/404" /> }
     ]
