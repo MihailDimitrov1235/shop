@@ -1,12 +1,15 @@
 import HeroSection from "../../../components/PublicWebsite/HeroSection/HeroSection";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
+import { Container } from '@mui/material';
 
 const Landing = () => {
     return (
-        <div>
+        <Container maxWidth={'false'} sx={{
+            px: { lg: '130px!important' }
+        }}>
             <HeroSection/>
             <ProductDisplay/>
-        </div>
+        </Container>
     );
 }
 
