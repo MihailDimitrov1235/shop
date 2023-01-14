@@ -39,13 +39,13 @@ const routes = [
     element: <MainLayout />,
     children: [
       { path: '/', element: <Landing /> },
-      { path: '/404', element: <Page404 /> },
+      // { path: '/404', element: <Page404 /> },
       { path: 'products', element: <Products /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: 'account', element: <Account /> },
       // { path: '/', element: <Navigate to="/home" /> },
-      { path: '*', element: <Navigate to="/404" /> }
+      // { path: '*', element: <Navigate to="/404" /> }
     ]
   },
   {
@@ -100,9 +100,10 @@ const routes = [
         ] 
       },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
-      { path: '*', element: <Navigate to="/404" /> }
+      // { path: '*', element: <Navigate to="/404" /> }
     ]
-  }
+  },
+  { path: '*', element: <Page404 /> }
 ];
 
 export default routes;

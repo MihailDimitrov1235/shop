@@ -40,7 +40,7 @@ function HeroSection() {
           They hire fucking idiots who can't do their fucking job. The fucking grandma can go die under a fucking bridge. 
           They take 95 million euro from the EU for no fucking reason. KYS Ban. Thank you.
         </Typography>
-        <Button variant="contained" color="secondary" component={Link} to="/shop">
+        <Button variant="contained" color="bordoRed" component={Link} to="/products">
           Shop Now
         </Button>
       </Grid>

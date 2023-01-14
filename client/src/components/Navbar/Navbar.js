@@ -64,7 +64,7 @@ const Navbar = (props) => {
 
     return (
         <AppBar
-            elevation={0}
+            elevation={1}
             sx={{ py: 1 }}
             {...props}
         >
