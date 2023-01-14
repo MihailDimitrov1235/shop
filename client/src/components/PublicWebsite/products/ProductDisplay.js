@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 
 
@@ -88,27 +89,15 @@ const ProductDisplay = () => {
     ];
 
     return (
-        <Grid container className={classes.productContainer} justify="center" alignItems="center">
+        <Grid container className={classes.productContainer} justify="center" alignItems="center" spacing={2}>
             {products.map((product) => (
-                <Grid item key={product.id}>
-                    <Card className={classes.productCard}>
-                        <CardMedia
-                            className={classes.productImage}
-                            image={product.imageUrl}
-                            title={product.name}
-                        />
-                        <CardContent>
-                            <Typography variant="h5" className={classes.productTitle}>
-                                {product.name}
-                            </Typography>
-                            <Typography variant="subtitle1">
-                                {product.price}
-                            </Typography>
-                            <Button variant="contained" color="secondary" className={classes.productButton} component={Link} to={`/product/${product.id}`}>
-                                View Details
-                            </Button>
-                        </CardContent>
-                    </Card>
+                <Grid item sm={12} md={6} lg={3} key={product.id}>
+                    <ProductCard 
+                    id = {product.id}
+                    title={product.name}
+                    subtitle={product.description}
+                    img={product.imageUrl}
+                    />
                 </Grid>
             ))}
         </Grid>
