@@ -13,6 +13,7 @@ import {
     RemoveFileIcon,
     InputLabel
 } from "./styles";
+import { useTranslation } from 'react-i18next';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -24,7 +25,7 @@ const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 
 const FileUpload = ({
     label,
-    updateFilesCb,
+    updateFilesCb = () => {},
     maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
     setFieldValue,
     values,
@@ -32,6 +33,7 @@ const FileUpload = ({
 }) => {
     const fileInputField = useRef(null);
     const [files, setFiles] = useState(values[otherProps.name] || {});
+    const { t } = useTranslation();
 
     const handleUploadBtnClick = () => {
         fileInputField.current.click();
@@ -87,7 +89,7 @@ const FileUpload = ({
                 >
                     {label}
                 </Typography>
-                <Typography component='p' sx={{ fontWeight: 'bold', py: 1 }}>Drag and drop your files anywhere or</Typography>
+                <Typography component='p' sx={{ fontWeight: 'bold', py: 1 }}>{t('drag-and-drop-files')}</Typography>
                 {/* <DragDropText>Drag and drop your files anywhere or</DragDropText> */}
                 {/* <UploadFileBtn type="button" onClick={handleUploadBtnClick}>
                     <i className="fas fa-file-upload" />
@@ -103,7 +105,7 @@ const FileUpload = ({
                     sx={{ zIndex: 1 }}
                     onClick={handleUploadBtnClick}
                 >
-                    Upload {otherProps.multiple ? "files" : "a file"}
+                    {otherProps.multiple ? t('upload-files') : t('upload-file')}
                 </Button>
 
                 <FormField
@@ -118,7 +120,7 @@ const FileUpload = ({
 
             {otherProps.multiple ? (
                 <FilePreviewContainer>
-                    <Typography component='span'>To Upload</Typography>
+                    <Typography component='span'>{t('to-upload')}</Typography>
 
                     <Grid container spacing={1} sx={{ maxWidth: '1570px' }}>
                         {Object.keys(files).map((fileName, index) => {
@@ -156,14 +158,14 @@ const FileUpload = ({
                 </FilePreviewContainer>
             ) : (
                 <FilePreviewContainer>
-                    <Typography component='span'>To Upload</Typography>
+                    <Typography component='span'>{t('to-upload')}</Typography>
 
                     {Object.keys(files).map((fileName, index) => {
                         let file = files[fileName];
                         let isImageFile = file.type.split("/")[0] === "image";
                         return (
 
-                            <PreviewContainer>
+                            <PreviewContainer key={index}>
                                 <div>
                                     {isImageFile && (
                                         <ImagePreview
