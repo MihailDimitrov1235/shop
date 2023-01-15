@@ -37,7 +37,15 @@ const FormBuilder = ({
     };
 
     const constructInitialValues = (field) => {
-        if (Object.hasOwn(field, 'fields')) {
+        if(field.type === 'array') {
+            let base = {};
+
+            field.fields.forEach((f) => {
+                base[f.name] = '';
+            })
+
+            initialValues[field.name] = [base];
+        }else if (Object.hasOwn(field, 'fields')) {
             initialValues[field.name] = {};
 
             field.selectors.forEach((selector) => {
