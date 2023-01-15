@@ -1,4 +1,4 @@
-import { Box, Typography, Card, Button, Link } from '@mui/material';
+import { Box, Typography, Card, Button, Link, CardActions } from '@mui/material';
 import CartItem from './CartItem';
 import Header from './Header';
 const items = [
@@ -92,11 +92,11 @@ function Cart (){
                 </Typography>
               </Box>
             </Card>
-            <Box>
-              <Button variant="contained" color="bordoRed" component={Link} to="/payment">
-                Complete order
-              </Button>
-            </Box>
+              <Box justifyContent='right' display='flex'>
+                <Button variant="contained" color="bordoRed" component={Link} to='/payments'>
+                  Complete order
+                </Button>
+              </Box>
           </Box>
       </Box>
     );

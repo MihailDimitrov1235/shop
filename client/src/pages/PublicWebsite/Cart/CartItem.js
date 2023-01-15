@@ -4,7 +4,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 
 const CartItem = ({ item, removeFromCart }) => {
-  console.log(item.id)
   return (
       <Card style={{marginTop:'20px', width:'100%'}}>
         <Grid container>
