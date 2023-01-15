@@ -7,12 +7,13 @@ import { margin } from '@mui/system';
 
 const useStyles = makeStyles({
   image: {
-    width: '100%',
-    height: 'auto',
+    maxWidth: '100%',
+    width: 'auto',
+    height: '75vh',
     borderRadius: '0 0 35px 0'
   },
   text: {
-    padding: '20%',
+    // padding: '20%',
   },
   button: {
     padding: '10px',
@@ -22,7 +23,6 @@ const useStyles = makeStyles({
 const data = {
     title: "Knifsy",
     description: "This is a high-quality knife with a wood handle and a sharp blade.",
-    price: 99.99,
     parts:[
       {id:1, price:999},
       {id:2, price:990}
@@ -44,18 +44,13 @@ const ProductPage = (id) => {
   const classes = useStyles();
   return (
     <Card elevation={0}>
-      <Grid container>
-        <Grid item xs={7}>
+      <Box display={'flex'}>
           <CardMedia
             className={classes.image}
-            // image={props.img}
-            // title={props.title}
             component='img'
             title={data.title}
             image={data.image}
           />
-        </Grid>
-        <Grid item xs={5}>
           <CardContent className={classes.text}>
             <Typography gutterBottom variant="h3" component="h2">
               {data.title}
@@ -88,8 +83,7 @@ const ProductPage = (id) => {
               {price} лв.
             </Typography>
           </CardContent>
-        </Grid>
-      </Grid>
+        </Box>
     </Card>
   );
 }

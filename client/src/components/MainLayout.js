@@ -28,7 +28,6 @@ const MainLayoutContainer = styled('div')({
 
 const MainLayoutContent = styled('div')({
     flex: '1 1 auto',
-    gap: '50px',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
