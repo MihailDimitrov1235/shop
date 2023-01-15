@@ -18,7 +18,6 @@ class ProductController extends Controller
     public function index() {
         $query = Product::select(
                             'products.id',
-                            'products.parts',
                             'product_trans.name as name',
                             'product_trans.shortDescription',
                             'product_trans.longDescription'
@@ -72,7 +71,7 @@ class ProductController extends Controller
 
     public function store(Request $request) {
 
-        $product = Product::create(['parts' => $request->parts]);
+        $product = Product::create();
 
         foreach(json_decode($request->lang, true) as $key=>$lang) {
 
@@ -103,8 +102,16 @@ class ProductController extends Controller
         $product_file = $request->file('picture');
         $this->uploadProductFiles($product_file, Product::class, $product->id);
 
-        $parts_file = $request->file('uploader');
-        $this->uploadProductFiles($parts_file, ProductPart::class, $product->id);
+        foreach(json_decode($request->parts) as $key=>$part) {
+            $createdPart = ProductPart::create([
+                'price' => $part->price,
+                'product_id' => $product->id
+            ]);
+
+            $parts_file = $request->file('partsFiles.' . $key . '.uploader');
+
+            $this->uploadProductFiles($parts_file, ProductPart::class, $createdPart->id);
+        }
 
         return $product;
     }

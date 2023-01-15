@@ -57,11 +57,17 @@ const AddProductForm = () => {
     // shortDescription: Yup.string().required(t('short-description-required')),
     // longDescription: Yup.string().required(t('long-description-required')),
     category: Yup.array().required(t('category-required')),
-    parts: Yup.number().required(t('parts-required'))
+    //parts: Yup.number().required(t('parts-required'))
   });
 
   const onSubmit = (values, { setSubmitting }) => {
-    const data = formData(values, [], ['picture', 'uploader']);
+    const data = formData(values, [], ['picture']);
+
+    values.parts.forEach(function(obj, index) {
+      obj.uploader.forEach((file) => {
+        data.append("partsFiles["+index+"][uploader][]", file);
+      })
+    });
 
     productService.createProduct(data)
       .then((res) => {
@@ -86,7 +92,7 @@ const AddProductForm = () => {
     'information': [
       { type: 'upload', name: 'picture', label: t('picture'), accept: '.jpg,.png,.jpeg', multiple: false },
       { type: 'autocomplete', name: 'author', label: t('authors'), options: authorOptions, multiple: true },
-      { type: 'number', name: 'parts', label: t('parts-count') },
+      // { type: 'number', name: 'parts', label: t('parts-count') },
       { type: 'autocomplete', name: 'category', label: t('category'), options: categoryOptions, multiple: true },
       {
         type: 'lang', name: 'lang', selectors: ['bg', 'en'], fields: [
@@ -97,7 +103,12 @@ const AddProductForm = () => {
       },
     ],
     'parts': [
-      { type: 'upload', name: 'uploader', accept: '.jpg,.png,.jpeg,.docx,.pdf,.doc', multiple: true },
+      {
+        type: 'array', name: 'parts', label: t('parts'), itemLabel: t('part'), fields: [
+          { type: 'number', name: 'price', label: t('price') },
+          { type: 'upload', name: 'uploader', label: t('files'), accept: '.jpg,.png,.jpeg,.docx,.pdf,.doc', multiple: true },
+        ]
+      }
     ]
   };
 
