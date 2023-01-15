@@ -44,7 +44,7 @@ const ProductPage = (id) => {
   const classes = useStyles();
   return (
     <Card elevation={0}>
-      <Box display={'flex'}>
+      <Box display={'flex'} justifyContent={'space-between'}>
           <CardMedia
             className={classes.image}
             component='img'

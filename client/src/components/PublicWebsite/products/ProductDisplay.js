@@ -83,15 +83,15 @@ const ProductDisplay = () => {
             id: 8,
             name: "Lab Glass Petri Dish",
             imageUrl: "https://cdn.discordapp.com/attachments/1008571217004990565/1063523481897156739/Knifsy_laboratory_glass_filled_with_red_crystals_on_a_white_bac_0855b009-84b9-4466-b89e-5c4fdc9cdc01.png",
-            description: "This lab glass petri dish is perfect for growing and studying cultures of bacteria.",
+            description: "This lab glass petri dish is perfect for growing and studying cultures of bacteria. fiaushi uaf uiefh iuwfhweufhweiufhuywegfiwgye iwf uwief iuwefuiw iefw",
             price: "14.99"
         }
     ];
 
     return (
-        <Grid container className={classes.productContainer} justify="center" alignItems="center" spacing={2}>
+        <Grid container className={classes.productContainer} justifyContent="space-evenly" alignItems="center" spacing={2}>
             {products.map((product) => (
-                <Grid item sm={12} md={6} lg={3} key={product.id}>
+                <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} >
                     <ProductCard 
                     id = {product.id}
                     title={product.name}

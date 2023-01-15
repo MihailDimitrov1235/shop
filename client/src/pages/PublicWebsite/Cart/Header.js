@@ -2,9 +2,11 @@ import { Box, Card, Grid, Typography } from '@mui/material';
 
 function Header(){
     return(
-        <Card>
+        <Card style={{
+            marginTop:'20px',
+        }}>
             <Grid container>
-                <Grid xs={6}>
+                <Grid xs={5}>
                     <Typography variant='h6' style={{ textAlign: 'center'}}>Items</Typography>
                 </Grid>
                 <Grid xs={2}>
