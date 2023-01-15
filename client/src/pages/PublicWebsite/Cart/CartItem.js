@@ -8,7 +8,7 @@ const CartItem = ({ item, removeFromCart }) => {
   return (
       <Card style={{marginTop:'20px', width:'100%'}}>
         <Grid container>
-            <Grid xs={5}>
+            <Grid item xs={5}>
                 <Box display={'flex'}>
                     <CardMedia src={item.image} alt={item.title} component='img' style={{
                         width: 'auto',
@@ -21,16 +21,16 @@ const CartItem = ({ item, removeFromCart }) => {
                 </Box>
                 </Box>
             </Grid>
-            <Grid xs={2}>
+            <Grid item xs={2}>
                 <Typography variant='h6' style={{ textAlign: 'center'}}>Price</Typography>
             </Grid>
-            <Grid xs={2}>
+            <Grid item xs={2}>
                 <Typography variant='h6' style={{ textAlign: 'center'}}>Parts</Typography>
             </Grid>
-            <Grid xs={2}>
+            <Grid item xs={2}>
                 <Typography variant='h6' style={{ textAlign: 'center'}}>Total</Typography>
             </Grid>
-            <Grid xs={1} textAlign='right'>
+            <Grid item xs={1} textAlign='right'>
                 <IconButton onClick={() => removeFromCart(item.id)}>
                     <CancelIcon/>
                 </IconButton>

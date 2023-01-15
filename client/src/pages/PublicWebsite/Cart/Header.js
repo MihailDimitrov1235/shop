@@ -6,16 +6,16 @@ function Header(){
             marginTop:'20px',
         }}>
             <Grid container>
-                <Grid xs={5}>
+                <Grid item xs={5}>
                     <Typography variant='h6' style={{ textAlign: 'center'}}>Items</Typography>
                 </Grid>
-                <Grid xs={2}>
+                <Grid item xs={2}>
                     <Typography variant='h6' style={{ textAlign: 'center'}}>Price</Typography>
                 </Grid>
-                <Grid xs={2}>
+                <Grid item xs={2}>
                     <Typography variant='h6' style={{ textAlign: 'center'}}>Parts</Typography>
                 </Grid>
-                <Grid xs={2}>
+                <Grid item xs={2}>
                     <Typography variant='h6' style={{ textAlign: 'center'}}>Total</Typography>
                 </Grid>
             </Grid>
