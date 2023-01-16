@@ -3,6 +3,7 @@ import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/mat
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
+import { Container } from '@mui/system';
 
 
 
@@ -89,18 +90,20 @@ const ProductDisplay = () => {
     ];
 
     return (
-        <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
-            {products.map((product) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} >
-                    <ProductCard 
-                    id = {product.id}
-                    title={product.name}
-                    subtitle={product.description}
-                    img={product.imageUrl}
-                    />
-                </Grid>
-            ))}
-        </Grid>
+        <Container maxWidth={false}>
+            <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
+                {products.map((product) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} >
+                        <ProductCard
+                            id={product.id}
+                            title={product.name}
+                            subtitle={product.description}
+                            img={product.imageUrl}
+                        />
+                    </Grid>
+                ))}
+            </Grid>
+        </Container>
     );
 };
 

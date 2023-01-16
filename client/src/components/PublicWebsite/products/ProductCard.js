@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({ id, title="Lizard", subtitle="", img="https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp"}) => {
     return (
-        <Card sx={{ maxWidth: 250, height:'330px', marginLeft:'auto', marginRight:'auto'}}>
+        <Card sx={{ height:'330px', marginLeft:'auto', marginRight:'auto'}}>
             <CardActionArea component={Link} to={`/product/${id}`} >
                 <CardMedia
                     component="img"
