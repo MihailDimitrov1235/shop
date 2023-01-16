@@ -4,33 +4,34 @@ import LanguageSwitcher from './LanguageSwitcher';
 import ProfileItem from './ProfileItem';
 import PropTypes from 'prop-types';
 
-const NavbarContent = ({ items }) => {
+const NavbarContent = ({ item }) => {
     return (
         <>
-            {items.map((item, index) => {
-                if (item.type === 'link') {
-                    return (
-                        <NavItem
-                            key={index}
-                            title={item.title}
-                            href={item.href}
-                            {...item}
-                        />
-                    );
-                } else if (item.type === 'langSwitcher') {
-                    return <LanguageSwitcher key={index} />
-                } else if (item.type === 'divider') {
-                    return <Divider orientation="vertical" flexItem key={index} />
-                } else if (item.type === 'profile') {
-                    return <ProfileItem key={index} />
-                }
-            })}
+            {item.type === 'link' && (
+                <NavItem
+                    title={item.title}
+                    href={item.href}
+                    {...item}
+                />
+            )}
+
+            {item.type === 'langSwitcher' && (
+                <LanguageSwitcher />
+            )}
+
+            {item.type === 'divider' && (
+                <Divider orientation={item.orientation || 'horizontal'} flexItem />
+            )}
+
+            {item.type === 'profile' && (
+                <ProfileItem />
+            )}
         </>
     );
 };
 
 NavbarContent.propTypes = {
-    items: PropTypes.array.isRequired
+    item: PropTypes.object.isRequired
 };
 
 export default NavbarContent;

@@ -34,12 +34,12 @@ const Navbar = (props) => {
         { type: 'link', title: t('home'), href: '/' },
         { type: 'link', title: t('products'), href: '/products' },
         { type: 'langSwitcher' },
-        { type: 'divider' },
+        { type: 'divider', orientation: 'vertical' },
         {
             type: 'link',
             title: <StyledBadge badgeContent={4} color="bordoRed">
-                    <span>{t('cart')}</span>
-                </StyledBadge>,
+                <span>{t('cart')}</span>
+            </StyledBadge>,
             href: '/cart',
             variant: "outlined",
             color: "bordoRed",
@@ -49,9 +49,9 @@ const Navbar = (props) => {
         }
     ]
 
-    if(user) {
+    if (user) {
         items.push({ type: 'profile' })
-    }else {
+    } else {
         items.push({
             type: 'link',
             title: t('sign-in'),
@@ -73,10 +73,12 @@ const Navbar = (props) => {
                     <Logo />
                 </RouterLink>
                 <Box sx={{ justifyContent: 'space-between', display: { xs: 'none', md: 'flex' } }}>
-                    <NavbarContent items={items} />
+                    {items.map((item, index) => (
+                        <NavbarContent item={item} key={index} />
+                    ))}
                 </Box>
 
-                <HamburgerMenu />
+                <HamburgerMenu items={items} />
             </Toolbar>
         </AppBar>
     );
