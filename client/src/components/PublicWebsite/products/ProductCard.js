@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
             <CardActionArea component={Link} to={`/product/${id}`} >
                 <CardMedia
                     component="img"
-                    alt="green iguana"
+                    alt={name}
                     height="150"
                     image={`${process.env.REACT_APP_ASSETS}/${files[0].path}`}
                 />
