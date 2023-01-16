@@ -9,7 +9,7 @@ import ProductCard from './ProductCard';
 const useStyles = makeStyles({
     productContainer: {
         backgroundColor: 'white',
-        padding: '3rem'
+        padding: '3rem 0'
     },
     productCard: {
         width: '20rem',
@@ -89,7 +89,7 @@ const ProductDisplay = () => {
     ];
 
     return (
-        <Grid container className={classes.productContainer} justifyContent="space-evenly" alignItems="center" spacing={2}>
+        <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
             {products.map((product) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} >
                     <ProductCard 
