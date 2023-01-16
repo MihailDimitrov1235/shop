@@ -47,8 +47,8 @@ function deleteProducts(selected) {
     });
 }
 
-function getProductById(id) {
-    const url = `${servicesHelper.url}/products/${id}`;
+function getProductById(id, lang='bg') {
+    const url = `${servicesHelper.url}/products/${id}?lang=${lang}`;
 
     return axios.get(url, {
         headers: servicesHelper.header()

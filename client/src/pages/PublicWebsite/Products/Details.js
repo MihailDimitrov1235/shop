@@ -1,80 +1,89 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { FormControl, MenuItem, InputLabel, Select, Box, Button, Grid, Card, CardMedia, CardContent, Typography, Container } from '@mui/material';
-import { margin } from '@mui/system';
+import { Link, useParams } from 'react-router-dom';
+import { FormControl, MenuItem, InputLabel, Select, Box, Button, Card, CardMedia, CardContent, Typography, Container } from '@mui/material';
+import productService from '../../../services/product';
 
 const useStyles = makeStyles({
     image: {
-        maxWidth: '100%',
+        maxWidth: '50%',
         width: 'auto',
         height: '75vh',
         borderRadius: '0 0 35px 35px'
     },
     text: {
-        // padding: '20%',
+        flexGrow: 1
     },
     button: {
         padding: '10px',
     }
 });
 
-const data = {
-    title: "Knifsy",
-    description: "This is a high-quality knife with a wood handle and a sharp blade.",
-    parts: [
-        { id: 1, price: 999 },
-        { id: 2, price: 990 }
-    ],
-    image: "https://cdn.discordapp.com/attachments/1008571197572775966/1063814791317180526/Knifsy_lab_glass_filled_with_red_stuff_on_white_background_97def308-e59c-40f6-bab1-3b12137430ad.png"
-};
-
-const ProductPage = (id) => {
+const ProductPage = () => {
+    const classes = useStyles();
+    const { id } = useParams();
     const [part, setPart] = useState('');
     const [price, setPrice] = useState('');
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        productService.getProductById(id)
+            .then((res) => {
+                setProduct(res.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
     const handleChange = (event) => {
-        data.parts.forEach(part => {
+        product.parts.forEach(part => {
             if (part.id === event.target.value) {
                 setPrice(part.price);
             }
         });
         setPart(event.target.value);
     };
-    const classes = useStyles();
+
     return (
         <Container maxWidth={'false'} sx={{
             px: { lg: '130px!important' }
         }}>
             <Card elevation={0}>
-                <Box display={'flex'} justifyContent={'space-between'}>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    gap: 10,
+                    px: 3
+                }}>
                     <CardMedia
                         className={classes.image}
                         component='img'
-                        title={data.title}
-                        image={data.image}
+                        title={product.name}
+                        image={product.files && `${process.env.REACT_APP_ASSETS}/${product.files[0].path}`}
                     />
                     <CardContent className={classes.text}>
-                        <Typography gutterBottom variant="h3" component="h2">
-                            {data.title}
+                        <Typography gutterBottom variant='h3' component='h2'>
+                            {product.name}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {data.description}
+                        <Typography variant='body2' color='textSecondary' component='p'>
+                            {product.longDescription}
                         </Typography>
                         <Box display={'flex'} marginTop={'30px'}>
-                            <Button className={classes.button} variant="contained" color="bordoRed" component={Link} to="/products">
+                            <Button className={classes.button} variant='contained' color='bordoRed' component={Link} to='/products'>
                                 Buy
                             </Button>
                             <FormControl fullWidth>
-                                <InputLabel id="part">Part</InputLabel>
+                                <InputLabel id='part' color='bordoRed'>Part</InputLabel>
                                 <Select
-                                    labelId="part"
-                                    id="part"
+                                    labelId='part'
+                                    id='part'
                                     value={part}
-                                    label="Part"
+                                    label='Part'
+                                    color='bordoRed'
                                     onChange={handleChange}
                                 >
-                                    {data.parts.map(part => {
+                                    {product.parts && product.parts.map(part => {
                                         return (
                                             <MenuItem value={part.id}>{part.id}</MenuItem>
                                         );
@@ -82,7 +91,7 @@ const ProductPage = (id) => {
                                 </Select>
                             </FormControl>
                         </Box>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography variant='body2' color='textSecondary' component='p'>
                             {price} лв.
                         </Typography>
                     </CardContent>
