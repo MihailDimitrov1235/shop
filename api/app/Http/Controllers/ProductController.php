@@ -22,7 +22,7 @@ class ProductController extends Controller
                             'product_trans.shortDescription',
                             'product_trans.longDescription'
                         )
-                        ->with(['categories', 'authors', 'categories.category', 'authors.author'])
+                        ->with(['categories', 'authors', 'categories.category', 'authors.author', 'files'])
                         ->leftJoin('product_trans', function($q) {
                             $q->on('product_trans.product_id', 'products.id');
                             $q->where('product_trans.lang', request()->query('lang'));
