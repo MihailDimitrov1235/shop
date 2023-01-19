@@ -1,8 +1,8 @@
 import servicesHelper from ".";
 import axios from "axios";
 
-function getAuthors(pagination, filters, order) {
-    let url = `${servicesHelper.url}/authors?page=${pagination.page}&total=${pagination.total}`;
+function getAuthors(pagination, filters, order, lang='bg') {
+    let url = `${servicesHelper.url}/authors?page=${pagination.page}&total=${pagination.total}&lang=${lang}`;
 
     if(filters.length > 0) {
         filters.forEach((filter) => {

@@ -14,17 +14,33 @@ const EditAuthor = () => {
     const { addMessage } = useMessage();
     const navigate = useNavigate();
     const { id } = useParams();
-    const [authorInitValues, setAuthorInitValues] = useState({ name: '', email: '', phone: '' });
+    const [authorInitValues, setAuthorInitValues] = useState({ 
+        lang: { bg: { name: '' }, en: { name: '' } },
+        email: '',
+        phone: ''
+    });
 
     useEffect(() => {
         authorService.getAuthorById(id)
             .then((res) => {
-                setAuthorInitValues({ name: res.data.name, email: res.data.email, phone: res.data.phone });
+                let initValues = {
+                    lang: {},
+                    email: res.data.email,
+                    phone: res.data.phone
+                }
+
+                res.data.trans.forEach((trans) => {
+                    initValues.lang[trans.lang] = {
+                        name: trans.name
+                    }
+                })
+                
+                setAuthorInitValues(initValues);
             })
     }, []);
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().max(255).required(t('name-required')),
+        //name: Yup.string().max(255).required(t('name-required')),
         email: Yup.string().email(t('email-invalid')).max(255).required(t('email-required')),
         phone: Yup.string().max(10, t('phone-invalid')).required(t('phone-required')).min(10, t('phone-invalid')),
     });
@@ -45,7 +61,11 @@ const EditAuthor = () => {
     };
 
     const fields = [
-        { type: 'text', name: 'name', label: t('name') },
+        {
+            type: 'lang', name: 'lang', selectors: ['bg', 'en'], fields: [
+                { type: 'text', name: 'name', label: t('name') },
+            ]
+        },
         { type: 'email', name: 'email', label: t('email') },
         { type: 'text', name: 'phone', label: t('phone') },
     ];

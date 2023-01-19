@@ -1,8 +1,8 @@
 import servicesHelper from ".";
 import axios from "axios";
 
-function getCategories(pagination, filters, order) {
-    let url = `${servicesHelper.url}/categories?page=${pagination.page}&total=${pagination.total}`;
+function getCategories(pagination, filters, order, lang='bg') {
+    let url = `${servicesHelper.url}/categories?page=${pagination.page}&total=${pagination.total}&lang=${lang}`;
 
     if(filters.length > 0) {
         filters.forEach((filter) => {

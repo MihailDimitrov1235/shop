@@ -14,7 +14,7 @@ const AddUserForm = () => {
     const navigate = useNavigate();
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().max(255).required(t('name-required')),
+        //name: Yup.string().max(255).required(t('name-required')),
         email: Yup.string().email(t('email-invalid')).max(255).required(t('email-required')),
         phone: Yup.string().max(10, t('phone-invalid')).required(t('phone-required')).min(10, t('phone-invalid')),
     });
@@ -35,7 +35,11 @@ const AddUserForm = () => {
     };
 
     const fields = [
-        { type: 'text', name: 'name', label: t('name') },
+        {
+            type: 'lang', name: 'lang', selectors: ['bg', 'en'], fields: [
+                { type: 'text', name: 'name', label: t('name') },
+            ]
+        },
         { type: 'email', name: 'email', label: t('email') },
         { type: 'text', name: 'phone', label: t('phone') },
     ];

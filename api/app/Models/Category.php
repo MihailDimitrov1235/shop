@@ -10,10 +10,6 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name'
-    ];
-
     public function trans() {
         return $this->hasMany(CategoryTrans::class);
     }

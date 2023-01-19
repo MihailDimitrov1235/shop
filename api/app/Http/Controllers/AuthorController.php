@@ -3,16 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Author;
+use App\Models\{
+    Author,
+    AuthorTrans
+};
 
 class AuthorController extends Controller
 {
     public function index()
     {
-        $query = Author::select('id', 'name', 'phone', 'email');
+        $query = Author::select(
+                            'authors.id as id',
+                            'authors.phone',
+                            'authors.email',
+                            'author_trans.name',
+                        )
+                        ->leftJoin('author_trans', function($q) {
+                            $q->on('author_trans.author_id', 'authors.id');
+                            $q->where('author_trans.lang', request()->query('lang'));
+                        });
 
         if(request()->query('id')) {
-            $query->where('id', 'LIKE', '%'.request()->query('id').'%');
+            $query->where('authors.id', 'LIKE', '%'.request()->query('id').'%');
         }
 
         if(request()->query('name')) {
@@ -44,7 +56,6 @@ class AuthorController extends Controller
     {
         $validator = validator($request->only('name', 'email', 'phone'), 
             [
-                'name' => 'required|string',
                 'email' => 'required|string|email|max:255|unique:authors',
                 'phone' => 'required|string'
             ],
@@ -57,20 +68,29 @@ class AuthorController extends Controller
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
-        $auhtor = Author::create([
-            'name' => $request->name,
+        $author = Author::create([
             'phone' => $request->phone,
             'email' => $request->email
         ]);
 
-        return response()->json(['auhtor' => $auhtor], 200); 
+        foreach($request->lang as $key=>$lang) {
+
+            AuthorTrans::create([
+                'name' => $lang['name'],
+                'author_id' => $author->id,
+                'lang' => $key
+            ]);
+        }
+
+
+        return response()->json(['author' => $author], 200); 
     }
 
     public function delete(Request $request)
     {
         $ids = $request->selected;
 
-        Author::whereIn('id', $ids)->delete();
+        $authors = Author::whereIn('id', $ids)->delete();
 
         return response()->json(['message' => 'Deleted'], 200);
     }
@@ -79,7 +99,6 @@ class AuthorController extends Controller
     {
         $validator = validator($request->only('name', 'email', 'phone'), 
             [
-                'name' => 'required|string',
                 'email' => 'required|string|email|max:255|unique:authors,email,' . $id,
                 'phone' => 'required|string'
             ],
@@ -94,8 +113,12 @@ class AuthorController extends Controller
 
         $author = Author::findOrFail($id);
 
+        foreach($request->lang as $key=>$lang) {
+            AuthorTrans::where(['author_id' => $id, 'lang' => $key])
+                        ->update(['name' => $lang['name']]);
+        }
+
         $author->update([
-            'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email
         ]);
@@ -105,7 +128,7 @@ class AuthorController extends Controller
 
     public function getById($id)
     {
-        $author = Author::findOrFail($id);
+        $author = Author::with('trans')->findOrFail($id);
 
         return $author;
     }

@@ -13,6 +13,7 @@ class CategoryTrans extends Model
 
     protected $fillable = [
         'name',
+        'category_id',
         'lang'
     ];
 }

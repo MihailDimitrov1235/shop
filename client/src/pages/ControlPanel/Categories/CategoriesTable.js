@@ -11,7 +11,7 @@ import MainTable from '../../../components/MainTable';
 function CategoriesTable() {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { addMessage } = useMessage();
 
     useEffect(() => {
@@ -34,7 +34,7 @@ function CategoriesTable() {
             total: total || 10
         }
 
-        categoryService.getCategories(pagination, filters, order)
+        categoryService.getCategories(pagination, filters, order, i18n.language)
             .then((res) => {
                 setData(res.data.data);
                 setTotal(res.data.total);

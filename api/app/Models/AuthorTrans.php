@@ -13,6 +13,7 @@ class AuthorTrans extends Model
 
     protected $fillable = [
         'name',
+        'author_id',
         'lang'
     ];
 }

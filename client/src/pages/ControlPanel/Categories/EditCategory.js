@@ -14,17 +14,27 @@ const EditCategory = () => {
     const { addMessage } = useMessage();
     const navigate = useNavigate();
     const { id } = useParams();
-    const [categoryInitValues, setCategoryInitValues] = useState({ name: '' });
+    const [categoryInitValues, setCategoryInitValues] = useState({ lang: { bg: { name: '' }, en: { name: '' }  } });
 
     useEffect(() => {
         categoryService.getCategoryById(id)
             .then((res) => {
-                setCategoryInitValues({ name: res.data.name });
+                let initValues = {
+                    lang: {}
+                }
+
+                res.data.trans.forEach((trans) => {
+                    initValues.lang[trans.lang] = {
+                        name: trans.name
+                    }
+                })
+
+                setCategoryInitValues(initValues);
             })
     }, []);
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().max(255).required(t('name-required'))
+        //name: Yup.string().max(255).required(t('name-required'))
     });
 
     const onSubmit = (values, { setSubmitting }) => {
@@ -43,7 +53,11 @@ const EditCategory = () => {
     };
 
     const fields = [
-        { type: 'text', name: 'name', label: t('name') }
+        {
+            type: 'lang', name: 'lang', selectors: ['bg', 'en'], fields: [
+                { type: 'text', name: 'name', label: t('name') },
+            ]
+        },
     ];
 
     const submitButton = {
