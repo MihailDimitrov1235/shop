@@ -17,7 +17,6 @@ class AuthorFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
             'phone' => fake()->phoneNumber(),
             'email' => fake()->email()
         ];

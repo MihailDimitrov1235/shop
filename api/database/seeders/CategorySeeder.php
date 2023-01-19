@@ -4,7 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\{
+    Category,
+    CategoryTrans
+};
 
 class CategorySeeder extends Seeder
 {
@@ -15,6 +18,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory()->count(10)->create();
+        Category::factory()
+                ->count(10)
+                ->has(CategoryTrans::factory(2)->sequence(['lang' => 'bg'], ['lang' => 'en']), 'trans')
+                ->create();
     }
 }

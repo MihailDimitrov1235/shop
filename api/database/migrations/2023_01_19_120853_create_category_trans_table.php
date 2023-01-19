@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('category_trans', function (Blueprint $table) {
             $table->id();
-            $table->string('phone');
-            $table->string('email')->unique();
+            $table->string('name');
+            $table->string('lang');
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('category_trans');
     }
 };

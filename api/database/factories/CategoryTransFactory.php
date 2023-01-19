@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CategoryTrans>
  */
-class CategoryFactory extends Factory
+class CategoryTransFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,6 +17,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
+            'name' => fake()->text(30)
         ];
     }
 }

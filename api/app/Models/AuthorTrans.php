@@ -4,19 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\AuthorTrans;
 
-class Author extends Model
+class AuthorTrans extends Model
 {
     use HasFactory;
 
+    protected $table = 'author_trans';
+
     protected $fillable = [
         'name',
-        'phone',
-        'email'
+        'lang'
     ];
-
-    public function trans() {
-        return $this->hasMany(AuthorTrans::class);
-    }
 }
