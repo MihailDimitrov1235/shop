@@ -57,6 +57,9 @@ const AddProductForm = () => {
     // shortDescription: Yup.string().required(t('short-description-required')),
     // longDescription: Yup.string().required(t('long-description-required')),
     category: Yup.array().required(t('category-required')),
+    parts: Yup.array().of(Yup.object().shape({
+      price: Yup.number().required(t('price-required'))
+    }))
     //parts: Yup.number().required(t('parts-required'))
   });
 
