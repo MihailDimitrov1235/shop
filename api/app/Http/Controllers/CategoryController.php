@@ -88,7 +88,15 @@ class CategoryController extends Controller
 
     public function getAll()
     {
-        $categories = Category::all();
+        $categories = Category::select(
+                                'categories.id as id',
+                                'category_trans.name'
+                            )
+                            ->leftJoin('category_trans', function($q) {
+                                $q->on('category_trans.category_id', 'categories.id');
+                                $q->where('category_trans.lang', request()->query('lang'));
+                            })
+                            ->get();
 
         return $categories;
     }

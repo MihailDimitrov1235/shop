@@ -22,7 +22,39 @@ class ProductController extends Controller
                             'product_trans.shortDescription',
                             'product_trans.longDescription'
                         )
-                        ->with(['categories', 'authors', 'categories.category', 'authors.author', 'files'])
+                        ->with([
+                            'categories',
+                            'authors',
+                            'categories.category' => function ($query) {
+                                $query->select(
+                                    'categories.id as id',
+                                    'category_trans.name'
+                                )->leftJoin('category_trans', function($q) {
+                                    $q->on('category_trans.category_id', 'categories.id');
+                                    $q->where('category_trans.lang', request()->query('lang'));
+                                });
+
+                                if(request()->query('categories')) {
+                                    $query->where('category_trans.name', 'LIKE', '%'.request()->query('categories').'%');
+                                }
+                            },
+                            'authors.author' => function ($query) {
+                                $query->select(
+                                    'authors.id as id',
+                                    'authors.phone',
+                                    'authors.email',
+                                    'author_trans.name',
+                                )->leftJoin('author_trans', function($q) {
+                                    $q->on('author_trans.author_id', 'authors.id');
+                                    $q->where('author_trans.lang', request()->query('lang'));
+                                });
+
+                                if(request()->query('authors')) {
+                                    $query->where('author_trans.name', 'LIKE', '%'.request()->query('authors').'%');
+                                }
+                            },
+                            'files'
+                        ])
                         ->leftJoin('product_trans', function($q) {
                             $q->on('product_trans.product_id', 'products.id');
                             $q->where('product_trans.lang', request()->query('lang'));
@@ -34,22 +66,6 @@ class ProductController extends Controller
 
         if(request()->query('name')) {
             $query->where('name', 'LIKE', '%'.request()->query('name').'%');
-        }
-
-        if(request()->query('authors')) {
-            $query->whereHas('authors', function ($q) {
-                $q->whereHas('author', function ($q) {
-                    $q->where('name', 'LIKE', '%'.request()->query('authors').'%');
-                });
-            });
-        }
-
-        if(request()->query('categories')) {
-            $query->whereHas('categories', function ($q) {
-                $q->whereHas('category', function ($q) {
-                    $q->where('name', 'LIKE', '%'.request()->query('categories').'%');
-                });
-            });
         }
 
         if(request()->query('parts')) {
@@ -146,11 +162,13 @@ class ProductController extends Controller
         return $product;
     }
 
-    public function destroy($id) {
+    public function destroy(Request $request) {
+        $ids = $request->selected;
 
-        $project = Product::findOrFail($id);   
-        $project->delete();
-        return "This project no longer exists.";
+        Product::whereIn('id', $ids)->delete();
+        ProductFile::where('type', Product::class)->whereIn('parent_id', $ids)->delete();
+
+        return response()->json(['message' => 'Deleted'], 200);
     }
 
     public function uploadFiles(Request $request) {

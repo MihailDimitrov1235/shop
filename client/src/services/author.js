@@ -52,8 +52,8 @@ function getAuthorById(id) {
     })
 }
 
-function getAll() {
-    const url = `${servicesHelper.url}/authors/all`;
+function getAll(lang='bg') {
+    const url = `${servicesHelper.url}/authors/all?lang=${lang}`;
 
     return axios.get(url, {
         headers: servicesHelper.header()

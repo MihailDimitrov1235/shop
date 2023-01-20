@@ -16,14 +16,14 @@ import InfoIcon from '@mui/icons-material/Info';
 import InventoryIcon from '@mui/icons-material/Inventory';
 
 const AddProductForm = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { addMessage } = useMessage();
   const navigate = useNavigate();
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [authorOptions, setAuthorOptions] = useState([]);
 
   useEffect(() => {
-    categoryService.getAll()
+    categoryService.getAll(i18n.language)
       .then((res) => {
         let newCategoryOptions = [];
 
@@ -37,7 +37,7 @@ const AddProductForm = () => {
         console.log(error);
       })
 
-    authorService.getAll()
+    authorService.getAll(i18n.language)
       .then((res) => {
         let newAuthorOptions = [];
 
@@ -50,7 +50,7 @@ const AddProductForm = () => {
       .catch((error) => {
         console.log(error);
       })
-  }, []);
+  }, [i18n.language]);
 
   const validationSchema = Yup.object().shape({
     author: Yup.array().required(t('author-required')),

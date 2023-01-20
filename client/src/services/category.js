@@ -52,8 +52,8 @@ function getCategoryById(id) {
     })
 }
 
-function getAll() {
-    const url = `${servicesHelper.url}/categories/all`;
+function getAll(lang='bg') {
+    const url = `${servicesHelper.url}/categories/all?lang=${lang}`;
 
     return axios.get(url, {
         headers: servicesHelper.header()

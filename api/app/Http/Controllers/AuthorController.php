@@ -135,7 +135,17 @@ class AuthorController extends Controller
 
     public function getAll()
     {
-        $authors = Author::all();
+        $authors = Author::select(
+                            'authors.id as id',
+                            'authors.phone',
+                            'authors.email',
+                            'author_trans.name',
+                        )
+                        ->leftJoin('author_trans', function($q) {
+                            $q->on('author_trans.author_id', 'authors.id');
+                            $q->where('author_trans.lang', request()->query('lang'));
+                        })
+                        ->get();
 
         return $authors;
     }
