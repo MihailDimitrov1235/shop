@@ -49,14 +49,14 @@ function ProductTable() {
     }
 
     const deleteHandler = (selected) => {
-    //   productService.deleteProducts(selected)
-    //         .then((res) => {
-    //             console.log(res)
-    //             addMessage(t('product-deleted'), 'success')
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         })
+      productService.deleteProducts(selected)
+            .then((res) => {
+                console.log(res)
+                addMessage(t('product-deleted'), 'success')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     return (

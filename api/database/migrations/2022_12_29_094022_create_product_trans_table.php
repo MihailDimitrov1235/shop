@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('shortDescription');
             $table->string('longDescription');
-            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->string('lang');
             $table->timestamps();
         });

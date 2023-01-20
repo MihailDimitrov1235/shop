@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{
     Product,
     ProductTrans,
@@ -192,11 +193,28 @@ class ProductController extends Controller
         return $product;
     }
 
-    public function destroy(Request $request) {
+    public function delete(Request $request) {
         $ids = $request->selected;
 
-        Product::whereIn('id', $ids)->delete();
-        ProductFile::where('type', Product::class)->whereIn('parent_id', $ids)->delete();
+        foreach($ids as $id) {
+            $product = Product::findOrFail($id);
+            
+            $product->parts()->with(['files'])->get()->each(function ($part) {
+                $part->files->each(function ($file) {
+                    Storage::delete('public/' . $file->path);
+                    $file->delete();
+                });
+                
+                $part->delete();
+            });
+
+            $product->files()->get()->each(function ($file) {
+                Storage::delete('public/' . $file->path);
+                $file->delete();
+            });
+            
+            $product->delete();
+        }
 
         return response()->json(['message' => 'Deleted'], 200);
     }
