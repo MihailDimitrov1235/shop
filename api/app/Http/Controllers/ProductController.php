@@ -183,7 +183,33 @@ class ProductController extends Controller
                                 'product_trans.shortDescription',
                                 'product_trans.longDescription'
                             )
-                            ->with(['categories', 'authors', 'categories.category', 'authors.author', 'files', 'trans', 'parts'])
+                            ->with([
+                                'categories',
+                                'authors',
+                                'categories.category' => function ($query) {
+                                    $query->select(
+                                        'categories.id as id',
+                                        'category_trans.name'
+                                    )->leftJoin('category_trans', function($q) {
+                                        $q->on('category_trans.category_id', 'categories.id');
+                                        $q->where('category_trans.lang', request()->query('lang'));
+                                    });
+                                },
+                                'authors.author' => function ($query) {
+                                    $query->select(
+                                        'authors.id as id',
+                                        'authors.phone',
+                                        'authors.email',
+                                        'author_trans.name',
+                                    )->leftJoin('author_trans', function($q) {
+                                        $q->on('author_trans.author_id', 'authors.id');
+                                        $q->where('author_trans.lang', request()->query('lang'));
+                                    });
+                                },
+                                'files',
+                                'parts',
+                                'parts.files'
+                            ])
                             ->leftJoin('product_trans', function($q) {
                                 $q->on('product_trans.product_id', 'products.id');
                                 $q->where('product_trans.lang', request()->query('lang'));
