@@ -5,7 +5,7 @@ import Footer from './Footer/Footer';
 
 const MainLayoutRoot = styled('div')(
     ({ theme }) => ({
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.palette.background.default,
         display: 'flex',
         height: '100%',
         overflow: 'hidden',
