@@ -5,6 +5,8 @@ import ProductCard from './ProductCard';
 import { Container } from '@mui/system';
 import productService from '../../../services/product';
 import { useTranslation } from 'react-i18next';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 
 
@@ -49,10 +51,21 @@ const ProductDisplay = () => {
                 console.log(error)
             })
     }, []);
-
     return (
         <Container maxWidth={false}>
-            <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
+            <Swiper
+                spaceBetween={50}
+                slidesPerView={3}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+                >
+                    {products.map((product, index)=>{
+                        <SwiperSlide key={product} virtualIndex={index}>
+                            {<ProductCard product={product}/>}
+                        </SwiperSlide>
+                    })}
+            </Swiper>
+            {/* <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
                 {products.map((product) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} >
                         <ProductCard
@@ -60,7 +73,7 @@ const ProductDisplay = () => {
                         />
                     </Grid>
                 ))}
-            </Grid>
+            </Grid> */}
         </Container>
     );
 };
