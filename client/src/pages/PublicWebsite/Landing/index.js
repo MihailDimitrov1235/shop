@@ -1,14 +1,13 @@
 import HeroSection from "../../../components/PublicWebsite/HeroSection/HeroSection";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
 import { Container } from '@mui/material';
-import BgImage from './heroImage.png';
 
 const Landing = () => {
     return (
         <>
             <Container maxWidth={'false'} sx={{
                 px: { lg: '130px!important' },
-                backgroundImage: `url(${BgImage})`,
+                backgroundImage: `url('/static/images/heroImage.png')`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
