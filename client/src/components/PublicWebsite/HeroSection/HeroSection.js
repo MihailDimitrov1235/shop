@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, Typography, Button, CardMedia } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
-import heroImage from './hero_image.png';
 import { Container } from '@mui/system';
+import './HeroSectionCss.css';
 
 const useStyles = makeStyles({
   heroContainer: {
@@ -24,6 +24,13 @@ const useStyles = makeStyles({
     marginTop: '10px',
     marginBottom: '10px',
   },
+  // heroImg: {
+  //   height: '40%!important',
+  //   border: 'solid red 1px',
+  //   '&:hover': {
+  //     border: 'solid red 1px',      
+  //   }
+  // },
 });
 function HeroSection() {
   const classes = useStyles();
@@ -49,8 +56,8 @@ function HeroSection() {
           </Box>
           
         </Box>
-        <Box height={'100%'} justifyContent="right">
-        <img src="/static/images/hImage.png" height={'100%'}/>
+        <Box height={'100%'} justifyContent="right" >
+        <img src="/static/images/hImage.png" height={'100%'} className='img'/>
       </Box>
       </Box>
     </Container>
