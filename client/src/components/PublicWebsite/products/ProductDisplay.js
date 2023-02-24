@@ -75,10 +75,10 @@ const ProductDisplay = () => {
             })
     }, []);
     return (
-        <Container maxWidth={false} sx={{ width: '85%', margin: '0 auto', my: 1, p: '0px!important' }}>
+        <Container maxWidth={false} sx={{ width: '85%', margin: '0 auto', my: 10, p: '0px!important' }}>
             <Swiper
                 // install Swiper modules
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                modules={[Navigation, Pagination, A11y]}
                 spaceBetween={50}
                 slidesPerView={3}
                 navigation={{
@@ -86,7 +86,6 @@ const ProductDisplay = () => {
                     prevEl: '.swiper-button-prev',
                   }}
                 pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >
