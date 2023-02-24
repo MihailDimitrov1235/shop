@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import ProductCard from './ProductCard';
+import ProductCardTest from './ProductCardTest';
 import { Container } from '@mui/system';
 import productService from '../../../services/product';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,20 @@ const useStyles = makeStyles({
     },
     productButton: {
         marginTop: '1rem'
-    }
+    },
+    Deck: {
+        transition: 'transform 0.3s ease',
+    },
+    DeckSelected: {
+        transform: 'scale(1)',
+      },
+    DeckUnselected: {
+        transform: 'scale(0.3)',
+      },
+      
+    swiperFixedWidth300: {
+        width: '300px',
+    },
 });
 
 const ProductDisplay = () => {
@@ -55,15 +68,12 @@ const ProductDisplay = () => {
         <Container maxWidth={false}>
             <Swiper
                 spaceBetween={50}
-                slidesPerView={3}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
                 >
-                    {products.map((product, index)=>{
-                        <SwiperSlide key={product} virtualIndex={index}>
-                            {<ProductCard product={product}/>}
-                        </SwiperSlide>
-                    })}
+                    <SwiperSlide className="swiperFixedWidth300">
+                        <ProductCardTest/>
+                    </SwiperSlide>
             </Swiper>
             {/* <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
                 {products.map((product) => (
