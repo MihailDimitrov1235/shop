@@ -4,19 +4,25 @@ import {
     Box,
     Typography
 } from '@mui/material';
+import topSvg from './Vector.svg';
 
 const Footer = () => {
     return (
-        <Paper
-            component="footer"
-            square
-            variant="outlined"
-            sx={{
-                mt: 'auto',
-                width: '100%',
-            }}
+        <Box
+        width='100%'
+        display='contents'
         >
-            <Container maxWidth="lg">
+            <img style={{width:'100%'}} src={topSvg} alt="React Logo" />
+            <Box
+                margin='0'
+                height='300px'
+                style={{
+                    backgroundColor:'#96011c'
+                }}
+            >
+                
+            </Box>
+            {/* <Container maxWidth="lg">
                 <Box
                     sx={{
                         flexGrow: 1,
@@ -29,8 +35,8 @@ const Footer = () => {
                         © 2022 Bulgarian Academy of Sciences | Some rights reserved.
                     </Typography>
                 </Box>
-            </Container>
-        </Paper>
+            </Container> */}
+        </Box>
     );
 }
 
