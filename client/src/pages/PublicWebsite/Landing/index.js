@@ -2,6 +2,7 @@ import { Container, Box } from '@mui/material';
 import HeroSection from '../../../components/PublicWebsite/HeroSection/HeroSection';
 import ProductDisplay from '../../../components/PublicWebsite/products/ProductDisplay';
 import InformationSection from '../../../components/PublicWebsite/InformationSection';
+import Achievements from '../../../components/PublicWebsite/home/Achevements';
 
 const Landing = () => {
     return (
@@ -20,6 +21,7 @@ const Landing = () => {
             </Container>
             <ProductDisplay/>
             <InformationSection />
+            <Achievements/>
         </>
     );
 }
