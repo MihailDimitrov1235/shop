@@ -1,6 +1,7 @@
+import { Container } from '@mui/material';
 import HeroSection from "../../../components/PublicWebsite/HeroSection/HeroSection";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
-import { Container } from '@mui/material';
+import InformationSection from '../../../components/PublicWebsite/InformationSection';
 
 const Landing = () => {
     return (
@@ -18,6 +19,7 @@ const Landing = () => {
                 <HeroSection/>
             </Container>
             <ProductDisplay/>
+            <InformationSection />
         </>
     );
 }

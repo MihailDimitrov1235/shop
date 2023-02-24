@@ -13,6 +13,7 @@ const theme = createTheme({
       paper: '#ffffff',
       adminMenu: '#4f5d73',
       adminMenuDarker: '#465367',
+      bordoRed: '#96011c'
     },
     primary: {
       contrastText: '#96011c',
