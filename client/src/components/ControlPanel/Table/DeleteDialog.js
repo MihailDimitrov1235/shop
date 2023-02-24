@@ -8,7 +8,6 @@ import {
   Button,
   Box
 } from '@mui/material';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useTranslation } from 'react-i18next';
 
 export default function DeleteDialog({ selected, setSelected }) {

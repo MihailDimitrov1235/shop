@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import ProductCard from './ProductCard';
+import ProductCardTest from './ProductCardTest';
 import { Container } from '@mui/system';
 import productService from '../../../services/product';
 import { useTranslation } from 'react-i18next';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 
 
@@ -26,7 +28,20 @@ const useStyles = makeStyles({
     },
     productButton: {
         marginTop: '1rem'
-    }
+    },
+    Deck: {
+        transition: 'transform 0.3s ease',
+    },
+    DeckSelected: {
+        transform: 'scale(1)',
+      },
+    DeckUnselected: {
+        transform: 'scale(0.3)',
+      },
+      
+    swiperFixedWidth300: {
+        width: '300px',
+    },
 });
 
 const ProductDisplay = () => {
@@ -49,10 +64,18 @@ const ProductDisplay = () => {
                 console.log(error)
             })
     }, []);
-
     return (
         <Container maxWidth={false}>
-            <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
+            <Swiper
+                spaceBetween={50}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+                >
+                    <SwiperSlide className="swiperFixedWidth300">
+                        <ProductCardTest/>
+                    </SwiperSlide>
+            </Swiper>
+            {/* <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
                 {products.map((product) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} >
                         <ProductCard
@@ -60,7 +83,7 @@ const ProductDisplay = () => {
                         />
                     </Grid>
                 ))}
-            </Grid>
+            </Grid> */}
         </Container>
     );
 };
