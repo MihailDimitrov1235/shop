@@ -58,7 +58,8 @@ const Navbar = (props) => {
             href: '/login',
             variant: 'contained',
             color: 'bordoRed',
-            textcolor: "text.white"
+            textcolor: "text.white",
+            marginx: 0
         })
     }
 

@@ -75,7 +75,7 @@ const ProductDisplay = () => {
             })
     }, []);
     return (
-        <Container maxWidth={false} sx={{ width: '85%', margin: '0 auto', my: 10, p: '0px!important' }}>
+        <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10 }}>
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, A11y]}

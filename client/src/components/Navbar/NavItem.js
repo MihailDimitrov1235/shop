@@ -57,8 +57,14 @@ const NavItem = ({
                         height: '5px',
                         position: 'absolute',
                         bottom: -5
-                    }
-                })
+                    },
+                }),
+                ':first-of-type': {
+                    ml: 0
+                },
+                ':last-child': {
+                    mr: 0
+                }
                 // '& svg': {
                 //     mr: 1
                 // },
