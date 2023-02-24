@@ -5,9 +5,19 @@ import ProductCardTest from './ProductCardTest';
 import { Container } from '@mui/system';
 import productService from '../../../services/product';
 import { useTranslation } from 'react-i18next';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
 
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+import './styles.css'
 
 
 const useStyles = makeStyles({
@@ -34,11 +44,11 @@ const useStyles = makeStyles({
     },
     DeckSelected: {
         transform: 'scale(1)',
-      },
+    },
     DeckUnselected: {
         transform: 'scale(0.3)',
-      },
-      
+    },
+
     swiperFixedWidth300: {
         width: '300px',
     },
@@ -65,25 +75,47 @@ const ProductDisplay = () => {
             })
     }, []);
     return (
-        <Container maxWidth={false}>
+        <Container maxWidth={false} sx={{ width: '85%', margin: '0 auto', my: 1, p: '0px!important' }}>
             <Swiper
+                // install Swiper modules
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={50}
-                onSlideChange={() => console.log('slide change')}
+                slidesPerView={3}
+                navigation={{
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                  }}
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
                 onSwiper={(swiper) => console.log(swiper)}
-                >
-                    <SwiperSlide className="swiperFixedWidth300">
-                        <ProductCardTest/>
-                    </SwiperSlide>
+                onSlideChange={() => console.log('slide change')}
+            >
+                <SwiperSlide className="swiperFixedWidth300">
+                    <ProductCardTest />
+                </SwiperSlide>
+                <SwiperSlide className="swiperFixedWidth300">
+                    <ProductCardTest />
+                </SwiperSlide>
+                <SwiperSlide className="swiperFixedWidth300">
+                    <ProductCardTest />
+                </SwiperSlide>
+                <SwiperSlide className="swiperFixedWidth300">
+                    <ProductCardTest />
+                </SwiperSlide>
+                <SwiperSlide className="swiperFixedWidth300">
+                    <ProductCardTest />
+                </SwiperSlide>
+                <SwiperSlide className="swiperFixedWidth300">
+                    <ProductCardTest />
+                </SwiperSlide>
+                <SwiperSlide className="swiperFixedWidth300">
+                    <ProductCardTest />
+                </SwiperSlide>
             </Swiper>
-            {/* <Grid container className={classes.productContainer} justifyContent="space-between" alignItems="center" spacing={2}>
-                {products.map((product) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} >
-                        <ProductCard
-                            product={product}
-                        />
-                    </Grid>
-                ))}
-            </Grid> */}
+            <div className='swiper-button-container'>
+                <div className="icon-arrow-long-right swiper-button-next"></div>
+                <div className="icon-arrow-long-left swiper-button-prev"></div>
+            </div>
         </Container>
     );
 };

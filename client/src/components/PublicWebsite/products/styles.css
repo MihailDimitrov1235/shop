@@ -1,0 +1,23 @@
+.swiper-button-next,
+.swiper-button-prev {
+    /* background-color: white; */
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    
+    padding: 30px;
+    color: #000 !important;
+    fill: black !important;
+    stroke: black !important;
+}
+
+.swiper-button-prev {
+    left: -70px;
+}
+
+.swiper-button-next {
+    right: -70px;
+}
+
+.swiper-button-container {
+    position: relative;
+    top: -50%;
+}
