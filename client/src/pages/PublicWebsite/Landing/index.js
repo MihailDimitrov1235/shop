@@ -7,12 +7,12 @@ const Landing = () => {
         <>
             <Container maxWidth={'false'} sx={{
                 px: { lg: '130px!important' },
-                backgroundImage: `url('/static/images/heroImage.png')`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                width: '100vw',
-                height: '70vh',
+                // backgroundImage: `url('/static/images/hImage.png')`,
+                // backgroundPosition: 'center',
+                // backgroundSize: 'cover',
+                // backgroundRepeat: 'no-repeat',
+                width: '100%',
+                height: '500px',
                 display: 'flex',
             }}>
                 <HeroSection/>
