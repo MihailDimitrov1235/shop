@@ -38,9 +38,7 @@ function HeroSection() {
             Welcome to the webstore of the Bulgarian Academy of sciences
           </Typography>
           <Typography variant="subtitle1" className={classes.heroSubtitle}>
-            The Bulgarian Academy of sciences is the shitties place on earth. It is fucking horrible.
-            They hire fucking idiots who can't do their fucking job. The fucking grandma can go die under a fucking bridge.
-            They take 95 million euro from the EU for no fucking reason. KYS Ban. Thank you.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           </Typography>
           <Button variant="contained" color="bordoRed" component={Link} to="/products">
             Shop Now
