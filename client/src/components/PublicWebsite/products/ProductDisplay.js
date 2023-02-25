@@ -81,10 +81,25 @@ const ProductDisplay = () => {
                 modules={[Navigation, Pagination, A11y]}
                 spaceBetween={50}
                 slidesPerView={3}
+                breakpoints={{
+                    // when window width is >= 0px
+                    0: {
+                        slidesPerView: 1
+                    },
+                    // when window width is >= 640px
+                    640: {
+                        slidesPerView: 2
+                    },
+                    //when window width is >= 1100px
+                    1100: {
+                        slidesPerView: 3
+                    }
+                }}
+                loop={true}
                 navigation={{
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
-                  }}
+                }}
                 pagination={{ clickable: true }}
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
