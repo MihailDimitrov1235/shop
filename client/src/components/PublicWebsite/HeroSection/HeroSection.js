@@ -35,14 +35,20 @@ const useStyles = makeStyles({
 function HeroSection() {
     const classes = useStyles();
     return (
-        <Container maxWidth={false} display='flex' alignItems="center" height='100%' >
+        <Container maxWidth={false} sx={{
+            display: 'flex',
+            alignItems: 'center',
+            height: '100%'
+        }}>
             <Box
                 className={classes.heroContainer}
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
+                    flexDirection: { xs: 'column', md: 'row' },
                     alignItems: 'center',
-                    height: '100%'
+                    height: '100%',
+                    width: '100%'
                 }}
             >
                 <Box>
