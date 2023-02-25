@@ -75,7 +75,7 @@ const ProductDisplay = () => {
             })
     }, []);
     return (
-        <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10 }}>
+        <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, position: 'relative' }}>
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, A11y]}
@@ -100,7 +100,11 @@ const ProductDisplay = () => {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 }}
-                pagination={{ clickable: true }}
+                pagination={{
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    
+                }}
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >
@@ -130,6 +134,7 @@ const ProductDisplay = () => {
                 <div className="icon-arrow-long-right swiper-button-next"></div>
                 <div className="icon-arrow-long-left swiper-button-prev"></div>
             </div>
+            <div className='swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal'></div>
         </Container>
     );
 };

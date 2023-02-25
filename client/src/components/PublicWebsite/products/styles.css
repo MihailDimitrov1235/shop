@@ -21,3 +21,11 @@
     position: relative;
     top: -50%;
 }
+
+.swiper-pagination {
+    bottom: -10% !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #96011c !important;
+}
