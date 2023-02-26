@@ -1,9 +1,25 @@
 import React from 'react';
-import { Box, Typography, Button, CardMedia, Card } from '@mui/material';
+import { Box, Typography, Button, CardMedia, Card, duration } from '@mui/material';
 import "./AchievementCss.css"
-import { width } from '@mui/system';
+import { animated, useSpring } from '@react-spring/web';
+import { useInView } from 'react-intersection-observer';
 function Achievement( props ){
+
+    const { ref, inView, entry } = useInView({
+        /* Optional options */
+        triggerOnce: true,
+        threshold: 0,
+      });
+
+    const styles = useSpring({
+        opacity: inView? 1 : 0,
+        y: inView? 0 : 40,
+        config:{duration:500}
+      })
+      
+      console.log(styles)
     return(
+        <animated.div style={styles} ref={ref}>
         <Box textAlign={'center'}>
 
             <Typography className='topText' 
@@ -24,6 +40,7 @@ function Achievement( props ){
                 </Box>
             </Card>
         </Box>
+        </animated.div>
     )
 }
 
