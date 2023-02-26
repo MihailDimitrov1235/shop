@@ -5,10 +5,10 @@ import { animated, useSpring } from '@react-spring/web';
 import { useInView } from 'react-intersection-observer';
 function Achievement( props ){
 
-    const { ref, inView, entry } = useInView({
+    const { ref, inView} = useInView({
         /* Optional options */
         triggerOnce: true,
-        threshold: 0,
+        threshold: 0.5,
       });
 
     const styles = useSpring({

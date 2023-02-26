@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useGesture } from '@use-gesture/react';
+import { useSpring, animated} from '@react-spring/web'
 
 const NavItem = ({
     href,
@@ -30,6 +32,14 @@ const NavItem = ({
     };
 
     const condition = (active || isHovering) && !rest.variant;
+
+    const springs = useSpring({
+        transform: isHovering? 'scale(1.15)': 'scale(1)'
+    })
+
+    const bind = useGesture({
+        onHover:() => setIsHovering(!isHovering) && console.log("change"),
+    })
 
     return (
         <Button
@@ -75,7 +85,9 @@ const NavItem = ({
             {...rest}
         >
             <span>
-                {title}
+                <animated.div {...bind()} style={springs}>
+                    {title}
+                </animated.div>
             </span>
         </Button>
     );
