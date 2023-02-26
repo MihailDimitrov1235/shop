@@ -54,7 +54,11 @@ const useStyles = makeStyles({
     },
 });
 
+
+
 const ProductDisplay = () => {
+
+
     const classes = useStyles();
     const [products, setProducts] = useState([]);
     const { i18n } = useTranslation();
@@ -76,11 +80,17 @@ const ProductDisplay = () => {
     }, []);
     return (
         <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, position: 'relative' }}>
+            {/* <animated.div {...bind()} style={{transform}}>
+                        <ProductCardTest />
+                </animated.div> */}
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, A11y]}
                 spaceBetween={50}
                 slidesPerView={3}
+                style={{
+                    padding:'30px'
+                }}
                 breakpoints={{
                     // when window width is >= 0px
                     0: {
