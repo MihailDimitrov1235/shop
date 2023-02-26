@@ -9,6 +9,7 @@ const Landing = () => {
         <>
             <Container maxWidth={'false'} sx={{
                 px: { lg: '130px!important' },
+                mb: { xs: 30, md: 0 },
                 // backgroundImage: `url('/static/images/hImage.png')`,
                 // backgroundPosition: 'center',
                 // backgroundSize: 'cover',
