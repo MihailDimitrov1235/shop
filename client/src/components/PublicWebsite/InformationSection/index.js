@@ -16,10 +16,11 @@ const InformationSection = () => {
                         px: { lg: '130px!important' },
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        flexDirection: { xs: 'column', md: 'row' }
                     }}
                 >
-                    <Box sx={{ textAlign: 'center', width: '40%' }}>
+                    <Box sx={{ textAlign: 'center', width: { md: '40%' } }}>
                         <Typography
                             variant='h1'
                             sx={{ fontSize: '35px', color: 'white', fontWeight: 800 }}
