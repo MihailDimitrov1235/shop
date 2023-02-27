@@ -13,7 +13,9 @@ const InformationSection = () => {
                 <Container
                     maxWidth={'false'}
                     sx={{
-                        px: { lg: '130px!important' },
+                        width: '85%',
+                        margin: '0 auto',
+                        //px: { lg: '130px!important' },
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
