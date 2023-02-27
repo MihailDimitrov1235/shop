@@ -20,7 +20,7 @@ function Achievement( props ){
       console.log(styles)
     return(
         <animated.div style={styles} ref={ref}>
-        <Box textAlign={'center'}>
+        <Box sx={{ textAlign: 'center' }}>
 
             <Typography className='topText' 
             marginLeft='auto' 
