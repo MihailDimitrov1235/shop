@@ -54,6 +54,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-spring": "^9.7.0",
+    "react-use-measure": "^2.1.1",
     "styled-components": "^5.3.6",
     "swiper": "^9.0.5",
     "web-vitals": "^2.1.4",

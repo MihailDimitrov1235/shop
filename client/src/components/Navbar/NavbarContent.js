@@ -30,10 +30,10 @@ const NavbarContent = ({ item }) => {
             )}
 
             {item.type === 'langSwitcher' && (
-                <animated.div {...bind()} style={{transform}}>
-                    <LanguageSwitcher />
-                </animated.div>
-                
+                // <animated.div {...bind()} style={{transform}}>
+                //     <LanguageSwitcher />
+                // </animated.div>
+                <LanguageSwitcher />
             )}
 
             {item.type === 'divider' && (

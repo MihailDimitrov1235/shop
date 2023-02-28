@@ -31,7 +31,7 @@ const Navbar = (props) => {
     }));
 
     const items = [
-        { type: 'link', title: t('home'), href: '/' },
+        { type: 'link', title: t('home'), href: '/'},
         { type: 'link', title: t('products'), href: '/products' },
         { type: 'langSwitcher' },
         { type: 'divider', orientation: 'vertical' },
@@ -45,7 +45,8 @@ const Navbar = (props) => {
             color: "bordoRed",
             textcolor: "bordoRed",
             paddingx: 4.5,
-            startIcon: <ShoppingCartIcon />
+            startIcon: <ShoppingCartIcon />,
+            underline:false,
         }
     ]
 
@@ -59,14 +60,15 @@ const Navbar = (props) => {
             variant: 'contained',
             color: 'bordoRed',
             textcolor: "text.white",
-            marginx: 0
+            marginx: 0,
+            underline:false,
         })
     }
 
     return (
         <AppBar
-            elevation={1}
-            sx={{ py: 1 }}
+            elevation={0}
+            sx={{ py: 1, borderBottom: 'solid 1px #efefef'}}
             {...props}
         >
             <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', width: { sm: '100%', md: '85%' }, margin: { sm: 'none', md: '0 auto' } }}>

@@ -7,7 +7,8 @@ import {
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useGesture } from '@use-gesture/react';
-import { useSpring, animated} from '@react-spring/web'
+import useMeasure from 'react-use-measure';
+import { useSpring, animated} from '@react-spring/web';
 
 const NavItem = ({
     href,
@@ -23,8 +24,13 @@ const NavItem = ({
 
     const [isHovering, setIsHovering] = useState(false);
 
+    // const styles = {{
+    //     marginLeft = rest.marginx? ''
+    // }}
+
     const handleMouseOver = () => {
         setIsHovering(true);
+        console.log(rest.marginx)
     };
 
     const handleMouseOut = () => {
@@ -33,8 +39,10 @@ const NavItem = ({
 
     const condition = (active || isHovering) && !rest.variant;
 
-    const springs = useSpring({
-        transform: isHovering? 'scale(1.15)': 'scale(1)'
+
+    const [ref, { width }] = useMeasure()
+    const spring = useSpring({ 
+        width: rest.underline === false? 0 : active? '100%' : isHovering? width : 0 
     })
 
     const bind = useGesture({
@@ -43,6 +51,7 @@ const NavItem = ({
 
     return (
         <Button
+            ref={ref}
             component={RouterLink}
             sx={{
                 display: 'flex',
@@ -59,16 +68,7 @@ const NavItem = ({
                 ...(condition  && {
                     color: 'primary.contrastText',
                 }),
-                ...(condition && {
-                    '&:after': {
-                        content: '""',
-                        width: '100%',
-                        backgroundColor: 'primary.contrastText',
-                        height: '5px',
-                        position: 'absolute',
-                        bottom: -5
-                    },
-                }),
+                
                 ':first-of-type': {
                     ml: 0
                 },
@@ -85,10 +85,22 @@ const NavItem = ({
             {...rest}
         >
             <span>
-                <animated.div {...bind()} style={springs}>
+                {/* <animated.div {...bind()} style={springs}>
                     {title}
-                </animated.div>
+                </animated.div> */}
+                {title}
             </span>
+                <animated.div style={{
+                    position:'absolute',
+                    left:'0px',
+                    overflow:'hidden',
+                    width:width,
+                    backgroundColor:'#96011c',
+                    height:'2px',
+                    position:'absolute',
+                    bottom:-5,
+                    ...spring
+                }}/>
         </Button>
     );
 };
