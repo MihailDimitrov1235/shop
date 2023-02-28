@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/system';
 import './HeroSectionCss.css';
+import { useSpring, animated} from '@react-spring/web';
 
 const useStyles = makeStyles({
     heroContainer: {
@@ -33,6 +34,13 @@ const useStyles = makeStyles({
     // },
 });
 function HeroSection() {
+
+    const springs = useSpring({
+        border:'solid 1px red',
+        from: { opacity: 0, y: 100},
+        to: { opacity: 1, y: 0},
+    })
+
     const classes = useStyles();
     return (
         <Container maxWidth={false} sx={{
@@ -51,23 +59,24 @@ function HeroSection() {
                     width: '100%'
                 }}
             >
-                <Box>
-                    <Typography variant="h2" className={classes.heroText}>
-                        Welcome to the webstore of the Bulgarian Academy of sciences
-                    </Typography>
-                    <Typography variant="subtitle1" className={classes.heroSubtitle}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </Typography>
-                    <Box display={'flex'} justifyContent='left'>
-                        <Button variant="contained" color="bordoRed" component={Link} to="/products">
-                            Shop Now
-                        </Button>
+                <animated.div style={springs}>
+                    <Box>
+                        <Typography variant="h2" className={classes.heroText}>
+                            Welcome to the webstore of the Bulgarian Academy of sciences
+                        </Typography>
+                        <Typography variant="subtitle1" className={classes.heroSubtitle}>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </Typography>
+                        <Box display={'flex'} justifyContent='left'>
+                            <Button variant="contained" color="bordoRed" component={Link} to="/products">
+                                Shop Now
+                            </Button>
+                        </Box>
                     </Box>
-
-                </Box>
-                <Box height={'100%'} justifyContent="right" >
-                    <img src="/static/images/hImage.png" height={'100%'} className='img' />
-                </Box>
+                </animated.div>
+                    <Box height={'100%'} justifyContent="right" >
+                        <img src="/static/images/hImage.png" height={'100%'} className='img' />
+                    </Box>
             </Box>
         </Container>
 
