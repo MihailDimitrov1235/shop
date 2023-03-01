@@ -35,7 +35,7 @@ const ProductList = () => {
         >
             <Box width = '100%' display = 'flex' paddingLeft='30px' paddingRight='30px'>
                 <Box display='flex' width='100%'>
-                    <TextField id="standard-basic" label="Standard" variant="standard" />
+                    <TextField id="standard-basic" label="Search" variant="standard" />
                 </Box>
                 <Box display='flex' justifyContent='right'>
                     <IconButton style={{justifyContent:'right'}}><FilterListIcon/></IconButton>
