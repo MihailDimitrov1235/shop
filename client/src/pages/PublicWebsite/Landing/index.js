@@ -1,7 +1,7 @@
 import { Container, Box } from '@mui/material';
 import HeroSection from '../../../components/PublicWebsite/home/HeroSection/HeroSection';
 import ProductDisplay from '../../../components/PublicWebsite/products/ProductDisplay';
-import InformationSection from '../../../components/PublicWebsite/InformationSection';
+import InformationSection from '../../../components/PublicWebsite//home/InformationSection';
 import Achievements from '../../../components/PublicWebsite/home/achievements/Achevements';
 
 const Landing = () => {
