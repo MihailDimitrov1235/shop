@@ -8,7 +8,23 @@ function Achievements() {
     return (
         <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto' }}>
             <Box sx={{ my: '100px' }}>
-                <Typography variant='h3' textAlign={'center'}>
+                <Typography
+                    variant='h3'
+                    sx={{
+                        textAlign: 'center',
+                        position: 'relative',
+                        ':after': {
+                            content: '""',
+                            position: 'absolute',
+                            width: '20%',
+                            height: '3px',
+                            bottom: '-10px',
+                            left: '40%',
+                            borderBottom: '3px dashed',
+                            borderColor: 'background.bordoRed'
+                        }
+                    }}
+                >
                     Нашите постижения
                 </Typography>
                 <Grid
