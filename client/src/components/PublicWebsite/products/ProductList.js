@@ -35,14 +35,14 @@ const ProductList = () => {
         >
             <Box width = '100%' display = 'flex' paddingLeft='30px' paddingRight='30px'>
                 <Box display='flex' width='100%'>
-                    <TextField id="standard-basic" label="Search" variant="standard" />
+                    <TextField id="standard-basic" label="Search" variant="standard" color='bordoRed'/>
                 </Box>
                 <Box display='flex' justifyContent='right'>
                     <IconButton style={{justifyContent:'right'}}><FilterListIcon/></IconButton>
                 </Box>
             </Box>
 
-            <Container maxWidth={'false'}>
+            <Container maxWidth={'false'} sx={{ mt: 3 }}>
                 <Grid container spacing={2} >
                     {products.map((product, index) => (
                         <Grid item sm={12} md={6} lg={4} key={index}>
