@@ -24,13 +24,8 @@ const NavItem = ({
 
     const [isHovering, setIsHovering] = useState(false);
 
-    // const styles = {{
-    //     marginLeft = rest.marginx? ''
-    // }}
-
     const handleMouseOver = () => {
         setIsHovering(true);
-        console.log(rest.marginx)
     };
 
     const handleMouseOut = () => {
@@ -43,10 +38,6 @@ const NavItem = ({
     const [ref, { width }] = useMeasure()
     const spring = useSpring({ 
         width: rest.underline === false? 0 : active? '100%' : isHovering? width : 0 
-    })
-
-    const bind = useGesture({
-        onHover:() => setIsHovering(!isHovering) && console.log("change"),
     })
 
     return (
