@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     },
     heroSubtitle: {
         textAlign: 'left',
-        maxWidth: '600px',
+        //maxWidth: '600px',
         marginTop: '10px',
         marginBottom: '10px',
     },
@@ -52,7 +52,7 @@ function HeroSection() {
 
     const classes = useStyles();
     return (
-        <Container maxWidth={false} sx={{
+        <Container maxWidth={'false'} sx={{
             display: 'flex',
             alignItems: 'center',
             height: '100%',
