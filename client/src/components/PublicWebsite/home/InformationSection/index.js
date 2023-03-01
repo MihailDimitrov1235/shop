@@ -15,7 +15,7 @@ const InformationSection = () => {
                     sx={{
                         width: '85%',
                         margin: '0 auto',
-                        //px: { lg: '130px!important' },
+                        py: '100px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',

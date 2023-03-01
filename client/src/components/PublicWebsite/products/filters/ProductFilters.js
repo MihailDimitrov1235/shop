@@ -1,5 +1,5 @@
-import { Container } from '@mui/material';
-import FilterCard from '../../filters/FilterCard';
+import { Card, Typography } from '@mui/material';
+import FilterCard from './FilterCard';
 
 const ProductFilters = () => {
     //nau4na oblast
@@ -8,11 +8,16 @@ const ProductFilters = () => {
     //klu4ovi dumi
 
     return (
-        <Container>
+        <Card style={{
+            paddingTop:'40px',
+        }}
+        elevation={3}
+        >
+            <Typography variant='h3' style={{textAlign:'center'}}>t('filters')</Typography>
             <FilterCard />
             <FilterCard />
             <FilterCard />
-        </Container>
+        </Card>
     );
 }
 

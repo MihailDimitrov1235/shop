@@ -55,7 +55,7 @@ function HeroSection() {
         <Container maxWidth={false} sx={{
             display: 'flex',
             alignItems: 'center',
-            height: '100%'
+            height: '100%',
         }}>
             <Box
                 className={classes.heroContainer}
@@ -65,7 +65,8 @@ function HeroSection() {
                     flexDirection: { xs: 'column', md: 'row' },
                     alignItems: 'center',
                     height: '100%',
-                    width: '100%'
+                    width: '100%',
+                    justifyContent:'space-around',
                 }}
             >
                 <animated.div style={springs}>

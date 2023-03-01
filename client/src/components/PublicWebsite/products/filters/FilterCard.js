@@ -1,5 +1,5 @@
 import {
-    Card,
+    Container,
     CardContent,
     CardActions,
     Button,
@@ -8,7 +8,7 @@ import {
 
 const FilterCard = () => {
     return (
-        <Card sx={{ minWidth: 275, mb: 2, width: '100%' }}>
+        <Container sx={{ minWidth: 275, mb: 2, width: '100%' }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Word of the Day
@@ -28,7 +28,7 @@ const FilterCard = () => {
             <CardActions>
                 <Button size="small">Learn More</Button>
             </CardActions>
-        </Card>
+        </Container>
     );
 }
 
