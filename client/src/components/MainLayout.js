@@ -31,7 +31,8 @@ const MainLayoutContent = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    overflow: 'auto'
+    overflow: 'auto',
+    justifyContent: 'space-between'
 });
 
 const MainLayout = () => {
