@@ -16,8 +16,6 @@ function Achievement( props ){
         y: inView? 0 : 40,
         config:{duration:500}
       })
-      
-      console.log(styles)
     return(
         <animated.div style={styles} ref={ref}>
         <Box sx={{ textAlign: 'center' }}>

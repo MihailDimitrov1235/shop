@@ -37,7 +37,7 @@ const NavItem = ({
 
     const [ref, { width }] = useMeasure()
     const spring = useSpring({ 
-        width: rest.underline === false? 0 : active? '100%' : isHovering? width : 0 
+        width: rest.underline === false? 0 : condition? width : 0 
     })
 
     return (
@@ -85,11 +85,10 @@ const NavItem = ({
                     position:'absolute',
                     left:'0px',
                     overflow:'hidden',
-                    width:width,
                     backgroundColor:'#96011c',
                     height:'2px',
                     position:'absolute',
-                    bottom:-5,
+                    bottom:-2,
                     ...spring
                 }}/>
         </Button>

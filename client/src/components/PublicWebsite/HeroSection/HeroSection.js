@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Box, Typography, Button, CardMedia } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/system';
 import './HeroSectionCss.css';
 import { useSpring, animated} from '@react-spring/web';
+import { useGesture } from '@use-gesture/react';
 
 const useStyles = makeStyles({
     heroContainer: {
@@ -35,9 +36,17 @@ const useStyles = makeStyles({
 });
 function HeroSection() {
 
+    const [{x,y}, api] = useSpring( () => ({
+        x: "0",
+        y: "0",
+      }));
+
+    const bind = useGesture({
+        onHover: ({ hovering }) => api({x:hovering? '-5px': '0', y:hovering? '-5px': '0'}),
+})
+
     const springs = useSpring({
-        border:'solid 1px red',
-        from: { opacity: 0, y: 100},
+        from: { opacity: 0, y: 150},
         to: { opacity: 1, y: 0},
     })
 
@@ -68,15 +77,20 @@ function HeroSection() {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                         </Typography>
                         <Box display={'flex'} justifyContent='left'>
-                            <Button variant="contained" color="bordoRed" component={Link} to="/products">
-                                Shop Now
+                        <animated.div style={{x:x, y:y}}>
+                            <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products">
+                                
+                                    Shop now
                             </Button>
+                            </animated.div>
                         </Box>
                     </Box>
                 </animated.div>
+                <animated.div style={{height:'100%', justifyContent:"right", ...springs}}>
                     <Box height={'100%'} justifyContent="right" >
                         <img src="/static/images/hImage.png" height={'100%'} className='img' />
                     </Box>
+                </animated.div>
             </Box>
         </Container>
 
