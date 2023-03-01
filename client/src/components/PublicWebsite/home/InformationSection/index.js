@@ -25,7 +25,22 @@ const InformationSection = () => {
                     <Box sx={{ textAlign: 'center', width: { md: '40%' } }}>
                         <Typography
                             variant='h1'
-                            sx={{ fontSize: '35px', color: 'white', fontWeight: 800 }}
+                            sx={{
+                                fontSize: '35px',
+                                color: 'white',
+                                fontWeight: 800,
+                                position: 'relative',
+                                ':after': {
+                                    content: '""',
+                                    position: 'absolute',
+                                    width: '70%',
+                                    height: '3px',
+                                    bottom: '-10px',
+                                    left: '15%',
+                                    borderBottom: '3px dashed',
+                                    borderColor: 'white'
+                                }
+                            }}
                         >
                             What is Lorem Ipsum?
                         </Typography>
