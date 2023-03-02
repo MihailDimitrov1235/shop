@@ -6,9 +6,12 @@ import { useTranslation } from 'react-i18next';
 import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import Pagination from '../../Pagination/Pagination';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [rows, setRows] = useState(10);
     const { i18n } = useTranslation();
 
     useEffect(() => {
@@ -50,6 +53,13 @@ const ProductList = () => {
                         </Grid>
                     ))}
                 </Grid>
+                <Pagination
+                    total={100}
+                    page={page}
+                    setPage={setPage}
+                    rows={rows}
+                    setRows={setRows}
+                />
             </Container>
         </Card>
     );
