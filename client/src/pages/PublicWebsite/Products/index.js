@@ -14,10 +14,10 @@ const Products = () => {
         }}/>
         <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, p: '0px!important', zIndex:1 }}>
             <Grid container spacing={1}>
-                <Grid item md={12} lg={4}>
+                <Grid item xs={12} lg={4}>
                     <ProductFilters />
                 </Grid>
-                <Grid item md={12} lg={8}>
+                <Grid item xs={12} lg={8}>
                     <ProductList />
                 </Grid>
             </Grid>

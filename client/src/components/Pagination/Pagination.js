@@ -24,7 +24,7 @@ const Pagination = ({
     };
 
     return (
-        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', float: 'right', mt: 3 }}>
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap', float: 'right', mt: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Typography component='span'>
                     Елементи на страница:
