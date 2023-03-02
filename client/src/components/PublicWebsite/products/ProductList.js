@@ -7,12 +7,19 @@ import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Pagination from '../../Pagination/Pagination';
+import Select from '../../filters/Select';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [rows, setRows] = useState(10);
+    const [sort, setSort] = useState('desc');
     const { i18n } = useTranslation();
+
+    const options = [
+        { label: 'Първо по-новите', value: 'desc' },
+        { label: 'Първо по-старите', value: 'asc' }
+    ]
 
     useEffect(() => {
         const pagination = {
@@ -36,12 +43,21 @@ const ProductList = () => {
         }}
         elevation={3}
         >
-            <Box width = '100%' display = 'flex' paddingLeft='30px' paddingRight='30px'>
-                <Box display='flex' width='100%'>
-                    <TextField id="standard-basic" label="Search" variant="standard" color='bordoRed'/>
+            <Box sx={{ display: 'flex', px: '30px', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box sx={{ flexGrow: 2 }}>
+                    <TextField
+                        label='Search'
+                        margin='normal'
+                        variant='standard'
+                        color='bordoRed'
+                    />
                 </Box>
-                <Box display='flex' justifyContent='right'>
-                    <IconButton style={{justifyContent:'right'}}><FilterListIcon/></IconButton>
+                <Box sx={{ width: '30%' }}>
+                    <Select
+                        title='Сортиране'
+                        options={options}
+                        setValue={setSort}
+                    />
                 </Box>
             </Box>
 
