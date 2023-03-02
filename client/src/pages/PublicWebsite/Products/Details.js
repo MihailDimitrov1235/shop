@@ -46,58 +46,38 @@ const ProductPage = () => {
     };
 
     return (
-        <Container maxWidth={'false'} sx={{
-            px: { lg: '130px!important' }
-        }}>
-            <Card elevation={0}>
-                <Box sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    gap: 10,
-                    px: 3
-                }}>
-                    <CardMedia
-                        className={classes.image}
-                        component='img'
-                        title={product.name}
-                        image={product.files && `${process.env.REACT_APP_ASSETS}/${product.files[0].path}`}
-                    />
-                    <CardContent className={classes.text}>
-                        <Typography gutterBottom variant='h3' component='h2'>
-                            {product.name}
-                        </Typography>
-                        <Typography variant='body2' color='textSecondary' component='p'>
-                            {product.longDescription}
-                        </Typography>
-                        <Box display={'flex'} marginTop={'30px'}>
-                            <Button className={classes.button} variant='contained' color='bordoRed' component={Link} to='/products'>
-                                Buy
-                            </Button>
-                            <FormControl fullWidth>
-                                <InputLabel id='part' color='bordoRed'>Part</InputLabel>
-                                <Select
-                                    labelId='part'
-                                    id='part'
-                                    value={part}
-                                    label='Part'
-                                    color='bordoRed'
-                                    onChange={handleChange}
-                                >
-                                    {product.parts && product.parts.map(part => {
-                                        return (
-                                            <MenuItem value={part.id}>{part.id}</MenuItem>
-                                        );
-                                    })}
-                                </Select>
-                            </FormControl>
+        <Box display='flex' width='80%' marginLeft='auto' marginRight='auto'>
+            <Card elevation={1} style={{
+                width:'100%'
+            }}>
+                <Box display='flex'>
+                    <Box width='30%'>
+                        <CardMedia
+                            component="img"
+                            alt='img'
+                            image='https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp'
+                        />
+                    </Box>
+                    <Box width='70%'>
+                        <Box width='100%' height='100px' textAlign='center'>
+                            <Typography variant='h2'>Product of the bulgarian academy of sciences</Typography>
                         </Box>
-                        <Typography variant='body2' color='textSecondary' component='p'>
-                            {price} лв.
-                        </Typography>
-                    </CardContent>
+                        <Box width='100%' height = '100%' border='solid purple 1px' display='flex'>
+                            <Box width='60%' border='solid 1px red'>
+                                <Box height='20%' border='solid 2px blue' justifyContent='center' alignContent='center' textAlign='center'>
+                                    <Typography variant='p'>authors</Typography>
+                                </Box>
+                                <Box height='80%' border='solid 2px purple'>
+                                </Box>
+                            </Box>
+                            <Box width='40%' border='solid 2px blue'>
+
+                            </Box>
+                        </Box>
+                    </Box>
                 </Box>
             </Card>
-        </Container>
+        </Box>
     );
 }
 
