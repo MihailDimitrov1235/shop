@@ -125,8 +125,8 @@ const ProductPage = () => {
         <Card
           elevation={1}
           sx={{
-            width:'100%',
-            p:2
+            width: "100%",
+            p: 2,
           }}
         >
           <Box
@@ -159,7 +159,15 @@ const ProductPage = () => {
                   //mt: 2
                 }}
               >
-                <Box sx={{ flexBasis: "60%", display:'flex', flexDirection:'column', justifyContent:'space-evenly', maxHeight:'500px'}}>
+                <Box
+                  sx={{
+                    flexBasis: "60%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-evenly",
+                    maxHeight: "500px",
+                  }}
+                >
                   <Box textAlign="center">
                     <Typography variant="h2">{props.name}</Typography>
                     <Typography variant="p" sx={{ fontStyle: "italic" }}>
