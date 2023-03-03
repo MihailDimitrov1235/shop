@@ -4,6 +4,7 @@ import { ReactComponent as PdfIcon } from '../../../../assets/icons/pdf.svg';
 import { ReactComponent as WordIcon } from '../../../../assets/icons/word.svg';
 import { ReactComponent as ExcelIcon } from '../../../../assets/icons/excel.svg';
 import { ReactComponent as ImageIcon } from '../../../../assets/icons/image.svg';
+import { useTrail, animated } from '@react-spring/web'
 import { useTranslation } from 'react-i18next';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
@@ -13,6 +14,12 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 function Files({files}){
+
+    const trail = useTrail(files.length, {
+        from: { opacity: 0, x: 40},
+        to: { opacity: 1, x: 0},
+        config: { mass: 5, tension: 1500, friction: 200 },
+      })
 
     const [open, setOpen] = useState(false);
     const regex = /(?:\.([^.]+))?$/;
@@ -30,25 +37,27 @@ function Files({files}){
     return(
         <>
         <Typography variant='h5'>{t('recieve')}</Typography>
-            {files.reduce((result, file, i) => {
-                if (i < 4) {
+            {trail.reduce((result, {...style}, idx) => {
+                if (idx < 4) {
                     result.push(
-                        <Box width='100%' sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-evenly',
-                            py: 1
-                        }}>
-                            <Box width={'30px'}>
-                                {regex.exec(file)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
-                                    : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
-                                        : regex.exec(file)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
-                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
+                        <animated.div key={idx} style={{width:'100%', ...style}}>
+                            <Box width='100%' sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-evenly',
+                                py: 1
+                            }}>
+                                <Box width={'30px'}>
+                                    {regex.exec(files[idx])[1] === "pdf" ? <PdfIcon fill='#f40f02' />
+                                        : regex.exec(files[idx])[1] === "docs" || regex.exec(files[idx])[1] === "doxs" ? <WordIcon fill='#2D92D4' />
+                                            : regex.exec(files[idx])[1] === "xml" ? <ExcelIcon fill='#388E3C' />
+                                                : regex.exec(files[idx])[1] === "png" || regex.exec(files[idx])[1] === "jpg" || regex.exec(files[idx])[1] === "jpeg" || regex.exec(files[idx])[1] === "svg" || regex.exec(files[idx])[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
+                                </Box>
+                                <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
+                                    <Typography variant='p'>{files[idx]}</Typography>
+                                </Box>
                             </Box>
-                            <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
-                                <Typography variant='p'>{file}</Typography>
-                            </Box>
-                        </Box>
+                        </animated.div>
                     );
                 }
                 return result;
