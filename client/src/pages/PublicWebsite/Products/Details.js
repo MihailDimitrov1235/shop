@@ -129,19 +129,19 @@ const ProductPage = () => {
                         >
 
                             <CardContent>
-                                <Box textAlign='center'>
-                                    <Typography variant='h2'>{props.name}</Typography>
-                                    <Typography variant='p' sx={{ fontStyle: 'italic' }}>by {' '}
-                                        {props.authors.map((author, index) => (
-                                            <>
-                                                {author}{index == props.authors.length - 1 ? ' ' : ', '}
-                                            </>
-                                        ))}
-                                    </Typography>
-                                </Box>
                                 <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 3, mt: 3 }}>
                                     <Box sx={{ flexBasis: '60%' }}>
-                                        <Box sx={{ textAlign: 'center', height: '100%' }}>
+                                        <Box textAlign='center'>
+                                            <Typography variant='h2'>{props.name}</Typography>
+                                            <Typography variant='p' sx={{ fontStyle: 'italic' }}>by {' '}
+                                                {props.authors.map((author, index) => (
+                                                    <>
+                                                        {author}{index == props.authors.length - 1 ? ' ' : ', '}
+                                                    </>
+                                                ))}
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ textAlign: 'center', height: '100%', mt: 5 }}>
                                             <Typography>
                                                 {props.shortDescription}
                                             </Typography>
