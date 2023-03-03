@@ -8,10 +8,12 @@ import { useTranslation } from 'react-i18next';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 
+const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 function Files({files}){
-    const Transition = forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
-    });
+
     const [open, setOpen] = useState(false);
     const regex = /(?:\.([^.]+))?$/;
     const { t } = useTranslation();
@@ -62,7 +64,8 @@ function Files({files}){
 
                     <Dialog
                         open={open}
-                        //TransitionComponent={Transition}
+                        TransitionComponent={Transition}
+                        keepMounted
                         onClose={handleClose}
                     >
                         <Box                         
