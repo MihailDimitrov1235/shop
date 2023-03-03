@@ -247,5 +247,9 @@
 
     "item":"Item",
 
-    "total":"Total"
+    "total":"Total",
+
+    "recieve":"You will recieve",
+
+    "and-more":"And more..."
 }

@@ -6,10 +6,7 @@ import productService from '../../../services/product';
 import { width } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import ProductDisplay from '../../../components/PublicWebsite/products/ProductDisplay';
-import { ReactComponent as PdfIcon } from '../../../assets/icons/pdf.svg';
-import { ReactComponent as WordIcon } from '../../../assets/icons/word.svg';
-import { ReactComponent as ExcelIcon } from '../../../assets/icons/excel.svg';
-import { ReactComponent as ImageIcon } from '../../../assets/icons/image.svg';
+import Files from '../../../components/PublicWebsite/products/detailsPage/Files';
 
 const useStyles = makeStyles({
     image: {
@@ -39,6 +36,7 @@ const ProductPage = () => {
             "file2.pdf",
             "file3.png",
             "file4.xml",
+            "file5.png",
         ],
         shortDescription: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
         longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id purus ante. Ut venenatis felis at porttitor finibus. Etiam a blandit turpis, vitae dictum mauris. Fusce eu urna ac tortor aliquam ultrices. Nullam pharetra molestie nisi eget commodo. Donec sodales, velit pretium sodales euismod, magna leo ultricies ex, pellentesque molestie enim mi sit amet dui. Nullam et nulla et odio varius vulputate nec id leo."
@@ -58,7 +56,6 @@ const ProductPage = () => {
     const [part, setPart] = useState('');
     const [price, setPrice] = useState('');
     const [product, setProduct] = useState({});
-    const regex = /(?:\.([^.]+))?$/;
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -70,6 +67,8 @@ const ProductPage = () => {
                 console.log(error)
             })
     }, [])
+
+    const [open, setOpen] = React.useState(false);
 
     const handleChange = (event) => {
         product.parts.forEach(part => {
@@ -130,24 +129,7 @@ const ProductPage = () => {
                                     flexDirection: 'column',
                                     alignItems: 'center'
                                 }}>
-                                    {props.files.map((file) => (
-                                        <Box width='100%' sx={{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            justifyContent: 'space-evenly',
-                                            py: 1
-                                        }}>
-                                            <Box width={'40px'}>
-                                                {regex.exec(file)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
-                                                    : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
-                                                        : regex.exec(file)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
-                                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
-                                            </Box>
-                                            <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
-                                                <Typography variant='p'>{file}</Typography>
-                                            </Box>
-                                        </Box>
-                                    ))}
+                                    <Files files={props.files}/>
                                     <Box>
                                         <Button variant='contained' color='bordoRed'>{t('add-cart')}</Button>
                                     </Box>
