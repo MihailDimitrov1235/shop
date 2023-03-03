@@ -6,6 +6,10 @@ import productService from '../../../services/product';
 import { width } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import ProductDisplay from '../../../components/PublicWebsite/products/ProductDisplay';
+import { ReactComponent as PdfIcon }  from '../../../assets/icons/pdf.svg';
+import { ReactComponent as WordIcon }  from '../../../assets/icons/word.svg';
+import { ReactComponent as ExcelIcon }  from '../../../assets/icons/excel.svg';
+import { ReactComponent as ImageIcon }  from '../../../assets/icons/image.svg';
 
 const useStyles = makeStyles({
     image: {
@@ -132,12 +136,13 @@ const ProductPage = () => {
                                         display:'flex',
                                         flexDirection:'row',
                                         justifyContent:'space-evenly',
+                                        py: 1
                                     }}> 
-                                        <Box width={'50px'}>
-                                            {regex.exec(file)[1] === "pdf"? <img src="/static/images/icons/pdf.svg" width={'50px'}/>
-                                            : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs"? <img src="/static/images/icons/word.svg" width={'50px'}/>
-                                            : regex.exec(file)[1] === "xml"? <img src="/static/images/icons/excel.svg" width={'50px'}/>
-                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff"? <img src="/static/images/icons/image.svg" width={'50px'}/> : "unidentified"}
+                                        <Box width={'40px'}>
+                                            {regex.exec(file)[1] === "pdf"? <PdfIcon fill='#f40f02' />
+                                            : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs"? <WordIcon fill='#2D92D4' />
+                                            : regex.exec(file)[1] === "xml"? <ExcelIcon fill='#388E3C' />
+                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff"? <ImageIcon fill='#81D4FA' /> : "unidentified"}
                                         </Box>
                                         <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
                                             <Typography variant='p'>{file}</Typography>
