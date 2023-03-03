@@ -6,6 +6,7 @@ import { Container } from '@mui/system';
 import './HeroSectionCss.css';
 import { useSpring, animated} from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
     heroContainer: {
@@ -35,6 +36,8 @@ const useStyles = makeStyles({
     // },
 });
 function HeroSection() {
+
+    const { t } = useTranslation();
 
     const [{x,y}, api] = useSpring( () => ({
         x: "0",
@@ -72,16 +75,15 @@ function HeroSection() {
                 <animated.div style={springs}>
                     <Box>
                         <Typography variant="h2" className={classes.heroText}>
-                            Welcome to the webstore of the Bulgarian Academy of sciences
+                            {t('hero-title')}
                         </Typography>
                         <Typography variant="subtitle1" className={classes.heroSubtitle}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            {t('hero-desc')}
                         </Typography>
                         <Box display={'flex'} justifyContent='left'>
                         <animated.div style={{x:x, y:y}}>
                             <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products">
-                                
-                                    Shop now
+                                {t('hero-button')}
                             </Button>
                             </animated.div>
                         </Box>

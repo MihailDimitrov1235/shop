@@ -207,5 +207,45 @@
 
     "price": "Price",
 
-    "drag-and-drop-files": "Drag and drop your files or"
+    "drag-and-drop-files": "Drag and drop your files or",
+
+    "sort":"Sorting",
+
+    "sort-newest":"Newest first",
+
+    "sort-oldest":"Oldest first",
+    
+    "filters":"Filters",
+    
+    "search":"Search",
+
+    "add-cart":"ADD TO CART",
+
+    "description":"Description",
+
+    "simular-products":"Simular Products",
+
+    "hero-title":"The best website to buy scientific papers",
+
+    "hero-desc":"Webstore by the Bulgarian Academy of Sciences which sells highly researched and developed scientific papers. After a purchase of the full product you are free to use it in your own or your company's projects.",
+
+    "hero-button":"SHOP NOW",
+
+    "information-title":"What is Lorem Ipsum?",
+    
+    "information-desc":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    
+    "achievements":"Our achievements",
+
+    "copyright":"© 2023 Bulgarian Academy of Sciences | Some rights reserved | Cookie Policy",
+
+    "home-title":"Home",
+
+    "products-title":"Products",
+
+    "cart-title":"Cart",
+
+    "item":"Item",
+
+    "total":"Total"
 }

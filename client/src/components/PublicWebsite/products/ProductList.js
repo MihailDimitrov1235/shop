@@ -14,11 +14,11 @@ const ProductList = () => {
     const [page, setPage] = useState(1);
     const [rows, setRows] = useState(10);
     const [sort, setSort] = useState('desc');
-    const { i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const options = [
-        { label: 'Първо по-новите', value: 'desc' },
-        { label: 'Първо по-старите', value: 'asc' }
+        { label: t('sort-newest'), value: 'desc' },
+        { label: t('sort-oldest'), value: 'asc' }
     ]
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const ProductList = () => {
             total: 10
         }
 
-        productService.getProducts(pagination, [], {}, i18n.language)
+        productService.getProducts(pagination, [], {}, t.language)
             .then((res) => {
                 setProducts(res.data.data);
                 //setTotal(res.data.total);
@@ -46,7 +46,7 @@ const ProductList = () => {
             <Box sx={{ display: 'flex', px: '30px', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box sx={{ flexGrow: 2 }}>
                     <TextField
-                        label='Search'
+                        label={t('search')}
                         margin='normal'
                         variant='standard'
                         color='bordoRed'
@@ -54,7 +54,7 @@ const ProductList = () => {
                 </Box>
                 <Box sx={{ width: '30%' }}>
                     <Select
-                        title='Сортиране'
+                        title={t('sort')}
                         options={options}
                         setValue={setSort}
                     />

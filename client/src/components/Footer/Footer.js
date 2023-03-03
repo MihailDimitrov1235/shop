@@ -4,8 +4,10 @@ import {
     Typography
 } from '@mui/material';
 import topSvg from './Vector.svg';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+    const { t } = useTranslation();
     return (
         <footer style={{ marginTop: '50px' }}>
             <Box sx={{ display: 'flex' }}>
@@ -73,7 +75,7 @@ const Footer = () => {
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: { xs: 'column', md: 'row' } }}>
                         <Box sx={{ flexGrow: 1, textAlign: { xs: 'center', md: 'left' } }}>
-                            <Typography color={'white'}>© 2023 Българска академия на науките | Някои права запазени | Политика за бисквитките</Typography>
+                            <Typography color={'white'}>{t('copyright')}</Typography>
                         </Box>
                         <Box sx={{ display: 'flex', justifyContent: 'space-evenly', p: '10px', width: '40%' }}>
                             <img src="/static/images/icons/FacebookIcon.png" height={'30px'} />

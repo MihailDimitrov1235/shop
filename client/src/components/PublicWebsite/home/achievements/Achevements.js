@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Typography, Button, CardMedia, Card, Grid, Container } from '@mui/material';
 import Achievement from './Achievement';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import { useTranslation } from 'react-i18next';
 
 function Achievements() {
+
+    const { t } = useTranslation();
 
     return (
         <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto' }}>
@@ -25,7 +28,7 @@ function Achievements() {
                         }
                     }}
                 >
-                    Нашите постижения
+                    {t('achievements')}
                 </Typography>
                 <Grid
                     container
