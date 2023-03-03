@@ -20,8 +20,6 @@ const ProductFilters = () => {
 
             <FilterCard component={<AutocompleteCheckboxes label={t('categories')} options={top100Films} />}/>
             <FilterCard component={<AutocompleteCheckboxes label={t('authors')} options={top100Films} />}/>
-            {/* <FilterCard />
-            <FilterCard /> */}
         </Card>
     );
 }
