@@ -117,7 +117,7 @@ const ProductPage = () => {
                                         ))}
                                     </Typography>
                                 </Box>
-                                <Box height='80%' border='solid 2px purple' padding={'10px'} >
+                                <Box height='80%' border='solid 2px purple' padding={'10px'} sx={{ textAlign: 'center' }}>
                                     <Typography>
                                         {props.shortDescription}
                                     </Typography>
@@ -134,10 +134,10 @@ const ProductPage = () => {
                                         justifyContent:'space-evenly',
                                     }}> 
                                         <Box width={'50px'}>
-                                            {regex.exec(file)[1] === "pdf"? <img src="/static/images/icons/pdfIcon.png" width={'50px'}/>
-                                            : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs"? <img src="/static/images/icons/wordIcon.png" width={'50px'}/>
-                                            : regex.exec(file)[1] === "xml"? <img src="/static/images/icons/excelIcon.png" width={'50px'}/>
-                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff"? <img src="/static/images/icons/imageIcon.png" width={'50px'}/> : "unidentified"}
+                                            {regex.exec(file)[1] === "pdf"? <img src="/static/images/icons/pdf.svg" width={'50px'}/>
+                                            : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs"? <img src="/static/images/icons/word.svg" width={'50px'}/>
+                                            : regex.exec(file)[1] === "xml"? <img src="/static/images/icons/excel.svg" width={'50px'}/>
+                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff"? <img src="/static/images/icons/image.svg" width={'50px'}/> : "unidentified"}
                                         </Box>
                                         <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
                                             <Typography variant='p'>{file}</Typography>
