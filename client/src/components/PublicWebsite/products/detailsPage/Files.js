@@ -53,7 +53,9 @@ function Files({files}){
                 }, [])}
                 {files.length>4 &&
                 <>
-                    <Button onClick={handleClickOpen}>
+                    <Button onClick={handleClickOpen} sx={{
+                        marginBottom:'10px'
+                    }}>
                         <Typography color={'black'} variant='p'>{t('and-more')}</Typography>
                     </Button>
 

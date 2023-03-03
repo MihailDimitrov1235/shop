@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Link, useParams } from 'react-router-dom';
-import { FormControl, MenuItem, InputLabel, Select, Box, Button, Card, CardMedia, CardContent, Typography, Container, CardActions } from '@mui/material';
+import { TextField, MenuItem, InputLabel, Select, Box, Button, Card, CardMedia, CardContent, Typography, Container, CardActions } from '@mui/material';
 import productService from '../../../services/product';
 import { width } from '@mui/system';
 import { useTranslation } from 'react-i18next';
@@ -31,13 +31,6 @@ const ProductPage = () => {
             "S. Kozuharov",
             "M. Balev",
         ],
-        files: [
-            "file1.docs",
-            "file2.pdf",
-            "file3.png",
-            "file4.xml",
-            "file5.png",
-        ],
         shortDescription: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
         longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id purus ante. Ut venenatis felis at porttitor finibus. Etiam a blandit turpis, vitae dictum mauris. Fusce eu urna ac tortor aliquam ultrices. Nullam pharetra molestie nisi eget commodo. Donec sodales, velit pretium sodales euismod, magna leo ultricies ex, pellentesque molestie enim mi sit amet dui. Nullam et nulla et odio varius vulputate nec id leo."
             + "Curabitur nec ultrices est. Donec ornare, mi eget rhoncus volutpat, erat enim dictum ipsum, nec volutpat nulla leo ac elit. In massa magna, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Integer fringilla ligula vel ullamcorper viverra. Suspendisse consequat ligula id congue sodales. Sed elementum turpis id felis congue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem."
@@ -49,12 +42,47 @@ const ProductPage = () => {
             + "Fusce venenatis elit et tellus scelerisque rhoncus. Donec varius lectus quis nisi faucibus, vitae mollis lectus vulputate. Ut risus ex, elementum vel augue non, laoreet facilisis odio. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed commodo volutpat nisi eget porttitor. Donec efficitur aliquet odio quis laoreet. Nullam scelerisque, libero eget mattis aliquet, urna mauris dignissim nibh, sed interdum tortor felis quis ex. Suspendisse potenti. Aenean accumsan, purus vel porta consequat, est nunc condimentum velit, imperdiet vulputate leo ante vitae nunc."
             + "Donec non elit ac neque varius dapibus. Proin blandit cursus nisl, sed ultrices magna imperdiet et. Nullam quam est, scelerisque et vehicula ultrices, convallis at mi. In dignissim, augue vel mollis varius, leo massa condimentum odio, quis placerat odio lorem eu nisi. Sed et elementum tellus, vitae accumsan nisi. Etiam id fringilla odio, vel ultricies elit. Aliquam efficitur pellentesque erat, quis fringilla magna tincidunt quis. Maecenas cursus faucibus arcu, ut ultricies augue tincidunt ac. Cras ante nisi, tincidunt et enim in, vestibulum sollicitudin risus. Maecenas posuere, odio eget posuere iaculis, diam ligula lacinia ex, id aliquam purus nibh vel dui. Sed euismod euismod sem ac aliquam."
             + "Sed porta tempor faucibus. Donec condimentum eget urna vel ullamcorper. Nam dignissim magna vel risus fringilla fermentum. Sed eleifend ultricies lorem, in pellentesque nibh scelerisque id. Morbi suscipit ut augue eget scelerisque. Nunc commodo dignissim est at viverra. Nunc scelerisque nibh sem, sit amet consequat orci lacinia vel. Donec egestas interdum nisl, ut dignissim diam ornare vitae. Suspendisse blandit ipsum magna, in hendrerit nunc ultrices eget. Vestibulum molestie maximus porttitor. In porta, ante a pellentesque volutpat, ex urna mollis est, ac porta diam neque vitae orci. Vivamus tristique diam tortor, eu aliquam tellus facilisis id.",
-        parts: 4,
+        parts: [
+            {
+                id:1,
+                files:[
+                    "file1.docs",
+                    "file2.pdf",
+                    "file3.png",
+                    "file4.xml",
+                    "file5.png",
+                ],
+                price:999.99
+            },
+            {
+                id:2,
+                files:[
+                    "file1.docs",
+                    "file2.pdf",
+                    "file3.png",
+                    "file5.png",
+                ],
+                price:99.99
+            },
+            {
+                id:3,
+                files:[
+                    "file1.docs",
+                    "file3.png",
+                    "file4.xml",
+                    "file5.png",
+                ],
+                price:9909.99
+            }
+        ],
     }
+
+    const [files, setFiles] = useState(props.parts[0].files)
+    const [price, setPrice] = useState(props.parts[0].price);
+    const [part, setPart] = useState(1);
+
     const classes = useStyles();
     const { id } = useParams();
-    const [part, setPart] = useState('');
-    const [price, setPrice] = useState('');
     const [product, setProduct] = useState({});
     const { t } = useTranslation();
 
@@ -68,16 +96,11 @@ const ProductPage = () => {
             })
     }, [])
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleChange = (event) => {
-        product.parts.forEach(part => {
-            if (part.id === event.target.value) {
-                setPrice(part.price);
-            }
-        });
+    const handlePartChange = (event) => {
         setPart(event.target.value);
-    };
+        setFiles(props.parts[event.target.value-1].files)
+        setPrice(props.parts[event.target.value-1].price)
+      };
 
     return (
         <>
@@ -129,7 +152,27 @@ const ProductPage = () => {
                                     flexDirection: 'column',
                                     alignItems: 'center'
                                 }}>
-                                    <Files files={props.files}/>
+                                    <Box width='100%' display={'flex'} justifyContent={'space-evenly'} alignItems='center' marginBottom={'30px'}>
+                                        <Box sx={{ minWidth: 80 }}>
+                                            <TextField
+                                                select
+                                                onChange={handlePartChange}
+                                                label={t('part')}
+                                                value={part}
+                                                color='bordoRed'
+                                                variant={'standard'}
+                                                fullWidth
+                                            >
+                                                {props.parts.map((part)=>(
+                                                    <MenuItem key={part.id} value={part.id}>
+                                                            {part.id}
+                                                    </MenuItem>
+                                                ))}
+                                            </TextField>
+                                        </Box>
+                                        <Typography>{price}{" "}{t('bgn')}</Typography>
+                                    </Box>
+                                    <Files files={files}/>
                                     <Box>
                                         <Button variant='contained' color='bordoRed'>{t('add-cart')}</Button>
                                     </Box>
