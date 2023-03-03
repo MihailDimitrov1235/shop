@@ -62,7 +62,7 @@ function Files({files}){
 
                     <Dialog
                         open={open}
-                        TransitionComponent={Transition}
+                        //TransitionComponent={Transition}
                         onClose={handleClose}
                     >
                         <Box                         
