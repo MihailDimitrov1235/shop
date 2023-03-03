@@ -44,35 +44,35 @@ const ProductPage = () => {
             + "Sed porta tempor faucibus. Donec condimentum eget urna vel ullamcorper. Nam dignissim magna vel risus fringilla fermentum. Sed eleifend ultricies lorem, in pellentesque nibh scelerisque id. Morbi suscipit ut augue eget scelerisque. Nunc commodo dignissim est at viverra. Nunc scelerisque nibh sem, sit amet consequat orci lacinia vel. Donec egestas interdum nisl, ut dignissim diam ornare vitae. Suspendisse blandit ipsum magna, in hendrerit nunc ultrices eget. Vestibulum molestie maximus porttitor. In porta, ante a pellentesque volutpat, ex urna mollis est, ac porta diam neque vitae orci. Vivamus tristique diam tortor, eu aliquam tellus facilisis id.",
         parts: [
             {
-                id:1,
-                files:[
+                id: 1,
+                files: [
                     "file1.docs",
                     "file2.pdf",
                     "file3.png",
                     "file4.xml",
                     "file5.png",
                 ],
-                price:999.99
+                price: 999.99
             },
             {
-                id:2,
-                files:[
+                id: 2,
+                files: [
                     "file1.docs",
                     "file2.pdf",
                     "file3.png",
                     "file5.png",
                 ],
-                price:99.99
+                price: 99.99
             },
             {
-                id:3,
-                files:[
+                id: 3,
+                files: [
                     "file1.docs",
                     "file3.png",
                     "file4.xml",
                     "file5.png",
                 ],
-                price:9909.99
+                price: 9909.99
             }
         ],
     }
@@ -98,89 +98,91 @@ const ProductPage = () => {
 
     const handlePartChange = (event) => {
         setPart(event.target.value);
-        setFiles(props.parts[event.target.value-1].files)
-        setPrice(props.parts[event.target.value-1].price)
-      };
+        setFiles(props.parts[event.target.value - 1].files)
+        setPrice(props.parts[event.target.value - 1].price)
+    };
 
     return (
         <>
             <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 5, }}>
-                <Card elevation={1} style={{
-                    width: '100%'
-                }}>
+                <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', lg: 'row' }, height: { xs: 'auto', lg: '40%' } }}>
                     <Box sx={{
-                        display: 'flex',
-                        flexDirection: { xs: 'column', md: 'row' }
-                    }}
-                    >
-                        <Box sx={{
-                            height: { sm: '100%', xs: 'auto' },
-                            width: { sm: 'auto', xs: '100%' }
-                        }}>
-                            <CardMedia
-                                sx={{
-                                    height: { sm: '100%', xxs: 'auto' },
-                                    width: { md: 'auto', xxs: '100%' }
-                                }}
-                                component="img"
-                                alt='img'
-                                image='https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp'
-                            />
-                        </Box>
-                        <CardContent>
-                            <Box textAlign='center'>
-                                <Typography variant='h2'>{props.name}</Typography>
-                                <Typography variant='p' sx={{ fontStyle: 'italic' }}>by {' '}
-                                    {props.authors.map((author, index) => (
-                                        <>
-                                            {author}{index == props.authors.length - 1 ? ' ' : ', '}
-                                        </>
-                                    ))}
-                                </Typography>
-                            </Box>
-                            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mt: 3 }}>
-                                <Box sx={{ flexBasis: '60%' }}>
-                                    <Box sx={{ textAlign: 'center', height: '100%', }}>
-                                        <Typography>
-                                            {props.shortDescription}
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                                <Box width='100%' sx={{
-                                    flexBasis: '40%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center'
-                                }}>
-                                    <Box width='100%' display={'flex'} justifyContent={'space-evenly'} alignItems='center' marginBottom={'30px'}>
-                                        <Box sx={{ minWidth: 80 }}>
-                                            <TextField
-                                                select
-                                                onChange={handlePartChange}
-                                                label={t('part')}
-                                                value={part}
-                                                color='bordoRed'
-                                                variant={'standard'}
-                                                fullWidth
-                                            >
-                                                {props.parts.map((part)=>(
-                                                    <MenuItem key={part.id} value={part.id}>
-                                                            {part.id}
-                                                    </MenuItem>
-                                                ))}
-                                            </TextField>
-                                        </Box>
-                                        <Typography>{price}{" "}{t('bgn')}</Typography>
-                                    </Box>
-                                    <Files files={files}/>
-                                    <Box>
-                                        <Button variant='contained' color='bordoRed'>{t('add-cart')}</Button>
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </CardContent>
+                        height: { sm: '100%', xs: 'auto' },
+                        width: { sm: 'auto', xs: '100%' }
+                    }}>
+                        <CardMedia
+                            sx={{
+                                height: { sm: '100%', xxs: 'auto' },
+                                width: { md: 'auto', xxs: '100%' }
+                            }}
+                            component="img"
+                            alt='img'
+                            image='https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp'
+                        />
                     </Box>
-                </Card>
+
+                    <Card elevation={1} sx={{ flexGrow: 1 }}>
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'column', md: 'row' }
+                        }}
+                        >
+
+                            <CardContent>
+                                <Box textAlign='center'>
+                                    <Typography variant='h2'>{props.name}</Typography>
+                                    <Typography variant='p' sx={{ fontStyle: 'italic' }}>by {' '}
+                                        {props.authors.map((author, index) => (
+                                            <>
+                                                {author}{index == props.authors.length - 1 ? ' ' : ', '}
+                                            </>
+                                        ))}
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 3, mt: 3 }}>
+                                    <Box sx={{ flexBasis: '60%' }}>
+                                        <Box sx={{ textAlign: 'center', height: '100%' }}>
+                                            <Typography>
+                                                {props.shortDescription}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                    <Box width='100%' sx={{
+                                        flexBasis: '40%',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center'
+                                    }}>
+                                        <Box width='100%' display={'flex'} justifyContent={'space-evenly'} alignItems='center' marginBottom={'30px'}>
+                                            <Box sx={{ minWidth: 80 }}>
+                                                <TextField
+                                                    select
+                                                    onChange={handlePartChange}
+                                                    label={t('part')}
+                                                    value={part}
+                                                    color='bordoRed'
+                                                    variant={'standard'}
+                                                    fullWidth
+                                                >
+                                                    {props.parts.map((part) => (
+                                                        <MenuItem key={part.id} value={part.id}>
+                                                            {part.id}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
+                                            </Box>
+                                            <Typography>{price}{" "}{t('bgn')}</Typography>
+                                        </Box>
+                                        <Files files={files} />
+                                        <Box>
+                                            <Button variant='contained' color='bordoRed'>{t('add-cart')}</Button>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </CardContent>
+                        </Box>
+                    </Card>
+                </Box>
                 <Card elevation={1} sx={{ mt: 4 }}>
                     <CardContent>
                         <Typography
