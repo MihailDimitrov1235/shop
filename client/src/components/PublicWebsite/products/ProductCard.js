@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
                 </Typography>
                 <Tooltip title={shortDescription}>
                     <Typography variant="body2" color="text.secondary">
-                        {shortDescription}
+                        <div dangerouslySetInnerHTML={{ __html: shortDescription }} />
                     </Typography>
                 </Tooltip>
             </CardContent>
