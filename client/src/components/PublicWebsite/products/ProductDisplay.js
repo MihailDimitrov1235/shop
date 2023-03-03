@@ -79,7 +79,7 @@ const ProductDisplay = () => {
             })
     }, []);
     return (
-        <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, position: 'relative' }}>
+        <>
             {/* <animated.div {...bind()} style={{transform}}>
                         <ProductCardTest />
                 </animated.div> */}
@@ -145,7 +145,7 @@ const ProductDisplay = () => {
                 <div className="icon-arrow-long-left swiper-button-prev"></div>
             </div>
             <div className='swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal'></div>
-        </Container>
+        </>
     );
 };
 

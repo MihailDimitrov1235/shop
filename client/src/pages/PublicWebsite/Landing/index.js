@@ -14,11 +14,13 @@ const Landing = () => {
                 height: '500px',
                 display: 'flex',
             }}>
-                <HeroSection/>
+                <HeroSection />
             </Container>
-            <ProductDisplay/>
+            <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, position: 'relative' }}>
+                <ProductDisplay />
+            </Container>
             <InformationSection />
-            <Achievements/>
+            <Achievements />
         </>
     );
 }
