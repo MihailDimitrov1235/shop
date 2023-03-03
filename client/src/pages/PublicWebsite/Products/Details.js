@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Link, useParams } from 'react-router-dom';
-import { FormControl, MenuItem, InputLabel, Select, Box, Button, Card, CardMedia, CardContent, Typography, Container } from '@mui/material';
+import { FormControl, MenuItem, InputLabel, Select, Box, Button, Card, CardMedia, CardContent, Typography, Container, CardActions } from '@mui/material';
 import productService from '../../../services/product';
 import { width } from '@mui/system';
 import { useTranslation } from 'react-i18next';
@@ -117,16 +117,18 @@ const ProductPage = () => {
                                 </Typography>
                             </Box>
                             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, mt: 3 }}>
-                                <Box>
-                                    <Box sx={{ textAlign: 'center', height: '100%', p: '10px' }}>
+                                <Box sx={{ flexBasis: '60%' }}>
+                                    <Box sx={{ textAlign: 'center', height: '100%', }}>
                                         <Typography>
                                             {props.shortDescription}
                                         </Typography>
                                     </Box>
                                 </Box>
                                 <Box width='100%' sx={{
+                                    flexBasis: '40%',
                                     display: 'flex',
                                     flexDirection: 'column',
+                                    alignItems: 'center'
                                 }}>
                                     {props.files.map((file) => (
                                         <Box width='100%' sx={{
@@ -146,6 +148,9 @@ const ProductPage = () => {
                                             </Box>
                                         </Box>
                                     ))}
+                                    <Box>
+                                        <Button variant='contained' color='bordoRed'>Add to cart</Button>
+                                    </Box>
                                 </Box>
                             </Box>
                         </CardContent>
