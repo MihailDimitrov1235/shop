@@ -13,13 +13,13 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function Files({files}){
+function Files({ files }) {
 
     const trail = useTrail(files.length, {
-        from: { opacity: 0, x: 40},
-        to: { opacity: 1, x: 0},
+        from: { opacity: 0, x: 40 },
+        to: { opacity: 1, x: 0 },
         config: { mass: 5, tension: 1500, friction: 200 },
-      })
+    })
 
     const [open, setOpen] = useState(false);
     const regex = /(?:\.([^.]+))?$/;
@@ -27,20 +27,20 @@ function Files({files}){
 
     const handleClickOpen = () => {
         setOpen(true);
-      };
-    
-      const handleClose = () => {
-        setOpen(false);
-      };
-    
+    };
 
-    return(
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    return (
         <>
-        <Typography variant='h5'>{t('recieve')}</Typography>
-            {trail.reduce((result, {...style}, idx) => {
+            <Typography variant='h5'>{t('recieve')}</Typography>
+            {trail.reduce((result, { ...style }, idx) => {
                 if (idx < 4) {
                     result.push(
-                        <animated.div key={idx} style={{width:'100%', ...style}}>
+                        <animated.div key={idx} style={{ width: '100%', ...style }}>
                             <Box width='100%' sx={{
                                 display: 'flex',
                                 flexDirection: 'row',
@@ -61,52 +61,49 @@ function Files({files}){
                     );
                 }
                 return result;
-                }, [])}
-                {files.length>4 &&
-                <>
-                    <Button onClick={handleClickOpen} sx={{
-                        marginBottom:'10px'
-                    }}>
-                        <Typography color={'black'} variant='p'>{t('and-more')}</Typography>
-                    </Button>
+            }, [])}
+
+            <Button hidden={files.length <= 4} onClick={handleClickOpen} sx={{
+                marginBottom: '10px',
+                visibility: files.length > 4 ? 'visible' : 'hidden'
+            }}>
+                <Typography color={'black'} variant='p'>{t('and-more')}</Typography>
+            </Button>
 
 
-                    <Dialog
-                        open={open}
-                        TransitionComponent={Transition}
-                        keepMounted
-                        onClose={handleClose}
-                    >
-                        <Box                         
-                        sx={{
-                            py:'30px'
-                        }}
-                        >
-                        <Typography textAlign={'center'} variant='h3'>{t('all-files')}</Typography>
-                        {files.map((file) => (
-                            <Box width='500px' sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-evenly',
-                                py: 1
-                            }}>
-                                <Box width={'40px'}>
-                                    {regex.exec(file)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
-                                        : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
-                                            : regex.exec(file)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
-                                                : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
-                                </Box>
-                                <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
-                                    <Typography variant='p'>{file}</Typography>
-                                </Box>
+            <Dialog
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+            >
+                <Box
+                    sx={{
+                        py: '30px'
+                    }}
+                >
+                    <Typography textAlign={'center'} variant='h3'>{t('all-files')}</Typography>
+                    {files.map((file) => (
+                        <Box width='500px' sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-evenly',
+                            py: 1
+                        }}>
+                            <Box width={'40px'}>
+                                {regex.exec(file)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
+                                    : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
+                                        : regex.exec(file)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
+                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
                             </Box>
-                        ))}
+                            <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
+                                <Typography variant='p'>{file}</Typography>
+                            </Box>
                         </Box>
-                    </Dialog>
-                </>
-                }
-                {/* View all files dialog box */}
-                </>
+                    ))}
+                </Box>
+            </Dialog>
+        </>
     )
 }
 

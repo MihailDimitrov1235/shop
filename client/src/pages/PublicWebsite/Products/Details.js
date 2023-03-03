@@ -153,8 +153,8 @@ const ProductPage = () => {
                                         flexDirection: 'column',
                                         alignItems: 'center'
                                     }}>
-                                        <Box width='100%' display={'flex'} justifyContent={'space-evenly'} alignItems='center' marginBottom={'30px'}>
-                                            <Box sx={{ minWidth: 80 }}>
+                                        <Box width='100%' sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', mb: '30px' }}>
+                                            <Box sx={{ minWidth: 80, width: '100px' }}>
                                                 <TextField
                                                     select
                                                     onChange={handlePartChange}
