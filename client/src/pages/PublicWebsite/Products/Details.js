@@ -105,7 +105,7 @@ const ProductPage = () => {
     return (
         <>
             <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 5, }}>
-                <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', lg: 'row' }, height: { xs: 'auto', lg: '40%' } }}>
+                <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' }, height: { xs: 'auto', lg: '40%' } }}>
                     <Box sx={{
                         height: { sm: '100%', xs: 'auto' },
                         width: { sm: 'auto', xs: '100%' }
