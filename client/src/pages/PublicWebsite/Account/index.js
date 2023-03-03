@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import {
     Box,
@@ -10,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 const Account = () => {
     const { t } = useTranslation();
+    const [menu, setMenu] = useState('home');
 
     return (
         <>
@@ -34,7 +36,7 @@ const Account = () => {
                             md={6}
                             xs={12}
                         >
-                            <AccountProfile />
+                            <AccountProfile menu={menu} setMenu={setMenu} />
                         </Grid>
                         <Grid
                             item

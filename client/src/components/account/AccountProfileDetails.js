@@ -45,7 +45,7 @@ const AccountProfileDetails = (props) => {
     };
 
     return (
-            <Card>
+            <Card sx={{ height: '100%' }}>
                 <CardHeader
                     subheader={t('profile-edit-information')}
                     title={t('profile')}

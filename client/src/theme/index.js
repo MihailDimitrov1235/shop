@@ -26,7 +26,8 @@ const theme = createTheme({
       primary: '#172b4d',
       secondary: '#6b778c',
       white: '#ffffff',
-      black: '#000000'
+      black: '#000000',
+      bordoRed: '#96011c'
     }
   },
   shadows: [
