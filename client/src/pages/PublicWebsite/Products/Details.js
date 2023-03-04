@@ -4,8 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import {
   TextField,
   MenuItem,
-  Chip,
-  Stack,
   Box,
   Button,
   Card,
@@ -13,13 +11,12 @@ import {
   CardContent,
   Typography,
   Container,
-  CardActions,
 } from "@mui/material";
 import productService from "../../../services/product";
-import { width } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
 import Files from "../../../components/PublicWebsite/products/detailsPage/Files";
+import ProductInformation from "../../../components/PublicWebsite/products/detailsPage/ProductInformation";
 
 const useStyles = makeStyles({
   image: {
@@ -129,14 +126,15 @@ const ProductPage = () => {
         >
           <Box
             sx={{
-              height: { sm: "100%", xs: "auto" },
+              height: {xs: "auto" },
               width: { sm: "auto", xs: "100%" },
+              marginRight: { sm: "50px", xs: "0" }
             }}
           >
             <CardMedia
               sx={{
-                height: { sm: "100%", xxs: "auto" },
-                width: { md: "auto", xxs: "100%" },
+                height: { sm: "100%", xs: "auto" },
+                width: { md: "auto", xs: "100%" },
               }}
               component="img"
               alt="img"
@@ -147,7 +145,7 @@ const ProductPage = () => {
           <Card elevation={1} sx={{ flexGrow: 1 }}>
             <Box
               sx={{
-                display: "flex",
+                display:{ xs: 'block', lg:'flex'},
                 flexDirection: { xs: "column", md: "row" },
               }}
             >
@@ -160,32 +158,8 @@ const ProductPage = () => {
                     mt: 3,
                   }}
                 >
-                  <Box sx={{ flexBasis: "60%" }}>
-                    <Box textAlign="center" display={"flex"} flexWrap="wrap">
-                      <Typography variant="h2">{props.name}</Typography>
-                      <Stack
-                        direction="row"
-                        spacing={1}
-                        justifyContent="center"
-                        display={"flex"}
-                        flexWrap="wrap"
-                      >
-                        {props.authors.map((author) => (
-                          <Chip
-                            sx={{
-                              mb: 1,
-                            }}
-                            component={Link}
-                            label={author.name}
-                            to={"/author/" + author.id}
-                            clickable
-                          />
-                        ))}
-                      </Stack>
-                    </Box>
-                    <Box sx={{ textAlign: "center", height: "100%", mt: 5 }}>
-                      <Typography>{props.shortDescription}</Typography>
-                    </Box>
+                  <Box sx={{ flexBasis: "60%", display:{ xs: 'none', lg:'block'} }}>
+                    <ProductInformation name={props.name} authors={props.authors} desc={props.shortDescription} />
                   </Box>
                   <Box
                     width="100%"
@@ -199,7 +173,7 @@ const ProductPage = () => {
                     <Box
                       width="100%"
                       sx={{
-                        display: "flex",
+                        display:'flex',
                         justifyContent: "space-evenly",
                         alignItems: "center",
                         mb: "30px",
@@ -238,6 +212,12 @@ const ProductPage = () => {
             </Box>
           </Card>
         </Box>
+          <Box sx={{ display:{ xs: 'flex', lg:'none'}, flexDirection:'column' }}>
+            
+            <Card elevation={1} sx={{ p: 3, mt:3 }}>
+                <ProductInformation name={props.name} authors={props.authors} desc={props.shortDescription} />
+            </Card>
+          </Box>
         <Card elevation={1} sx={{ mt: 4 }}>
           <CardContent>
             <Typography
