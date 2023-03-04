@@ -183,6 +183,7 @@ class ProductController extends Controller
                                 'product_trans.shortDescription',
                                 'product_trans.longDescription'
                             )
+                            ->where('products.id', $id)
                             ->with([
                                 'categories',
                                 'authors',
@@ -214,7 +215,7 @@ class ProductController extends Controller
                                 $q->on('product_trans.product_id', 'products.id');
                                 $q->where('product_trans.lang', request()->query('lang'));
                             })
-                            ->findOrFail($id);   
+                            ->first(); 
 
         return $product;
     }
