@@ -11,14 +11,14 @@ import {
   CardContent,
   Typography,
   Container,
-  Stack,
-  Chip,
 } from "@mui/material";
 import productService from "../../../services/product";
 import { useTranslation } from "react-i18next";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
 import Files from "../../../components/PublicWebsite/products/detailsPage/Files";
 import ProductInformation from "../../../components/PublicWebsite/products/detailsPage/ProductInformation";
+import { useSpring, animated} from '@react-spring/web';
+import { useGesture } from '@use-gesture/react';
 import { display } from "@mui/system";
 
 const useStyles = makeStyles({
@@ -37,6 +37,16 @@ const useStyles = makeStyles({
 });
 
 const ProductPage = () => {
+
+  const [{x,y}, api] = useSpring( () => ({
+    x: "0",
+    y: "0",
+  }));
+
+  const bind = useGesture({
+      onHover: ({ hovering }) => api({x:hovering? '-5px': '0', y:hovering? '-5px': '0'}),
+  })
+
   const props = {
     name: "Product of the bulgarian academy of sciences",
     authors: [
@@ -199,7 +209,7 @@ const ProductPage = () => {
                       width="100%"
                       sx={{
                         display: "flex",
-                        justifyContent: "center",
+                        justifyContent: "space-evenly",
                         alignItems: "center",
                         mb: "30px",
                       }}
@@ -234,9 +244,14 @@ const ProductPage = () => {
                     </Box>
                     <Files files={files} />
                     <Box>
-                      <Button variant="contained" color="bordoRed">
-                        {t("add-cart")}
-                      </Button>
+                      <animated.div {...bind()} style={{
+                        x:x,
+                        y:y
+                      }}>
+                        <Button variant="contained" color="bordoRed">
+                          {t("add-cart")}
+                        </Button>
+                      </animated.div>
                     </Box>
                   </Box>
                 </Box>
