@@ -2,24 +2,23 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { Link, useParams } from "react-router-dom";
 import {
-    TextField,
-    MenuItem,
-    Chip,
-    Stack,
-    Box,
-    Button,
-    Card,
-    CardMedia,
-    CardContent,
-    Typography,
-    Container,
-    CardActions,
+  TextField,
+  MenuItem,
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Container,
+  Stack,
+  Chip
 } from "@mui/material";
 import productService from "../../../services/product";
-import { width } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
 import Files from "../../../components/PublicWebsite/products/detailsPage/Files";
+//import ProductInformation from "../../../components/PublicWebsite/products/detailsPage/ProductInformation";
 
 const useStyles = makeStyles({
     image: {
