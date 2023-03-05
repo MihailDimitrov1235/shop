@@ -2,6 +2,7 @@ import { Box, Typography, Stack, Chip } from '@mui/material';
 import { Link } from "react-router-dom";
 
 export default function ProductInformation({ name, authors, desc }) {
+    console.log(authors)
     return (
         <>
             <Box textAlign="center" display={"flex"} flexWrap="wrap" justifyContent={'center'}>
@@ -23,7 +24,7 @@ export default function ProductInformation({ name, authors, desc }) {
                             }}
                             component={Link}
                             label={author.name}
-                            to={"/author/" + author.id}
+                            to={"/author/" + author.author_id}
                             clickable
                         />
                     ))}

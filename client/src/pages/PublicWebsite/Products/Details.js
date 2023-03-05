@@ -50,14 +50,14 @@ const ProductPage = () => {
     const props = {
         name: "Product of the bulgarian academy of sciences",
         authors: [
-            { id: 1, name: "M. Dimitrov" },
-            { id: 2, name: "S. Kozuharov" },
-            { id: 3, name: "M. Balev" },
-            { id: 1, name: "M. Dimitrov" },
-            { id: 2, name: "S. Kozuharov" },
-            { id: 3, name: "M. Balev" },
-            { id: 1, name: "M. Dimitrov" },
-            { id: 2, name: "S. Kozuharov" },
+            { author_id: 1, name: "M. Dimitrov" },
+            { author_id: 2, name: "S. Kozuharov" },
+            { author_id: 3, name: "M. Balev" },
+            { author_id: 1, name: "M. Dimitrov" },
+            { author_id: 2, name: "S. Kozuharov" },
+            { author_id: 3, name: "M. Balev" },
+            { author_id: 1, name: "M. Dimitrov" },
+            { author_id: 2, name: "S. Kozuharov" },
         ],
         shortDescription:
             "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
@@ -103,14 +103,14 @@ const ProductPage = () => {
 
     const classes = useStyles();
     const { id } = useParams();
-    const [product, setProduct] = useState({});
+    const [product, setProduct] = useState({ authors: [] });
     const { t, i18n } = useTranslation();
 
     useEffect(() => {
         productService
             .getProductById(id)
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
                 setProduct(res.data);
             })
             .catch((error) => {
@@ -151,7 +151,7 @@ const ProductPage = () => {
                         <Card elevation={1} sx={{ p: 3, mt: 3 }}>
                             <ProductInformation
                                 name={props.name}
-                                authors={props.authors}
+                                authors={product.authors}
                                 desc={product.shortDescription}
                             />
                         </Card>
@@ -187,7 +187,7 @@ const ProductPage = () => {
                                     >
                                         <ProductInformation
                                             name={props.name}
-                                            authors={props.authors}
+                                            authors={product.authors}
                                             desc={product.shortDescription}
                                         />
                                     </Box>
@@ -261,7 +261,7 @@ const ProductPage = () => {
                     <Card elevation={1} sx={{ p: 3, mt: 3 }}>
                         <ProductInformation
                             name={props.name}
-                            authors={props.authors}
+                            authors={product.authors}
                             desc={product.shortDescription}
                         />
                     </Card>
