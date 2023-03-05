@@ -2,7 +2,7 @@ import { Box, Typography, Stack, Chip } from '@mui/material';
 import { Link } from "react-router-dom";
 
 export default function ProductInformation({ name, authors, desc }) {
-    console.log(authors)
+
     return (
         <>
             <Box textAlign="center">
@@ -26,6 +26,7 @@ export default function ProductInformation({ name, authors, desc }) {
                             label={author.name}
                             to={"/author/" + author.author_id}
                             clickable
+                            key={author.author_id}
                         />
                     ))}
                 </Stack>

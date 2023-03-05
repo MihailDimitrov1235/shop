@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
                     {name}
                 </Typography>
                 <Tooltip title={shortDescription}>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" component='div' color="text.secondary">
                         <div dangerouslySetInnerHTML={{ __html: shortDescription }} />
                     </Typography>
                 </Tooltip>

@@ -45,8 +45,7 @@ const Navbar = (props) => {
             color: "bordoRed",
             textcolor: "bordoRed",
             paddingx: 4.5,
-            startIcon: <ShoppingCartIcon />,
-            underline:false,
+            startIcon: <ShoppingCartIcon />
         }
     ]
 
@@ -60,8 +59,7 @@ const Navbar = (props) => {
             variant: 'contained',
             color: 'bordoRed',
             textcolor: "text.white",
-            marginx: 0,
-            underline:false,
+            marginx: 0
         })
     }
 

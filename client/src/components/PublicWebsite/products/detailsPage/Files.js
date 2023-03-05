@@ -83,13 +83,17 @@ function Files({ files }) {
                     }}
                 >
                     <Typography textAlign={'center'} variant='h3'>{t('all-files')}</Typography>
-                    {files.map((file) => (
-                        <Box width='500px' sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-evenly',
-                            py: 1
-                        }}>
+                    {files.map((file, index) => (
+                        <Box
+                            sx={{
+                                width: '500px',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-evenly',
+                                py: 1
+                            }}
+                            key={index}
+                        >
                             <Box width={'40px'}>
                                 {regex.exec(file)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
                                     : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
