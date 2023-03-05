@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
     TextField,
     MenuItem,
@@ -105,15 +105,16 @@ const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({ authors: [] });
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         productService
             .getProductById(id)
             .then((res) => {
-                console.log(res.data);
                 setProduct(res.data);
             })
             .catch((error) => {
+                navigate('/');
                 console.log(error);
             });
     }, [i18n.language]);

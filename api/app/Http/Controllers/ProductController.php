@@ -176,7 +176,8 @@ class ProductController extends Controller
     }
 
     public function getById($id) {
-
+        $p = Product::findOrFail($id);
+        
         $product = Product::select(
                                 'products.id',
                                 'product_trans.name as name',
