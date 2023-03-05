@@ -185,25 +185,30 @@ class ProductController extends Controller
                             )
                             ->where('products.id', $id)
                             ->with([
-                                'categories',
-                                'authors',
-                                'categories.category' => function ($query) {
+                                'categories' => function ($query) {
                                     $query->select(
-                                        'categories.id as id',
+                                        'product_category.category_id',
+                                        'product_category.product_id',
                                         'category_trans.name'
-                                    )->leftJoin('category_trans', function($q) {
-                                        $q->on('category_trans.category_id', 'categories.id');
+                                    )
+                                    ->leftJoin('category_trans', function($q) {
+                                        $q->on('category_trans.category_id', 'product_category.category_id');
                                         $q->where('category_trans.lang', request()->query('lang'));
                                     });
                                 },
-                                'authors.author' => function ($query) {
+                                'authors' => function ($query) {
                                     $query->select(
-                                        'authors.id as id',
+                                        'product_author.author_id',
+                                        'product_author.product_id',
                                         'authors.phone',
                                         'authors.email',
                                         'author_trans.name',
-                                    )->leftJoin('author_trans', function($q) {
-                                        $q->on('author_trans.author_id', 'authors.id');
+                                    )
+                                    ->leftJoin('authors', function($q) {
+                                        $q->on('product_author.author_id', 'authors.id');
+                                    })
+                                    ->leftJoin('author_trans', function($q) {
+                                        $q->on('author_trans.author_id', 'product_author.author_id');
                                         $q->where('author_trans.lang', request()->query('lang'));
                                     });
                                 },
