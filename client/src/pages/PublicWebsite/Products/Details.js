@@ -145,6 +145,18 @@ const ProductPage = () => {
                         />
                     </Box>
 
+                    <Box
+                        sx={{ display: { xs: "flex", md: "none" }, flexDirection: "column" }}
+                    >
+                        <Card elevation={1} sx={{ p: 3, mt: 3 }}>
+                            <ProductInformation
+                                name={props.name}
+                                authors={props.authors}
+                                desc={product.shortDescription}
+                            />
+                        </Card>
+                    </Box>
+
                     <Card elevation={1} sx={{ flexBasis: '70%' }}>
                         <Box
                             sx={{
@@ -244,7 +256,7 @@ const ProductPage = () => {
                     </Card>
                 </Box>
                 <Box
-                    sx={{ display: { xs: "flex", lg: "none" }, flexDirection: "column" }}
+                    sx={{ display: { xs: 'none', md: "flex", lg: "none" }, flexDirection: "column" }}
                 >
                     <Card elevation={1} sx={{ p: 3, mt: 3 }}>
                         <ProductInformation
