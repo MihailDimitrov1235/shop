@@ -5,7 +5,7 @@ export default function ProductInformation({ name, authors, desc }) {
     console.log(authors)
     return (
         <>
-            <Box textAlign="center" display={"flex"} flexWrap="wrap" justifyContent={'center'}>
+            <Box textAlign="center">
                 <Typography variant="h2">{name}</Typography>
                 <Stack
                     direction="row"
