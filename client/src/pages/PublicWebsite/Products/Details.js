@@ -289,7 +289,7 @@ const ProductPage = () => {
                         </Typography>
                         <Box sx={{ mt: 4 }}>
                             <div
-                                dangerouslySetInnerHTML={{ __html: props.longDescription }}
+                                dangerouslySetInnerHTML={{ __html: product.longDescription }}
                             />
                         </Box>
                     </CardContent>
