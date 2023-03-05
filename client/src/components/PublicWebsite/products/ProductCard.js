@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
 
     return (
         <Card sx={{ height: '330px', marginLeft: 'auto', marginRight: 'auto' }}>
-            <CardActionArea component={Link} to={`/product/${id}`} >
+            <CardActionArea component={Link} to={`/products/${id}`} >
                 <CardMedia
                     component="img"
                     alt={name}
@@ -39,7 +39,7 @@ const ProductCard = ({ product }) => {
                 </Tooltip>
             </CardContent>
             <CardActions>
-                <Button variant="contained" color="bordoRed" component={Link} to={`/product/${id}`} style={{
+                <Button variant="contained" color="bordoRed" component={Link} to={`/products/${id}`} style={{
                     width: "auto",
                     fontSize: "12px",
                     marginTop: '30px',

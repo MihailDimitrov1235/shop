@@ -44,8 +44,14 @@ const routes = [
     children: [
       { path: '/', element: <Landing /> },
       // { path: '/404', element: <Page404 /> },
-      { path: 'products', element: <Products /> },
-      { path: 'product/:id', element: <ProductPage /> },
+      {
+        path: 'products',
+        children: [
+          { path: '', element: <Products /> },
+          { path: ':id', element: <ProductPage /> },
+        ]
+      },
+      
       { path: 'author/:id', element: <AuthorPage /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },

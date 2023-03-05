@@ -117,7 +117,7 @@ const ProductPage = () => {
                 navigate('/products');
                 console.log(error);
             });
-    }, [i18n.language]);
+    }, [id, i18n.language]);
 
     const handlePartChange = (event) => {
         setPart(event.target.value);
