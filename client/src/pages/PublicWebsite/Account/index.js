@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import AccountProfile from '../../../components/account/AccountProfile';
 import AccountProfileDetails from '../../../components/account/AccountProfileDetails';
+import AccountProfileSettings from '../../../components/account/AccountProfileSettings';
 import { useTranslation } from 'react-i18next';
 
 const Account = () => {
@@ -44,7 +45,8 @@ const Account = () => {
                             md={6}
                             xs={12}
                         >
-                            <AccountProfileDetails />
+                            {menu === 'home' && <AccountProfileDetails />}
+                            {menu === 'settings' && <AccountProfileSettings />}
                         </Grid>
                     </Grid>
                 </Container>
