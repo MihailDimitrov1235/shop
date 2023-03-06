@@ -60,8 +60,8 @@ const AccountProfileSettings = (props) => {
                 touched,
                 values
             }) => (
-                <form onSubmit={handleSubmit}>
-                    <Card>
+                <form onSubmit={handleSubmit} style={{ height: '100%' }}>
+                    <Card sx={{ height: '100%' }}>
                         <CardHeader
                             subheader='Информацията може да бъде редактирана'
                             title='Профил'

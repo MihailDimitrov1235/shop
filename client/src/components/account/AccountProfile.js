@@ -36,7 +36,7 @@ const AccountProfile = ({ menu, setMenu, ...props }) => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, height: '100%' }}>
-            <Card {...props}>
+            <Card {...props} sx={{ height: '260px' }}>
                 <CardContent>
                     <Box
                         sx={{
@@ -84,7 +84,7 @@ const AccountProfile = ({ menu, setMenu, ...props }) => {
                     </Button>
                 </CardActions>
             </Card>
-            <Card>
+            <Card sx={{ height: '50%' }}>
                 <MenuList>
                     {menus.map((m, index) => {
                         const { icon: Icon } = m;
