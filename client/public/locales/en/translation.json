@@ -255,5 +255,9 @@
 
     "bgn":"BGN",
 
-    "all-files":"All files:"
+    "all-files":"All files:",
+
+    "purchases": "Purchases",
+
+    "settings": "Settings"
 }

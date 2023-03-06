@@ -91,7 +91,7 @@ const AccountProfile = ({ menu, setMenu, ...props }) => {
                         const isActive = menu === m.slug;
 
                         return (
-                            <MenuItem onClick={() => handleMenuClick(m.slug)}>
+                            <MenuItem onClick={() => handleMenuClick(m.slug)} sx={{ py: 1 }}>
                                 <ListItemIcon>
                                     <Icon color={isActive ? 'bordoRed' : 'action'} />
                                 </ListItemIcon>
