@@ -41,7 +41,7 @@ const MainLayout = () => {
             <Navbar />
             <MainLayoutWrapper>
                 <MainLayoutContainer>
-                    <MainLayoutContent>
+                    <MainLayoutContent className='main-content'>
                         <Outlet />
                         <Footer />
                     </MainLayoutContent>
