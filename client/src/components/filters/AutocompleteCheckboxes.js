@@ -36,11 +36,11 @@ const AutocompleteCheckboxes = ({ label, options, setValue }) => {
             renderInput={(params) => (
                 <TextField {...params} label={label} placeholder={label} color='bordoRed' />
             )}
-            renderTags={(tagValue, getTagProps) => {
-                return tagValue.map((option, index) => (
-                    <Chip {...getTagProps({ index })} label={option.title} sx={{ width: '100%', justifyContent: 'space-between', px: 4 }}/>
-                ))
-            }}
+            // renderTags={(tagValue, getTagProps) => {
+            //     return tagValue.map((option, index) => (
+            //         <Chip {...getTagProps({ index })} label={option.title} sx={{ justifyContent: 'space-between', px: 4 }}/>
+            //     ))
+            // }}
             noOptionsText={t('no-options')}
         />
     );
