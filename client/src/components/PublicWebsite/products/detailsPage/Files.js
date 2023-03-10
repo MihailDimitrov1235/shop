@@ -48,13 +48,13 @@ function Files({ files }) {
                                 py: 1
                             }}>
                                 <Box width={'30px'}>
-                                    {regex.exec(files[idx])[1] === "pdf" ? <PdfIcon fill='#f40f02' />
-                                        : regex.exec(files[idx])[1] === "docs" || regex.exec(files[idx])[1] === "doxs" ? <WordIcon fill='#2D92D4' />
-                                            : regex.exec(files[idx])[1] === "xml" ? <ExcelIcon fill='#388E3C' />
-                                                : regex.exec(files[idx])[1] === "png" || regex.exec(files[idx])[1] === "jpg" || regex.exec(files[idx])[1] === "jpeg" || regex.exec(files[idx])[1] === "svg" || regex.exec(files[idx])[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
+                                    {regex.exec(files[idx].path)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
+                                        : regex.exec(files[idx].path)[1] === "docs" || regex.exec(files[idx].path)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
+                                            : regex.exec(files[idx].path)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
+                                                : regex.exec(files[idx].path)[1] === "png" || regex.exec(files[idx].path)[1] === "jpg" || regex.exec(files[idx].path)[1] === "jpeg" || regex.exec(files[idx].path)[1] === "svg" || regex.exec(files[idx].path)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
                                 </Box>
                                 <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
-                                    <Typography variant='p'>{files[idx]}</Typography>
+                                    <Typography variant='p'>{files[idx].path.split('/').pop()}</Typography>
                                 </Box>
                             </Box>
                         </animated.div>
@@ -95,13 +95,13 @@ function Files({ files }) {
                             key={index}
                         >
                             <Box width={'40px'}>
-                                {regex.exec(file)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
-                                    : regex.exec(file)[1] === "docs" || regex.exec(file)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
-                                        : regex.exec(file)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
-                                            : regex.exec(file)[1] === "png" || regex.exec(file)[1] === "jpg" || regex.exec(file)[1] === "jpeg" || regex.exec(file)[1] === "svg" || regex.exec(file)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
+                                {regex.exec(file.path)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
+                                    : regex.exec(file.path)[1] === "docs" || regex.exec(file.path)[1] === "doxs" ? <WordIcon fill='#2D92D4' />
+                                        : regex.exec(file.path)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
+                                            : regex.exec(file.path)[1] === "png" || regex.exec(file.path)[1] === "jpg" || regex.exec(file.path)[1] === "jpeg" || regex.exec(file.path)[1] === "svg" || regex.exec(file.path)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
                             </Box>
                             <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
-                                <Typography variant='p'>{file}</Typography>
+                                <Typography variant='p'>{file.path.split('/').pop()}</Typography>
                             </Box>
                         </Box>
                     ))}
