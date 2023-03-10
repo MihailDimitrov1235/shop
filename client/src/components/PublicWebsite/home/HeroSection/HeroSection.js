@@ -55,23 +55,18 @@ function HeroSection() {
 
     const classes = useStyles();
     return (
-        <Container maxWidth={'false'} sx={{
+        <Container maxWidth={'false'} className={classes.heroContainer} sx={{
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: { xs: 'column', md: 'row' },
             height: '100%',
+            backgroundImage:`url("/static/images/HomeBackground.svg")`,
+            backgroundRepeat:'no-repeat',
+            backgroundPosition:'right',
+            px: { lg: '130px!important' },
+            mb: { xs: 30, md: 0 },
         }}>
-            <Box
-                className={classes.heroContainer}
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    flexDirection: { xs: 'column', md: 'row' },
-                    alignItems: 'center',
-                    height: '100%',
-                    width: '100%',
-                    justifyContent:'space-around',
-                }}
-            >
                 <animated.div style={springs}>
                     <Box>
                         <Typography variant="h2" className={classes.heroText}>
@@ -89,12 +84,11 @@ function HeroSection() {
                         </Box>
                     </Box>
                 </animated.div>
-                <animated.div style={{height:'100%', justifyContent:"right", ...springs}}>
-                    <Box height={'100%'} justifyContent="right" >
+                <animated.div style={{width:'60%', justifyContent:"right", ...springs}}>
+                    <Box height={'580px'} justifyContent="right" >
                         <img src="/static/images/hImage.png" height={'100%'} className='img' />
                     </Box>
                 </animated.div>
-            </Box>
         </Container>
 
     );

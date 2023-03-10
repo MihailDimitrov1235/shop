@@ -7,15 +7,10 @@ import Achievements from '../../../components/PublicWebsite/home/achievements/Ac
 const Landing = () => {
     return (
         <>
-            <Container maxWidth={'false'} sx={{
-                px: { lg: '130px!important' },
-                mb: { xs: 30, md: 0 },
-                width: '100%',
-                height: '500px',
-                display: 'flex',
-            }}>
+            
+            
+                
                 <HeroSection />
-            </Container>
             <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, position: 'relative' }}>
                 <ProductDisplay />
             </Container>
