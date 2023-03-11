@@ -97,13 +97,13 @@ const ProductPage = () => {
         ],
     };
 
-    const [files, setFiles] = useState(props.parts[0].files);
+    const [files, setFiles] = useState([]);
     const [price, setPrice] = useState(props.parts[0].price);
-    const [part, setPart] = useState(1);
+    const [part, setPart] = useState('');
 
     const classes = useStyles();
     const { id } = useParams();
-    const [product, setProduct] = useState({ authors: [], files: [ { path: '' } ] });
+    const [product, setProduct] = useState({ authors: [], files: [ { path: '' } ], parts: [] });
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
@@ -120,9 +120,10 @@ const ProductPage = () => {
     }, [id, i18n.language]);
 
     const handlePartChange = (event) => {
+        const part = product.parts.find((x) => x.id === event.target.value);
         setPart(event.target.value);
-        setFiles(props.parts[event.target.value - 1].files);
-        setPrice(props.parts[event.target.value - 1].price);
+        setFiles(part.files);
+        setPrice(part.price);
     };
 
     return (
@@ -188,7 +189,7 @@ const ProductPage = () => {
                                         }}
                                     >
                                         <ProductInformation
-                                            name={props.name}
+                                            name={product.name}
                                             authors={product.authors}
                                             desc={product.shortDescription}
                                         />
@@ -229,7 +230,7 @@ const ProductPage = () => {
                                                     variant={"standard"}
                                                     fullWidth
                                                 >
-                                                    {props.parts.map((part) => (
+                                                    {product.parts.map((part) => (
                                                         <MenuItem key={part.id} value={part.id}>
                                                             {part.id}
                                                         </MenuItem>
