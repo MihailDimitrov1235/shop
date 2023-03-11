@@ -67,8 +67,8 @@ function HeroSection() {
             px: { lg: '130px!important' },
             mb: { xs: 30, md: 0 },
         }}>
-                <animated.div style={springs}>
-                    <Box width={'500px'}>
+                <animated.div style={{height:'60%', ...springs}}>
+                    <Box width={'500px'} height='100%' display={'flex'} justifyContent= 'space-evenly' flexDirection={'column'}>
                         <Typography variant="h1" className={classes.heroText}>
                             {t('hero-title')}
                         </Typography>
