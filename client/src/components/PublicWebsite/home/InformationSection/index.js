@@ -11,7 +11,9 @@ const InformationSection = () => {
         <>
             <img style={{ width: '100%' }} src='/static/images/Top.svg' alt="curve" />
 
-            <Box bgcolor={"#96011c"}>
+            <Box style={{
+                background:"linear-gradient(90deg, rgba(255,23,48,1) 0%, rgba(133,1,28,1) 100%)",
+            }}>
                 <Container
                     maxWidth={'false'}
                     sx={{

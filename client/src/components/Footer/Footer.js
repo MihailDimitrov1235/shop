@@ -14,7 +14,7 @@ const Footer = () => {
                 <img style={{ width: '100%' }} src={topSvg} alt="curve" />
             </Box>
 
-            <Box sx={{ backgroundColor: 'background.bordoRed' }}>
+            <Box sx={{ background: 'linear-gradient(180deg, rgba(219,18,41,1) 0%, rgba(150,1,28,1) 100%)' }}>
                 <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto' }}>
                     <Box sx={{
                             display: 'flex',
