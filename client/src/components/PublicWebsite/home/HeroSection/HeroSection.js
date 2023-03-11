@@ -7,6 +7,7 @@ import './HeroSectionCss.css';
 import { useSpring, animated} from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { useTranslation } from 'react-i18next';
+import Rive from 'rive-react';
 
 const useStyles = makeStyles({
     heroContainer: {
@@ -86,10 +87,13 @@ function HeroSection() {
                 </animated.div>
                 <animated.div style={{width:'60%', justifyContent:"right", ...springs}}>
                     <Box height={'100vh'} justifyContent="right" display={'flex'} alignItems='center'  >
-                        <img src="/static/images/hImage.svg" height={'100%'} className='img' style={{
+                        {/* <img src="/static/images/hImage.svg" height={'100%'} className='img' style={{
                             bottom:'150px',
                             left:'100px'
-                        }} />
+                        }} /> */}
+                        <Rive src="/static/images/lab_equipment_bubbles.riv" style={{
+                            left:'100px'
+                        }}/>
                     </Box>
                 </animated.div>
         </Container>

@@ -55,6 +55,7 @@
     "react-scripts": "5.0.1",
     "react-spring": "^9.7.0",
     "react-use-measure": "^2.1.1",
+    "rive-react": "^3.0.38",
     "styled-components": "^5.3.6",
     "swiper": "^9.0.5",
     "web-vitals": "^2.1.4",
