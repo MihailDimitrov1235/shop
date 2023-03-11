@@ -60,7 +60,7 @@ function HeroSection() {
             alignItems: 'center',
             justifyContent: 'space-between',
             flexDirection: { xs: 'column', md: 'row' },
-            height: '100%',
+            height: 'auto',
             backgroundImage:`url("/static/images/HomeBackground.svg")`,
             backgroundRepeat:'no-repeat',
             backgroundPosition:'right',
@@ -68,8 +68,8 @@ function HeroSection() {
             mb: { xs: 30, md: 0 },
         }}>
                 <animated.div style={springs}>
-                    <Box>
-                        <Typography variant="h2" className={classes.heroText}>
+                    <Box width={'500px'}>
+                        <Typography variant="h1" className={classes.heroText}>
                             {t('hero-title')}
                         </Typography>
                         <Typography variant="subtitle1" className={classes.heroSubtitle}>
@@ -85,8 +85,8 @@ function HeroSection() {
                     </Box>
                 </animated.div>
                 <animated.div style={{width:'60%', justifyContent:"right", ...springs}}>
-                    <Box height={'580px'} justifyContent="right" >
-                        <img src="/static/images/hImage.png" height={'100%'} className='img' />
+                    <Box height={'100vh'} justifyContent="right" display={'flex'} alignItems='center' >
+                        <img src="/static/images/hImage.png" height={'50%'} className='img' />
                     </Box>
                 </animated.div>
         </Container>
