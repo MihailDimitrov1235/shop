@@ -65,10 +65,10 @@ function HeroSection() {
             backgroundImage:`url("/static/images/HomeBackground.svg")`,
             backgroundRepeat:'no-repeat',
             backgroundPosition:'right',
-            px: { lg: '130px!important' },
-            mb: { xs: 30, md: 0 },
+            backgroundSize: { xs: '100% auto', md: 'auto' },
+            px: { lg: '130px!important' }
         }}>
-                <animated.div style={{height:'60%', ...springs}}>
+                <animated.div style={{...springs}}>
                     <Box width={'500px'} height='100%' display={'flex'} justifyContent= 'space-evenly' flexDirection={'column'}>
                         <Typography variant="h1" className={classes.heroText}>
                             {t('hero-title')}
@@ -86,11 +86,7 @@ function HeroSection() {
                     </Box>
                 </animated.div>
                 <animated.div style={{width:'60%', justifyContent:"right", ...springs}}>
-                    <Box height={'100vh'} justifyContent="right" display={'flex'} alignItems='center'  >
-                        {/* <img src="/static/images/hImage.svg" height={'100%'} className='img' style={{
-                            bottom:'150px',
-                            left:'100px'
-                        }} /> */}
+                    <Box height={'900px'} justifyContent="right" display={'flex'} alignItems='center'  >
                         <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1"/>
                     </Box>
                 </animated.div>
