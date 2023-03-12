@@ -1,9 +1,8 @@
-import {Container, Box, Typography} from '@mui/material';
+import {Container, Box, Typography, Button} from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LinkIcon from '@mui/icons-material/Link';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { display } from '@mui/system';
 
 
 const props = {
@@ -27,7 +26,9 @@ const props = {
 
 export default function AuthorPage(){
 
-    console.log(props.links)
+    const handleClick = ({link}) => {
+        window.location.replace(link);
+    }
 
     const facebookRegex = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/;
     const linkedinRegex = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm;
@@ -61,15 +62,15 @@ export default function AuthorPage(){
                         <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >{props.ocupation}</Typography>
                         <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
                         {props.links.map(link =>(
-                            <Box display={'flex'} marginBottom='10px'>
-                                {facebookRegex.exec(link)? <FacebookIcon/>
-                                    : linkedinRegex.exec(link)? <LinkedInIcon/>
-                                        : twitterRegex.exec(link)? <TwitterIcon/>
-                                            : <LinkIcon/>}
-                                <Typography>
-                                    {link}
-                                </Typography>
-                            </Box>
+                                <Box display={'flex'} marginBottom='10px'>
+                                        {facebookRegex.exec(link)? <FacebookIcon/>
+                                            : linkedinRegex.exec(link)? <LinkedInIcon/>
+                                                : twitterRegex.exec(link)? <TwitterIcon/>
+                                                    : <LinkIcon/>}
+                                        <Typography>
+                                            {link}
+                                        </Typography>
+                                </Box>
                         ))}
                         </Box>
                     </Box>
