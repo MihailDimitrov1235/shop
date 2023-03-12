@@ -36,7 +36,7 @@ const InformationSection = () => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         flexDirection: { xs: 'column', lg: 'row' },
-                        gap: 10
+                        gap: 15
                     }}
                 >
                     <Box sx={{ textAlign: 'center', flexBasis: '80%' }}>
@@ -86,7 +86,6 @@ const InformationSection = () => {
                             }}
                         >
                             <img className='informationImg' src="https://www.uni-sofia.bg/var/ezwebin_site/storage/images/media/images/18_a2/1327379-1-bul-BG/18_a.jpg"/>
-                        
                         </animated.div>
                     </Container>
                 </Container>
