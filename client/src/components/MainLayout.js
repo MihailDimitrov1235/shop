@@ -17,7 +17,7 @@ const MainLayoutWrapper = styled('div')({
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
-    paddingTop: 84
+    paddingTop: 80
 });
 
 const MainLayoutContainer = styled('div')({
