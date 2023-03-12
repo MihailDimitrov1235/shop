@@ -91,7 +91,7 @@ function HeroSection() {
                             bottom:'150px',
                             left:'100px'
                         }} /> */}
-                        <Rive src="/static/images/lab_equipment_bubbles.riv"/>
+                        <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1"/>
                     </Box>
                 </animated.div>
         </Container>
