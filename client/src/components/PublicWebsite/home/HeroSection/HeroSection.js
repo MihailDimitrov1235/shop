@@ -91,9 +91,7 @@ function HeroSection() {
                             bottom:'150px',
                             left:'100px'
                         }} /> */}
-                        <Rive src="/static/images/lab_equipment_bubbles.riv" style={{
-                            left:'100px'
-                        }}/>
+                        <Rive src="/static/images/lab_equipment_bubbles.riv"/>
                     </Box>
                 </animated.div>
         </Container>

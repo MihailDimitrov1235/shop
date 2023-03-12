@@ -4,8 +4,19 @@ import {
 } from '@mui/material';
 import { Container } from '@mui/system';
 import { useTranslation } from 'react-i18next';
+import React, {useState} from 'react';
+import { useSpring, animated } from '@react-spring/web'
+import './styles.css';
 
 const InformationSection = () => {
+
+    const [flipped, setFlipped] = useState(false)
+    const { transform, opacity } = useSpring({
+        opacity: flipped ? 1 : 0,
+        transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
+        config: { mass: 5, tension: 450, friction: 70 },
+    })
+
     const { t } = useTranslation();
     return (
         <>
@@ -17,6 +28,7 @@ const InformationSection = () => {
                 <Container
                     maxWidth={'false'}
                     sx={{
+                        display:'flex',
                         width: '85%',
                         margin: '0 auto',
                         py: '100px',
@@ -26,7 +38,7 @@ const InformationSection = () => {
                         flexDirection: { xs: 'column', md: 'row' }
                     }}
                 >
-                    <Box sx={{ textAlign: 'center', width: { md: '40%' } }}>
+                    <Box sx={{ textAlign: 'center', width: { md: '40%' }, flex:'1' }}>
                         <Typography
                             variant='h1'
                             sx={{
@@ -57,7 +69,25 @@ const InformationSection = () => {
                         </Typography>
                     </Box>
 
-                    <img src='/static/images/glass.png' width='518' />
+                    <Container className={'container'} onClick={() => setFlipped(state => !state)}>
+                        <animated.div
+                            className={'c back'}
+                            style={{ opacity: opacity.to(o => 1 - o), transform }}
+                        >
+                            <img className='informationImg' src="https://www.bas.bg/wp-content/uploads/2017/10/Ban_Zgrada_Tzentr_Vhod-1024x615.jpg"/>
+                        </animated.div>
+                        <animated.div
+                            className={'c front'}
+                            style={{
+                            opacity,
+                            transform,
+                            rotateX: '180deg',
+                            }}
+                        >
+                            <img className='informationImg' src="https://www.uni-sofia.bg/var/ezwebin_site/storage/images/media/images/18_a2/1327379-1-bul-BG/18_a.jpg"/>
+                        
+                        </animated.div>
+                    </Container>
                 </Container>
             </Box>
 
