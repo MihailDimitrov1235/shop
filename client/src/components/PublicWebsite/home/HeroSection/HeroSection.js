@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Button, CardMedia } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/system';
 import './HeroSectionCss.css';
-import { useSpring, animated} from '@react-spring/web';
+import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { useTranslation } from 'react-i18next';
 import Rive from 'rive-react';
@@ -40,36 +40,40 @@ function HeroSection() {
 
     const { t } = useTranslation();
 
-    const [{x,y}, api] = useSpring( () => ({
+    const [{ x, y }, api] = useSpring(() => ({
         x: "0",
         y: "0",
-      }));
+    }));
 
     const bind = useGesture({
-        onHover: ({ hovering }) => api({x:hovering? '-5px': '0', y:hovering? '-5px': '0'}),
-})
+        onHover: ({ hovering }) => api({ x: hovering ? '-5px' : '0', y: hovering ? '-5px' : '0' }),
+    })
 
     const springs = useSpring({
-        from: { opacity: 0, y: 150},
-        to: { opacity: 1, y: 0},
+        from: { opacity: 0, y: 150 },
+        to: { opacity: 1, y: 0 },
     })
 
     const classes = useStyles();
     return (
-        <Container maxWidth={'false'} className={classes.heroContainer} sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexDirection: { xs: 'column', md: 'row' },
-            height: 'auto',
-            backgroundImage:`url("/static/images/HomeBackground.svg")`,
-            backgroundRepeat:'no-repeat',
-            backgroundPosition:'right',
-            px: { lg: '130px!important' },
-            mb: { xs: 30, md: 0 },
+        <Box sx={{
+            backgroundImage: `url("/static/images/HomeBackground.svg")`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right',
+            backgroundSize: { xs: '100% auto', md: 'auto' },
         }}>
-                <animated.div style={{height:'60%', ...springs}}>
-                    <Box width={'500px'} height='100%' display={'flex'} justifyContent= 'space-evenly' flexDirection={'column'}>
+
+            <Container maxWidth={'false'} className={classes.heroContainer} sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexDirection: { xs: 'column', md: 'row' },
+                height: 'auto',
+                width: '85%',
+                margin: '0 auto'
+            }}>
+                <animated.div style={{ ...springs }}>
+                    <Box width={'500px'} height='100%' display={'flex'} justifyContent='space-evenly' flexDirection={'column'}>
                         <Typography variant="h1" className={classes.heroText}>
                             {t('hero-title')}
                         </Typography>
@@ -77,25 +81,21 @@ function HeroSection() {
                             {t('hero-desc')}
                         </Typography>
                         <Box display={'flex'} justifyContent='left'>
-                        <animated.div style={{x:x, y:y}}>
-                            <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products">
-                                {t('hero-button')}
-                            </Button>
+                            <animated.div style={{ x: x, y: y }}>
+                                <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products">
+                                    {t('hero-button')}
+                                </Button>
                             </animated.div>
                         </Box>
                     </Box>
                 </animated.div>
-                <animated.div style={{width:'60%', justifyContent:"right", ...springs}}>
-                    <Box height={'100vh'} justifyContent="right" display={'flex'} alignItems='center'  >
-                        {/* <img src="/static/images/hImage.svg" height={'100%'} className='img' style={{
-                            bottom:'150px',
-                            left:'100px'
-                        }} /> */}
-                        <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1"/>
+                <animated.div style={{ width: '60%', justifyContent: "right", ...springs }}>
+                    <Box height={'900px'} justifyContent="right" display={'flex'} alignItems='center'  >
+                        <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
                     </Box>
                 </animated.div>
-        </Container>
-
+            </Container>
+        </Box>
     );
 };
 

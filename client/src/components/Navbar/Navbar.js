@@ -66,7 +66,7 @@ const Navbar = (props) => {
     return (
         <AppBar
             elevation={0}
-            sx={{ py: 1, borderBottom: 'solid 1px #efefef'}}
+            sx={{ py: 1 }}
             {...props}
         >
             <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', width: { sm: '100%', md: '85%' }, margin: { sm: 'none', md: '0 auto' } }}>
