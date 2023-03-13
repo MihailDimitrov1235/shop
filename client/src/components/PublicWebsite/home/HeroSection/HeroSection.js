@@ -60,7 +60,8 @@ function HeroSection() {
             backgroundImage: `url("/static/images/HomeBackground.svg")`,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'right',
-            backgroundSize: { xs: '100% auto', md: 'auto' },
+            backgroundSize: { xs: '100% 100%', md: 'auto' },
+            height: '100vh'
         }}>
 
             <Container maxWidth={'false'} className={classes.heroContainer} sx={{
@@ -72,8 +73,8 @@ function HeroSection() {
                 width: '85%',
                 margin: '0 auto'
             }}>
-                <animated.div style={{ ...springs }}>
-                    <Box width={'500px'} height='100%' display={'flex'} justifyContent='space-evenly' flexDirection={'column'}>
+                <animated.div style={{ ...springs, flexBasis: '40%' }}>
+                    <Box>
                         <Typography variant="h1" className={classes.heroText}>
                             {t('hero-title')}
                         </Typography>
