@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, CardMedia } from '@mui/material';
+import { Box, Typography, Button, CardMedia, Hidden } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/system';
@@ -16,14 +16,14 @@ const useStyles = makeStyles({
         //padding: '1.8rem'
     },
     heroText: {
-        textAlign: 'left',
+        //textAlign: 'left',
         fontWeight: 'bold',
         maxWidth: '600px',
         marginTop: '10px',
         marginBottom: '10px',
     },
     heroSubtitle: {
-        textAlign: 'left',
+        //textAlign: 'left',
         //maxWidth: '600px',
         marginTop: '10px',
         marginBottom: '10px',
@@ -56,47 +56,54 @@ function HeroSection() {
 
     const classes = useStyles();
     return (
-        <Box sx={{
-            backgroundImage: `url("/static/images/HomeBackground.svg")`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right',
-            backgroundSize: { xs: '100% 100%', md: 'auto' },
-            height: '100vh'
-        }}>
-
-            <Container maxWidth={'false'} className={classes.heroContainer} sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexDirection: { xs: 'column', md: 'row' },
-                height: 'auto',
-                width: '85%',
-                margin: '0 auto'
+        <>
+            <Hidden mdUp>
+                <Box style={{ height: '300px' }}>
+                    <img src='/static/images/HomeTop.svg' />
+                </Box>
+            </Hidden>
+            <Box sx={{
+                backgroundImage: { xs: 'none', md: `url("/static/images/HomeBackground.svg")` },
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right',
+                backgroundSize: { xs: '100% 100%', md: 'auto' },
+                height: '100vh'
             }}>
-                <animated.div style={{ ...springs, flexBasis: '40%' }}>
-                    <Box>
-                        <Typography variant="h1" className={classes.heroText}>
-                            {t('hero-title')}
-                        </Typography>
-                        <Typography variant="subtitle1" className={classes.heroSubtitle}>
-                            {t('hero-desc')}
-                        </Typography>
-                        <Box display={'flex'} justifyContent='left'>
-                            <animated.div style={{ x: x, y: y }}>
-                                <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products">
-                                    {t('hero-button')}
-                                </Button>
-                            </animated.div>
+
+                <Container maxWidth={'false'} className={classes.heroContainer} sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexDirection: { xs: 'column', md: 'row' },
+                    height: 'auto',
+                    width: '85%',
+                    margin: '0 auto'
+                }}>
+                    <animated.div style={{ ...springs, flexBasis: '40%' }}>
+                        <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+                            <Typography variant="h1" className={classes.heroText}>
+                                {t('hero-title')}
+                            </Typography>
+                            <Typography variant="subtitle1" className={classes.heroSubtitle}>
+                                {t('hero-desc')}
+                            </Typography>
+                            <Box>
+                                <animated.div style={{ x: x, y: y }}>
+                                    <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products">
+                                        {t('hero-button')}
+                                    </Button>
+                                </animated.div>
+                            </Box>
                         </Box>
-                    </Box>
-                </animated.div>
-                <animated.div style={{ ...springs, width: '100%' }}>
-                    <Box sx={{ height: { xs: 'auto', md: '800px', lg: '900px' } }}>
-                        <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
-                    </Box>
-                </animated.div>
-            </Container>
-        </Box>
+                    </animated.div>
+                    <animated.div style={{ ...springs, width: '100%' }}>
+                        <Box sx={{ height: { xs: '50vh', sm: '70vh', md: '800px', lg: '900px' } }}>
+                            <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
+                        </Box>
+                    </animated.div>
+                </Container>
+            </Box>
+        </>
     );
 };
 
