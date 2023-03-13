@@ -90,8 +90,8 @@ function HeroSection() {
                         </Box>
                     </Box>
                 </animated.div>
-                <animated.div style={{ ...springs, flexBasis: '60%' }}>
-                    <Box height={'900px'} justifyContent="right" display={'flex'} alignItems='center'  >
+                <animated.div style={{ ...springs, width: '100%' }}>
+                    <Box sx={{ height: { xs: 'auto', md: '800px', lg: '900px' } }}>
                         <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
                     </Box>
                 </animated.div>
