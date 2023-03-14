@@ -6,7 +6,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
-import ProductDisplay from '../../../components/PublicWebsite/products/ProductDisplay';
+import { useTranslation } from 'react-i18next';
 
 
 const props = {
@@ -33,6 +33,8 @@ const props = {
 }
 
 export default function AuthorPage(){
+
+    const {t} = useTranslation();
 
     const [height, setHeight] = useState(0)
     const ref = useRef(null)
@@ -89,11 +91,11 @@ export default function AuthorPage(){
                             <Box position={'absolute'} width='100%'bottom={'50px'} display={'flex'} flexDirection='row'  justifyContent='space-evenly' alignItems={'center'}>
                                     <Box display={'flex'} flexDirection='column' textAlign={'center'}>
                                         <Typography variant='h3'>{props.achievements.created}</Typography>
-                                        <Typography variant='subtitle2'>Products created</Typography>
+                                        <Typography variant='subtitle2'>{t('products-created')}</Typography>
                                     </Box>
                                     <Box display={'flex'} flexDirection='column' textAlign={'center'}>
                                         <Typography variant='h3'>{props.achievements.sold}</Typography>
-                                        <Typography variant='subtitle2'>Sales</Typography>
+                                        <Typography variant='subtitle2'>{t('sales')}</Typography>
                                     </Box>
                                 </Box>
 
@@ -136,7 +138,7 @@ export default function AuthorPage(){
                     ml:'0',
                 }}>
                     <Box display={'flex'} margin={'10px auto'}>
-                        <Typography variant='h3'>t('contact-info')</Typography>
+                        <Typography variant='h3'>{t('contact-info')}</Typography>
                     </Box>
                     <Box display={'flex'} margin={'10px auto'}>
                         <PhoneIcon/>
@@ -156,7 +158,7 @@ export default function AuthorPage(){
                     mr:'0',
                 }}>
                     <Box display={'flex'} margin={'10px auto'}>
-                        <Typography variant='h2'>t('created-products')</Typography>
+                        <Typography variant='h2'>{t('created-products')}</Typography>
                     </Box>
                     <Box display={'flex'}>
                     </Box>
