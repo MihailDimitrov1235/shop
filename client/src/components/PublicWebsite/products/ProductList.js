@@ -11,6 +11,7 @@ import Select from '../../filters/Select';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
+    const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [rows, setRows] = useState(10);
     const [sort, setSort] = useState('desc');
@@ -30,7 +31,7 @@ const ProductList = () => {
         productService.getProducts(pagination, [], {}, t.language)
             .then((res) => {
                 setProducts(res.data.data);
-                //setTotal(res.data.total);
+                setTotal(res.data.total);
             })
             .catch((error) => {
                 console.log(error)
@@ -70,7 +71,7 @@ const ProductList = () => {
                     ))}
                 </Grid>
                 <Pagination
-                    total={100}
+                    total={total}
                     page={page}
                     setPage={setPage}
                     rows={rows}
