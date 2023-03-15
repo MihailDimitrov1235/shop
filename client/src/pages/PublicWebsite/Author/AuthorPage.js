@@ -79,7 +79,7 @@ export default function AuthorPage(){
                             alignContent:'center',
                             position:'relative',
                         }}>
-                            <Box position={'relative'} bottom={height/2} className='authorImg' overflow={'hidden'} border={'solid white 10px'} borderRadius='50%' style={{
+                            <Box position={'relative'} bottom='50%' className='authorImg' overflow={'hidden'} border={'solid white 10px'} borderRadius='50%' style={{
                                 aspectRatio:'1/1',
                                 display:'flex',
                                 justifyContent:'center',
