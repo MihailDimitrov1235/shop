@@ -99,7 +99,12 @@ export default function AuthorPage(){
                                 </Box>
 
                         </Box>
-                        <Box display='flex' justifyContent={'center'} flexDirection={'column'} >
+                        <Box sx={{
+                            display:'flex',
+                            justifyContent:'space-evenly',
+                            flexDirection:'column',
+                            py:3,
+                        }} >
                             <Typography variant='h1' marginBottom={'20px'} textAlign='center'>{props.name}</Typography>
                             <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >{props.ocupation}</Typography>
                             <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >

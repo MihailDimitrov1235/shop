@@ -8,8 +8,11 @@ import {
   TableRow,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 function CreatedProducts(products) {
+
+    const {t} = useTranslation();
   products = products.products;
   return (
     <Table>
@@ -20,28 +23,28 @@ function CreatedProducts(products) {
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">Image</Typography>
+            <Typography variant="h4">{t('image')}</Typography>
           </TableCell>
           <TableCell
             sx={{
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">Name</Typography>
+            <Typography variant="h4">{t('name')}</Typography>
           </TableCell>
           <TableCell
             sx={{
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">Description</Typography>
+            <Typography variant="h4">{t('description')}</Typography>
           </TableCell>
           <TableCell
             sx={{
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">Numbers sold</Typography>
+            <Typography variant="h4">{t('numbers-sold')}</Typography>
           </TableCell>
         </TableRow>
       </TableHead>
