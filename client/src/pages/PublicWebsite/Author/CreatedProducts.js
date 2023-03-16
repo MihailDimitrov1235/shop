@@ -7,6 +7,7 @@ import {
   TableCell,
   TableRow,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function CreatedProducts(products) {
   products = products.products;
@@ -46,7 +47,9 @@ function CreatedProducts(products) {
       </TableHead>
       <TableBody>
         {products.map((product) => (
-            
+            <Link to={`/product/${product.id}`} style={{
+                display:'contents'
+            }}>
           <TableRow
             sx={{
               Width: "100%",
@@ -55,7 +58,10 @@ function CreatedProducts(products) {
             <TableCell
               sx={{ width:'25%', borderRadius: "15px", overFlow: "hidden" }}
             >
-              <img src={product.image} width="100%" />
+              <img src={product.image} style={{
+                borderRadius: "15px",
+                width:'100%',
+              }}/>
             </TableCell>
             <TableCell sx={{
                 width:'25%',
@@ -73,9 +79,12 @@ function CreatedProducts(products) {
                 width:'25%',
                 textAlign:'center',
             }}>
-              <Typography variant="h5">{product.sold}</Typography>
+              <Typography sx={{
+                fontSize:'20px'
+              }}>{product.sold}</Typography>
             </TableCell>
           </TableRow>
+          </Link>
         ))}
       </TableBody>
     </Table>
