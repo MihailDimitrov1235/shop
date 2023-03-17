@@ -49,12 +49,13 @@ function CreatedProducts(products) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {products.map((product) => (
+        {products.map((product, index) => (
           <Link
             to={`/products/${product.id}`}
             style={{
               display: "contents",
             }}
+            key={index}
           >
             <TableRow
               sx={{

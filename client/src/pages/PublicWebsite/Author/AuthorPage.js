@@ -67,7 +67,7 @@ export default function AuthorPage() {
                 marginTop: '200px',
             }}>
                 <Container className='topContent'>
-                    <Card ref={ref} elevation={'2'} sx={{
+                    <Card ref={ref} elevation={2} sx={{
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
                         overflow: 'visible',
@@ -81,14 +81,16 @@ export default function AuthorPage() {
                             width: '30%',
                             margin: { xs: '0 auto', md: '0 50px' }
                         }}>
-                            <Box sx={{
+                            <Box className='authorImg' sx={{
                                 position: 'relative',
                                 border: '10px solid white',
-                            }} bottom='50%' className='authorImg' overflow={'hidden'} borderRadius='50%' style={{
+                                bottom: '50%',
+                                overflow: 'hidden',
+                                borderRadius: '50%',
                                 aspectRatio: '1/1',
                                 display: 'flex',
                                 justifyContent: 'center',
-                                alignContent: 'center',
+                                alignItems: 'center'
                             }}>
                                 <img height='100%' src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80' />
                             </Box>
@@ -121,8 +123,8 @@ export default function AuthorPage() {
                             <Typography variant='h1' marginBottom={'20px'} textAlign='center'>{props.name}</Typography>
                             <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >{props.ocupation}</Typography>
                             <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
-                                {props.links.map(link => (
-                                    <Box display={'flex'} marginBottom='30px' marginRight={'30px'}>
+                                {props.links.map((link, index) => (
+                                    <Box display={'flex'} marginBottom='30px' marginRight={'30px'} key={index}>
                                         {facebookRegex.exec(link) ? <FacebookIcon />
                                             : linkedinRegex.exec(link) ? <LinkedInIcon />
                                                 : twitterRegex.exec(link) ? <TwitterIcon />
@@ -145,7 +147,7 @@ export default function AuthorPage() {
                 width: '100%',
                 flexDirection: { xs: 'column', md: 'row' },
             }}>
-                <Card className='authorSideBar' elevation={'2'} sx={{
+                <Card className='authorSideBar' elevation={2} sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     flex: '1',
@@ -166,7 +168,7 @@ export default function AuthorPage() {
                         <Typography variant='subtitle1'>{props.email}</Typography>
                     </Box>
                 </Card>
-                <Card className='authorContent' elevation={'2'} sx={{
+                <Card className='authorContent' elevation={2} sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     flex: '2',
