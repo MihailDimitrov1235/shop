@@ -38,28 +38,15 @@ export default function AuthorPage() {
 
     const { t } = useTranslation();
 
-    const [height, setHeight] = useState(0)
-    const ref = useRef(null)
-
-    useEffect(() => {
-        setHeight(ref.current.clientHeight)
-    })
-
-    const handleClick = ({ link }) => {
-        window.location.replace(link);
-    }
-
     const facebookRegex = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/;
     const linkedinRegex = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm;
     const twitterRegex = /((?:https?:\/\/)?twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/;
 
 
     return (
-        <Box >
-            <Box width={'100%'} position='relative'>
-                <img width={'100%'} src={Gradient} style={{
-                    position: 'absolute'
-                }} />
+        <Box position='relative' >
+            <Box width={'100%'} position='absolute' height={'100vh'} overflow='hidden'>
+                <img width={'100%'} src={Gradient} />
             </Box>
 
             <Box className='topSection' width='100%' sx={{
@@ -67,18 +54,18 @@ export default function AuthorPage() {
                 marginTop: '200px',
             }}>
                 <Container className='topContent'>
-                    <Card ref={ref} elevation={2} sx={{
+                    <Card elevation={2} sx={{
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
                         overflow: 'visible',
-                        pr: '30px'
+                        pr: { xs: '0', md: '30px' },
                     }}>
                         <Box sx={{
                             display: 'flex',
                             justifyContent: 'center',
                             alignContent: 'center',
                             position: 'relative',
-                            width: '30%',
+                            width: { xs: '50%', md: '30%' },
                             margin: { xs: '0 auto', md: '0 50px' }
                         }}>
                             <Box className='authorImg' sx={{
@@ -101,8 +88,9 @@ export default function AuthorPage() {
                                 bottom: '50px',
                                 display: 'flex',
                                 flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center'
+                                justifyContent: 'space-evenly',
+                                alignItems: 'center',
+                                display:{ xs: 'none', md: 'flex' },
                             }}>
                                 <Box display={'flex'} flexDirection='column' textAlign={'center'}>
                                     <Typography variant='h3'>{props.achievements.created}</Typography>

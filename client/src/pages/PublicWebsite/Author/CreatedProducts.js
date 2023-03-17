@@ -12,8 +12,8 @@ import { useTranslation } from 'react-i18next';
 
 function CreatedProducts(products) {
 
-    const {t} = useTranslation();
-  products = products.products;
+  const {t} = useTranslation();
+  products = products.products; // !!!!!!!!!!!!!!
   return (
     <Table>
       <TableHead>
