@@ -51,7 +51,7 @@ function CreatedProducts(products) {
       <TableBody>
         {products.map((product) => (
           <Link
-            to={`/product/${product.id}`}
+            to={`/products/${product.id}`}
             style={{
               display: "contents",
             }}

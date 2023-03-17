@@ -98,7 +98,7 @@ function Cart() {
                         </Box>
                     </Card>
                     <Box justifyContent='right' display='flex'>
-                        <form action="/checkout" method="POST">
+                        <form action="/api/checkout" method="POST">
                             <input type ="hidden" name="_token" value="{{csrf_token()}}"/>
                             <button type="submit">Checkout</button>
                         </form>

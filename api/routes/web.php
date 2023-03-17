@@ -23,6 +23,3 @@ Route::delete('/project/{id}', [ProjectController::class, 'destroy']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Route::post('/checkout', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
-Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');

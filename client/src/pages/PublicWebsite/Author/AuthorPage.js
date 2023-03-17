@@ -127,7 +127,7 @@ export default function AuthorPage(){
 
             <Container className='mainContent' sx={{
                 position:'relative',
-                marginBottom:'300px',
+                marginBottom:'100px',
                 display:'flex',
                 width:'100%',
                 flexDirection:'row',
