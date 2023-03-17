@@ -8,6 +8,7 @@ import {
 import AccountProfile from '../../../components/account/AccountProfile';
 import AccountProfileDetails from '../../../components/account/AccountProfileDetails';
 import AccountProfileSettings from '../../../components/account/AccountProfileSettings';
+import AccountProfilePurchases from '../../../components/account/AccountProfilePurchases';
 import { useTranslation } from 'react-i18next';
 
 const Account = () => {
@@ -46,6 +47,7 @@ const Account = () => {
                             xs={12}
                         >
                             {menu === 'home' && <AccountProfileDetails />}
+                            {menu === 'purchases' && <AccountProfilePurchases />}
                             {menu === 'settings' && <AccountProfileSettings />}
                         </Grid>
                     </Grid>
