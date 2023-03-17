@@ -1,5 +1,5 @@
 import {
-    Box,
+    IconButton,
     Table,
     TableBody,
     TableCell,
@@ -11,6 +11,7 @@ import {
     Card
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import Row from './Row';
 
 const products = [
     { 
@@ -20,8 +21,25 @@ const products = [
     description: 'Description1', 
     parts: 10, 
     ownedParts: [
-        { id:1 }
+        { id:1, name:'introduction', files: ['ferf.docs'] },
+        { id:2, name:'part2', files: ['ferf.docs'] },
+        { id:3, name:'part3', files: ['ferf.docs'] },
+        { id:3, name:'part4', files: ['ferf.docs'] },
+        { id:3, name:'end', files: ['ferf.docs'] },
     ]},
+    { 
+        id: 2, 
+        image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', 
+        name: 'Product1', 
+        description: 'Description1', 
+        parts: 5, 
+        ownedParts: [
+            { id:1, name:'introduction', files: ['ferf.docs'] },
+            { id:2, name:'part2', files: ['ferf.docs'] },
+            { id:3, name:'part3', files: ['ferf.docs'] },
+            { id:3, name:'part4', files: ['ferf.docs'] },
+            { id:3, name:'end', files: ['ferf.docs'] },
+        ]},
 ]
 
 function AccountProfilePurchases(){
@@ -32,6 +50,7 @@ function AccountProfilePurchases(){
         }}>
             <Table>
                 <TableHead>
+                    <TableCell/>
                     <TableCell
                         sx={{
                         textAlign: "center",
@@ -61,7 +80,11 @@ function AccountProfilePurchases(){
                         <Typography>{t('parts-owned')}</Typography>
                     </TableCell>
                 </TableHead>
-                <TableBody></TableBody>
+                <TableBody>
+                    {products.map( product => (
+                        <Row product={product} />
+                    ))}
+                </TableBody>
             </Table>
         </Card>
     )
