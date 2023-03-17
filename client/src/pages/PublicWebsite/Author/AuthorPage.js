@@ -153,8 +153,7 @@ export default function AuthorPage() {
                     flex: '1',
                     py: '20px',
                     px: '5px',
-                    m: '10px',
-                    ml: '0',
+                    margin: '10px 0'
                 }}>
                     <Box display={'flex'} margin={'10px auto'}>
                         <Typography variant='h3'>{t('contact-info')}</Typography>
