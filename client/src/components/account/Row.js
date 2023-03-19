@@ -10,7 +10,9 @@ import {
   Typography,
   Collapse,
   Card,
+  NativeSelect,
 } from "@mui/material";
+import PartRow from "./PartRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTranslation } from "react-i18next";
@@ -18,7 +20,6 @@ import { useTranslation } from "react-i18next";
 function Row({ product }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  console.log(product.ownedParts[0].files);
   return (
     <>
       <TableRow
@@ -109,40 +110,7 @@ function Row({ product }) {
 
               <TableBody>
                 {product.ownedParts.map((part) => (
-                  <TableRow>
-                    <TableCell
-                      sx={{
-                        width: "33%",
-                        textAlign: "center",
-                      }}
-                    >
-                      <Typography variant="h5">{part.id}</Typography>
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        width: "33%",
-                        textAlign: "center",
-                      }}
-                    >
-                      <Typography variant="subtitle2">{part.name}</Typography>
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        width: "33%",
-                        textAlign: "center",
-                      }}
-                    >
-                      {part.files.map((file) => (
-                        <Typography
-                          sx={{
-                            fontSize: "15px",
-                          }}
-                        >
-                          {file}
-                        </Typography>
-                      ))}
-                    </TableCell>
-                  </TableRow>
+                  <PartRow part={part} />
                 ))}
               </TableBody>
             </Table>

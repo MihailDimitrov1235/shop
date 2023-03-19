@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     IconButton,
     Table,
@@ -43,6 +44,16 @@ const products = [
 ]
 
 function AccountProfilePurchases(){
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+      };
+    
+      const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+      };
     const { t } = useTranslation();
     return(
         <Card sx={{
@@ -85,6 +96,14 @@ function AccountProfilePurchases(){
                         <Row product={product} />
                     ))}
                 </TableBody>
+                <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                count={products.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                />
             </Table>
         </Card>
     )
