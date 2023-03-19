@@ -17,7 +17,6 @@ const AutocompleteCheckboxes = ({ label, options, setValue }) => {
     return (
         <Autocomplete
             multiple
-            id="checkboxes-tags-demo"
             options={options}
             disableCloseOnSelect
             getOptionLabel={(option) => option.title}
