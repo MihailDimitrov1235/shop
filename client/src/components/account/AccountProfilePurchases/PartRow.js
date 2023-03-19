@@ -24,7 +24,7 @@ function PartRow( {part} ){
         <TableRow>
                     <TableCell
                       sx={{
-                        width: "25%",
+                        width: "5%",
                         textAlign: "center",
                       }}
                     >
@@ -32,7 +32,7 @@ function PartRow( {part} ){
                     </TableCell>
                     <TableCell
                       sx={{
-                        width: "25%",
+                        width: "35%",
                         textAlign: "center",
                       }}
                     >
@@ -40,7 +40,7 @@ function PartRow( {part} ){
                     </TableCell>
                     <TableCell
                       sx={{
-                        width: "25%",
+                        width: "55%",
                         textAlign: "center",
                       }}
                     >
@@ -57,7 +57,7 @@ function PartRow( {part} ){
                     </TableCell>
                     <TableCell
                       sx={{
-                        width: "25%",
+                        width: "5%",
                         textAlign: "center",
                       }}
                     >
