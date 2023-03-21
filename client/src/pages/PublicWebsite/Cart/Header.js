@@ -1,6 +1,8 @@
 import { Box, Card, Grid, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 function Header(){
+    const { t } = useTranslation();
     return(
         <Card sx={{
             marginTop:'20px',

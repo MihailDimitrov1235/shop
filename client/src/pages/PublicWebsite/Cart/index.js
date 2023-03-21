@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Container } from '@mui/system';
 import CartItem from './CartItem';
 import Header from './Header';
+import { useTranslation } from 'react-i18next';
 const props = [
     {
         id: 1,
@@ -60,6 +61,7 @@ const tax = subTotal / 10;
 const grandTotal = subTotal + tax;
 
 function Cart() {
+    const { t } = useTranslation();
     return (
         <Container maxWidth={'false'} sx={{
             px: { lg: '130px!important' }
@@ -68,9 +70,9 @@ function Cart() {
                 width='100%'
                 padding='20px'
             >
-                <Typography variant='h2' style={{ textAlign: 'center' }}>Your Cart</Typography>
+                <Typography variant='h2' style={{ textAlign: 'center' }}>{t('your-cart')}</Typography>
                 <Header />
-                {props.length === 0 ? <p>No items in cart.</p> : null}
+                {props.length === 0 ? <p>{t('no-items-in-cart')}</p> : null}
                 {props.map((item) => (
                     <CartItem
                         key={item.id}
@@ -87,24 +89,24 @@ function Cart() {
                     }}>
                         <Box justifyContent='space-between' >
                             <Typography variant='h3' >
-                                Subtotal: {subTotal} lv.
+                                {t('subtotal')}: {subTotal} {t("bgn")}.
                             </Typography>
                         </Box>
                         <Box justifyContent='space-between' >
                             <Typography variant='p'>
-                                Taxes: {tax} lv.
+                                {t('taxes')}: {tax} {t("bgn")}..
                             </Typography>
                         </Box>
                         <Box justifyContent='space-between' >
                             <Typography variant='h6' >
-                                GrandTotal: {grandTotal} lv.
+                                {t("grandtotal")}.: {grandTotal} {t("bgn")}..
                             </Typography>
                         </Box>
                     </Card>
                     <Box justifyContent='right' display='flex'>
                         <form action="/api/checkout" method="POST">
                             <input type ="hidden" name="_token" value="{{csrf_token()}}"/>
-                            <button type="submit">Checkout</button>
+                            <button type="submit">{t("checkout")}.</button>
                         </form>
                     </Box>
                 </Box>

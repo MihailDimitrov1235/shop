@@ -1,5 +1,6 @@
 import { Box, IconButton, Card, CardMedia, Grid, Typography, Table, TableHead, TableBody, TableCell,TableRow } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -8,6 +9,7 @@ const CartItem = ({ item, removeFromCart }) => {
     item.parts.forEach(part => {
         total += part.price;
     });
+    const { t } = useTranslation();
   return (
       <Card style={{marginTop:'20px', width:'100%'}}>
         <Grid container sx={{
@@ -50,11 +52,11 @@ const CartItem = ({ item, removeFromCart }) => {
                             <TableRow sx={{
                                 borderBottom: "none",
                             }}>
-                                <TableCell sx={{
+                                {/* <TableCell sx={{
                                     borderBottom: "none",
                                 }}>
                                     <Typography>{part.id}</Typography>
-                                </TableCell>
+                                </TableCell> */}
                                 <TableCell sx={{
                                     borderBottom: "none",
                                 }}> 
@@ -63,7 +65,7 @@ const CartItem = ({ item, removeFromCart }) => {
                                 <TableCell sx={{
                                     borderBottom: "none",
                                 }}>
-                                    <Typography>{part.price} лв.</Typography>
+                                    <Typography>{part.price} {t('bgn')}</Typography>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -76,7 +78,7 @@ const CartItem = ({ item, removeFromCart }) => {
                 justifyContent:'center',
                 py:{md:0,xs:1},
             }}>
-                <Typography variant='h4' style={{ textAlign: 'center'}}>Total: {total}</Typography>
+                <Typography variant='h4' style={{ textAlign: 'center'}}>{t('total')}: {total}</Typography>
             </Grid>
             <Grid item textAlign='right' sx={{
                 position:'absolute',

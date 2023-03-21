@@ -269,5 +269,19 @@
 
     "image": "Image",
 
-    "numbers-sold": "Numbers sold"
+    "numbers-sold": "Numbers sold",
+
+    "your-cart":"Your cart",
+
+    "no-items-in-cart":"You don't have any items in your cart.",
+
+    "subtotal":"Subtotal",
+
+    "taxes":"Taxes",
+
+    "grandtotal":"GrandTotal",
+
+    "checkout":"Checkout",
+
+    "total-price":"Total price"
 }
