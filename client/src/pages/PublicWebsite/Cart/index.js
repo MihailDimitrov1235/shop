@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Container } from '@mui/system';
 import CartItem from './CartItem';
 import Header from './Header';
-const items = [
+const props = [
     {
         id: 1,
         title: "Knifsy",
@@ -66,8 +66,8 @@ function Cart() {
             >
                 <Typography variant='h2' style={{ textAlign: 'center' }}>Your Cart</Typography>
                 <Header />
-                {items.length === 0 ? <p>No items in cart.</p> : null}
-                {items.map((item) => (
+                {props.length === 0 ? <p>No items in cart.</p> : null}
+                {props.map((item) => (
                     <CartItem
                         key={item.id}
                         item={item}

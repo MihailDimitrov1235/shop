@@ -14,19 +14,35 @@ const CartItem = ({ item, removeFromCart }) => {
                         height:'150px',
                         objectFit: 'cover',
                     }} /> 
-                <Box>
+                <Box sx={{
+                    display:'flex',
+                    flexDirection:'column',
+                    justifyContent:'center'
+                }}>
                     <Typography variant='h3' >{item.title}</Typography>
                     <Typography variant='h6' >{item.description}</Typography>
                 </Box>
                 </Box>
             </Grid>
-            <Grid item xs={2}>
-                <Typography variant='h6' style={{ textAlign: 'center'}}>Price</Typography>
+            <Grid item xs={2} sx={{
+                display:'flex',
+                flexDirection:'column',
+                justifyContent:'center'
+            }}>
+                <Typography variant='h6' style={{ textAlign: 'center', justifyContent:'center'}}>Price</Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={2} sx={{
+                display:'flex',
+                flexDirection:'column',
+                justifyContent:'center'
+            }}>
                 <Typography variant='h6' style={{ textAlign: 'center'}}>Parts</Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={2} sx={{
+                display:'flex',
+                flexDirection:'column',
+                justifyContent:'center'
+            }}>
                 <Typography variant='h6' style={{ textAlign: 'center'}}>Total</Typography>
             </Grid>
             <Grid item xs={1} textAlign='right'>
