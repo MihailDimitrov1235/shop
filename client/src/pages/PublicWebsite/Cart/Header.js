@@ -2,21 +2,19 @@ import { Box, Card, Grid, Typography } from '@mui/material';
 
 function Header(){
     return(
-        <Card style={{
+        <Card sx={{
             marginTop:'20px',
+            display:{md:'flex', xs:'none'}
         }}>
             <Grid container>
-                <Grid item xs={5}>
-                    <Typography variant='h6' style={{ textAlign: 'center'}}>Items</Typography>
+                <Grid item md={6}>
+                    <Typography variant='h6' style={{ textAlign: 'center'}}>Item</Typography>
                 </Grid>
-                <Grid item xs={2}>
-                    <Typography variant='h6' style={{ textAlign: 'center'}}>Price</Typography>
-                </Grid>
-                <Grid item xs={2}>
+                <Grid item md={4}>
                     <Typography variant='h6' style={{ textAlign: 'center'}}>Parts</Typography>
                 </Grid>
-                <Grid item xs={2}>
-                    <Typography variant='h6' style={{ textAlign: 'center'}}>Total</Typography>
+                <Grid item md={2}>
+                    <Typography variant='h6' style={{ textAlign: 'center'}}>Total Price</Typography>
                 </Grid>
             </Grid>
         </Card>
