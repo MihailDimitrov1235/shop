@@ -10,13 +10,13 @@ function Header(){
         }}>
             <Grid container>
                 <Grid item md={6}>
-                    <Typography variant='h6' style={{ textAlign: 'center'}}>Item</Typography>
+                    <Typography variant='h6' style={{ textAlign: 'center'}}>{t('item')}</Typography>
                 </Grid>
                 <Grid item md={4}>
-                    <Typography variant='h6' style={{ textAlign: 'center'}}>Parts</Typography>
+                    <Typography variant='h6' style={{ textAlign: 'center'}}>{t('parts')}</Typography>
                 </Grid>
                 <Grid item md={2}>
-                    <Typography variant='h6' style={{ textAlign: 'center'}}>Total Price</Typography>
+                    <Typography variant='h6' style={{ textAlign: 'center'}}>{t('total-price')}</Typography>
                 </Grid>
             </Grid>
         </Card>

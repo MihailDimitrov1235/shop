@@ -45,6 +45,9 @@ const CartItem = ({ item, removeFromCart }) => {
                 flexDirection:'column',
                 justifyContent:'center',
                 py:{md:0,xs:1},
+                my:{md:1,xs:0},
+                borderLeft:{md:'solid 2px rgba(224, 224, 224, 1)' , xs:'none'},
+                borderRight:{md:'solid 2px rgba(224, 224, 224, 1)' , xs:'none'},
             }}>
                 <Table>
                     <TableBody>
@@ -58,11 +61,13 @@ const CartItem = ({ item, removeFromCart }) => {
                                     <Typography>{part.id}</Typography>
                                 </TableCell> */}
                                 <TableCell sx={{
+                                    textAlign:'center',
                                     borderBottom: "none",
                                 }}> 
                                     <Typography>{part.name}</Typography>
                                 </TableCell>
                                 <TableCell sx={{
+                                    textAlign:'center',
                                     borderBottom: "none",
                                 }}>
                                     <Typography>{part.price} {t('bgn')}</Typography>
@@ -78,7 +83,7 @@ const CartItem = ({ item, removeFromCart }) => {
                 justifyContent:'center',
                 py:{md:0,xs:1},
             }}>
-                <Typography variant='h4' style={{ textAlign: 'center'}}>{t('total')}: {total}</Typography>
+                <Typography variant='h4' style={{ textAlign: 'center'}}>{t('total')}: {total} {t('bgn')}</Typography>
             </Grid>
             <Grid item textAlign='right' sx={{
                 position:'absolute',

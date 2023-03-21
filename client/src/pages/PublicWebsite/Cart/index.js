@@ -89,17 +89,17 @@ function Cart() {
                     }}>
                         <Box justifyContent='space-between' >
                             <Typography variant='h3' >
-                                {t('subtotal')}: {subTotal} {t("bgn")}.
+                                {t('subtotal')}: {subTotal} {t("bgn")}
                             </Typography>
                         </Box>
                         <Box justifyContent='space-between' >
                             <Typography variant='p'>
-                                {t('taxes')}: {tax} {t("bgn")}..
+                                {t('taxes')}: {tax} {t("bgn")}
                             </Typography>
                         </Box>
                         <Box justifyContent='space-between' >
                             <Typography variant='h6' >
-                                {t("grandtotal")}.: {grandTotal} {t("bgn")}..
+                                {t("grandtotal")}.: {grandTotal} {t("bgn")}
                             </Typography>
                         </Box>
                     </Card>
