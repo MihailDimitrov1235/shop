@@ -23,6 +23,7 @@ function Files({ files }) {
 
     const [open, setOpen] = useState(false);
     const regex = /(?:\.([^.]+))?$/;
+    const filename = /(.+?)(\.[^.]*$|$)/;
     const { t } = useTranslation();
 
     const handleClickOpen = () => {
@@ -44,17 +45,21 @@ function Files({ files }) {
                             <Box width='100%' sx={{
                                 display: 'flex',
                                 flexDirection: 'row',
-                                justifyContent: 'space-evenly',
+                                justifyContent: 'center',
                                 py: 1
                             }}>
-                                <Box width={'30px'} height={'30px'}>
+                                <Box width={'30px'} height={'30px'} marginRight='10px'>
                                     {regex.exec(files[idx].path)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
                                         : regex.exec(files[idx].path)[1] === "doc" || regex.exec(files[idx].path)[1] === "docx" ? <WordIcon fill='#2D92D4' />
                                             : regex.exec(files[idx].path)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
                                                 : regex.exec(files[idx].path)[1] === "png" || regex.exec(files[idx].path)[1] === "jpg" || regex.exec(files[idx].path)[1] === "jpeg" || regex.exec(files[idx].path)[1] === "svg" || regex.exec(files[idx].path)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
                                 </Box>
-                                <Box display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
-                                    <Typography variant='p'>{files[idx].path.split('/').pop()}</Typography>
+                                <Box width={'70%'} display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
+                                    <Typography variant='p' sx={{
+                                        overflow:'hidden',
+                                        textOverflow:'ellipsis',
+                                    }}>{filename.exec(files[idx].path.split('/').pop())[1]}</Typography>
+                                    <Typography variant='p'>.{regex.exec(files[idx].path)[1]}</Typography>
                                 </Box>
                             </Box>
                         </animated.div>
