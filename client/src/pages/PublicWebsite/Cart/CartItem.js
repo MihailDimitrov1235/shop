@@ -51,10 +51,11 @@ const CartItem = ({ item, removeFromCart }) => {
             }}>
                 <Table>
                     <TableBody>
-                        {item.parts.map(part =>(
-                            <TableRow sx={{
-                                borderBottom: "none",
-                            }}>
+                        {item.parts.map((part, index) =>(
+                            <TableRow 
+                                sx={{ borderBottom: "none" }}
+                                key={index}
+                            >
                                 {/* <TableCell sx={{
                                     borderBottom: "none",
                                 }}>

@@ -47,7 +47,7 @@ function Files({ files }) {
                                 justifyContent: 'space-evenly',
                                 py: 1
                             }}>
-                                <Box width={'30px'}>
+                                <Box width={'30px'} height={'30px'}>
                                     {regex.exec(files[idx].path)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
                                         : regex.exec(files[idx].path)[1] === "doc" || regex.exec(files[idx].path)[1] === "docx" ? <WordIcon fill='#2D92D4' />
                                             : regex.exec(files[idx].path)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
