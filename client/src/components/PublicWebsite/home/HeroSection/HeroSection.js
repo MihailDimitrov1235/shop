@@ -9,33 +9,6 @@ import { useGesture } from '@use-gesture/react';
 import { useTranslation } from 'react-i18next';
 import Rive from 'rive-react';
 
-const useStyles = makeStyles({
-    heroContainer: {
-        color: 'black',
-        //   height: '100vh',
-        //padding: '1.8rem'
-    },
-    heroText: {
-        //textAlign: 'left',
-        fontWeight: 'bold',
-        maxWidth: '600px',
-        marginTop: '10px',
-        marginBottom: '10px',
-    },
-    heroSubtitle: {
-        //textAlign: 'left',
-        //maxWidth: '600px',
-        marginTop: '10px',
-        marginBottom: '10px',
-    },
-    // heroImg: {
-    //   height: '40%!important',
-    //   border: 'solid red 1px',
-    //   '&:hover': {
-    //     border: 'solid red 1px',      
-    //   }
-    // },
-});
 function HeroSection() {
 
     const { t } = useTranslation();
@@ -54,7 +27,6 @@ function HeroSection() {
         to: { opacity: 1, y: 0 },
     })
 
-    const classes = useStyles();
     return (
         <>
             <Hidden mdUp>
@@ -70,7 +42,7 @@ function HeroSection() {
                 height: '100vh'
             }}>
 
-                <Container maxWidth={'false'} className={classes.heroContainer} sx={{
+                <Container maxWidth={'false'} sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -81,23 +53,34 @@ function HeroSection() {
                 }}>
                     <animated.div style={{ ...springs, flexBasis: '40%' }}>
                         <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-                            <Typography variant="h1" className={classes.heroText}>
+                            <Typography variant="h1" sx={{
+                                fontWeight:'bold',
+                                fontSize:{xs: '5vw', md:'2.5vw'},
+                                marginTop: '10px',
+                                marginBottom: '10px',
+                            }}>
                                 {t('hero-title')}
                             </Typography>
-                            <Typography variant="subtitle1" className={classes.heroSubtitle}>
+                            <Typography variant="subtitle1" sx={{
+                                fontSize:{xs: '2.3vw', md:'1vw'},
+                                marginTop: '10px',
+                                marginBottom: '10px',
+                            }}>
                                 {t('hero-desc')}
                             </Typography>
                             <Box>
-                                <animated.div style={{ x: x, y: y }}>
-                                    <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products">
+                                <animated.div style={{ x: x, y: y, textAlign:'center', display:'contents' }}>
+                                    <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products" sx={{
+                                        fontSize:{xs:'2vw', md:'0.8vw'}
+                                    }}>
                                         {t('hero-button')}
                                     </Button>
                                 </animated.div>
                             </Box>
                         </Box>
                     </animated.div>
-                    <animated.div style={{ ...springs, width: '100%' }}>
-                        <Box sx={{ height: { xs: '50vh', sm: '70vh', md: '800px', lg: '900px' } }}>
+                    <animated.div style={{ ...springs, marginRight:'auto' }}>
+                        <Box sx={{ height: { xs: '50vh', sm: '70vh', md: '700px', lg: '900px' }, width: { xs: '100%', md: '50vw' }}}>
                             <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
                         </Box>
                     </animated.div>
