@@ -79,12 +79,40 @@ const theme = createTheme({
     },
     h2: {
       fontWeight: 500,
-      fontSize: 29,
+      '@media (min-width:0px)': { // xs
+        fontSize: '7vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '4.8vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '3.8vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '2.8vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '2.2vw',
+      },
       letterSpacing: '-0.24px'
     },
     h3: {
       fontWeight: 500,
-      fontSize: 24,
+      '@media (min-width:0px)': { // xs
+        fontSize: '6.5vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '4.3vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '3.3vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '2.3vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '1.8vw',
+      },
       letterSpacing: '-0.06px'
     },
     h4: {
@@ -101,6 +129,40 @@ const theme = createTheme({
       fontWeight: 500,
       fontSize: 14,
       letterSpacing: '-0.05px'
+    },
+    subtitle1: {
+      '@media (min-width:0px)': { // xs
+        fontSize: '3vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '2.5vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '1.7vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '1.2vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '1vw',
+      },
+    },
+    subtitle2: {
+      '@media (min-width:0px)': { // xs
+        fontSize: '2.8vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '2.3vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '1.5vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '1vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '0.8vw',
+      },
     },
     span: {
       color: '#96011c'

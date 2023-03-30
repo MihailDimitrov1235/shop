@@ -12,9 +12,8 @@ function Achievements() {
         <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto' }}>
             <Box sx={{ my: '100px' }}>
                 <Typography
-                    variant='h3'
+                    variant='h1'
                     sx={{
-                        fontSize:{lg:'2.5vw',  xs:'4.5vw'},
                         textAlign: 'center',
                         position: 'relative',
                         ':after': {

@@ -41,7 +41,7 @@ const InformationSection = () => {
                 >
                     <Box sx={{ textAlign: 'center', flexBasis: '80%' }}>
                         <Typography
-                            variant='h1'
+                            variant='h2'
                             sx={{
                                 fontSize: '35px',
                                 color: 'white',
@@ -62,7 +62,7 @@ const InformationSection = () => {
                             {t('information-title')}
                         </Typography>
                         <Typography
-                            variant='h6'
+                            variant='subtitle1'
                             component='p'
                             sx={{ fontSize: '19px', color: 'white', fontWeight: 800, mt: '100px' }}
                         >
@@ -72,13 +72,13 @@ const InformationSection = () => {
 
                     <Container className={'container'} onClick={() => setFlipped(state => !state)}>
                         <animated.div
-                            className={'c back'}
+                            className={'image back'}
                             style={{ opacity: opacity.to(o => 1 - o), transform }}
                         >
                             <img className='informationImg' src="https://www.bas.bg/wp-content/uploads/2017/10/Ban_Zgrada_Tzentr_Vhod-1024x615.jpg"/>
                         </animated.div>
                         <animated.div
-                            className={'c front'}
+                            className={'image front'}
                             style={{
                             opacity,
                             transform,

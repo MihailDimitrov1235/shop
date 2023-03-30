@@ -25,18 +25,16 @@ function Achievement(props) {
                         <Typography className='topText'
                             marginLeft='auto'
                             marginRight={'auto'}
-                            sx={{
-                                width:'100%',
-                                fontSize:{xs: '3.7vw', sm: '2.7vw', lg: '1.7vw'}
-                            }}>
+                            width='100%'
+                            variant='h3'>
                             {props.name}
                         </Typography>
                     </legend>
                     <Box className='achievement-content'>
-                        <Box width={'70%'} paddingLeft={'40px'} paddingRight='40px'sx={{
-                                fontSize:{xs: '2.4vw', sm: '1.9vw', lg: '1.4vw'}
-                            }}>
-                            {props.desc}
+                        <Box width={'70%'} paddingLeft={'40px'} paddingRight='40px'>
+                            <Typography variant='subtitle1'>
+                                {props.desc}
+                            </Typography>
                         </Box>
                         <Box width={'30%'} height='100%' paddingRight='40px'>
                             <Icon sx={{

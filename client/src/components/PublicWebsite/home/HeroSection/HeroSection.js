@@ -67,9 +67,11 @@ function HeroSection() {
                                 {t('hero-desc')}
                             </Typography>
                             <Box>
-                                <animated.div style={{ x: x, y: y, textAlign:'center', display:'contents' }}>
+                                <animated.div style={{ x: x, y: y, textAlign:'center', width:'fit-content'}}>
                                     <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products" >
-                                        {t('hero-button')}
+                                        <Typography variant='subtitle2'>
+                                            {t('hero-button')}
+                                        </Typography>
                                     </Button>
                                 </animated.div>
                             </Box>
