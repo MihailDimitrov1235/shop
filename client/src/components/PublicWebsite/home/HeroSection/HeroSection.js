@@ -55,14 +55,12 @@ function HeroSection() {
                         <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
                             <Typography variant="h1" sx={{
                                 fontWeight:'bold',
-                                fontSize:{xs: '5vw', md:'2.5vw'},
                                 marginTop: '10px',
                                 marginBottom: '10px',
                             }}>
                                 {t('hero-title')}
                             </Typography>
                             <Typography variant="subtitle1" sx={{
-                                fontSize:{xs: '2.3vw', md:'1vw'},
                                 marginTop: '10px',
                                 marginBottom: '10px',
                             }}>
@@ -70,16 +68,14 @@ function HeroSection() {
                             </Typography>
                             <Box>
                                 <animated.div style={{ x: x, y: y, textAlign:'center', display:'contents' }}>
-                                    <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products" sx={{
-                                        fontSize:{xs:'2vw', md:'0.8vw'}
-                                    }}>
+                                    <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products" >
                                         {t('hero-button')}
                                     </Button>
                                 </animated.div>
                             </Box>
                         </Box>
                     </animated.div>
-                    <animated.div style={{ ...springs }}>
+                    <animated.div style={{ ...springs, marginRight:'auto' }}>
                         <Box sx={{ height: { xs: '50vh', sm: '70vh', md: '700px', lg: '900px' }, width: { xs: '100%', md: '50vw' }}}>
                             <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
                         </Box>

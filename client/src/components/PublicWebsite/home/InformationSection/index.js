@@ -43,7 +43,7 @@ const InformationSection = () => {
                         <Typography
                             variant='h1'
                             sx={{
-                                fontSize: {xs: '5vw', sm:'4vw', lg:'2.5vw'},
+                                fontSize: {xs: '4vw', sm:'3vw', lg:'2vw'},
                                 color: 'white',
                                 fontWeight: 800,
                                 position: 'relative',
@@ -63,7 +63,7 @@ const InformationSection = () => {
                         </Typography>
                         <Typography
                             component='p'
-                            sx={{ fontSize: {xs: '2.5vw', sm:'2vw', lg:'1.2vw'}, color: 'white', fontWeight: 800, mt: '100px' }}
+                            sx={{ fontSize: {xs: '2vw', sm:'1.5vw', lg:'0.9vw'}, color: 'white', fontWeight: 800, mt: '100px' }}
                         >
                             {t('information-desc')}
                         </Typography>

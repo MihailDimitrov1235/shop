@@ -14,6 +14,7 @@ function Achievements() {
                 <Typography
                     variant='h3'
                     sx={{
+                        fontSize:{lg:'2.5vw',  xs:'4.5vw'},
                         textAlign: 'center',
                         position: 'relative',
                         ':after': {

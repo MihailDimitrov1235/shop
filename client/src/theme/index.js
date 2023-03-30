@@ -60,7 +60,21 @@ const theme = createTheme({
   typography: {
     h1: {
       fontWeight: 500,
-      fontSize: 35,
+      '@media (min-width:0px)': { // xs
+        fontSize: '7.5vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '5vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '4vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '3vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '2vw',
+      },
       letterSpacing: '-0.24px'
     },
     h2: {
