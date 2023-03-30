@@ -164,6 +164,23 @@ const theme = createTheme({
         fontSize: '0.8vw',
       },
     },
+    p:{
+      '@media (min-width:0px)': { // xs
+        fontSize: '2.8vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '2.3vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '1.5vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '1vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '0.8vw',
+      },
+    },
     span: {
       color: '#96011c'
     },

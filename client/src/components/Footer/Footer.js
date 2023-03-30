@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 import topSvg from './Vector.svg';
 import { useTranslation } from 'react-i18next';
+import './style.css';
 
 const Footer = () => {
     const { t } = useTranslation();
@@ -78,10 +79,10 @@ const Footer = () => {
                             <Typography color={'white'}>{t('copyright')}</Typography>
                         </Box>
                         <Box sx={{ display: 'flex', justifyContent: 'space-evenly', p: '10px', width: '40%' }}>
-                            <img src="/static/images/icons/FacebookIcon.png" height={'30px'} />
-                            <img src="/static/images/icons/TwitterIcon.png" height={'30px'} />
-                            <img src="/static/images/icons/InstagramIcon.png" height={'30px'} />
-                            <img src="/static/images/icons/YoutubeIcon.png" height={'30px'} />
+                            <img src="/static/images/icons/FacebookIcon.png" className='footerIcon' />
+                            <img src="/static/images/icons/TwitterIcon.png" className='footerIcon' />
+                            <img src="/static/images/icons/InstagramIcon.png" className='footerIcon' />
+                            <img src="/static/images/icons/YoutubeIcon.png" className='footerIcon' />
                         </Box>
                     </Box>
                 </Container>
