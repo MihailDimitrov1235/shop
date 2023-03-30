@@ -43,7 +43,7 @@ const InformationSection = () => {
                         <Typography
                             variant='h1'
                             sx={{
-                                fontSize: '35px',
+                                fontSize: {xs: '5vw', sm:'4vw', lg:'2.5vw'},
                                 color: 'white',
                                 fontWeight: 800,
                                 position: 'relative',
@@ -62,9 +62,8 @@ const InformationSection = () => {
                             {t('information-title')}
                         </Typography>
                         <Typography
-                            variant='h6'
                             component='p'
-                            sx={{ fontSize: '19px', color: 'white', fontWeight: 800, mt: '100px' }}
+                            sx={{ fontSize: {xs: '2.5vw', sm:'2vw', lg:'1.2vw'}, color: 'white', fontWeight: 800, mt: '100px' }}
                         >
                             {t('information-desc')}
                         </Typography>
@@ -72,13 +71,13 @@ const InformationSection = () => {
 
                     <Container className={'container'} onClick={() => setFlipped(state => !state)}>
                         <animated.div
-                            className={'c back'}
+                            className={'image back'}
                             style={{ opacity: opacity.to(o => 1 - o), transform }}
                         >
                             <img className='informationImg' src="https://www.bas.bg/wp-content/uploads/2017/10/Ban_Zgrada_Tzentr_Vhod-1024x615.jpg"/>
                         </animated.div>
                         <animated.div
-                            className={'c front'}
+                            className={'image front'}
                             style={{
                             opacity,
                             transform,
