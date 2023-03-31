@@ -8,7 +8,7 @@ use App\Models\{
 trait UserTrait {
 
     public function getUsers($role = 2) {
-        $query = User::where('role_id', $role);
+        $query = User::where('role_id', $role)->with('cart');
 
         if(request()->query('id')) {
             $query->where('id', 'LIKE', '%'.request()->query('id').'%');

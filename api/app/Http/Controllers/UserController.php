@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\{
     User,
-    Role
+    Role,
+    Cart
 };
 use App\Traits\UserTrait;
 
@@ -62,6 +63,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
             'role_id' => $roleId
         ]);
+
+        Cart::create(['user_id' => $user->id]);
 
         $token = $user->createToken('authToken')->plainTextToken;
 
