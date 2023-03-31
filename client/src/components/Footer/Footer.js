@@ -75,10 +75,11 @@ const Footer = () => {
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: { xs: 'column', md: 'row' } }}>
-                        <Box sx={{ flexGrow: 1, textAlign: { xs: 'center', md: 'left' } }}>
-                            <Typography color={'white'}>{t('copyright')}</Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', p: '10px', width: '40%' }}>
+                            <Typography sx={{
+                                width:'50%',
+                                textAlign:'center'
+                            }} variant='p' color={'white'}>{t('copyright')}</Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', p: '10px', width: '50%' }}>
                             <img src="/static/images/icons/FacebookIcon.png" className='footerIcon' />
                             <img src="/static/images/icons/TwitterIcon.png" className='footerIcon' />
                             <img src="/static/images/icons/InstagramIcon.png" className='footerIcon' />

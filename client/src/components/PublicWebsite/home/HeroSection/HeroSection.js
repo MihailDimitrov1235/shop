@@ -66,7 +66,9 @@ function HeroSection() {
                             }}>
                                 {t('hero-desc')}
                             </Typography>
-                            <Box>
+                            <Box display={'flex'} sx={{
+                                justifyContent:{xs:'center', md:'left'}
+                            }}>
                                 <animated.div style={{ x: x, y: y, textAlign:'center', width:'fit-content'}}>
                                     <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products" >
                                         <Typography variant='subtitle2'>
@@ -77,7 +79,7 @@ function HeroSection() {
                             </Box>
                         </Box>
                     </animated.div>
-                    <animated.div style={{ ...springs, marginRight:'auto' }}>
+                    <animated.div style={{ ...springs }}>
                         <Box sx={{ height: { xs: '50vh', sm: '70vh', md: '700px', lg: '900px' }, width: { xs: '100%', md: '50vw' }}}>
                             <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
                         </Box>
