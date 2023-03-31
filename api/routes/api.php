@@ -9,7 +9,8 @@ use App\Http\Controllers\{
     AdminController,
     CategoryController,
     AuthorController,
-    StripeController
+    StripeController,
+    CartController
 };
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -62,6 +63,11 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/', [AuthorController::class, 'store']);
         Route::delete('/', [AuthorController::class, 'delete']);
         Route::put('/{id}', [AuthorController::class, 'edit']);
+    });
+
+    Route::prefix('cart')->group(function () {
+        Route::post('/add', [CartController::class, 'addProduct']);
+        Route::delete('/remove/{id}', [CartController::class, 'removeProduct']);
     });
 });
 
