@@ -47,8 +47,8 @@ const AccountProfileDetails = (props) => {
                 <form onSubmit={handleSubmit} style={{ height: '100%' }}>
                     <Card sx={{ height: '100%' }}>
                         <CardHeader
-                            subheader='Информацията може да бъде редактирана'
-                            title='Профил'
+                            subheader={t('profile-subtitle')}
+                            title={t('profile')}
                         />
                         <Divider />
                         <CardContent>
@@ -64,7 +64,7 @@ const AccountProfileDetails = (props) => {
                                         error={Boolean(touched.name && errors.name)}
                                         fullWidth
                                         helperText={touched.name && errors.name}
-                                        label='Име'
+                                        label={t('name')}
                                         name='name'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -81,7 +81,7 @@ const AccountProfileDetails = (props) => {
                                         error={Boolean(touched.email && errors.email)}
                                         fullWidth
                                         helperText={touched.email && errors.email}
-                                        label='Имейл'
+                                        label={t('email')}
                                         name='email'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -106,7 +106,7 @@ const AccountProfileDetails = (props) => {
                                 variant='contained'
                                 type='submit'
                             >
-                                Запази
+                                {t('save')}
                             </Button>
                         </Box>
                     </Card>

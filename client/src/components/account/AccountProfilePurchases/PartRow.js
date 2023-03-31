@@ -28,7 +28,7 @@ function PartRow( {part} ){
                         textAlign: "center",
                       }}
                     >
-                      <Typography variant="h5">{part.id}</Typography>
+                      <Typography variant="subtitle1">{part.id}</Typography>
                     </TableCell>
                     <TableCell
                       sx={{

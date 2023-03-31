@@ -55,7 +55,7 @@ const AccountProfile = ({ menu, setMenu, ...props }) => {
                         <Typography
                             color="textPrimary"
                             gutterBottom
-                            variant="h3"
+                            variant="h5"
                         >
                             {user && user.name}
                         </Typography>

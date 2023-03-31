@@ -71,7 +71,7 @@ const Login = () => {
                         <Box sx={{ mb: 2 }}>
                             <Typography
                                 color="textPrimary"
-                                variant="h2"
+                                variant="h3"
                             >
                                 {t('sign-in')}
                             </Typography>
@@ -99,7 +99,7 @@ const Login = () => {
                         >
                             {t('no-account')}
                             {' '}
-                            <Link component={RouterLink} to='/register' variant='h5' underline='hover' color='primary.contrastText'>
+                            <Link component={RouterLink} to='/register' variant='subtitle1' underline='hover' color='primary.contrastText'>
                                 {t('sign-up')}
                             </Link>
                         </Typography>

@@ -54,7 +54,7 @@ function Row({ product }) {
             textAlign: "center",
           }}
         >
-          <Typography variant="h5">{product.name}</Typography>
+          <Typography variant="h6">{product.name}</Typography>
         </TableCell>
         <TableCell
           sx={{
@@ -71,6 +71,7 @@ function Row({ product }) {
           }}
         >
           <Typography
+            variant="subtitle1"
             sx={{
               fontSize: "20px",
             }}

@@ -67,28 +67,28 @@ function AccountProfilePurchases(){
                         textAlign: "center",
                         }}
                     >
-                        <Typography>{t('image')}</Typography>
+                        <Typography variant='p'>{t('image')}</Typography>
                     </TableCell>
                     <TableCell
                         sx={{
                         textAlign: "center",
                         }}
                     >
-                        <Typography>{t('name')}</Typography>
+                        <Typography variant='p'>{t('name')}</Typography>
                     </TableCell>
                     <TableCell
                         sx={{
                         textAlign: "center",
                         }}
                     >
-                        <Typography>{t('description')}</Typography>
+                        <Typography variant='p'>{t('description')}</Typography>
                     </TableCell>
                     <TableCell
                         sx={{
                         textAlign: "center",
                         }}
                     >
-                        <Typography>{t('parts-owned')}</Typography>
+                        <Typography variant='p'>{t('parts-owned')}</Typography>
                     </TableCell>
                 </TableHead>
                 <TableBody>

@@ -283,5 +283,9 @@
 
     "checkout":"Checkout",
 
-    "total-price":"Total price"
+    "total-price":"Total price",
+
+    "profile-subtitle":"The information can be edited",
+
+    "parts-owned":"Owned parts"
 }
