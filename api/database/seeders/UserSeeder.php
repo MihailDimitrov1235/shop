@@ -5,9 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use App\Models\{
     User,
-    Role
+    Role,
+    Cart
 };
 
 class UserSeeder extends Seeder
@@ -19,7 +21,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         User::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         User::create([
             'name' => 'Admin',
@@ -28,6 +32,8 @@ class UserSeeder extends Seeder
             'role_id' => Role::where('name', 'Admin')->first()->id
         ]);
 
+        Cart::create(['user_id' => 1]);
+
         User::create([
             'name' => 'Miroslav',
             'email' => 'zevs8@abv.bg',
@@ -35,6 +41,8 @@ class UserSeeder extends Seeder
             'role_id' => Role::where('name', 'User')->first()->id
         ]);
 
-        User::factory()->count(50)->create();
+        Cart::create(['user_id' => 2]);
+
+        User::factory()->hasCart()->count(50)->create();
     }
 }
