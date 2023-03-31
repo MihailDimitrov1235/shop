@@ -13,6 +13,7 @@ import {
     Container,
 } from "@mui/material";
 import productService from "../../../services/product";
+import cartService from "../../../services/cart";
 import { useTranslation } from "react-i18next";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
 import Files from "../../../components/PublicWebsite/products/detailsPage/Files";
@@ -20,6 +21,7 @@ import ProductInformation from "../../../components/PublicWebsite/products/detai
 import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { display } from "@mui/system";
+import useAuth from "../../../hooks/useAuth";
 
 const useStyles = makeStyles({
     image: {
@@ -51,6 +53,7 @@ const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({ authors: [], files: [ { path: '' } ], parts: [] });
     const { t, i18n } = useTranslation();
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -76,6 +79,22 @@ const ProductPage = () => {
         setFiles(part.files);
         setPrice(part.price);
     };
+
+    const handleAddCart = () => {
+        const data = {
+            'cart_id': user.cart.id,
+            'product_id': id,
+            'part_id': part
+        }
+
+        cartService.addProduct(data)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
 
     return (
         <>
@@ -197,7 +216,7 @@ const ProductPage = () => {
                                                 x: x,
                                                 y: y
                                             }}>
-                                                <Button variant="contained" color="bordoRed">
+                                                <Button variant="contained" color="bordoRed" onClick={handleAddCart}>
                                                     {t("add-cart")}
                                                 </Button>
                                             </animated.div>
