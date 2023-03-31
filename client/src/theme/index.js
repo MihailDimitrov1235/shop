@@ -99,38 +99,62 @@ const theme = createTheme({
     h3: {
       fontWeight: 500,
       '@media (min-width:0px)': { // xs
-        fontSize: '6.5vw',
+        fontSize: '5.6vw',
       },
       '@media (min-width:600px)': { // sm
-        fontSize: '4.3vw',
+        fontSize: '4.1vw',
       },
       '@media (min-width:900px)': { // md
-        fontSize: '3.3vw',
+        fontSize: '3.2vw',
       },
       '@media (min-width:1200px)': { // lg
-        fontSize: '2.3vw',
+        fontSize: '2.1vw',
       },
       '@media (min-width:1536px)': { // xl
-        fontSize: '1.8vw',
+        fontSize: '1.6vw',
       },
       letterSpacing: '-0.06px'
     },
     h4: {
       fontWeight: 500,
-      fontSize: 20,
+      '@media (min-width:0px)': { // xs
+        fontSize: '4.2vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '3.2vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '2vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '1.6vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '1.3vw',
+      },
       letterSpacing: '-0.06px'
     },
     h5: {
       fontWeight: 500,
-      fontSize: 16,
+      '@media (min-width:0px)': { // xs
+        fontSize: '3.4vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '2.9vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '1.8vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '1.3vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '1.1vw',
+      },
       letterSpacing: '-0.05px'
     },
     h6: {
       fontWeight: 500,
-      fontSize: 14,
-      letterSpacing: '-0.05px'
-    },
-    subtitle1: {
       '@media (min-width:0px)': { // xs
         fontSize: '3vw',
       },
@@ -145,6 +169,24 @@ const theme = createTheme({
       },
       '@media (min-width:1536px)': { // xl
         fontSize: '1vw',
+      },
+      letterSpacing: '-0.05px'
+    },
+    subtitle1: {
+      '@media (min-width:0px)': { // xs
+        fontSize: '2.9vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '2.4vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '1.6vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '1.1vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '0.9vw',
       },
     },
     subtitle2: {

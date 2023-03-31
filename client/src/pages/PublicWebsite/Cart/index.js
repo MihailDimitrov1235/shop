@@ -88,7 +88,7 @@ function Cart() {
                         padding: '20px',
                     }}>
                         <Box justifyContent='space-between' >
-                            <Typography variant='h3' >
+                            <Typography variant='h6' >
                                 {t('subtotal')}: {subTotal} {t("bgn")}
                             </Typography>
                         </Box>
@@ -98,8 +98,8 @@ function Cart() {
                             </Typography>
                         </Box>
                         <Box justifyContent='space-between' >
-                            <Typography variant='h6' >
-                                {t("grandtotal")}.: {grandTotal} {t("bgn")}
+                            <Typography variant='h4' >
+                                {t("grandtotal")}: {grandTotal} {t("bgn")}
                             </Typography>
                         </Box>
                     </Card>

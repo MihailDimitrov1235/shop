@@ -36,7 +36,7 @@ const CartItem = ({ item, removeFromCart }) => {
                         textAlign:{md:'left',xs:'center'}
                     }}>
                         <Typography variant='h3' >{item.title}</Typography>
-                        <Typography variant='h6' >{item.description}</Typography>
+                        <Typography variant='subtitle1' >{item.description}</Typography>
                     </Box>
                 </Box>
             </Grid>
@@ -65,13 +65,13 @@ const CartItem = ({ item, removeFromCart }) => {
                                     textAlign:'center',
                                     borderBottom: "none",
                                 }}> 
-                                    <Typography>{part.name}</Typography>
+                                    <Typography variant='subtitle1'>{part.name}</Typography>
                                 </TableCell>
                                 <TableCell sx={{
                                     textAlign:'center',
                                     borderBottom: "none",
                                 }}>
-                                    <Typography>{part.price} {t('bgn')}</Typography>
+                                    <Typography variant='h6'>{part.price} {t('bgn')}</Typography>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -84,7 +84,7 @@ const CartItem = ({ item, removeFromCart }) => {
                 justifyContent:'center',
                 py:{md:0,xs:1},
             }}>
-                <Typography variant='h4' style={{ textAlign: 'center'}}>{t('total')}: {total} {t('bgn')}</Typography>
+                <Typography variant='h5' style={{ textAlign: 'center'}}>{t('total')}: {total} {t('bgn')}</Typography>
             </Grid>
             <Grid item textAlign='right' sx={{
                 position:'absolute',
