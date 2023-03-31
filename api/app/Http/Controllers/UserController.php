@@ -30,7 +30,7 @@ class UserController extends Controller
         ];
 
         if (auth()->attempt($data)) {
-            $user = auth()->user();
+            $user = auth()->user()->load(['cart']);
             $token = auth()->user()->createToken('authToken')->plainTextToken;
             return response()->json(['token' => $token, 'user' => $user], 200);
         } else {
