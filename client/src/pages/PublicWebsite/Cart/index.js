@@ -7,6 +7,7 @@ import Header from './Header';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../../../hooks/useAuth';
 import cartService from '../../../services/cart';
+import paymentService from '../../../services/payment';
 
 const props = [
     {
@@ -89,6 +90,13 @@ function Cart() {
         console.log(id);
     }
 
+    const handlePlan = async (planId=1) => {
+        const res = await paymentService.checkout(1);
+        if (res.status === 200) {
+            window.location.replace(res.data.url);
+        }
+    };
+
     return (
         <Container maxWidth={'false'} sx={{
             px: { lg: '130px!important' }
@@ -129,12 +137,13 @@ function Cart() {
                             </Typography>
                         </Box>
                     </Card>
-                    <Box justifyContent='right' display='flex'>
+                    <Button color='bordoRed' onClick={handlePlan}>{t('checkout')}</Button>
+                    {/* <Box justifyContent='right' display='flex'>
                         <form action="/api/checkout" method="POST">
                             <input type ="hidden" name="_token" value="{{csrf_token()}}"/>
                             <button type="submit">{t("checkout")}.</button>
                         </form>
-                    </Box>
+                    </Box> */}
                 </Box>
             </Box>
         </Container>
