@@ -30,7 +30,7 @@ class UserController extends Controller
         ];
 
         if (auth()->attempt($data)) {
-            $user = auth()->user()->load(['cart']);
+            $user = auth()->user()->load(['cart', 'cart.products', 'cart.products.parts']);
             $token = auth()->user()->createToken('authToken')->plainTextToken;
             return response()->json(['token' => $token, 'user' => $user], 200);
         } else {
@@ -73,7 +73,7 @@ class UserController extends Controller
 
     public function profile()
     {
-        $user = auth()->user();
+        $user = auth()->user()->load(['cart', 'cart.products', 'cart.products.parts']);
 
         return response()->json($user, 200);
     }
