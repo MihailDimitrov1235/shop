@@ -15,7 +15,7 @@ const CartItem = ({ item, removeFromCart }) => {
                 sum += part.price;
             })
 
-            setTotal(total + sum);
+            setTotal(sum);
         }
     }, [item])
 
