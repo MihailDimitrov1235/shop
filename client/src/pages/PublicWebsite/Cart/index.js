@@ -1,9 +1,13 @@
+import { useState, useEffect } from 'react';
 import { Box, Typography, Card, Button, Link, CardActions } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { Container } from '@mui/system';
 import CartItem from './CartItem';
 import Header from './Header';
 import { useTranslation } from 'react-i18next';
+import useAuth from '../../../hooks/useAuth';
+import cartService from '../../../services/cart';
+
 const props = [
     {
         id: 1,
@@ -48,20 +52,43 @@ const props = [
 
 ];
 
-const removeFromCart = (id) => {
-    console.log(id);
-};
-let subTotal = 0;
-props.forEach(item => {
-    item.parts.forEach(part => {
-        subTotal += part.price;
-    });
-});
-const tax = subTotal / 10;
-const grandTotal = subTotal + tax;
-
 function Cart() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const { user } = useAuth();
+    const [products, setProducts] = useState([]);
+    const [subTotal, setSubtotal] = useState(0);
+    const [tax, setTax] = useState(0);
+
+    useEffect(() => {
+        if(user) {
+            cartService.getCart(user.id, i18n.language)
+            .then((res) => {
+                console.log(res.data.products);
+                setProducts(res.data.products)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
+    }, [user, i18n.language]);
+
+    useEffect(() => {
+        let sum = 0;
+
+        products.forEach(item => {
+            item.parts.forEach(part => {
+                sum += part.price;
+            });
+        });
+
+        setSubtotal(sum);
+        setTax(sum / 10);
+    }, [products]);
+
+    const removeFromCart = (id) => {
+        console.log(id);
+    }
+
     return (
         <Container maxWidth={'false'} sx={{
             px: { lg: '130px!important' }
@@ -72,12 +99,11 @@ function Cart() {
             >
                 <Typography variant='h2' style={{ textAlign: 'center' }}>{t('your-cart')}</Typography>
                 <Header />
-                {props.length === 0 ? <p>{t('no-items-in-cart')}</p> : null}
-                {props.map((item) => (
+                {products.length === 0 ? <p>{t('no-items-in-cart')}</p> : null}
+                {products.map((item, index) => (
                     <CartItem
-                        key={item.id}
+                        key={index}
                         item={item}
-                        // addToCart={addToCart}
                         removeFromCart={removeFromCart}
                     />
                 ))}
@@ -99,7 +125,7 @@ function Cart() {
                         </Box>
                         <Box justifyContent='space-between' >
                             <Typography variant='h4' >
-                                {t("grandtotal")}: {grandTotal} {t("bgn")}
+                                {t("grandtotal")}: {subTotal + tax} {t("bgn")}
                             </Typography>
                         </Box>
                     </Card>
