@@ -137,7 +137,10 @@ function Cart() {
                             </Typography>
                         </Box>
                     </Card>
-                    <Button color='bordoRed' onClick={handlePlan}>{t('checkout')}</Button>
+                    <Box sx={{ textAlign: 'end' }}>
+                        <Button color='bordoRed' variant='contained' onClick={handlePlan}>{t('checkout')}</Button>
+                    </Box>
+                   
                     {/* <Box justifyContent='right' display='flex'>
                         <form action="/api/checkout" method="POST">
                             <input type ="hidden" name="_token" value="{{csrf_token()}}"/>
