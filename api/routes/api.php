@@ -17,13 +17,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/payment', [PaymentController::class, 'pay'])->middleware('auth');
-
 Route::post('/users/login', [UserController::class, 'login']);
 Route::post('/users/register', [UserController::class, 'register']);
 
-Route::post('/checkout', [StripeController::class, 'checkout']);
-Route::get('/success', [StripeController::class, 'success']);
+Route::get('/checkout/success', [StripeController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [StripeController::class, 'cancel'])->name('checkout.cancel');
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('users')->group(function() {
@@ -70,6 +68,8 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/add', [CartController::class, 'addProduct']);
         Route::delete('/remove/{id}', [CartController::class, 'removeProduct']);
     });
+
+    Route::post('/checkout/{id}', [StripeController::class, 'checkout']);
 });
 
 Route::prefix('categories')->group(function () {
