@@ -59,7 +59,6 @@ const routes = [
       { path: 'register', element: <Register /> },
       { path: 'account', element: <Account /> },
       { path: 'cart', element: <Cart /> },
-      { path: 'payments', element: <Payments /> }
       // { path: '/', element: <Navigate to="/home" /> },
       // { path: '*', element: <Navigate to="/404" /> }
     ]
