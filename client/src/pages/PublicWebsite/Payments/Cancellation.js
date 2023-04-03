@@ -18,13 +18,17 @@ const Cancellation = () => {
                 height: '100%'
             }}
         >
-            <Typography variant='h3' sx={{ fontWeight: 'bold', mb: 2 }}>{t('payment-cancel')}</Typography>
+            <Typography variant='h3' sx={{ fontWeight: 'bold' }}>{t('payment-cancel')}</Typography>
+            <p>
+                {t('payment-cancel-info')}
+            </p>
             <Button
                 color='bordoRed'
                 variant='contained'
                 component={RouterLink}
                 to='/'
                 endIcon={<ArrowForwardIcon />}
+                sx={{ mt: 2 }}
             >
                     {t('home')}
             </Button>
