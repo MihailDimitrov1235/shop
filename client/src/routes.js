@@ -33,6 +33,7 @@ import AuthorsTable from './pages/ControlPanel/Authors/AuthorsTable';
 import AddAuthor from './pages/ControlPanel/Authors/AddAuthor';
 import EditAuthor from './pages/ControlPanel/Authors/EditAuthor';
 
+import Success from './pages/PublicWebsite/Payments/Success';
 import Cancellation from './pages/PublicWebsite/Payments/Cancellation';
 
 import PageLayout from './components/ControlPanel/PageLayout';
@@ -121,7 +122,7 @@ const routes = [
   {
     path: 'payment',
     children: [
-      { path: 'success', element: <Cancellation /> },
+      { path: 'success', element: <Success /> },
       { path: 'cancellation', element: <Cancellation /> }
     ]
   },
