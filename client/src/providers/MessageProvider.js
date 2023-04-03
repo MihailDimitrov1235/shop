@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 export const MessageContext = React.createContext({
     message: null,
@@ -8,10 +8,21 @@ export const MessageContext = React.createContext({
 
 export default function MessageProvider({ children }) {
     const [message, setMessage] = useState(null);
+    const [timeoutId, setTimeoutId] = useState(null);
+
+    useEffect(() => {
+        if (!message) {
+            clearTimeout(timeoutId);
+        }
+    }, [message, timeoutId]);
 
     const removeMessage = () => setMessage(null);
 
-    const addMessage = (text, status) => setMessage({ text, status });
+    const addMessage = (text, status) => {
+        setMessage({ text, status })
+        const id = setTimeout(() => setMessage(null), 3000);
+        setTimeoutId(id);
+    };
 
     const contextValue = {
         message,
