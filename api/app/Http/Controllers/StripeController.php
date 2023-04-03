@@ -81,7 +81,7 @@ class StripeController extends Controller
             // $payment->date = $session->created;
             // $payment->save();
 
-            return redirect()->away('http://localhost:3000/plans/payment/success');
+            return redirect()->away('http://localhost:3000/payment/success');
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }

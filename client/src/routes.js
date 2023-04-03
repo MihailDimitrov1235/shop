@@ -33,6 +33,8 @@ import AuthorsTable from './pages/ControlPanel/Authors/AuthorsTable';
 import AddAuthor from './pages/ControlPanel/Authors/AddAuthor';
 import EditAuthor from './pages/ControlPanel/Authors/EditAuthor';
 
+import Cancellation from './pages/PublicWebsite/Payments/Cancellation';
+
 import PageLayout from './components/ControlPanel/PageLayout';
 
 import Page404 from './pages/Page404';
@@ -115,6 +117,13 @@ const routes = [
       },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
       // { path: '*', element: <Navigate to="/404" /> }
+    ]
+  },
+  {
+    path: 'payment',
+    children: [
+      { path: 'success', element: <Cancellation /> },
+      { path: 'cancellation', element: <Cancellation /> }
     ]
   },
   { path: '*', element: <Page404 /> }
