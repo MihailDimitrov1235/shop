@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Box, Typography, Card, Button, Link, CardActions } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Box, Typography, Card } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { Container } from '@mui/system';
 import CartItem from './CartItem';
 import Header from './Header';
@@ -59,6 +59,7 @@ function Cart() {
     const [products, setProducts] = useState([]);
     const [subTotal, setSubtotal] = useState(0);
     const [tax, setTax] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if(user) {
@@ -91,8 +92,10 @@ function Cart() {
     }
 
     const handlePlan = async (planId=1) => {
+        setLoading(true);
         const res = await paymentService.checkout(1);
         if (res.status === 200) {
+            setLoading(false);
             window.location.replace(res.data.url);
         }
     };
@@ -138,15 +141,15 @@ function Cart() {
                         </Box>
                     </Card>
                     <Box sx={{ textAlign: 'end' }}>
-                        <Button color='bordoRed' variant='contained' onClick={handlePlan}>{t('checkout')}</Button>
+                        <LoadingButton
+                            color='bordoRed'
+                            variant='contained'
+                            onClick={handlePlan}
+                            loading={loading}
+                        >
+                            {t('checkout')}
+                        </LoadingButton>
                     </Box>
-                   
-                    {/* <Box justifyContent='right' display='flex'>
-                        <form action="/api/checkout" method="POST">
-                            <input type ="hidden" name="_token" value="{{csrf_token()}}"/>
-                            <button type="submit">{t("checkout")}.</button>
-                        </form>
-                    </Box> */}
                 </Box>
             </Box>
         </Container>
