@@ -17,6 +17,7 @@ class CartController extends Controller
                         ->with([
                             'products' => function ($query) {
                                 $query->select(
+                                        'cart_product.id',
                                         'cart_product.cart_id',
                                         'cart_product.product_id',
                                         'cart_product.part_id',

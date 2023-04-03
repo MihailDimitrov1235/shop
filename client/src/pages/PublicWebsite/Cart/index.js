@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import useAuth from '../../../hooks/useAuth';
 import cartService from '../../../services/cart';
 import paymentService from '../../../services/payment';
+import useMessage from '../../../hooks/useMessage';
 
 const props = [
     {
@@ -56,6 +57,7 @@ const props = [
 function Cart() {
     const { t, i18n } = useTranslation();
     const { user } = useAuth();
+    const { addMessage } = useMessage();
     const [products, setProducts] = useState([]);
     const [subTotal, setSubtotal] = useState(0);
     const [tax, setTax] = useState(0);
@@ -63,14 +65,7 @@ function Cart() {
 
     useEffect(() => {
         if(user) {
-            cartService.getCart(user.id, i18n.language)
-            .then((res) => {
-                console.log(res.data.products);
-                setProducts(res.data.products)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+            loadCart();
         }
     }, [user, i18n.language]);
 
@@ -87,8 +82,26 @@ function Cart() {
         setTax(sum / 10);
     }, [products]);
 
+    const loadCart = () => {
+        cartService.getCart(user.id, i18n.language)
+        .then((res) => {
+            console.log(res.data.products);
+            setProducts(res.data.products)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
     const removeFromCart = (id) => {
-        console.log(id);
+        cartService.removeProduct(id)
+        .then((res) => {
+            addMessage(t('removed-from-cart'), 'success');
+            loadCart();
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     const handlePlan = async (planId=1) => {
