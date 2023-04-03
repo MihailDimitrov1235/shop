@@ -20,8 +20,8 @@ import Files from "../../../components/PublicWebsite/products/detailsPage/Files"
 import ProductInformation from "../../../components/PublicWebsite/products/detailsPage/ProductInformation";
 import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { display } from "@mui/system";
 import useAuth from "../../../hooks/useAuth";
+import useMessage from "../../../hooks/useMessage";
 
 const useStyles = makeStyles({
     image: {
@@ -55,6 +55,7 @@ const ProductPage = () => {
     const { t, i18n } = useTranslation();
     const { user } = useAuth();
     const navigate = useNavigate();
+    const { addMessage } = useMessage();
 
     useEffect(() => {
         productService
@@ -89,7 +90,7 @@ const ProductPage = () => {
 
         cartService.addProduct(data)
         .then((res) => {
-            console.log(res);
+            addMessage(t('added-to-cart'), 'success')
         })
         .catch((error) => {
             console.log(error);
@@ -216,7 +217,7 @@ const ProductPage = () => {
                                                 x: x,
                                                 y: y
                                             }}>
-                                                <Button variant="contained" color="bordoRed" onClick={handleAddCart}>
+                                                <Button disabled={!part} variant="contained" color="bordoRed" onClick={handleAddCart}>
                                                     {t("add-cart")}
                                                 </Button>
                                             </animated.div>
