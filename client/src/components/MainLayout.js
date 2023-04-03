@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { styled } from '@mui/material';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
+import Message from './Message';
 
 const MainLayoutRoot = styled('div')(
     ({ theme }) => ({
@@ -36,6 +37,12 @@ const MainLayoutContent = styled('div')({
     justifyContent: 'space-between'
 });
 
+const MessageWrapper = styled('div')({
+    zIndex: 2000,
+    position: 'absolute',
+    right: 5
+})
+
 const MainLayout = () => {
     return (
         <MainLayoutRoot>
@@ -43,6 +50,9 @@ const MainLayout = () => {
             <MainLayoutWrapper>
                 <MainLayoutContainer>
                     <MainLayoutContent className='main-content'>
+                        <MessageWrapper>
+                            <Message />
+                        </MessageWrapper>
                         <Outlet />
                         <Footer />
                     </MainLayoutContent>
