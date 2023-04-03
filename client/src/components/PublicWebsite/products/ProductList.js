@@ -15,7 +15,7 @@ const ProductList = () => {
     const [page, setPage] = useState(1);
     const [rows, setRows] = useState(10);
     const [sort, setSort] = useState('desc');
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const options = [
         { label: t('sort-newest'), value: 'desc' },
@@ -28,7 +28,7 @@ const ProductList = () => {
             total: 10
         }
 
-        productService.getProducts(pagination, [], {}, t.language)
+        productService.getProducts(pagination, [], {}, i18n.language)
             .then((res) => {
                 setProducts(res.data.data);
                 setTotal(res.data.total);
@@ -36,7 +36,7 @@ const ProductList = () => {
             .catch((error) => {
                 console.log(error)
             })
-    }, [])
+    }, [i18n.language])
 
     return (
         <Card style={{

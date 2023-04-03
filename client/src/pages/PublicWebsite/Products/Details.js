@@ -58,7 +58,7 @@ const ProductPage = () => {
 
     useEffect(() => {
         productService
-            .getProductById(id)
+            .getProductById(id, i18n.language)
             .then((res) => {
                 setProduct(res.data);
             })
