@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
     AppBar,
@@ -16,6 +17,13 @@ import NavbarContent from './NavbarContent';
 const Navbar = (props) => {
     const { t } = useTranslation();
     const { user } = useAuth();
+    const [cartItems, setCartItems] = useState(0);
+
+    useEffect(() => {
+        if(user) {
+            setCartItems(user.cart.products.length);
+        }
+    }, [user])
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -37,7 +45,7 @@ const Navbar = (props) => {
         { type: 'divider', orientation: 'vertical' },
         {
             type: 'link',
-            title: <StyledBadge badgeContent={4} color="bordoRed">
+            title: <StyledBadge badgeContent={cartItems} color="bordoRed" showZero>
                 <span>{t('cart')}</span>
             </StyledBadge>,
             href: '/cart',
