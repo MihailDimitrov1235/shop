@@ -22,20 +22,24 @@ const SideBar = () => {
     const items = [
         { type: 'item', icon: DashboardIcon, label: t('dashboard'), href: '/admin/dashboard' },
         { type: 'subMenu', icon: ComputerIcon, label: t('client-facing'), items: [
-            { href: '/admin/categories', label: t('categories') },
-            { href: '/admin/authors', label: t('authors') },
-            { href: '/admin/products', label: t('products') },
-            { href: '/admin/users', label: t('users') },
-            { href: '/admin/transactions', label: t('transactions') },
+            { type: 'item', icon: null, href: '/admin/categories', label: t('categories') },
+            { type: 'item', icon: null, href: '/admin/products', label: t('products') },
+            { type: 'item', icon: null, href: '/admin/users', label: t('users') },
+            { type: 'item', icon: null, href: '/admin/transactions', label: t('transactions') },
         ]},
         { type: 'subMenu', icon: ShoppingBagIcon, label: t('sales'), items: [
-            { href: '/products', label: 'Overview' },
-            { href: '/products', label: 'Daily' },
-            { href: '/products', label: 'Monthly' },
-            { href: '/products', label: 'Breakdown' },
+            { type: 'item', icon: null, href: '/products', label: 'Overview' },
+            { type: 'item', icon: null, href: '/products', label: 'Daily' },
+            { type: 'item', icon: null, href: '/products', label: 'Monthly' },
+            { type: 'item', icon: null, href: '/products', label: 'Breakdown' },
         ]},
         { type: 'subMenu', icon: ManageAccountsIcon, label: t('management'), items: [
-            { href: '/admin/admins', label: t('admins') },
+            { type: 'item', icon: null, href: '/admin/admins', label: t('admins') },
+            { type: 'item', icon: null, href: '/admin/authors', label: t('authors') },
+            { type: 'subMenu', icon: null, label: t('requests'), items: [
+                { type: 'item', icon: null, href: '/admin/requests/authors', label: t('authors') },
+                { type: 'item', icon: null, href: '/admin/requests/products', label: t('products') },
+            ]},
         ]},
 
     ]

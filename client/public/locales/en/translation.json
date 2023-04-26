@@ -287,5 +287,9 @@
 
     "profile-subtitle":"The information can be edited",
 
-    "parts-owned":"Owned parts"
+    "parts-owned":"Owned parts",
+
+    "requests":"Requests",
+
+    "request":"Request"
 }

@@ -36,6 +36,9 @@ import EditAuthor from './pages/ControlPanel/Authors/EditAuthor';
 import Success from './pages/PublicWebsite/Payments/Success';
 import Cancellation from './pages/PublicWebsite/Payments/Cancellation';
 
+import RequestAuthor from './pages/ControlPanel/Requests/RequestAuthor';
+import RequestProduct from './pages/ControlPanel/Requests/RequestProduct';
+
 import PageLayout from './components/ControlPanel/PageLayout';
 
 import Page404 from './pages/Page404';
@@ -113,6 +116,14 @@ const routes = [
           { path: '', element: <AuthorsTable />},
           { path: 'create', element: <AddAuthor />},
           { path: 'edit/:id', element: <EditAuthor/>},
+        ] 
+      },
+      {
+        path: 'requests',
+        element: <PageLayout title='requests' />,
+        children: [
+          { path: 'authors', element: <RequestAuthor />},
+          { path: 'products', element: <RequestProduct/>},
         ] 
       },
       { path: '/admin', element: <Navigate to="/admin/dashboard" /> },
