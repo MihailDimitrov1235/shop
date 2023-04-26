@@ -56,6 +56,11 @@ const SideBar = () => {
                     </IconButton>
                 </Box>
                 <Menu menuItemStyles={{
+                    subMenuContent:()=>{
+                        return{
+                            overflow:'visible'
+                        }
+                    },
                     button: ({ level, active, disabled }) => {
                         // only apply styles on first level elements of the tree
 
@@ -65,8 +70,8 @@ const SideBar = () => {
                             backgroundColor: `${theme.palette.background.paper}`,
                             ":hover": hoverStyle,
                         };
-                    },
-                }}>
+                        },
+                    }}>
                     <SideBarContent items={items}/>
                 </Menu>
             </Sidebar>

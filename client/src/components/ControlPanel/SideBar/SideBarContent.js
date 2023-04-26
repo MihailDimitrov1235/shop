@@ -6,7 +6,7 @@ import {
     useLocation
 } from "react-router-dom";
 
-const SideBarContent = ({ items, ml = 30 }) => {
+const SideBarContent = ({ items, ml = 20 }) => {
     const location = useLocation();
 
     const isActive = (href) => {
@@ -58,13 +58,13 @@ const SideBarContent = ({ items, ml = 30 }) => {
                                 position:'relative',
                                 marginLeft:marginL
                             }}>
-                                <SideBarContent items={item.items}/>
+                                <SideBarContent items={item.items} ml={ml+10}/>
                             </SubMenu>
                         );
                     }
                     return (
                         <SubMenu label={label} icon={<item.icon/>} key={index} >
-                            <SideBarContent items={item.items} ml={ml-10}/>
+                            <SideBarContent items={item.items} ml={ml+10}/>
                         </SubMenu>
                     );
                 }
