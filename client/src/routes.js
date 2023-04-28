@@ -36,6 +36,7 @@ import EditAuthor from './pages/ControlPanel/Authors/EditAuthor';
 import Success from './pages/PublicWebsite/Payments/Success';
 import Cancellation from './pages/PublicWebsite/Payments/Cancellation';
 
+import RequestPage from './pages/ControlPanel/Requests/RequestPage';
 import RequestAuthor from './pages/ControlPanel/Requests/RequestAuthor';
 import RequestProduct from './pages/ControlPanel/Requests/RequestProduct';
 
@@ -122,6 +123,7 @@ const routes = [
         path: 'requests',
         element: <PageLayout title='requests' />,
         children: [
+          { path: '', element: <RequestPage />},
           { path: 'authors', element: <RequestAuthor />},
           { path: 'products', element: <RequestProduct/>},
         ] 
