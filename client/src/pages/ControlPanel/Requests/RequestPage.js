@@ -8,8 +8,8 @@ const RequestPage = () =>{
 
     return(
         <Box display={'flex'} justifyContent={'space-evenly'} flexWrap={'wrap'}>
-            <RequestCard heading={t('authors')} image={''} href={'authors'}/>
-            <RequestCard heading={t('products')} image={''} href={'products'}/>
+            <RequestCard heading={t('authors')} image={'/static/images/requests/authors.jpg'} href={'authors'}/>
+            <RequestCard heading={t('products')} image={'/static/images/requests/products.jpg'} href={'products'}/>
         </Box>
     )
 }

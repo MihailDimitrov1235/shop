@@ -65,7 +65,7 @@ const RequestCard = ({ heading, image, href}) =>{
                             width:'100%',
                             height:'100%',
                             objectFit: 'cover',
-                        }} src='https://ec.europa.eu/eurostat/documents/4187653/15537732/Gorodenkoff_shutterstock_1922200124_RV.jpg'/>
+                        }} src={image}/>
                     </animated.div>
                         
                 </Link>
