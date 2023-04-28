@@ -291,5 +291,21 @@
 
     "requests":"Requests",
 
-    "request":"Request"
+    "time-ago":"Time passed",
+
+    "less-minute":"Less than a minute ago",
+
+    "minute-ago":"1 minute ago",
+
+    "minutes-ago":"minutes ago",
+
+    "hour-ago":"1 hour ago",
+
+    "hours-ago":"hours ago",
+
+    "day-ago":"1 day ago",
+
+    "days-ago":"days ago",
+
+    "ago":""
 }

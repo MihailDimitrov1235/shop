@@ -335,11 +335,28 @@ const MainTable = ({
                                                         </TableCell>
                                                     );
                                                 } else {
-
+                                                    let time
+                                                    if(heading.id === 'time'){
+                                                        if(value < 1){
+                                                            time = t('less-minute')
+                                                        }else if(value < 2){
+                                                            time = t('minute-ago')
+                                                        }else if(value < 60){
+                                                            time = t('ago') + value + ' ' + t('minutes-ago')
+                                                        }else if(value < 120){
+                                                            time = t('hour-ago')
+                                                        }else if(value < 1440){
+                                                            time = t('ago') + value % 60 + ' ' + t('hours-ago')
+                                                        }else if(value < 2880){
+                                                            time = t('day-ago')
+                                                        }else{
+                                                            time = t('ago') + value % 1440 + ' ' + t('days-ago')
+                                                        }
+                                                    }
                                                     return (
                                                         <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
-                                                            <Tooltip title={value}>
-                                                                <span>{value}</span>
+                                                            <Tooltip title={heading.id === 'time'? time : value}>
+                                                                <span>{heading.id === 'time'? time : value}</span>
                                                             </Tooltip>
                                                         </TableCell>
                                                     );
