@@ -36,10 +36,7 @@ const SideBar = () => {
         { type: 'subMenu', icon: ManageAccountsIcon, label: t('management'), items: [
             { type: 'item', icon: null, href: '/admin/admins', label: t('admins') },
             { type: 'item', icon: null, href: '/admin/authors', label: t('authors') },
-            { type: 'subMenu', icon: null, label: t('requests'), items: [
-                { type: 'item', icon: null, href: '/admin/requests/authors', label: t('authors') },
-                { type: 'item', icon: null, href: '/admin/requests/products', label: t('products') },
-            ]},
+            { type: 'item', icon: null, href: '/admin/requests', label: t('requests') },
         ]},
 
     ]
