@@ -79,7 +79,7 @@ export default function AuthorPage() {
                                 justifyContent: 'center',
                                 alignItems: 'center'
                             }}>
-                                <img height='100%' src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80' />
+                                <img width={'100%'} height={'100%'} src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public' />
                             </Box>
 
                             <Box sx={{
@@ -103,6 +103,7 @@ export default function AuthorPage() {
                             </Box>
                         </Box>
                         <Box sx={{
+                            flex:1,
                             display: 'flex',
                             justifyContent: 'space-evenly',
                             flexDirection: 'column',
