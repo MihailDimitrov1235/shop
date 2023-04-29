@@ -118,7 +118,7 @@ const PreviewAuthor = () =>{
     const [ocupationValue, setOcupationValue] = useState(propsBG.ocupation);
     const [descValue, setDescValue] = useState(propsBG.description);
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const facebookRegex = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/;
     const linkedinRegex = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm;
@@ -219,7 +219,11 @@ const PreviewAuthor = () =>{
                                         />
                                     </>
                                 :
-                                    <>{props.name}</>
+                                    <>{i18n.language === 'bg'? 
+                                        propsBG.name
+                                    :
+                                        propsEN.name
+                                    }</>
                                 }
                             </Typography>
                             <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >
@@ -234,7 +238,11 @@ const PreviewAuthor = () =>{
                                     />
                                 </>
                                 :
-                                    <>{props.ocupation}</>
+                                    <>{i18n.language === 'bg'? 
+                                        propsBG.ocupation
+                                    :
+                                        propsEN.ocupation
+                                    }</>
                                 }
                             </Typography>
                             <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
@@ -332,7 +340,11 @@ const PreviewAuthor = () =>{
                             </Box>
                         : 
                             <Typography variant='subtitle2'>
-                                {props.description}
+                                {i18n.language === 'bg'? 
+                                    propsBG.description
+                                :
+                                    propsEN.description
+                                }
                             </Typography>
                         }
                     </Box>
