@@ -307,5 +307,9 @@
 
     "days-ago":"days ago",
 
-    "ago":""
+    "ago":"",
+    
+    "approve":"Аpprove",
+
+    "approve-msg":"Are your sure you want to approve"
 }
