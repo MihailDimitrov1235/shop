@@ -51,10 +51,10 @@ const DeleteDialog = ({
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>
+                <Button onClick={handleClose} color="inherit">
                     {t('cancel')}
                 </Button>
-                <Button onClick={handleDelete} color="secondary">
+                <Button onClick={handleDelete} color="error">
                     {t('delete')}
                 </Button>
             </DialogActions>

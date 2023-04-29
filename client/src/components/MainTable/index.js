@@ -20,6 +20,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import EnhancedTableHead from './EnhancedTableHead';
 import DeleteDialog from './DeleteDialog';
+import ApproveDialog from './ApproveDialog';
 import PropTypes from 'prop-types';
 
 import AddIcon from '@mui/icons-material/Add';
@@ -61,6 +62,7 @@ const MainTable = ({
     method,
     editHandler,
     deleteHandler,
+    approveHandler,
     options = {
         checkbox: false,
         add: false,
@@ -88,7 +90,9 @@ const MainTable = ({
         }))
     );
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const [openApproveDialog, setOpenApproveDialog] = useState(false);
     const [deleteId, setDeleteId] = useState(0);
+    const [approveId, setApproveId] = useState(0);
     const [allColsNum, setAllColsNum] = useState(headings.length);
 
     const newRequest = () => {
@@ -193,8 +197,8 @@ const MainTable = ({
     }
 
     const handleApproveClick = (id) => {
-        setOpenDeleteDialog(true);
-        console.log(id)
+        setApproveId(id)
+        setOpenApproveDialog(true);
     }
     return (
         <Box>
@@ -221,6 +225,15 @@ const MainTable = ({
                                 newRequest={newRequest}
                                 open={openDeleteDialog}
                                 setOpen={setOpenDeleteDialog}
+                            />
+
+                            <ApproveDialog
+                                approveId={approveId}
+                                setApproveId={setApproveId}
+                                approveHandler={approveHandler}
+                                newRequest={newRequest}
+                                open={openApproveDialog}
+                                setOpen={setOpenApproveDialog}
                             />
                         </>
                     )}
@@ -461,6 +474,7 @@ MainTable.propTypes = {
     method: PropTypes.func.isRequired,
     editHandler: PropTypes.func,
     deleteHandler: PropTypes.func,
+    approveHandler: PropTypes.func,
     options: PropTypes.shape({
         checkbox: PropTypes.bool,
         add: PropTypes.bool,

@@ -22,6 +22,18 @@ const RequestAuthor = () =>{
         //     })
     }
 
+    const approveHandler = (selected) => {
+        console.log(selected)
+        // authorService.deleteAuthors(selected)
+        //     .then((res) => {
+        //         console.log(res)
+        //         addMessage(t('author-deleted'), 'success')
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     })
+    }
+
     const newRequest = (page, total, filters = [], order = {}) => {
         const pagination = {
             page: page || 1,
@@ -74,6 +86,7 @@ const RequestAuthor = () =>{
                             total={total}
                             method={newRequest}
                             deleteHandler={deleteHandler}
+                            approveHandler={approveHandler}
                             options={{
                                 checkbox: true,
                                 add: false,
