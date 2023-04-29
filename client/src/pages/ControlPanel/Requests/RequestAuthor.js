@@ -40,11 +40,11 @@ const RequestAuthor = () =>{
 
     const data = [
         {id: 1, name:"Mihail", time: 100}, //time in minutes
-        {id: 1, name:"Mihail", time: 1444},
-        {id: 1, name:"Mihail", time: 1100},
-        {id: 1, name:"Mihail", time: 9900},
-        {id: 1, name:"Mihail", time: 50},
-        {id: 1, name:"Mihail", time: 0.3},
+        {id: 2, name:"Mihail", time: 1444},
+        {id: 3, name:"Mihail", time: 1100},
+        {id: 4, name:"Mihail", time: 9900},
+        {id: 5, name:"Mihail", time: 50},
+        {id: 6, name:"Mihail", time: 0.3},
     ]
     
     const headings = [
@@ -74,13 +74,13 @@ const RequestAuthor = () =>{
                             total={total}
                             method={newRequest}
                             deleteHandler={deleteHandler}
-                            requestTable={true}
-                            previewHref={'/author/edit/'}
                             options={{
                                 checkbox: true,
                                 add: false,
                                 delete: true,
                                 edit: false,
+                                approve: true,
+                                previewHref: '/author/edit',
                             }}
                         />
                     </Box>

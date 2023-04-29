@@ -61,13 +61,13 @@ const MainTable = ({
     method,
     editHandler,
     deleteHandler,
-    requestTable = false,
-    previewHref = '',
     options = {
         checkbox: false,
         add: false,
         delete: false,
         edit: false,
+        previewHref: '',
+        approve: false,
         align: 'right',
     },
     dense,
@@ -99,6 +99,14 @@ const MainTable = ({
         newRequest();
 
         let colsNum = headings.length;
+
+        if (options.previewHref) {
+            colsNum++;
+        }
+
+        if (options.approve) {
+            colsNum++;
+        }
 
         if (options.delete) {
             colsNum++;
@@ -185,6 +193,7 @@ const MainTable = ({
     }
 
     const handleApproveClick = (id) => {
+        setOpenDeleteDialog(true);
         console.log(id)
     }
     return (
@@ -239,6 +248,8 @@ const MainTable = ({
                     <EnhancedTableHead
                         searches={searches}
                         handleSearchChange={handleSearchChange}
+                        preview={!options.previewHref? false : true}
+                        approve={options.approve}
                         options={options}
                         classes={classes}
                         numSelected={selected.length}
@@ -256,7 +267,6 @@ const MainTable = ({
                                 {options.checkbox && (
                                     <TableCell></TableCell>
                                 )}
-
                                 {headings.map((heading, index) => {
                                     if (headFilters[heading.id]) {
                                         return (
@@ -278,6 +288,14 @@ const MainTable = ({
                                         return <TableCell key={heading.id} sx={{ pt: 0.5 }}></TableCell>
                                     }
                                 })}
+
+                                {options.previewHref && (
+                                    <TableCell></TableCell>
+                                )}
+
+                                {options.approve && (
+                                    <TableCell></TableCell>
+                                )}
 
                                 {options.edit && (
                                     <TableCell></TableCell>
@@ -370,16 +388,16 @@ const MainTable = ({
                                                     );
                                                 }
                                             })}
-                                            {previewHref != '' && (
+                                            {options.previewHref && (
                                                 <TableCell align={options.align}>
-                                                    <RouterLink to={`${previewHref}${row.id}`}>
+                                                    <RouterLink to={`${options.previewHref}/${row.id}`}>
                                                         <IconButton color='info'>
                                                             <PreviewIcon />
                                                         </IconButton>
                                                     </RouterLink>
                                                 </TableCell>
                                             )}
-                                            {requestTable && (
+                                            {options.approve && (
                                                 <>
                                                     <TableCell align={options.align}>
                                                             <IconButton color='success' onClick={() => handleApproveClick(row['id'])}>
@@ -447,7 +465,10 @@ MainTable.propTypes = {
         checkbox: PropTypes.bool,
         add: PropTypes.bool,
         delete: PropTypes.bool,
-        edit: PropTypes.bool
+        edit: PropTypes.bool,
+        previewHref: PropTypes.string,
+        approve: PropTypes.bool,
+        align: PropTypes.string,
     })
 }
 

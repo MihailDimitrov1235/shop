@@ -20,6 +20,8 @@ const TableHead = withStyles(theme => ({
 const EnhancedTableHead = ({
     headings,
     headFilters,
+    preview = false,
+    approve = false,
     options,
     onSelectAllClick,
     order,
@@ -99,6 +101,12 @@ const EnhancedTableHead = ({
                         )} */}
                     </TableCell>
                 ))}
+                {preview && (
+                    <TableCell sx={ Object.keys(headFilters).length > 0 && { border: 'none', pb: 0 } }></TableCell>
+                )}
+                {approve && (
+                    <TableCell sx={ Object.keys(headFilters).length > 0 && { border: 'none', pb: 0 } }></TableCell>
+                )}
                 {options.edit && (
                     <TableCell sx={ Object.keys(headFilters).length > 0 && { border: 'none', pb: 0 } }></TableCell>
                 )}
