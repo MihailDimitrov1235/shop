@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Container, Box, Typography, Card, TextField } from '@mui/material';
+import { Container, Box, Typography, Card, TextField, Tab, Tabs } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LinkIcon from '@mui/icons-material/Link';
@@ -11,6 +11,53 @@ import Gradient from './authorGradient.svg';
 import CreatedProducts from './CreatedProducts';
 
 const PreviewAuthor = () =>{
+
+    const [nameLang, setNameLang] = useState('bg');
+    const [ocupationLang, setOcupationLang] = useState('bg');
+    const [descLang, setDescLang] = useState('bg');
+
+    const handleNameTabChange = (event, newValue) => {
+        setNameLang(newValue);
+        if(newValue == 'bg'){
+            setNameValue(propsBG.name)
+        }else if(newValue == 'en'){
+            setNameValue(propsEN.name)
+        }
+    };
+    const handleNameChange = (event) => {
+        setNameValue(event.target.value)
+        if(nameLang == 'bg'){
+            console.log(event.target.value)
+            propsBG.name = event.target.value
+            console.log(propsBG.name)
+        }else if(nameLang == 'en'){
+            propsEN.name = event.target.value
+        }
+    };
+
+    const handleOcupationTabChange = (event, newValue) => {
+        setOcupationLang(newValue);
+    };
+    const handleOcupationChange = (event) => {
+        setOcupationValue(event.target.value)
+        if(ocupationLang == 'bg'){
+            propsBG.ocupation = event.target.value
+        }else if(ocupationLang == 'en'){
+            propsEN.ocupation = event.target.value
+        }
+    };
+
+    const handleDescTabChange = (event, newValue) => {
+        setDescLang(newValue);
+    };
+    const handleDescChange = (event) => {
+        setDescValue(event.target.value)
+        if(descLang == 'bg'){
+            propsBG.description = event.target.value
+        }else if(descLang == 'en'){
+            propsEN.description = event.target.value
+        }
+    };
 
     const [edit, setEdit] = useState(true);
 
@@ -24,7 +71,6 @@ const PreviewAuthor = () =>{
             'twitter.com/GothamChess',
             'linkedin.com/in/mihail-d/',
         ],
-        description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
         products: [
             { id: 1, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product1', description: 'Description1', sold: 10 },
             { id: 2, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product2', description: 'Description2', sold: 10 },
@@ -36,6 +82,22 @@ const PreviewAuthor = () =>{
             sold: 20,
         }
     };
+
+    var propsBG = {
+        name: 'Михаил d',
+        ocupation: 'Student in the national highschool of sciences',
+        description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
+    }
+    var propsEN = {
+        name: 'Mihail Dimitrov',
+        ocupation: 'Student in the national highschool of sciences',
+        description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
+    }
+
+    const [nameValue, setNameValue] = useState(propsBG.name);
+    const [ocupationValue, setOcupationValue] = useState(propsBG.ocupation);
+    const [descValue, setDescValue] = useState(propsBG.description);
+
     const { t } = useTranslation();
 
     const facebookRegex = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/;
@@ -111,18 +173,30 @@ const PreviewAuthor = () =>{
                         }} >
                             <Typography variant='h1' marginBottom={'20px'} textAlign='center'>
                                 {edit?
-                                    <TextField id='name' defaultValue={props.name} fullWidth onChange={(event)=> props.name = event.target.value}
-                                        inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
-                                    />
+                                    <>
+                                        <Tabs value={nameLang} onChange={handleNameTabChange}>
+                                            <Tab value={'bg'} label={t('bulgarian')}/>
+                                            <Tab value={'en'} label={t('english')}/>
+                                        </Tabs>
+                                        <TextField id='name' value={nameValue} fullWidth onChange={handleNameChange}
+                                            inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
+                                        />
+                                    </>
                                 :
                                     <>{props.name}</>
                                 }
                             </Typography>
                             <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >
                                 {edit?
-                                <TextField id='ocupation' defaultValue={props.ocupation} fullWidth onChange={(event)=> props.ocupation = event.target.value}
-                                    inputProps={{ style: { textAlign: 'center', fontSize:'15px' }}}
-                                />
+                                <>
+                                    <Tabs value={ocupationLang} onChange={handleOcupationTabChange}>
+                                        <Tab value={'bg'} label={t('bulgarian')}/>
+                                        <Tab value={'en'} label={t('english')}/>
+                                    </Tabs>
+                                    <TextField id='ocupation' defaultValue={props.ocupation} fullWidth onChange={handleOcupationChange}
+                                        inputProps={{ style: { textAlign: 'center', fontSize:'15px' }}}
+                                    />
+                                </>
                                 :
                                     <>{props.ocupation}</>
                                 }
@@ -130,10 +204,12 @@ const PreviewAuthor = () =>{
                             <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
                                 {props.links.map((link, index) => (
                                     <Box display={'flex'} marginBottom='30px' marginRight={'30px'} key={index}>
-                                        {facebookRegex.exec(link) ? <FacebookIcon />
+                                        {!edit && (
+                                            facebookRegex.exec(link) ? <FacebookIcon />
                                             : linkedinRegex.exec(link) ? <LinkedInIcon />
                                                 : twitterRegex.exec(link) ? <TwitterIcon />
-                                                    : <LinkIcon />}
+                                                    : <LinkIcon />
+                                        )}
                                         <Typography>
                                             {edit? 
                                                 <TextField id='link' defaultValue={props.links[index]} fullWidth size='small' onChange={(event)=> props.links[index] = event.target.value}
@@ -209,9 +285,15 @@ const PreviewAuthor = () =>{
                 }}>
                     <Box display={'flex'} margin={'20px'} marginTop='10px'>
                         {edit? 
-                            <TextField id='description' defaultValue={props.description} multiline fullWidth onChange={(event)=> props.description = event.target.value}
-                                inputProps={{ style: { fontSize:'15px' }}}
-                            />
+                            <>
+                                <Tabs value={descLang} onChange={handleDescTabChange}>
+                                    <Tab value={'bg'} label={t('bulgarian')}/>
+                                    <Tab value={'en'} label={t('english')}/>
+                                </Tabs>
+                                <TextField id='description' defaultValue={props.description} multiline fullWidth onChange={handleDescChange}
+                                    inputProps={{ style: { fontSize:'15px' }}}
+                                />
+                            </>
                         : 
                             <Typography variant='subtitle2'>
                                 {props.description}
@@ -229,6 +311,7 @@ const PreviewAuthor = () =>{
 
         </Box>
     )
+    
 }
 
 export default PreviewAuthor;
