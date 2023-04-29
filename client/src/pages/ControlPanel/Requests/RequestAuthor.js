@@ -39,7 +39,7 @@ const RequestAuthor = () =>{
     }
 
     const data = [
-        {id: 1, name:"Mihail", time: 100},
+        {id: 1, name:"Mihail", time: 100}, //time in minutes
         {id: 1, name:"Mihail", time: 1444},
         {id: 1, name:"Mihail", time: 1100},
         {id: 1, name:"Mihail", time: 9900},
@@ -75,10 +75,11 @@ const RequestAuthor = () =>{
                             method={newRequest}
                             deleteHandler={deleteHandler}
                             requestTable={true}
+                            previewHref={'/author/edit/'}
                             options={{
-                                checkbox: false,
+                                checkbox: true,
                                 add: false,
-                                delete: false,
+                                delete: true,
                                 edit: false,
                             }}
                         />

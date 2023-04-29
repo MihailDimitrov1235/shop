@@ -25,6 +25,8 @@ import PropTypes from 'prop-types';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PreviewIcon from '@mui/icons-material/Preview';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,11 +61,14 @@ const MainTable = ({
     method,
     editHandler,
     deleteHandler,
+    requestTable = false,
+    previewHref = '',
     options = {
         checkbox: false,
         add: false,
         delete: false,
-        edit: false
+        edit: false,
+        align: 'right',
     },
     dense,
     rowClick
@@ -179,6 +184,9 @@ const MainTable = ({
         setDeleteId(id)
     }
 
+    const handleApproveClick = (id) => {
+        console.log(id)
+    }
     return (
         <Box>
             {(options.delete || options.add) && (
@@ -362,8 +370,26 @@ const MainTable = ({
                                                     );
                                                 }
                                             })}
+                                            {previewHref != '' && (
+                                                <TableCell align={options.align}>
+                                                    <RouterLink to={`${previewHref}${row.id}`}>
+                                                        <IconButton color='info'>
+                                                            <PreviewIcon />
+                                                        </IconButton>
+                                                    </RouterLink>
+                                                </TableCell>
+                                            )}
+                                            {requestTable && (
+                                                <>
+                                                    <TableCell align={options.align}>
+                                                            <IconButton color='success' onClick={() => handleApproveClick(row['id'])}>
+                                                                <VerifiedIcon />
+                                                            </IconButton>
+                                                    </TableCell>
+                                                </>
+                                            )}
                                             {options.edit && (
-                                                <TableCell align='right'>
+                                                <TableCell align={options.align}>
                                                     <RouterLink to={`edit/${row.id}`}>
                                                         <IconButton>
                                                             <EditIcon />
@@ -372,7 +398,7 @@ const MainTable = ({
                                                 </TableCell>
                                             )}
                                             {options.delete && (
-                                                <TableCell align='right'>
+                                                <TableCell align={options.align}>
                                                     <IconButton color='error' onClick={() => handleDeleteClick(row['id'])}>
                                                         <DeleteIcon />
                                                     </IconButton>
