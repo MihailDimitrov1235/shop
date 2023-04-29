@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { makeStyles } from '@mui/styles';
 import { Container, Box, Typography, Card, TextField, Tab, Tabs } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -10,9 +11,19 @@ import { useTranslation } from 'react-i18next';
 import Gradient from './authorGradient.svg';
 import CreatedProducts from './CreatedProducts';
 
+const useStyles = makeStyles({
+    flexContainer: {
+        justifyContent: 'end',
+    },
+  });
+
 const PreviewAuthor = () =>{
+    const classes = useStyles();
 
     const [edit, setEdit] = useState(true);
+    const handleEditTabChange = (event, newValue) => {
+        setEdit(newValue);
+    };
 
     const [nameLang, setNameLang] = useState('bg');
     const [ocupationLang, setOcupationLang] = useState('bg');
@@ -125,7 +136,21 @@ const PreviewAuthor = () =>{
                 position: 'relative',
                 marginTop: '200px',
             }}>
-                <Container className='topContent'>
+                <Container className='topContent' position='relative'>
+                <Tabs value={edit} onChange={handleEditTabChange} indicatorColor='inherit' classes={{
+                    flexContainer:classes.flexContainer
+                }} textColor='inherit' sx={{color:'black',}} >
+                    <Tab sx={{
+                        backgroundColor:'white',
+                        borderRadius:'10px 10px 0 0',
+                        mr:1
+                    }} value={false} label={t('preview')}/>
+                    <Tab sx={{
+                        backgroundColor:'white',
+                        borderRadius:'10px 10px 0 0',
+                        mr:1
+                    }} value={true} label={t('edit')}/>
+                </Tabs>
                     <Card elevation={2} sx={{
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
@@ -141,7 +166,8 @@ const PreviewAuthor = () =>{
                             margin: { xs: '0 auto', md: '0 50px' }
                         }}>
                             <Box className='authorImg' sx={{
-                                position: 'relative',
+                                width:'100%',
+                                position: 'absolute',
                                 border: '10px solid white',
                                 bottom: '50%',
                                 overflow: 'hidden',
@@ -186,6 +212,7 @@ const PreviewAuthor = () =>{
                                         <Tabs value={nameLang} onChange={handleNameTabChange}  indicatorColor='inherit' textColor='inherit'>
                                             <Tab value={'bg'} label={t('bulgarian')}/>
                                             <Tab value={'en'} label={t('english')}/>
+                                            
                                         </Tabs>
                                         <TextField id='name' value={nameValue} fullWidth onChange={handleNameChange}
                                             inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
@@ -225,7 +252,7 @@ const PreviewAuthor = () =>{
                                                     inputProps={{ style: { textAlign: 'center', fontSize:'12px' }}}
                                                 />
                                             :
-                                                {link}
+                                                <>{link}</>
                                             }
                                         </Typography>
                                     </Box>
