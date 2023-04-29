@@ -12,56 +12,13 @@ import CreatedProducts from './CreatedProducts';
 
 const PreviewAuthor = () =>{
 
+    const [edit, setEdit] = useState(true);
+
     const [nameLang, setNameLang] = useState('bg');
     const [ocupationLang, setOcupationLang] = useState('bg');
     const [descLang, setDescLang] = useState('bg');
 
-    const handleNameTabChange = (event, newValue) => {
-        setNameLang(newValue);
-        if(newValue == 'bg'){
-            setNameValue(propsBG.name)
-        }else if(newValue == 'en'){
-            setNameValue(propsEN.name)
-        }
-    };
-    const handleNameChange = (event) => {
-        setNameValue(event.target.value)
-        if(nameLang == 'bg'){
-            console.log(event.target.value)
-            propsBG.name = event.target.value
-            console.log(propsBG.name)
-        }else if(nameLang == 'en'){
-            propsEN.name = event.target.value
-        }
-    };
-
-    const handleOcupationTabChange = (event, newValue) => {
-        setOcupationLang(newValue);
-    };
-    const handleOcupationChange = (event) => {
-        setOcupationValue(event.target.value)
-        if(ocupationLang == 'bg'){
-            propsBG.ocupation = event.target.value
-        }else if(ocupationLang == 'en'){
-            propsEN.ocupation = event.target.value
-        }
-    };
-
-    const handleDescTabChange = (event, newValue) => {
-        setDescLang(newValue);
-    };
-    const handleDescChange = (event) => {
-        setDescValue(event.target.value)
-        if(descLang == 'bg'){
-            propsBG.description = event.target.value
-        }else if(descLang == 'en'){
-            propsEN.description = event.target.value
-        }
-    };
-
-    const [edit, setEdit] = useState(true);
-
-    var props = {
+    const [props, setProps] = useState({
         name: 'Mihail Dimitrov',
         ocupation: 'Student in the national highschool of sciences',
         phone: '1234567890',
@@ -81,18 +38,70 @@ const PreviewAuthor = () =>{
             created: 30,
             sold: 20,
         }
-    };
-
-    var propsBG = {
+    });
+    const [propsBG, setPropsBG] = useState({
         name: 'Михаил d',
         ocupation: 'Student in the national highschool of sciences',
         description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
-    }
-    var propsEN = {
+    });
+    const [propsEN, setPropsEN] = useState({
         name: 'Mihail Dimitrov',
         ocupation: 'Student in the national highschool of sciences',
         description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
-    }
+    });
+
+    const handleNameTabChange = (event, newValue) => {
+        setNameLang(newValue);
+        if(newValue == 'bg'){
+            setNameValue(propsBG.name)
+        }else if(newValue == 'en'){
+            setNameValue(propsEN.name)
+        }
+    };
+    const handleNameChange = (event) => {
+        setNameValue(event.target.value)
+        if(nameLang == 'bg'){
+            let newProps = propsBG
+            newProps.name = event.target.value
+            setPropsBG(newProps)
+        }else if(nameLang == 'en'){
+            let newProps = propsEN
+            newProps.name = event.target.value
+            setPropsEN(newProps)
+        }
+    };
+
+    const handleOcupationTabChange = (event, newValue) => {
+        setOcupationLang(newValue);
+    };
+    const handleOcupationChange = (event) => {
+        setOcupationValue(event.target.value)
+        if(ocupationLang == 'bg'){
+            let newProps = propsBG
+            newProps.ocupation = event.target.value
+            setPropsBG(newProps)
+        }else if(ocupationLang == 'en'){
+            let newProps = propsEN
+            newProps.ocupation = event.target.value
+            setPropsEN(newProps)
+        }
+    };
+
+    const handleDescTabChange = (event, newValue) => {
+        setDescLang(newValue);
+    };
+    const handleDescChange = (event) => {
+        setDescValue(event.target.value)
+        if(descLang == 'bg'){
+            let newProps = propsBG
+            newProps.description = event.target.value
+            setPropsBG(newProps)
+        }else if(descLang == 'en'){
+            let newProps = propsEN
+            newProps.description = event.target.value
+            setPropsEN(newProps)
+        }
+    };
 
     const [nameValue, setNameValue] = useState(propsBG.name);
     const [ocupationValue, setOcupationValue] = useState(propsBG.ocupation);
@@ -174,7 +183,7 @@ const PreviewAuthor = () =>{
                             <Typography variant='h1' marginBottom={'20px'} textAlign='center'>
                                 {edit?
                                     <>
-                                        <Tabs value={nameLang} onChange={handleNameTabChange}>
+                                        <Tabs value={nameLang} onChange={handleNameTabChange}  indicatorColor='inherit' textColor='inherit'>
                                             <Tab value={'bg'} label={t('bulgarian')}/>
                                             <Tab value={'en'} label={t('english')}/>
                                         </Tabs>
@@ -189,11 +198,11 @@ const PreviewAuthor = () =>{
                             <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >
                                 {edit?
                                 <>
-                                    <Tabs value={ocupationLang} onChange={handleOcupationTabChange}>
+                                    <Tabs value={ocupationLang} onChange={handleOcupationTabChange}  indicatorColor='inherit' textColor='inherit'>
                                         <Tab value={'bg'} label={t('bulgarian')}/>
                                         <Tab value={'en'} label={t('english')}/>
                                     </Tabs>
-                                    <TextField id='ocupation' defaultValue={props.ocupation} fullWidth onChange={handleOcupationChange}
+                                    <TextField id='ocupation' value={ocupationValue} fullWidth onChange={handleOcupationChange}
                                         inputProps={{ style: { textAlign: 'center', fontSize:'15px' }}}
                                     />
                                 </>
@@ -285,15 +294,15 @@ const PreviewAuthor = () =>{
                 }}>
                     <Box display={'flex'} margin={'20px'} marginTop='10px'>
                         {edit? 
-                            <>
-                                <Tabs value={descLang} onChange={handleDescTabChange}>
+                            <Box display={'flex'} flexDirection={'column'} width={'100%'}>
+                                <Tabs value={descLang} onChange={handleDescTabChange} indicatorColor='inherit' textColor='inherit'>
                                     <Tab value={'bg'} label={t('bulgarian')}/>
                                     <Tab value={'en'} label={t('english')}/>
                                 </Tabs>
-                                <TextField id='description' defaultValue={props.description} multiline fullWidth onChange={handleDescChange}
+                                <TextField id='description' value={descValue} multiline fullWidth onChange={handleDescChange}
                                     inputProps={{ style: { fontSize:'15px' }}}
                                 />
-                            </>
+                            </Box>
                         : 
                             <Typography variant='subtitle2'>
                                 {props.description}
