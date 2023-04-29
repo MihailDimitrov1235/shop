@@ -311,5 +311,11 @@
     
     "approve":"Аpprove",
 
-    "approve-msg":"Are your sure you want to approve"
+    "approve-msg":"Are your sure you want to approve",
+
+    "bulgarian":"Bulgarian",
+
+    "english":"English",
+
+    "preview":"Preview"
 }

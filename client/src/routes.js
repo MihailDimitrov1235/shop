@@ -57,11 +57,18 @@ const routes = [
         children: [
           { path: '', element: <Products /> },
           { path: ':id', element: <ProductPage /> },
+          { path: 'edit/:id', element: <ProductPage /> },
+        ]
+      },
+
+      {
+        path: 'author',
+        children: [
+          { path: ':id', element: <AuthorPage /> },
+          { path: 'edit/:id', element: <PreviewAuthor /> },
         ]
       },
       
-      { path: 'author/:id', element: <AuthorPage /> },
-      { path: 'author/edit/:id', element: <PreviewAuthor /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: 'account', element: <Account /> },
