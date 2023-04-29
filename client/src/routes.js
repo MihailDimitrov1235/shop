@@ -6,6 +6,7 @@ import Landing from './pages/PublicWebsite/Landing';
 import Products from './pages/PublicWebsite/Products';
 import ProductPage from './pages/PublicWebsite/Products/Details';
 import AuthorPage from './pages/PublicWebsite/Author/AuthorPage';
+import PreviewAuthor from './pages/PublicWebsite/Author/PreviewAuthor';
 import Cart from './pages/PublicWebsite/Cart';
 import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
@@ -60,6 +61,7 @@ const routes = [
       },
       
       { path: 'author/:id', element: <AuthorPage /> },
+      { path: 'author/edit/:id', element: <PreviewAuthor /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: 'account', element: <Account /> },
