@@ -317,5 +317,9 @@
 
     "english":"English",
 
-    "preview":"Preview"
+    "preview":"Preview",
+
+    "user": "User",
+
+    "author": "Author"
 }

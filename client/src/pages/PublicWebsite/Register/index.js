@@ -1,55 +1,37 @@
+import { useState } from 'react';
 import {
     Box,
     Container,
     Typography,
     Link,
-    Card
+    Card,
+    Tabs,
+    Tab
 } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Helmet } from 'react-helmet';
 import { Link as RouterLink } from 'react-router-dom';
-import FormBuilder from "../../../components/FormBuilder";
-import * as Yup from 'yup';
-import userService from '../../../services/user';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 
+import UserForm from '../../../components/PublicWebsite/register/UserForm';
+import AuthorForm from '../../../components/PublicWebsite/register/AuthorForm';
+
+const useStyles = makeStyles({
+    flexContainer: {
+        justifyContent: 'end',
+    },
+});
+
 const Register = () => {
-    const navigate = useNavigate();
-    const { setUser } = useAuth();
     const { t } = useTranslation();
+    const [mode, setMode] = useState('user');
 
-    const validationSchema = Yup.object().shape({
-        name: Yup.string().max(255).required(t('name-required')),
-        email: Yup.string().email(t('email-invalid')).max(255).required(t('email-required')),
-        password: Yup.string().max(255).required(t('password-required')).min(8, t('password-invalid')),
-        repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], t('passwords-not-match')),
-    });
-
-    const onSubmit = (values, { setSubmitting }) => {
-        userService.register(values)
-            .then((res) => {
-                localStorage.setItem('refresh-token', res.data.token);
-                const user = res.data.user;
-                setUser(user);
-                navigate('/', { replace: true });
-            })
-            .catch((err) => {
-                setSubmitting(false);
-            })
+    const handleModeTabChange = (event, newValue) => {
+        setMode(newValue);
     };
 
-    const fields = [
-        { type: 'text', name: 'name', label: t('name') },
-        { type: 'email', name: 'email', label: t('email') },
-        { type: 'password', name: 'password', label: t('password') },
-        { type: 'password', name: 'repeatPassword', label: t('repeat-password') }
-    ];
+    const classes = useStyles();
 
-    const submitButton = {
-        label: t('sign-up'),
-        color: 'bordoRed'
-    };
 
     return (
         <>
@@ -58,6 +40,35 @@ const Register = () => {
             </Helmet>
             <Box sx={{ mt: 10 }}>
                 <Container maxWidth="sm">
+                    <Tabs
+                        value={mode}
+                        onChange={handleModeTabChange}
+                        indicatorColor='inherit'
+                        textColor='inherit'
+                        classes={{
+                            flexContainer: classes.flexContainer
+                        }}
+                        sx={{ color: 'black' }}
+                    >
+                        <Tab
+                            sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '10px 10px 0 0',
+                                mr: 1
+                            }}
+                            value={'user'}
+                            label={t('user')}
+                        />
+                        <Tab
+                            sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '10px 10px 0 0',
+                                mr: 1
+                            }}
+                            value={'author'}
+                            label={t('author')}
+                        />
+                    </Tabs>
                     <Card sx={{ p: 3 }}>
                         <Box sx={{ mb: 2 }}>
                             <Typography
@@ -76,12 +87,7 @@ const Register = () => {
                         </Box>
 
                         <Box>
-                            <FormBuilder
-                                fields={fields}
-                                validationSchema={validationSchema}
-                                onSubmit={onSubmit}
-                                submitButton={submitButton}
-                            />
+                            {mode === 'user' ? <UserForm /> : <AuthorForm />}
                         </Box>
 
                         <Typography
