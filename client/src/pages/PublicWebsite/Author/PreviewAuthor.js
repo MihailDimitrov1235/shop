@@ -331,45 +331,6 @@ const PreviewAuthor = () => {
                                         }
                                     </Box>
                                 </Typography>
-                                {/* <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
-                                    {props.links.map((link, index) => (
-                                        <Box display={'flex'} marginBottom='30px' key={index}>
-                                            {!edit && (
-                                                facebookRegex.exec(link) ? <FacebookIcon />
-                                                    : linkedinRegex.exec(link) ? <LinkedInIcon />
-                                                        : twitterRegex.exec(link) ? <TwitterIcon />
-                                                            : <LinkIcon />
-                                            )}
-                                            <Typography>
-                                                <Box display={edit ? 'flex' : 'none'}>
-                                                    <Box>
-                                                        <TextField
-                                                            id='link'
-                                                            value={link}
-                                                            fullWidth
-                                                            size='small'
-                                                            onChange={(event) => handleLinkChange(index, event.target.value)}
-                                                            inputProps={{ style: { textAlign: 'center', fontSize: '12px' } }}
-                                                        />
-                                                    </Box>
-                                                    <Box>
-                                                        <IconButton onClick={() => handleRemoveLink(index)} color='error'>
-                                                            <DeleteIcon />
-                                                        </IconButton>
-                                                    </Box>
-                                                </Box>
-
-                                                <Box display={edit ? 'none' : 'block'}>{link}</Box>
-                                            </Typography>
-                                        </Box>
-                                    ))}
-                                    <Box display={edit ? 'block' : 'none'} float='right'>
-                                        <IconButton onClick={handleAddLink} color='inherit'>
-                                            <AddLinkIcon />
-                                        </IconButton>
-                                    </Box>
-
-                                </Box> */}
                             </Box>
                         </Card>
                     </Container>
@@ -391,8 +352,26 @@ const PreviewAuthor = () => {
                         margin: '10px 0'
                     }}>
                         <Box sx={{ px: 2 }}>
-                            <Typography variant='h4' sx={{ textAlign: 'center' }}>{t('contact-info')}</Typography>
-                            <Box>
+                            <Typography
+                                variant='h4'
+                                sx={{
+                                    textAlign: "center",
+                                    position: "relative",
+                                    ":after": {
+                                        content: '""',
+                                        position: "absolute",
+                                        width: '20%',
+                                        height: "3px",
+                                        bottom: "-10px",
+                                        left: "40%",
+                                        borderBottom: "3px dashed",
+                                        borderColor: "background.bordoRed",
+                                    },
+                                }}
+                            >
+                                {t('contact-info')}
+                            </Typography>
+                            <Box sx={{ mt: 3 }}>
                                 <ContactBox>
                                     <PhoneIcon />
                                     <Box sx={{ flexGrow: 1 }}>
@@ -437,8 +416,26 @@ const PreviewAuthor = () => {
                             </Box>
                         </Box>
                         <Box sx={{ p: 2, mt: 2 }}>
-                            <Typography variant='h4' sx={{ textAlign: 'center' }}>{t('links')}</Typography>
-                            <Box className='authorLinks'>
+                            <Typography
+                                variant='h4'
+                                sx={{
+                                    textAlign: "center",
+                                    position: "relative",
+                                    ":after": {
+                                        content: '""',
+                                        position: "absolute",
+                                        width: '20%',
+                                        height: "3px",
+                                        bottom: "-10px",
+                                        left: "40%",
+                                        borderBottom: "3px dashed",
+                                        borderColor: "background.bordoRed",
+                                    },
+                                }}
+                            >
+                                {t('links')}
+                            </Typography>
+                            <Box className='authorLinks' sx={{ mt: 3 }}>
                                 {props.links.map((link, index) => (
                                     <Box sx={{ display: 'flex', alignItems: 'center', my: 1 }} key={index}>
                                         {!edit && (
