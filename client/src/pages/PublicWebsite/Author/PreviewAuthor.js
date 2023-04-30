@@ -299,8 +299,13 @@ const PreviewAuthor = () => {
                                             <Tab value={'en'} label={t('english')} />
 
                                         </Tabs>
-                                        <TextField id='name' value={nameValue} fullWidth onChange={handleNameChange}
+                                        <TextField
+                                            id='name'
+                                            value={nameValue}
+                                            fullWidth
+                                            onChange={handleNameChange}
                                             inputProps={{ style: { textAlign: 'center', fontSize: '30px' } }}
+                                            color='bordoRed'
                                         />
                                     </Box>
 
@@ -318,8 +323,13 @@ const PreviewAuthor = () => {
                                             <Tab value={'bg'} label={t('bulgarian')} />
                                             <Tab value={'en'} label={t('english')} />
                                         </Tabs>
-                                        <TextField id='ocupation' value={ocupationValue} fullWidth onChange={handleOcupationChange}
+                                        <TextField
+                                            id='ocupation'
+                                            value={ocupationValue}
+                                            fullWidth
+                                            onChange={handleOcupationChange}
                                             inputProps={{ style: { textAlign: 'center', fontSize: '15px' } }}
+                                            color='bordoRed'
                                         />
                                     </Box>
 
@@ -384,6 +394,7 @@ const PreviewAuthor = () => {
                                                 fullWidth
                                                 onChange={(event) => props.phone = event.target.value}
                                                 inputProps={{ style: { fontSize: '15px' } }}
+                                                color='bordoRed'
                                             />
                                         ) : (
                                             <Typography variant='subtitle1'>
@@ -455,6 +466,7 @@ const PreviewAuthor = () => {
                                                         size='small'
                                                         onChange={(event) => handleLinkChange(index, event.target.value)}
                                                         inputProps={{ style: { textAlign: 'center', fontSize: '12px' } }}
+                                                        color='bordoRed'
                                                     />
                                                 </Box>
                                                 <Box>
@@ -498,8 +510,14 @@ const PreviewAuthor = () => {
                                         <Tab value={'bg'} label={t('bulgarian')} />
                                         <Tab value={'en'} label={t('english')} />
                                     </Tabs>
-                                    <TextField id='description' value={descValue} multiline fullWidth onChange={handleDescChange}
+                                    <TextField
+                                        id='description'
+                                        value={descValue}
+                                        multiline
+                                        fullWidth
+                                        onChange={handleDescChange}
                                         inputProps={{ style: { fontSize: '15px' } }}
+                                        color='bordoRed'
                                     />
                                 </Box>
                             </Box>
