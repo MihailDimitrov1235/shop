@@ -465,7 +465,7 @@ const PreviewAuthor = () => {
                                                         fullWidth
                                                         size='small'
                                                         onChange={(event) => handleLinkChange(index, event.target.value)}
-                                                        inputProps={{ style: { textAlign: 'center', fontSize: '12px' } }}
+                                                        inputProps={{ style: { textAlign: 'center', fontSize: '14px' } }}
                                                         color='bordoRed'
                                                     />
                                                 </Box>
@@ -533,7 +533,7 @@ const PreviewAuthor = () => {
 
                         </Box>
                         <Box display={'flex'} margin={'10px auto'}>
-                            <Typography variant='h2'>{t('created-products')}</Typography>
+                            <Typography variant='h3'>{t('created-products')}</Typography>
                         </Box>
                         <Box display={'flex'}>
                             <CreatedProducts products={props.products} />

@@ -10,10 +10,10 @@ import {
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-function CreatedProducts(products) {
+function CreatedProducts({ products }) {
 
   const {t} = useTranslation();
-  products = products.products; // !!!!!!!!!!!!!!
+ // products = products.products; // !!!!!!!!!!!!!!
   return (
     <Table>
       <TableHead>
@@ -23,28 +23,28 @@ function CreatedProducts(products) {
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">{t('image')}</Typography>
+            <Typography variant="h5">{t('image')}</Typography>
           </TableCell>
           <TableCell
             sx={{
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">{t('name')}</Typography>
+            <Typography variant="h5">{t('name')}</Typography>
           </TableCell>
           <TableCell
             sx={{
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">{t('description')}</Typography>
+            <Typography variant="h5">{t('description')}</Typography>
           </TableCell>
           <TableCell
             sx={{
               textAlign: "center",
             }}
           >
-            <Typography variant="h4">{t('numbers-sold')}</Typography>
+            <Typography variant="h5">{t('numbers-sold')}</Typography>
           </TableCell>
         </TableRow>
       </TableHead>
