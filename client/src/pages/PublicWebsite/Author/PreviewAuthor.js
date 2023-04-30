@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button, IconButton } from '@mui/material';
+import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button, IconButton, styled } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LinkIcon from '@mui/icons-material/Link';
@@ -23,6 +23,13 @@ const useStyles = makeStyles({
         justifyContent: 'end',
     },
 });
+
+const ContactBox = styled(Box)(() => ({
+    display: 'flex',
+    margin: '10px auto',
+    alignItems: 'center',
+    gap: '5px'
+}));
 
 const PreviewAuthor = () => {
 
@@ -324,7 +331,7 @@ const PreviewAuthor = () => {
                                         }
                                     </Box>
                                 </Typography>
-                                <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
+                                {/* <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
                                     {props.links.map((link, index) => (
                                         <Box display={'flex'} marginBottom='30px' key={index}>
                                             {!edit && (
@@ -362,7 +369,7 @@ const PreviewAuthor = () => {
                                         </IconButton>
                                     </Box>
 
-                                </Box>
+                                </Box> */}
                             </Box>
                         </Card>
                     </Container>
@@ -383,39 +390,99 @@ const PreviewAuthor = () => {
                         px: '5px',
                         margin: '10px 0'
                     }}>
-                        <Box display={'flex'} margin={'10px auto'}>
-                            <Typography variant='h3'>{t('contact-info')}</Typography>
+                        <Box sx={{ px: 2 }}>
+                            <Typography variant='h4' sx={{ textAlign: 'center' }}>{t('contact-info')}</Typography>
+                            <Box>
+                                <ContactBox>
+                                    <PhoneIcon />
+                                    <Box sx={{ flexGrow: 1 }}>
+                                        {edit ? (
+                                            <TextField
+                                                id='phone'
+                                                defaultValue={props.phone}
+                                                size='small'
+                                                margin='dense'
+                                                fullWidth
+                                                onChange={(event) => props.phone = event.target.value}
+                                                inputProps={{ style: { fontSize: '15px' } }}
+                                            />
+                                        ) : (
+                                            <Typography variant='subtitle1'>
+                                                {props.phone}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                </ContactBox>
+                                <ContactBox>
+                                    <EmailIcon />
+                                    <Box sx={{ flexGrow: 1 }}>
+                                        {edit ? (
+                                            <TextField
+                                                id='email'
+                                                defaultValue={props.email}
+                                                size='small'
+                                                margin='dense'
+                                                fullWidth
+                                                onChange={(event) => props.email = event.target.value}
+                                                inputProps={{ style: { fontSize: '15px' } }}
+                                                color='bordoRed'
+                                            />
+                                        ) : (
+                                            <Typography variant='subtitle1'>
+                                                {props.email}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                </ContactBox>
+                            </Box>
                         </Box>
-                        <Box display={'flex'} margin={'10px auto'}>
-                            <PhoneIcon />
-                            <Box display={edit ? 'block' : 'none'}>
-                                <TextField id='phone' defaultValue={props.phone} fullWidth size='small' onChange={(event) => props.phone = event.target.value}
-                                    inputProps={{ style: { fontSize: '15px' } }}
-                                />
+                        <Box sx={{ p: 2, mt: 2 }}>
+                            <Typography variant='h4' sx={{ textAlign: 'center' }}>{t('links')}</Typography>
+                            <Box className='authorLinks'>
+                                {props.links.map((link, index) => (
+                                    <Box sx={{ display: 'flex', alignItems: 'center', my: 1 }} key={index}>
+                                        {!edit && (
+                                            facebookRegex.exec(link) ? <FacebookIcon />
+                                                : linkedinRegex.exec(link) ? <LinkedInIcon />
+                                                    : twitterRegex.exec(link) ? <TwitterIcon />
+                                                        : <LinkIcon />
+                                        )}
+
+                                        {edit ? (
+                                            <>
+                                                <Box sx={{ flexGrow: 1 }}>
+                                                    <TextField
+                                                        id='link'
+                                                        value={link}
+                                                        fullWidth
+                                                        size='small'
+                                                        onChange={(event) => handleLinkChange(index, event.target.value)}
+                                                        inputProps={{ style: { textAlign: 'center', fontSize: '12px' } }}
+                                                    />
+                                                </Box>
+                                                <Box>
+                                                    <IconButton onClick={() => handleRemoveLink(index)} color='error'>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Box>
+                                            </>
+                                        ) : (
+                                            <Typography>{link}</Typography>
+                                        )}
+                                    </Box>
+                                ))}
+                                {edit && (
+                                    <Button
+                                        variant='text'
+                                        onClick={handleAddLink}
+                                        endIcon={<AddLinkIcon />}
+                                        color='inherit'
+                                        fullWidth
+                                    >
+                                        {t('add-link')}
+                                    </Button>
+                                )}
                             </Box>
-                            <Box display={edit ? 'none' : 'block'}>
-                                <Typography variant='subtitle1'>
-                                    {props.phone}
-                                </Typography>
-                            </Box>
-
-
-
-                        </Box>
-                        <Box display={'flex'} margin={'10px auto'}>
-                            <EmailIcon />
-                            <Box display={edit ? 'block' : 'none'}>
-                                <TextField id='email' defaultValue={props.email} fullWidth size='small' onChange={(event) => props.email = event.target.value}
-                                    inputProps={{ style: { fontSize: '15px' } }}
-                                />
-                            </Box>
-                            <Box display={edit ? 'none' : 'block'}>
-                                <Typography variant='subtitle1'>
-                                    {props.email}
-                                </Typography>
-                            </Box>
-
-
                         </Box>
                     </Card>
                     <Card className='authorContent' elevation={2} sx={{
