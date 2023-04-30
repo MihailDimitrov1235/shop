@@ -46,8 +46,6 @@ const PreviewAuthor = () =>{
     const [descLang, setDescLang] = useState('bg');
 
     const [props, setProps] = useState({
-        name: 'Mihail Dimitrov',
-        ocupation: 'Student in the national highschool of sciences',
         phone: '1234567890',
         email: 'mighty.strong1235@gmail.com',
         links: [
@@ -79,6 +77,9 @@ const PreviewAuthor = () =>{
 
     const handleApprove = ( id ) => {
         console.log(id[0])
+        console.log(props)
+        console.log(propsBG)
+        console.log(propsEN)
     }
 
     const handleNameTabChange = (event, newValue) => {
@@ -104,6 +105,11 @@ const PreviewAuthor = () =>{
 
     const handleOcupationTabChange = (event, newValue) => {
         setOcupationLang(newValue);
+        if(newValue == 'bg'){
+            setOcupationValue(propsBG.ocupation)
+        }else if(newValue == 'en'){
+            setOcupationValue(propsEN.ocupation)
+        }
     };
     const handleOcupationChange = (event) => {
         setOcupationValue(event.target.value)
@@ -120,6 +126,11 @@ const PreviewAuthor = () =>{
 
     const handleDescTabChange = (event, newValue) => {
         setDescLang(newValue);
+        if(newValue == 'bg'){
+            setDescValue(propsBG.description)
+        }else if(newValue == 'en'){
+            setDescValue(propsEN.description)
+        }
     };
     const handleDescChange = (event) => {
         setDescValue(event.target.value)
@@ -255,8 +266,7 @@ const PreviewAuthor = () =>{
                             py: 3,
                         }} >
                             <Typography variant='h1' marginBottom={'20px'} textAlign='center'>
-                                {edit?
-                                    <>
+                                    <Box display={edit? 'block' : 'none'}>
                                         <Tabs value={nameLang} onChange={handleNameTabChange}  indicatorColor='inherit' textColor='inherit'>
                                             <Tab value={'bg'} label={t('bulgarian')}/>
                                             <Tab value={'en'} label={t('english')}/>
@@ -265,18 +275,18 @@ const PreviewAuthor = () =>{
                                         <TextField id='name' value={nameValue} fullWidth onChange={handleNameChange}
                                             inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
                                         />
-                                    </>
-                                :
-                                    <>{i18n.language === 'bg'? 
+                                    </Box>
+
+                                    <Box display={edit? 'none' : 'block'}>
+                                    {i18n.language === 'bg'? 
                                         propsBG.name
                                     :
                                         propsEN.name
-                                    }</>
-                                }
+                                    }
+                                    </Box>
                             </Typography>
                             <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >
-                                {edit?
-                                <>
+                                <Box display={edit? 'block' : 'none'}>
                                     <Tabs value={ocupationLang} onChange={handleOcupationTabChange}  indicatorColor='inherit' textColor='inherit'>
                                         <Tab value={'bg'} label={t('bulgarian')}/>
                                         <Tab value={'en'} label={t('english')}/>
@@ -284,14 +294,15 @@ const PreviewAuthor = () =>{
                                     <TextField id='ocupation' value={ocupationValue} fullWidth onChange={handleOcupationChange}
                                         inputProps={{ style: { textAlign: 'center', fontSize:'15px' }}}
                                     />
-                                </>
-                                :
-                                    <>{i18n.language === 'bg'? 
+                                </Box>
+
+                                <Box display={edit? 'none' : 'block'}>
+                                    {i18n.language === 'bg'? 
                                         propsBG.ocupation
                                     :
                                         propsEN.ocupation
-                                    }</>
-                                }
+                                    }
+                                </Box>
                             </Typography>
                             <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
                                 {props.links.map((link, index) => (
@@ -303,13 +314,12 @@ const PreviewAuthor = () =>{
                                                     : <LinkIcon />
                                         )}
                                         <Typography>
-                                            {edit? 
+                                            <Box display={edit? 'block' : 'none'}> 
                                                 <TextField id='link' defaultValue={props.links[index]} fullWidth size='small' onChange={(event)=> props.links[index] = event.target.value}
                                                     inputProps={{ style: { textAlign: 'center', fontSize:'12px' }}}
                                                 />
-                                            :
-                                                <>{link}</>
-                                            }
+                                            </Box>
+                                            <Box display={edit? 'none' : 'block'}>{link}</Box>
                                         </Typography>
                                     </Box>
                                 ))}
@@ -339,29 +349,32 @@ const PreviewAuthor = () =>{
                     </Box>
                     <Box display={'flex'} margin={'10px auto'}>
                         <PhoneIcon />
-                        {edit?
+                        <Box display={edit? 'block' : 'none'}>
                             <TextField id='phone' defaultValue={props.phone} fullWidth size='small' onChange={(event)=> props.phone = event.target.value}
                                 inputProps={{ style: { fontSize:'15px' }}}
                             />
-                        :
+                        </Box>
+                        <Box display={edit? 'none' : 'block'}>
                             <Typography variant='subtitle1'>
                                 {props.phone}
                             </Typography>
-                        }
+                        </Box>
+                            
                             
                             
                     </Box>
                     <Box display={'flex'} margin={'10px auto'}>
                         <EmailIcon />
-                        {edit? 
+                        <Box display={edit? 'block' : 'none'}> 
                             <TextField id='email' defaultValue={props.email} fullWidth size='small' onChange={(event)=> props.email = event.target.value}
                                 inputProps={{ style: { fontSize:'15px' }}}
                             />
-                        : 
+                        </Box>
+                        <Box display={edit? 'none' : 'block'}>
                             <Typography variant='subtitle1'>
                                 {props.email}
                             </Typography>
-                        }
+                        </Box>
                         
                         
                     </Box>
@@ -376,7 +389,7 @@ const PreviewAuthor = () =>{
                     mr: '0',
                 }}>
                     <Box display={'flex'} margin={'20px'} marginTop='10px'>
-                        {edit? 
+                        <Box display={edit? 'block' : 'none'} width={'100%'}>
                             <Box display={'flex'} flexDirection={'column'} width={'100%'}>
                                 <Tabs value={descLang} onChange={handleDescTabChange} indicatorColor='inherit' textColor='inherit'>
                                     <Tab value={'bg'} label={t('bulgarian')}/>
@@ -386,7 +399,8 @@ const PreviewAuthor = () =>{
                                     inputProps={{ style: { fontSize:'15px' }}}
                                 />
                             </Box>
-                        : 
+                        </Box>
+                        <Box display={edit? 'none' : 'block'}>
                             <Typography variant='subtitle2'>
                                 {i18n.language === 'bg'? 
                                     propsBG.description
@@ -394,7 +408,8 @@ const PreviewAuthor = () =>{
                                     propsEN.description
                                 }
                             </Typography>
-                        }
+                        </Box>
+
                     </Box>
                     <Box display={'flex'} margin={'10px auto'}>
                         <Typography variant='h2'>{t('created-products')}</Typography>
