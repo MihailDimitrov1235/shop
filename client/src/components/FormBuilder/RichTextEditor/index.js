@@ -27,6 +27,9 @@ class RichTextEditor extends React.Component {
       this.onBlur = () => {
         this.setState({ isFocused: false });
       }
+      if(props.onChange){
+        this.onChange = props.onChange
+      }else{
       this.onChange = (editorState) => {
         const rawContentState = convertToRaw(editorState.getCurrentContent());
         const markup = draftToHtml(
@@ -36,6 +39,7 @@ class RichTextEditor extends React.Component {
         this.props.setFieldValue(this.props.name, markup);
         this.setState({editorState});
       };
+    }
 
       this.handleKeyCommand = this._handleKeyCommand.bind(this);
       this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);

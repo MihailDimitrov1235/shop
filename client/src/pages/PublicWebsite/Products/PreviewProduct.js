@@ -18,8 +18,11 @@ import { useTranslation } from "react-i18next";
 import ProductDisplay from "../../../components/PublicWebsite/products/ProductDisplay";
 import Files from "../../../components/PublicWebsite/products/detailsPage/Files";
 import ProductInformation from "../../../components/PublicWebsite/products/detailsPage/ProductInformation";
+import EditInformation from "../../../components/PublicWebsite/products/detailsPage/EditInformation";
 import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
+import { convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 import useAuth from "../../../hooks/useAuth";
 import useMessage from "../../../hooks/useMessage";
 
@@ -53,14 +56,14 @@ const PreviewProduct = () => {
 
     const [productBG, setProductBG] = useState({
         name:'The product',
-        shortDescription:'dwqohuidhqd',
-        longDescription:'kiefgwiufguwef',
+        shortDescription:"<h1>This is heading 1 bg</h1>",
+        longDescription:"<h2>This is heading 2 bg</h2>",
     })
 
     const [productEN, setProductEN] = useState({
         name:'The product',
-        shortDescription:'dwqohuidhqd',
-        longDescription:'kiefgwiufguwef',
+        shortDescription:"<h1>This is heading 1 en</h1>",
+        longDescription:"<h2>This is heading 2 en</h2>",
     })
 
     const [edit, setEdit] = useState(true);
@@ -86,33 +89,43 @@ const PreviewProduct = () => {
         }
     }
 
-    const handleNameLangChange = (event) =>{
-        setCurrentNameLang(event.target.value)
-        if(event.target.value === 'bg'){
+    const handleNameLangChange = (event, newValue) =>{
+        console.log(newValue)
+        setCurrentNameLang(newValue)
+        if(newValue === 'bg'){
             setCurrentName(productBG.name)
-        }else if(event.target.value === 'en'){
+        }else if(newValue === 'en'){
             setCurrentName(productEN.name)
         }
     }
 
-    const handleShortDescChange = (event) =>{
-        setCurrentShortDesc(event.target.value)
-        if(currentShortDescLang === 'bg'){
-            let newProps = productBG
-            newProps.shortDescription = event.target.value
-            setProductBG(newProps)
-        }else if(currentShortDescLang === 'en'){
-            let newProps = productEN
-            newProps.shortDescription = event.target.value
-            setProductEN(newProps)
-        }
+    const handleShortDescChange = (editorState) =>{
+        const rawContentState = convertToRaw(editorState.getCurrentContent());
+        const markup = draftToHtml(
+            rawContentState, 
+          );
+          console.log(markup)
+          console.log(currentShortDesc)
+        // const markup = draftToHtml(
+        //   rawContentState, 
+        // );
+        setCurrentShortDesc(markup)
+        // if(currentShortDescLang === 'bg'){
+        //     let newProps = productBG
+        //     newProps.shortDescription = editorState
+        //     setProductBG(newProps)
+        // }else if(currentShortDescLang === 'en'){
+        //     let newProps = productEN
+        //     newProps.shortDescription = editorState
+        //     setProductEN(newProps)
+        // }
     }
 
-    const handleShortDescLangChange = (event) =>{
-        setCurrentShortDescLang(event.target.value)
-        if(event.target.value === 'bg'){
+    const handleShortDescLangChange = (event, newValue) =>{
+        setCurrentShortDescLang(newValue)
+        if(newValue === 'bg'){
             setCurrentShortDesc(productBG.shortDescription)
-        }else if(event.target.value === 'en'){
+        }else if(newValue === 'en'){
             setCurrentShortDesc(productEN.shortDescription)
         }
     }
@@ -130,11 +143,11 @@ const PreviewProduct = () => {
         }
     }
 
-    const handleLongDescLangChange = (event) =>{
-        setCurrentLongDescLang(event.target.value)
-        if(event.target.value === 'bg'){
+    const handleLongDescLangChange = (event, newValue) =>{
+        setCurrentLongDescLang(newValue)
+        if(newValue === 'bg'){
             setCurrentLongDesc(productBG.longDescription)
-        }else if(event.target.value === 'en'){
+        }else if(newValue === 'en'){
             setCurrentLongDesc(productEN.longDescription)
         }
     }
@@ -222,12 +235,31 @@ const PreviewProduct = () => {
                         sx={{ display: { xs: "flex", md: "none" }, flexDirection: "column" }}
                     >
                         <Card elevation={1} sx={{ p: 3, mt: 3 }}>
-                            <ProductInformation
-                                name={edit? currentName : i18n==='bg'? productBG.name: productEN.name}
-                                authors={product.authors}
-                                desc={edit? currentShortDesc : i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
-                                edit={edit}
-                            />
+                            
+                            {edit?
+                                <EditInformation
+                                    name={currentName}
+                                    nameLang={currentNameLang}
+                                    handleNameChange={handleNameChange}
+                                    handleNameLangChange={handleNameLangChange}
+                                    authors={product.authors}
+                                    desc={currentShortDesc}
+                                    descLang={currentShortDescLang}
+                                    handleDescChange={handleShortDescChange}
+                                    handleDescLangChange={handleShortDescLangChange}
+                                />
+                            :
+                                <ProductInformation
+                                    name={edit? currentName : i18n==='bg'? productBG.name: productEN.name}
+                                    authors={product.authors}
+                                    desc={edit? currentShortDesc : i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                />
+                            }
+
+                            
+
+                            
+
                         </Card>
                     </Box>
 
@@ -259,11 +291,25 @@ const PreviewProduct = () => {
                                             display: { xs: "none", lg: "block" },
                                         }}
                                     >
-                                        <ProductInformation
-                                            name={product.name}
-                                            authors={product.authors}
-                                            desc={product.shortDescription}
-                                        />
+                                        {edit?
+                                            <EditInformation
+                                                name={currentName}
+                                                nameLang={currentNameLang}
+                                                handleNameChange={handleNameChange}
+                                                handleNameLangChange={handleNameLangChange}
+                                                authors={product.authors}
+                                                desc={currentShortDesc}
+                                                descLang={currentShortDescLang}
+                                                handleDescChange={handleShortDescChange}
+                                                handleDescLangChange={handleShortDescLangChange}
+                                            />
+                                        :
+                                            <ProductInformation
+                                                name={edit? currentName : i18n==='bg'? productBG.name: productEN.name}
+                                                authors={product.authors}
+                                                desc={edit? currentShortDesc : i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                            />
+                                        }
                                     </Box>
                                     <Box
                                         width="100%"
@@ -332,11 +378,27 @@ const PreviewProduct = () => {
                     sx={{ display: { xs: 'none', md: "flex", lg: "none" }, flexDirection: "column" }}
                 >
                     <Card elevation={1} sx={{ p: 3, mt: 3 }}>
-                        <ProductInformation
-                            name={product.name}
-                            authors={product.authors}
-                            desc={product.shortDescription}
-                        />
+                        
+                        {edit?
+                            <EditInformation
+                                name={currentName}
+                                nameLang={currentNameLang}
+                                handleNameChange={handleNameChange}
+                                handleNameLangChange={handleNameLangChange}
+                                authors={product.authors}
+                                desc={currentShortDesc}
+                                descLang={currentShortDescLang}
+                                handleDescChange={handleShortDescChange}
+                                handleDescLangChange={handleShortDescLangChange}
+                            />
+                        :
+                            <ProductInformation
+                                name={edit? currentName : i18n==='bg'? productBG.name: productEN.name}
+                                authors={product.authors}
+                                desc={edit? currentShortDesc : i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                            />
+                        }
+
                     </Card>
                 </Box>
                 <Card sx={{ mt: 4 }}>
