@@ -113,7 +113,7 @@ export default function AuthorPage() {
                             <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >{props.ocupation}</Typography>
                             <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
                                 {props.links.map((link, index) => (
-                                    <Box display={'flex'} marginBottom='30px' marginRight={'30px'} key={index}>
+                                    <Box display={'flex'} marginBottom='30px' key={index}>
                                         {facebookRegex.exec(link) ? <FacebookIcon />
                                             : linkedinRegex.exec(link) ? <LinkedInIcon />
                                                 : twitterRegex.exec(link) ? <TwitterIcon />

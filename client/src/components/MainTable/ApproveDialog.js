@@ -25,8 +25,12 @@ const ApproveDialog = ({
 
     function handleApprove() {
         approveHandler([approveId]);
-        setApproveId(0);
-        newRequest();
+        if(setApproveId){
+            setApproveId(0);
+        }
+        if(newRequest){
+            newRequest();
+        }
         setOpen(false);
     }
 

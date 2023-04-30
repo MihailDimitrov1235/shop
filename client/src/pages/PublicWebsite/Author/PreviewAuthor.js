@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import {useParams} from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { Container, Box, Typography, Card, TextField, Tab, Tabs } from '@mui/material';
+import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LinkIcon from '@mui/icons-material/Link';
@@ -10,6 +11,10 @@ import EmailIcon from '@mui/icons-material/Email';
 import { useTranslation } from 'react-i18next';
 import Gradient from './authorGradient.svg';
 import CreatedProducts from './CreatedProducts';
+import { useSpring, animated } from '@react-spring/web';
+import { useHover } from '@use-gesture/react';
+import ApproveDoalog from '../../../components/MainTable/ApproveDialog'
+import DoneIcon from '@mui/icons-material/Done';
 
 const useStyles = makeStyles({
     flexContainer: {
@@ -18,7 +23,18 @@ const useStyles = makeStyles({
   });
 
 const PreviewAuthor = () =>{
+
+    const id = useParams().id;
+
+    const [{ approveWidth }, apiApprove] = useSpring(() => ({ approveWidth: '50px' }))
+
+    const bind = useHover(( {hovering} ) => {
+        apiApprove.start({ approveWidth: hovering ? '130px' : '50px'})
+    })
+
     const classes = useStyles();
+
+    const [openDialog, setOpenDialog] = useState(false);
 
     const [edit, setEdit] = useState(true);
     const handleEditTabChange = (event, newValue) => {
@@ -60,6 +76,10 @@ const PreviewAuthor = () =>{
         ocupation: 'Student in the national highschool of sciences',
         description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
     });
+
+    const handleApprove = ( id ) => {
+        console.log(id[0])
+    }
 
     const handleNameTabChange = (event, newValue) => {
         setNameLang(newValue);
@@ -126,6 +146,32 @@ const PreviewAuthor = () =>{
 
 
     return (
+        <>
+        <animated.div {...bind()} style={{
+            width:approveWidth,
+            height:'50px',
+            zIndex:'3',
+            right:0,
+            position:'fixed',
+            top:'50%',
+            borderRadius:' 25px 0 0 25px',
+            background:'white',
+            border:'solid 1px #96011c',
+            overflow: 'hidden',
+            display:'flex',
+            alignItems:'center',
+            paddingLeft:'10px'
+        }}>
+            <DoneIcon sx={{
+                mr:1,
+                color:'#000000'
+            }}/>
+            <Button sx={{color:'#050505'}} onClick={() => setOpenDialog(true)}>
+                {t('approve')}
+            </Button>
+        </animated.div>
+
+        <ApproveDoalog approveId={id} setApproveId={null} approveHandler={handleApprove} newRequest={null} open={openDialog} setOpen={setOpenDialog}/>
         
         <Box component={'form'} position='relative' >
             <Box width={'100%'} position='absolute' height={'100vh'} overflow='hidden'>
@@ -249,7 +295,7 @@ const PreviewAuthor = () =>{
                             </Typography>
                             <Box className='authorLinks' display={'flex'} flexDirection='row' justifyContent={'space-evenly'} flexWrap="wrap" >
                                 {props.links.map((link, index) => (
-                                    <Box display={'flex'} marginBottom='30px' marginRight={'30px'} key={index}>
+                                    <Box display={'flex'} marginBottom='30px' key={index}>
                                         {!edit && (
                                             facebookRegex.exec(link) ? <FacebookIcon />
                                             : linkedinRegex.exec(link) ? <LinkedInIcon />
@@ -360,6 +406,7 @@ const PreviewAuthor = () =>{
             </Container>
 
         </Box>
+        </>
     )
     
 }
