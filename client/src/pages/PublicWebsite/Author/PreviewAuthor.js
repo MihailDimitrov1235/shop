@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import {useParams} from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button } from '@mui/material';
+import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LinkIcon from '@mui/icons-material/Link';
@@ -15,6 +15,8 @@ import { useSpring, animated } from '@react-spring/web';
 import { useHover } from '@use-gesture/react';
 import ApproveDoalog from '../../../components/MainTable/ApproveDialog'
 import DoneIcon from '@mui/icons-material/Done';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddLinkIcon from '@mui/icons-material/AddLink';
 
 const useStyles = makeStyles({
     flexContainer: {
@@ -80,6 +82,26 @@ const PreviewAuthor = () =>{
         console.log(props)
         console.log(propsBG)
         console.log(propsEN)
+    }
+
+    function handleRemoveLink( index ){
+        let newProps = props 
+        let newLinks = []
+        for(let i = 0; i<newProps.links.length; i++){
+            if(i!=index){
+                newLinks.push(newProps.links[i])
+            }
+        }
+        newProps.links = newLinks
+        setProps(newProps);
+    }
+
+    const handleAddLink = ( index ) => {
+        let newProps = props
+        let newLinks = newProps.links
+        newLinks.push("")
+        newProps.links = newLinks
+        setProps(newProps)
     }
 
     const handleNameTabChange = (event, newValue) => {
@@ -314,15 +336,29 @@ const PreviewAuthor = () =>{
                                                     : <LinkIcon />
                                         )}
                                         <Typography>
-                                            <Box display={edit? 'block' : 'none'}> 
-                                                <TextField id='link' defaultValue={props.links[index]} fullWidth size='small' onChange={(event)=> props.links[index] = event.target.value}
-                                                    inputProps={{ style: { textAlign: 'center', fontSize:'12px' }}}
-                                                />
+                                            <Box display={edit? 'flex' : 'none'}>
+                                                <Box> 
+                                                    <TextField id='link' defaultValue={props.links[index]} fullWidth size='small' onChange={(event)=> props.links[index] = event.target.value}
+                                                        inputProps={{ style: { textAlign: 'center', fontSize:'12px' }}}
+                                                    />
+                                                </Box>
+                                                <Box> 
+                                                    <IconButton onClick={() => handleRemoveLink(index)} color='error'>
+                                                        <DeleteIcon/>
+                                                    </IconButton>
+                                                </Box>
                                             </Box>
+                                            
                                             <Box display={edit? 'none' : 'block'}>{link}</Box>
                                         </Typography>
                                     </Box>
                                 ))}
+                                <Box display={edit? 'block' : 'none'} float='right'>
+                                    <IconButton onClick={handleAddLink} color='inherit'>
+                                        <AddLinkIcon/>
+                                    </IconButton>
+                                </Box>
+                                
                             </Box>
                         </Box>
                     </Card>
