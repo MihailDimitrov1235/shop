@@ -1,7 +1,7 @@
 import { Box, Typography, Stack, Chip } from '@mui/material';
 import { Link } from "react-router-dom";
 
-export default function ProductInformation({ name, authors, desc }) {
+export default function ProductInformation({ name, authors, desc, edit=false }) {
 
     return (
         <>

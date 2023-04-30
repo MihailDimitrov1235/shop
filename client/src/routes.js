@@ -17,6 +17,7 @@ import Dashboard from './pages/ControlPanel/Dashboard';
 
 import AddProductForm from './pages/ControlPanel/Products/AddProductForm'
 import ProductTable from "./pages/ControlPanel/Products/ProductTable";
+import PreviewProduct from './pages/PublicWebsite/Products/PreviewProduct';
 
 import UsersTable from './pages/ControlPanel/Users/UsersTable';
 import AddUser from './pages/ControlPanel/Users/AddUser';
@@ -57,7 +58,7 @@ const routes = [
         children: [
           { path: '', element: <Products /> },
           { path: ':id', element: <ProductPage /> },
-          { path: 'edit/:id', element: <ProductPage /> },
+          { path: 'edit/:id', element: <PreviewProduct /> },
         ]
       },
 
