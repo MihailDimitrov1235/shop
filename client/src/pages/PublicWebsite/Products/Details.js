@@ -62,9 +62,13 @@ const ProductPage = () => {
             .getProductById(id, i18n.language)
             .then((res) => {
                 setProduct(res.data);
-                setPart(res.data.parts[0].id);
-                setFiles(product.parts[0].files);
-                setPrice(product.parts[0].price);
+                if(res.data.parts.length>0){
+                    const part = res.data.parts[0]
+                    setPart(part.id)
+                    setFiles(part.files)
+                    setPrice(part.price)
+                }
+                console.log(res.data.parts.length);
             })
             .catch((error) => {
                 navigate('/products');
