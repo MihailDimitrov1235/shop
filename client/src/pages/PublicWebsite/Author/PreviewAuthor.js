@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button, IconButton, styled } from '@mui/material';
+import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button, IconButton, styled, Avatar, Badge } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LinkIcon from '@mui/icons-material/Link';
@@ -18,6 +18,8 @@ import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 
+import EditIcon from '@mui/icons-material/Edit';
+
 const useStyles = makeStyles({
     flexContainer: {
         justifyContent: 'end',
@@ -33,7 +35,7 @@ const ContactBox = styled(Box)(() => ({
 
 const PreviewAuthor = () => {
 
-    const id = useParams().id;
+    const { id } = useParams();
 
     const [{ approveWidth }, apiApprove] = useSpring(() => ({ approveWidth: '50px' }))
 
@@ -209,7 +211,7 @@ const PreviewAuthor = () => {
                 </Button>
             </animated.div>
 
-            <ApproveDoalog approveId={id} setApproveId={null} approveHandler={handleApprove} newRequest={null} open={openDialog} setOpen={setOpenDialog} />
+            <ApproveDoalog approveId={Number(id)} setApproveId={() => { }} approveHandler={handleApprove} newRequest={() => { }} open={openDialog} setOpen={setOpenDialog} />
 
             <Box component={'form'} position='relative' >
                 <Box width={'100%'} position='absolute' height={'100vh'} overflow='hidden'>
@@ -243,47 +245,81 @@ const PreviewAuthor = () => {
                         }}>
                             <Box sx={{
                                 display: 'flex',
+                                flexDirection: 'column',
                                 justifyContent: 'center',
                                 alignContent: 'center',
                                 position: 'relative',
                                 width: { xs: '50%', md: '30%' },
                                 margin: { xs: '0 auto', md: '0 50px' }
                             }}>
-                                <Box className='authorImg' sx={{
+                                {/* <Button className='authorImg' component='label' sx={{
                                     width: '100%',
                                     position: 'absolute',
                                     border: '10px solid white',
-                                    bottom:'10px',
+                                    bottom: '10px',
                                     overflow: 'hidden',
                                     borderRadius: '50%',
                                     aspectRatio: '1/1',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
-
+                                    p: 0
                                 }}>
-                                    <img width={'100%'} height={'100%'} src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public' />
-                                </Box>
-
-                                {/* <Box sx={{
-                                    position: 'absolute',
-                                    width: '100%',
-                                    bottom: '50px',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-evenly',
-                                    alignItems: 'center',
-                                    display: { xs: 'none', md: 'flex' },
-                                }}>
-                                    <Box display={'flex'} flexDirection='column' textAlign={'center'}>
-                                        <Typography variant='h3'>{props.achievements.created}</Typography>
-                                        <Typography variant='subtitle2'>{t('products-created')}</Typography>
+                                    <Avatar
+                                        src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
+                                        sx={{ width: '100%', height: '100%' }}
+                                    />
+                                    <input hidden accept="image/*" multiple type="file" />
+                                </Button> */}
+                                {edit ? (
+                                    <Badge
+                                        overlap='circular'
+                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                        sx={{ aspectRatio: '1/1' }}
+                                        badgeContent={
+                                            <IconButton aria-label='upload picture' component='label'>
+                                                <input hidden accept="image/*" type="file" />
+                                                <EditIcon sx={{ fontSize: '32px' }} />
+                                            </IconButton>
+                                        }
+                                    >
+                                        <Box className='authorImg' sx={{
+                                            width: '100%',
+                                            position: 'absolute',
+                                            border: '10px solid white',
+                                            bottom: '20px',
+                                            overflow: 'hidden',
+                                            borderRadius: '50%',
+                                            aspectRatio: '1/1',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+                                        }}>
+                                            <Avatar
+                                                src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
+                                                sx={{ width: '100%', height: '100%' }}
+                                            />
+                                        </Box>
+                                    </Badge>
+                                ) : (
+                                    <Box className='authorImg' sx={{
+                                        width: '100%',
+                                        position: 'absolute',
+                                        border: '10px solid white',
+                                        bottom: '20px',
+                                        overflow: 'hidden',
+                                        borderRadius: '50%',
+                                        aspectRatio: '1/1',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }}>
+                                        <Avatar
+                                            src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
+                                            sx={{ width: '100%', height: '100%' }}
+                                        />
                                     </Box>
-                                    <Box display={'flex'} flexDirection='column' textAlign={'center'}>
-                                        <Typography variant='h3'>{props.achievements.sold}</Typography>
-                                        <Typography variant='subtitle2'>{t('sales')}</Typography>
-                                    </Box>
-                                </Box> */}
+                                )}
                             </Box>
                             <Box sx={{
                                 flex: 1,
