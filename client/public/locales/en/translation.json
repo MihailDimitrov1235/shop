@@ -321,5 +321,7 @@
 
     "user": "User",
 
-    "author": "Author"
+    "author": "Author",
+
+    "links": "Links"
 }

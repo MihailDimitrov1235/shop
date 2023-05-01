@@ -448,7 +448,7 @@ const PreviewAuthor = () => {
                             </Typography>
                             <Box className='authorLinks' sx={{ mt: 3 }}>
                                 {props.links.map((link, index) => (
-                                    <Box sx={{ display: 'flex', alignItems: 'center', my: 1 }} key={index}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', my: 1.5, gap: 1 }} key={index}>
                                         {!edit && (
                                             facebookRegex.exec(link) ? <FacebookIcon />
                                                 : linkedinRegex.exec(link) ? <LinkedInIcon />
@@ -476,7 +476,7 @@ const PreviewAuthor = () => {
                                                 </Box>
                                             </>
                                         ) : (
-                                            <Typography>{link}</Typography>
+                                            <Typography sx={{ fontSize: '16px' }}>{link}</Typography>
                                         )}
                                     </Box>
                                 ))}
