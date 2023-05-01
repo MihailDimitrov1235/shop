@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Box, Typography, Card } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, Typography, Card, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Container } from '@mui/system';
 import CartItem from './CartItem';
@@ -9,6 +10,9 @@ import useAuth from '../../../hooks/useAuth';
 import cartService from '../../../services/cart';
 import paymentService from '../../../services/payment';
 import useMessage from '../../../hooks/useMessage';
+
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
 const props = [
     {
@@ -64,7 +68,7 @@ function Cart() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if(user) {
+        if (user) {
             loadCart();
         }
     }, [user, i18n.language]);
@@ -84,27 +88,27 @@ function Cart() {
 
     const loadCart = () => {
         cartService.getCart(user.id, i18n.language)
-        .then((res) => {
-            console.log(res.data.products);
-            setProducts(res.data.products)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+            .then((res) => {
+                console.log(res.data.products);
+                setProducts(res.data.products)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     const removeFromCart = (id) => {
         cartService.removeProduct(id)
-        .then((res) => {
-            addMessage(t('removed-from-cart'), 'success');
-            loadCart();
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then((res) => {
+                addMessage(t('removed-from-cart'), 'success');
+                loadCart();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
-    const handlePlan = async (planId=1) => {
+    const handlePlan = async (planId = 1) => {
         setLoading(true);
         const res = await paymentService.checkout(1);
         if (res.status === 200) {
@@ -121,49 +125,78 @@ function Cart() {
                 width='100%'
                 padding='20px'
             >
-                <Typography variant='h2' style={{ textAlign: 'center' }}>{t('your-cart')}</Typography>
-                <Header />
-                {products.length === 0 ? <p>{t('no-items-in-cart')}</p> : null}
-                {products.map((item, index) => (
-                    <CartItem
-                        key={index}
-                        item={item}
-                        removeFromCart={removeFromCart}
-                    />
-                ))}
-                <Box width={'400px'} marginLeft={'auto'}>
-                    <Card style={{
-                        marginTop: '20px',
-                        marginBottom: '20px',
-                        padding: '20px',
-                    }}>
-                        <Box justifyContent='space-between' >
-                            <Typography variant='h6' >
-                                {t('subtotal')}: {subTotal} {t("bgn")}
-                            </Typography>
+                {products.length > 0 ? (
+                    <>
+                        <Typography variant='h2' style={{ textAlign: 'center' }}>{t('your-cart')}</Typography>
+                        <Header />
+                        {products.map((item, index) => (
+                            <CartItem
+                                key={index}
+                                item={item}
+                                removeFromCart={removeFromCart}
+                            />
+                        ))}
+                        <Box width={'400px'} marginLeft={'auto'}>
+                            <Card style={{
+                                marginTop: '20px',
+                                marginBottom: '20px',
+                                padding: '20px',
+                            }}>
+                                <Box justifyContent='space-between' >
+                                    <Typography variant='h6' >
+                                        {t('subtotal')}: {subTotal} {t("bgn")}
+                                    </Typography>
+                                </Box>
+                                <Box justifyContent='space-between' >
+                                    <Typography variant='p'>
+                                        {t('taxes')}: {tax} {t("bgn")}
+                                    </Typography>
+                                </Box>
+                                <Box justifyContent='space-between' >
+                                    <Typography variant='h4' >
+                                        {t("grandtotal")}: {subTotal + tax} {t("bgn")}
+                                    </Typography>
+                                </Box>
+                            </Card>
+                            <Box sx={{ textAlign: 'end' }}>
+                                <LoadingButton
+                                    color='bordoRed'
+                                    variant='contained'
+                                    onClick={handlePlan}
+                                    loading={loading}
+                                >
+                                    {t('checkout')}
+                                </LoadingButton>
+                            </Box>
                         </Box>
-                        <Box justifyContent='space-between' >
-                            <Typography variant='p'>
-                                {t('taxes')}: {tax} {t("bgn")}
-                            </Typography>
+                    </>
+                ) : (
+                    <Box sx={{ textAlign: 'center', my: 8 }}>
+
+                        <svg width={0} height={0}>
+                            <linearGradient id="linearColors" x1={1} y1={0} x2={1} y2={1}>
+                                <stop offset={0} stopColor="rgba(219,18,41,1)" />
+                                <stop offset={1} stopColor="rgba(150,1,28,1)" />
+                            </linearGradient>
+                        </svg>
+                        <ProductionQuantityLimitsIcon sx={{ fontSize: '180px', fill: "url(#linearColors)" }} />
+
+                        <Box sx={{ my: 6 }}>
+                            <Typography variant='h2' style={{ textAlign: 'center' }}>{t('your-cart-is-empty')}</Typography>
+                            <Typography variant='p'>{t('empty-cart-message')}</Typography>
                         </Box>
-                        <Box justifyContent='space-between' >
-                            <Typography variant='h4' >
-                                {t("grandtotal")}: {subTotal + tax} {t("bgn")}
-                            </Typography>
-                        </Box>
-                    </Card>
-                    <Box sx={{ textAlign: 'end' }}>
-                        <LoadingButton
-                            color='bordoRed'
+                        <Button
                             variant='contained'
-                            onClick={handlePlan}
-                            loading={loading}
+                            color='bordoRed'
+                            startIcon={<ShoppingBagIcon />}
+                            component={RouterLink}
+                            to='/products'
                         >
-                            {t('checkout')}
-                        </LoadingButton>
+                            {t('return-to-shop')}
+                        </Button>
                     </Box>
-                </Box>
+                )}
+
             </Box>
         </Container>
     );
