@@ -323,5 +323,11 @@
 
     "author": "Author",
 
-    "links": "Links"
+    "links": "Links",
+
+    "your-cart-is-empty": "Your cart is empty",
+
+    "empty-cart-message": "You must items before you proceed to check out",
+
+    "return-to-shop": "Return to shop"
 }
