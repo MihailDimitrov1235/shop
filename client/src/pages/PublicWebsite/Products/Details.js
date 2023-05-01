@@ -62,6 +62,9 @@ const ProductPage = () => {
             .getProductById(id, i18n.language)
             .then((res) => {
                 setProduct(res.data);
+                setPart(res.data.parts[0].id);
+                setFiles(product.parts[0].files);
+                setPrice(product.parts[0].price);
             })
             .catch((error) => {
                 navigate('/products');

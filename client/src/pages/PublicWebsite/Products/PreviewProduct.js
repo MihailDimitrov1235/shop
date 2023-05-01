@@ -158,9 +158,9 @@ const PreviewProduct = () => {
     // }, [id, i18n.language]);
 
     
-    const [files, setFiles] = useState([]);
-    const [price, setPrice] = useState(0);
-    const [part, setPart] = useState('');
+    const [files, setFiles] = useState(product.parts[0].files);
+    const [price, setPrice] = useState(product.parts[0].price);
+    const [part, setPart] = useState(product.parts[0].id);
 
     const handlePartChange = (event) => {
         const part = product.parts.find((x) => x.id === event.target.value);
