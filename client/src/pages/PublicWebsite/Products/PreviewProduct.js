@@ -240,9 +240,9 @@ const PreviewProduct = () => {
                                 />
                             :
                                 <ProductInformation
-                                    name={i18n.language==='bg'? productBG.name: productEN.name}
-                                    authors={product.authors}
-                                    desc={i18n.language==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                    name={ i18n.language === 'bg' ? productBG.name: productEN.name}
+                                    authors={ product.authors }
+                                    desc={ i18n.language === 'bg' ? productBG.shortDescription: productEN.shortDescription}
                                 />
                             }
 
