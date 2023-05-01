@@ -52,7 +52,7 @@ function Files({ files }) {
                                     {regex.exec(files[idx].path)[1] === "pdf" ? <PdfIcon fill='#f40f02' />
                                         : regex.exec(files[idx].path)[1] === "doc" || regex.exec(files[idx].path)[1] === "docx" ? <WordIcon fill='#2D92D4' />
                                             : regex.exec(files[idx].path)[1] === "xml" ? <ExcelIcon fill='#388E3C' />
-                                                : regex.exec(files[idx].path)[1] === "png" || regex.exec(files[idx].path)[1] === "jpg" || regex.exec(files[idx].path)[1] === "jpeg" || regex.exec(files[idx].path)[1] === "svg" || regex.exec(files[idx].path)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : "unidentified"}
+                                                : regex.exec(files[idx].path)[1] === "png" || regex.exec(files[idx].path)[1] === "jpg" || regex.exec(files[idx].path)[1] === "jpeg" || regex.exec(files[idx].path)[1] === "svg" || regex.exec(files[idx].path)[1] === "tiff" ? <ImageIcon fill='#81D4FA' /> : ""}
                                 </Box>
                                 <Box width={'70%'} display='flex' textAlign={'center'} justifyContent='center' alignItems={'center'}>
                                     <Typography variant='p' sx={{
