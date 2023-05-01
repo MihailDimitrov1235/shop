@@ -42,6 +42,9 @@ const useStyles = makeStyles({
     button: {
         padding: "10px",
     },
+    flexContainer: {
+        justifyContent: 'end',
+    },
 });
 
 const PreviewProduct = () => {
@@ -237,9 +240,9 @@ const PreviewProduct = () => {
                                 />
                             :
                                 <ProductInformation
-                                    name={i18n==='bg'? productBG.name: productEN.name}
+                                    name={i18n.language==='bg'? productBG.name: productEN.name}
                                     authors={product.authors}
-                                    desc={i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                    desc={i18n.language==='bg'? productBG.shortDescription: productEN.shortDescription}
                                 />
                             }
 
@@ -291,11 +294,11 @@ const PreviewProduct = () => {
                                                 setProductEN={setProductEN}
                                             />
                                         :
-                                            <ProductInformation
-                                                name={i18n==='bg'? productBG.name: productEN.name}
-                                                authors={product.authors}
-                                                desc={i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
-                                            />
+                                        <ProductInformation
+                                        name={i18n.language==='bg'? productBG.name: productEN.name}
+                                        authors={product.authors}
+                                        desc={i18n.language==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                    />
                                         }
                                     </Box>
                                     <Box
@@ -380,9 +383,9 @@ const PreviewProduct = () => {
                             />
                         :
                             <ProductInformation
-                                name={i18n==='bg'? productBG.name: productEN.name}
+                                name={i18n.language==='bg'? productBG.name: productEN.name}
                                 authors={product.authors}
-                                desc={i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                desc={i18n.language==='bg'? productBG.shortDescription: productEN.shortDescription}
                             />
                         }
 
@@ -410,17 +413,23 @@ const PreviewProduct = () => {
                             {t("description")}
                         </Typography>
                         <Box sx={{ mt: 4 }}>
-                            <Box>
+                            <Box display={edit? 'block' : 'none'}>
                                 <Tabs value={currentLongDescLang} onChange={handleLongDescLangChange}  indicatorColor='inherit' textColor='inherit'>
                                     <Tab value={'bg'} label={t('bulgarian')}/>
                                     <Tab value={'en'} label={t('english')}/>
                                 </Tabs>
-                                <RichTextEditor value={currentLongDesc} setFieldValue={handleLongDescChange} />
+                                <Box display={currentLongDescLang==='bg'? 'block': 'none'}>
+                                    <RichTextEditor value={productBG.longDescription} setFieldValue={handleLongDescChange} />
+                                </Box>
+                                <Box display={currentLongDescLang==='en'? 'block': 'none'}>
+                                    <RichTextEditor value={productEN.longDescription} setFieldValue={handleLongDescChange} />
+                                </Box>
+                                
                             </Box>
                             
-                            {/* <div
-                                dangerouslySetInnerHTML={{ __html: product.longDescription }}
-                            /> */}
+                            <div style={{display:edit? 'none' : 'block'}}
+                                dangerouslySetInnerHTML={{ __html: i18n.language==='bg'? productBG.longDescription : productEN.longDescription }}
+                            />
                         </Box>
                     </CardContent>
                 </Card>
