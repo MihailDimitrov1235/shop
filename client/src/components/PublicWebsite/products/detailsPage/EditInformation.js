@@ -76,10 +76,10 @@ export default function EditInformation({
                     <Tab value={'bg'} label={t('bulgarian')}/>
                     <Tab value={'en'} label={t('english')}/>
                 </Tabs>
-                <Box display={descLang==='bg'? 'block': 'none'}>
+                <Box display={descLang==='bg' ? 'block' : 'none'}>
                     <RichTextEditor value={productBG.shortDescription} setFieldValue={handleDescChange} />
                 </Box>
-                <Box display={descLang==='en'? 'block': 'none'}>
+                <Box display={descLang==='en' ? 'block' : 'none'}>
                     <RichTextEditor value={productEN.shortDescription} setFieldValue={handleDescChange} />
                 </Box>
                     
