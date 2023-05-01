@@ -253,7 +253,7 @@ const PreviewAuthor = () => {
                                     width: '100%',
                                     position: 'absolute',
                                     border: '10px solid white',
-                                    bottom: '50%',
+                                    bottom:'10px',
                                     overflow: 'hidden',
                                     borderRadius: '50%',
                                     aspectRatio: '1/1',
@@ -265,7 +265,7 @@ const PreviewAuthor = () => {
                                     <img width={'100%'} height={'100%'} src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public' />
                                 </Box>
 
-                                <Box sx={{
+                                {/* <Box sx={{
                                     position: 'absolute',
                                     width: '100%',
                                     bottom: '50px',
@@ -283,7 +283,7 @@ const PreviewAuthor = () => {
                                         <Typography variant='h3'>{props.achievements.sold}</Typography>
                                         <Typography variant='subtitle2'>{t('sales')}</Typography>
                                     </Box>
-                                </Box>
+                                </Box> */}
                             </Box>
                             <Box sx={{
                                 flex: 1,
