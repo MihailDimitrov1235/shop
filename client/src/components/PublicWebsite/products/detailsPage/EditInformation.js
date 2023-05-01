@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Box, Typography, Stack, Chip, TextField, Tab, Tabs } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -6,8 +7,34 @@ import RichTextEditor from '../../../FormBuilder/RichTextEditor';
 export default function EditInformation({
     name, nameLang, handleNameChange, handleNameLangChange, 
     authors, 
-    desc, descLang, handleDescChange, handleDescLangChange
+    productBG, productEN, setProductBG, setProductEN
 }) {
+
+    const [desc, setDesc] = useState(productBG.shortDescription)
+    const [descLang, setDescLang] = useState('bg')
+
+    const handleDescChange = (editorState, markup) =>{
+        setDesc(markup)
+        if(descLang === 'bg'){
+            let newProps = productBG
+            newProps.shortDescription = markup
+            setProductBG(newProps)
+        }else if(descLang === 'en'){
+            let newProps = productEN
+            newProps.shortDescription = markup
+            setProductEN(newProps)
+        }
+    }
+
+    const handleDescLangChange = (event, newValue) =>{
+        setDescLang(newValue)
+        if(newValue === 'bg'){
+            setDesc(productBG.shortDescription)
+        }else if(newValue === 'en'){
+            setDesc(productEN.shortDescription)
+        }
+    }
+
     const { t, i18n } = useTranslation();
     return (
         <>
@@ -49,7 +76,13 @@ export default function EditInformation({
                     <Tab value={'bg'} label={t('bulgarian')}/>
                     <Tab value={'en'} label={t('english')}/>
                 </Tabs>
-                <RichTextEditor value={desc} onChange={handleDescChange} />
+                <Box display={descLang==='bg'? 'block': 'none'}>
+                    <RichTextEditor value={productBG.shortDescription} setFieldValue={handleDescChange} />
+                </Box>
+                <Box display={descLang==='en'? 'block': 'none'}>
+                    <RichTextEditor value={productEN.shortDescription} setFieldValue={handleDescChange} />
+                </Box>
+                    
                 {/* <TextField id='name' value={desc} fullWidth onChange={handleDescChange}
                     inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
                 /> */}

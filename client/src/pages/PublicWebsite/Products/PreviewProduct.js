@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import RichTextEditor from '../../../components/FormBuilder/RichTextEditor';
 import {
+    Tab,
+    Tabs,
     TextField,
     MenuItem,
     Box,
@@ -62,18 +65,19 @@ const PreviewProduct = () => {
 
     const [productEN, setProductEN] = useState({
         name:'The product',
-        shortDescription:"<h1>This is heading 1 en</h1>",
+        shortDescription:"<p>This is heading 1 en</p>",
         longDescription:"<h2>This is heading 2 en</h2>",
     })
 
     const [edit, setEdit] = useState(true);
+    const handleEditTabChange = (event, newValue) => {
+        setEdit(newValue);
+    };
 
     const [currentName, setCurrentName] = useState(productBG.name)
-    const [currentShortDesc, setCurrentShortDesc] = useState(productBG.shortDescription)
     const [currentLongDesc, setCurrentLongDesc] = useState(productBG.longDescription)
 
     const [currentNameLang, setCurrentNameLang] = useState('bg')
-    const [currentShortDescLang, setCurrentShortDescLang] = useState('bg')
     const [currentLongDescLang, setCurrentLongDescLang] = useState('bg')
 
     const handleNameChange = (event) =>{
@@ -99,46 +103,15 @@ const PreviewProduct = () => {
         }
     }
 
-    const handleShortDescChange = (editorState) =>{
-        const rawContentState = convertToRaw(editorState.getCurrentContent());
-        const markup = draftToHtml(
-            rawContentState, 
-          );
-          console.log(markup)
-          console.log(currentShortDesc)
-        // const markup = draftToHtml(
-        //   rawContentState, 
-        // );
-        setCurrentShortDesc(markup)
-        // if(currentShortDescLang === 'bg'){
-        //     let newProps = productBG
-        //     newProps.shortDescription = editorState
-        //     setProductBG(newProps)
-        // }else if(currentShortDescLang === 'en'){
-        //     let newProps = productEN
-        //     newProps.shortDescription = editorState
-        //     setProductEN(newProps)
-        // }
-    }
-
-    const handleShortDescLangChange = (event, newValue) =>{
-        setCurrentShortDescLang(newValue)
-        if(newValue === 'bg'){
-            setCurrentShortDesc(productBG.shortDescription)
-        }else if(newValue === 'en'){
-            setCurrentShortDesc(productEN.shortDescription)
-        }
-    }
-
-    const handleLongDescChange = (event) =>{
-        setCurrentLongDesc(event.target.value)
+    const handleLongDescChange = (editorState, markup) =>{
+        setCurrentLongDesc(markup)
         if(currentLongDescLang === 'bg'){
             let newProps = productBG
-            newProps.longDescription = event.target.value
+            newProps.longDescription = markup
             setProductBG(newProps)
         }else if(currentLongDescLang === 'en'){
             let newProps = productEN
-            newProps.longDescription = event.target.value
+            newProps.longDescription = markup
             setProductEN(newProps)
         }
     }
@@ -215,6 +188,20 @@ const PreviewProduct = () => {
                 maxWidth={"false"}
                 sx={{ width: "85%", margin: "0 auto", my: 5 }}
             >
+                <Tabs value={edit} onChange={handleEditTabChange} indicatorColor='inherit' classes={{
+                    flexContainer: classes.flexContainer
+                }} textColor='inherit' sx={{ color: 'black', }} >
+                    <Tab sx={{
+                        backgroundColor: 'white',
+                        borderRadius: '10px 10px 0 0',
+                        mr: 1
+                    }} value={false} label={t('preview')} />
+                    <Tab sx={{
+                        backgroundColor: 'white',
+                        borderRadius: '10px 10px 0 0',
+                        mr: 1
+                    }} value={true} label={t('edit')} />
+                </Tabs>
                 <Box
                     sx={{
                         display: "flex",
@@ -243,16 +230,16 @@ const PreviewProduct = () => {
                                     handleNameChange={handleNameChange}
                                     handleNameLangChange={handleNameLangChange}
                                     authors={product.authors}
-                                    desc={currentShortDesc}
-                                    descLang={currentShortDescLang}
-                                    handleDescChange={handleShortDescChange}
-                                    handleDescLangChange={handleShortDescLangChange}
+                                    productBG={productBG}
+                                    productEN={productEN}
+                                    setProductBG={setProductBG}
+                                    setProductEN={setProductEN}
                                 />
                             :
                                 <ProductInformation
-                                    name={edit? currentName : i18n==='bg'? productBG.name: productEN.name}
+                                    name={i18n==='bg'? productBG.name: productEN.name}
                                     authors={product.authors}
-                                    desc={edit? currentShortDesc : i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                    desc={i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
                                 />
                             }
 
@@ -298,16 +285,16 @@ const PreviewProduct = () => {
                                                 handleNameChange={handleNameChange}
                                                 handleNameLangChange={handleNameLangChange}
                                                 authors={product.authors}
-                                                desc={currentShortDesc}
-                                                descLang={currentShortDescLang}
-                                                handleDescChange={handleShortDescChange}
-                                                handleDescLangChange={handleShortDescLangChange}
+                                                productBG={productBG}
+                                                productEN={productEN}
+                                                setProductBG={setProductBG}
+                                                setProductEN={setProductEN}
                                             />
                                         :
                                             <ProductInformation
-                                                name={edit? currentName : i18n==='bg'? productBG.name: productEN.name}
+                                                name={i18n==='bg'? productBG.name: productEN.name}
                                                 authors={product.authors}
-                                                desc={edit? currentShortDesc : i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                                desc={i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
                                             />
                                         }
                                     </Box>
@@ -386,16 +373,16 @@ const PreviewProduct = () => {
                                 handleNameChange={handleNameChange}
                                 handleNameLangChange={handleNameLangChange}
                                 authors={product.authors}
-                                desc={currentShortDesc}
-                                descLang={currentShortDescLang}
-                                handleDescChange={handleShortDescChange}
-                                handleDescLangChange={handleShortDescLangChange}
+                                productBG={productBG}
+                                productEN={productEN}
+                                setProductBG={setProductBG}
+                                setProductEN={setProductEN}
                             />
                         :
                             <ProductInformation
-                                name={edit? currentName : i18n==='bg'? productBG.name: productEN.name}
+                                name={i18n==='bg'? productBG.name: productEN.name}
                                 authors={product.authors}
-                                desc={edit? currentShortDesc : i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
+                                desc={i18n==='bg'? productBG.shortDescription: productEN.shortDescription}
                             />
                         }
 
@@ -423,9 +410,17 @@ const PreviewProduct = () => {
                             {t("description")}
                         </Typography>
                         <Box sx={{ mt: 4 }}>
-                            <div
+                            <Box>
+                                <Tabs value={currentLongDescLang} onChange={handleLongDescLangChange}  indicatorColor='inherit' textColor='inherit'>
+                                    <Tab value={'bg'} label={t('bulgarian')}/>
+                                    <Tab value={'en'} label={t('english')}/>
+                                </Tabs>
+                                <RichTextEditor value={currentLongDesc} setFieldValue={handleLongDescChange} />
+                            </Box>
+                            
+                            {/* <div
                                 dangerouslySetInnerHTML={{ __html: product.longDescription }}
-                            />
+                            /> */}
                         </Box>
                     </CardContent>
                 </Card>
