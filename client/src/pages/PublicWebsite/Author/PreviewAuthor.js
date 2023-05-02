@@ -187,6 +187,7 @@ const PreviewAuthor = () => {
 
     return (
         <>
+        <Button sx={{ color: '#f1f1f1', display:'contents' }} onClick={() => setOpenDialog(true)}>
             <animated.div {...bind()} style={{
                 width: approveWidth,
                 height: '50px',
@@ -195,21 +196,26 @@ const PreviewAuthor = () => {
                 position: 'fixed',
                 top: '50%',
                 borderRadius: ' 25px 0 0 25px',
-                background: 'white',
-                border: 'solid 1px #96011c',
+                background: '#96011c',
                 overflow: 'hidden',
                 display: 'flex',
                 alignItems: 'center',
                 paddingLeft: '10px'
             }}>
-                <DoneIcon sx={{
-                    mr: 1,
-                    color: '#000000'
-                }} />
-                <Button sx={{ color: '#050505' }} onClick={() => setOpenDialog(true)}>
-                    {t('approve')}
-                </Button>
+                <Box width={'100%'} display={'flex'} justifyContent={'start'} alignItems={'center'}>
+                
+                    <DoneIcon sx={{
+                        ml: 1,
+                        mr: 1,
+                        color: '#f1f1f1'
+                    }} />
+                    
+                        {t('approve')}
+                    
+                </Box>
+                
             </animated.div>
+            </Button>
 
             <ApproveDoalog approveId={Number(id)} setApproveId={() => { }} approveHandler={handleApprove} newRequest={() => { }} open={openDialog} setOpen={setOpenDialog} />
 

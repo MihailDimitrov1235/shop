@@ -137,9 +137,12 @@ const PreviewProduct = () => {
         onHover: ({ hovering }) => api({ x: hovering ? '-5px' : '0', y: hovering ? '-5px' : '0' }),
     })
 
+    const handleEditParts = () =>{
+
+    }
+
     const classes = useStyles();
     const { id } = useParams();
-    // const [product, setProduct] = useState({ authors: [], files: [ { path: '' } ], parts: [] });
     const { t, i18n } = useTranslation();
     const { user } = useAuth();
     const navigate = useNavigate();
@@ -301,6 +304,7 @@ const PreviewProduct = () => {
                                     />
                                         }
                                     </Box>
+                                    {/* PART */}
                                     <Box
                                         width="100%"
                                         sx={{
@@ -353,8 +357,11 @@ const PreviewProduct = () => {
                                                 x: x,
                                                 y: y
                                             }}>
-                                                <Button disabled={!part} variant="contained" color="bordoRed" onClick={handleAddCart}>
+                                                <Button sx={{ display: edit? 'none' : 'block' }} disabled={!part} variant="contained" color="bordoRed" onClick={handleAddCart}>
                                                     {t("add-cart")}
+                                                </Button>
+                                                <Button sx={{ display: !edit? 'none' : 'block' }} variant="contained" color="bordoRed" onClick={handleEditParts}>
+                                                    {t("edit-parts")}
                                                 </Button>
                                             </animated.div>
                                         </Box>
@@ -458,7 +465,7 @@ const PreviewProduct = () => {
                 >
                     {t("simular-products")}
                 </Typography>
-                <ProductDisplay />
+                {/* <ProductDisplay /> */}
             </Container>
         </>
     );
