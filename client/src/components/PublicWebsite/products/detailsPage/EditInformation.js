@@ -1,17 +1,32 @@
 import { useState } from 'react';
-import { Box, Typography, Stack, Chip, TextField, Tab, Tabs } from '@mui/material';
+import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, IconButton } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import RichTextEditor from '../../../FormBuilder/RichTextEditor';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function EditInformation({
     name, nameLang, handleNameChange, handleNameLangChange, 
     authors, 
-    productBG, productEN, setProductBG, setProductEN
+    productBG, productEN, setProductBG, setProductEN,
+    product, setProduct
 }) {
 
     const [desc, setDesc] = useState(productBG.shortDescription)
     const [descLang, setDescLang] = useState('bg')
+
+    const handleAddAuthor = () => {
+        let newProduct = Object.assign({}, product);
+        newProduct.authors.push("")
+        setProduct(newProduct)
+    }
+
+    function handleDeleteAuthor( index ){
+        let newProduct = Object.assign({}, product);
+        newProduct.authors.splice(index, 1);
+        setProduct(newProduct)
+    }
 
     const handleDescChange = (editorState, markup) =>{
         setDesc(markup)
@@ -57,18 +72,29 @@ export default function EditInformation({
                         mt: 2
                     }}
                 >
-                    {authors.map((author) => (
-                        <Chip
-                            sx={{
-                                mb: 1,
-                            }}
-                            component={Box}
-                            label={author.name}
-                            to={"/author/" + author.author_id}
-                            key={author.author_id}
-                        />
+                    {authors.map((author, index) => (
+                        <>
+                            <Chip
+                                sx={{
+                                    height:'32px',
+                                    mb: 1,
+                                }}
+                                component={Box}
+                                label={author.name}
+                                to={"/author/" + author.author_id}
+                                key={author.author_id}
+                            />
+                            <IconButton sx={{ height:'32px', width:'32px'}} color='error' onClick={() => handleDeleteAuthor(index)}>
+                                <DeleteIcon/>
+                            </IconButton>
+                        </>
                     ))}
+                    
                 </Stack>
+                <Button color='inherit' onClick={handleAddAuthor}>
+                    <Typography sx={{ fontSize:'0.875rem', mr:1}}>{t('add-author')}</Typography>
+                    <AddCircleOutlineIcon/>
+                </Button>
             </Box>
             <Box sx={{ textAlign: "center", height: "100%", mt: 5 }}>
                 <Tabs value={descLang} onChange={handleDescLangChange}  indicatorColor='inherit' textColor='inherit'>
@@ -81,15 +107,6 @@ export default function EditInformation({
                 <Box display={descLang==='en' ? 'block' : 'none'}>
                     <RichTextEditor value={productEN.shortDescription} setFieldValue={handleDescChange} />
                 </Box>
-                    
-                {/* <TextField id='name' value={desc} fullWidth onChange={handleDescChange}
-                    inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
-                /> */}
-                {/* <div
-                    dangerouslySetInnerHTML={{
-                        __html: desc,
-                    }}
-                /> */}
             </Box>
         </>
     )

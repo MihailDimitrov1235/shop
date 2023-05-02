@@ -16,6 +16,7 @@ import {
     Container,
     Stack,
     Chip,
+    IconButton,
 } from "@mui/material";
 import productService from "../../../services/product";
 import cartService from "../../../services/cart";
@@ -30,6 +31,7 @@ import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import useAuth from "../../../hooks/useAuth";
 import useMessage from "../../../hooks/useMessage";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const useStyles = makeStyles({
     image: {
@@ -140,6 +142,12 @@ const PreviewProduct = () => {
         }else if(newValue === 'en'){
             setCurrentLongDesc(productEN.longDescription)
         }
+    }
+
+    function handleDeleteCategory(index) {
+        let newProduct = Object.assign({}, product);
+        newProduct.categories.splice(index, 1);
+        setProduct(newProduct)
     }
 
     const [{ x, y }, api] = useSpring(() => ({
@@ -254,6 +262,8 @@ const PreviewProduct = () => {
                                     productEN={productEN}
                                     setProductBG={setProductBG}
                                     setProductEN={setProductEN}
+                                    product={product}
+                                    setProduct={setProduct}
                                 />
                             :
                                 <ProductInformation
@@ -309,6 +319,8 @@ const PreviewProduct = () => {
                                                 productEN={productEN}
                                                 setProductBG={setProductBG}
                                                 setProductEN={setProductEN}
+                                                product={product}
+                                                setProduct={setProduct}
                                             />
                                         :
                                         <ProductInformation
@@ -396,17 +408,22 @@ const PreviewProduct = () => {
                             mt: 5
                         }}
                     >
-                    {product.categories.map(category => (
-                        <Chip
-                            sx={{
-                                mb: 1,
-                            }}
-                            component={!edit? Link : Box}
-                            label={category.name}
-                            to={"/products?category=" + category.category_id}
-                            clickable={!edit}
-                            key={category.category_id}
-                        />
+                    {product.categories.map((category, index) => (
+                        <>
+                            <Chip
+                                sx={{
+                                    mb: 1,
+                                }}
+                                component={!edit? Link : Box}
+                                label={category.name}
+                                to={"/products?category=" + category.category_id}
+                                clickable={!edit}
+                                key={category.category_id}
+                            />
+                            <IconButton sx={{ height:'32px', width:'32px'}} color='error' onClick={() => handleDeleteCategory(index)}>
+                                <DeleteIcon/>
+                            </IconButton>
+                        </>
                     ))}
                     </Stack>
                 </Box>
@@ -426,6 +443,8 @@ const PreviewProduct = () => {
                                 productEN={productEN}
                                 setProductBG={setProductBG}
                                 setProductEN={setProductEN}
+                                product={product}
+                                setProduct={setProduct}
                             />
                         :
                             <ProductInformation
