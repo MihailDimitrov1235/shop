@@ -79,7 +79,6 @@ export default function EditInformation({
                                     height:'32px',
                                     mb: 1,
                                 }}
-                                avatar={<Avatar>M</Avatar>}
                                 component={Box}
                                 label={author.name}
                                 to={"/author/" + author.author_id}
