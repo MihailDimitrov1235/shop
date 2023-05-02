@@ -19,7 +19,7 @@ const AutocompleteCheckboxes = ({ label, options, setValue }) => {
             multiple
             options={options}
             disableCloseOnSelect
-            getOptionLabel={(option) => option.title}
+            getOptionLabel={(option) => option.label}
             renderOption={(props, option, { selected }) => (
                 <li {...props}>
                     <Checkbox
@@ -29,7 +29,7 @@ const AutocompleteCheckboxes = ({ label, options, setValue }) => {
                         checked={selected}
                         color='bordoRed'
                     />
-                    {option.title}
+                    {option.label}
                 </li>
             )}
             renderInput={(params) => (
