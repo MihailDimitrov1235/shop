@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, Chip } from '@mui/material';
+import { Box, Typography, Stack, Chip, Avatar } from '@mui/material';
 import { Link } from "react-router-dom";
 
 export default function ProductInformation({name, authors, desc}) {
@@ -21,6 +21,7 @@ export default function ProductInformation({name, authors, desc}) {
                             sx={{
                                 mb: 1,
                             }}
+                            avatar={<Avatar>M</Avatar>}
                             component={Link}
                             label={author.name}
                             to={"/author/" + author.author_id}

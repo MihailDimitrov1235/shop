@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, IconButton } from '@mui/material';
+import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, IconButton, Avatar } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import RichTextEditor from '../../../FormBuilder/RichTextEditor';
@@ -79,6 +79,7 @@ export default function EditInformation({
                                     height:'32px',
                                     mb: 1,
                                 }}
+                                avatar={<Avatar>M</Avatar>}
                                 component={Box}
                                 label={author.name}
                                 to={"/author/" + author.author_id}
