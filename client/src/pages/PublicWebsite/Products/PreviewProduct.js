@@ -441,32 +441,6 @@ const PreviewProduct = () => {
                     </CardContent>
                 </Card>
             </Container>
-            <Container
-                maxWidth={"false"}
-                sx={{ width: "85%", margin: "0 auto", my: 5, position: "relative" }}
-            >
-                <Typography
-                    variant="h3"
-                    sx={{
-                        textAlign: "center",
-                        position: "relative",
-                        mb: 2,
-                        ":after": {
-                            content: '""',
-                            position: "absolute",
-                            width: "10%",
-                            height: "3px",
-                            bottom: "-10px",
-                            left: "45%",
-                            borderBottom: "3px dashed",
-                            borderColor: "background.bordoRed",
-                        },
-                    }}
-                >
-                    {t("simular-products")}
-                </Typography>
-                {/* <ProductDisplay /> */}
-            </Container>
         </>
     );
 };
