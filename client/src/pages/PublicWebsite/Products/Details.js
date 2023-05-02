@@ -12,7 +12,7 @@ import {
     Typography,
     Container,
     Stack,
-    Chip,
+    Chip
 } from "@mui/material";
 import productService from "../../../services/product";
 import cartService from "../../../services/cart";
