@@ -3,7 +3,7 @@ import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, IconButton 
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import RichTextEditor from '../../../FormBuilder/RichTextEditor';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function EditInformation({
@@ -83,17 +83,15 @@ export default function EditInformation({
                                 label={author.name}
                                 to={"/author/" + author.author_id}
                                 key={author.author_id}
+                                onDelete={() => handleDeleteAuthor(index)}
                             />
-                                <IconButton sx={{ height:'32px', width:'32px'}} color='error' onClick={() => handleDeleteAuthor(index)}>
-                                    <DeleteIcon/>
-                                </IconButton>
                         </Box>
                     ))}
                     
                 </Stack>
                 <Button color='inherit' onClick={handleAddAuthor}>
                     <Typography sx={{ fontSize:'0.875rem', mr:1}}>{t('add-author')}</Typography>
-                    <AddCircleOutlineIcon/>
+                    <AddIcon/>
                 </Button>
             </Box>
             <Box sx={{ textAlign: "center", height: "100%", mt: 5 }}>
