@@ -14,6 +14,8 @@ import {
     CardContent,
     Typography,
     Container,
+    Stack,
+    Chip,
 } from "@mui/material";
 import productService from "../../../services/product";
 import cartService from "../../../services/cart";
@@ -52,11 +54,23 @@ const PreviewProduct = () => {
     const [product, setProduct] = useState({
         authors:[
             {author_id:1, name:'john lenan'},
-            {author_id:1, name:'john lenan'},
-            {author_id:1, name:'john lenan'},
+            {author_id:2, name:'john lenan'},
+            {author_id:3, name:'john lenan'},
+        ],
+        categories:[
+            {category_id:1, name:'john lenan'},
+            {category_id:2, name:'john lenan'},
+            {category_id:3, name:'john lenan'},
         ],
         parts:[
-            {id:1, files:[{path:'2wue.docx'},{path:'2wue.docx'},{path:'2wue.docx'},{path:'2wue.docx'},{path:'2wue.docx'},{path:'2wue.docx'}], price:10},
+            {id:1, files:[
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'}
+            ], price:10},
         ]
     })
 
@@ -370,6 +384,31 @@ const PreviewProduct = () => {
                             </CardContent>
                         </Box>
                     </Card>
+                </Box>
+                <Box>
+                    <Stack
+                        direction="row"
+                        spacing={1}
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'left',
+                            flexWrap: 'wrap',
+                            mt: 5
+                        }}
+                    >
+                    {product.categories.map(category => (
+                        <Chip
+                            sx={{
+                                mb: 1,
+                            }}
+                            component={!edit? Link : Box}
+                            label={category.name}
+                            to={"/products?category=" + category.category_id}
+                            clickable={!edit}
+                            key={category.category_id}
+                        />
+                    ))}
+                    </Stack>
                 </Box>
                 <Box
                     sx={{ display: { xs: 'none', md: "flex", lg: "none" }, flexDirection: "column" }}

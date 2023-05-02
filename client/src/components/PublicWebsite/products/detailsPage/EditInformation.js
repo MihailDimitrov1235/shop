@@ -62,10 +62,9 @@ export default function EditInformation({
                             sx={{
                                 mb: 1,
                             }}
-                            component={Link}
+                            component={Box}
                             label={author.name}
                             to={"/author/" + author.author_id}
-                            clickable
                             key={author.author_id}
                         />
                     ))}

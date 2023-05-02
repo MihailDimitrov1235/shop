@@ -11,6 +11,8 @@ import {
     CardContent,
     Typography,
     Container,
+    Stack,
+    Chip,
 } from "@mui/material";
 import productService from "../../../services/product";
 import cartService from "../../../services/cart";
@@ -103,6 +105,8 @@ const ProductPage = () => {
             console.log(error);
         })
     }
+
+    const categories = [{ category_id:1, name: 'biologiq'}, { category_id:2, name: 'himiq'}, { category_id:3, name: 'gotin'}]
 
     return (
         <>
@@ -234,6 +238,31 @@ const ProductPage = () => {
                             </CardContent>
                         </Box>
                     </Card>
+                </Box>
+                <Box>
+                    <Stack
+                        direction="row"
+                        spacing={1}
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'left',
+                            flexWrap: 'wrap',
+                            mt: 5
+                        }}
+                    >
+                    {categories.map(category => (
+                        <Chip
+                            sx={{
+                                mb: 1,
+                            }}
+                            component={Link}
+                            label={category.name}
+                            to={"/products?category=" + category.name}
+                            clickable
+                            key={category.category_id}
+                        />
+                    ))}
+                    </Stack>
                 </Box>
                 <Box
                     sx={{ display: { xs: 'none', md: "flex", lg: "none" }, flexDirection: "column" }}
