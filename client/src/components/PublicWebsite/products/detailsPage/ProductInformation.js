@@ -21,7 +21,7 @@ export default function ProductInformation({name, authors, desc}) {
                             sx={{
                                 mb: 1,
                             }}
-                            avatar={<Avatar>M</Avatar>}
+                            avatar={author.image?<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" /> : <Avatar>{author.name[0].toUpperCase()}</Avatar>}
                             component={Link}
                             label={author.name}
                             to={"/author/" + author.author_id}

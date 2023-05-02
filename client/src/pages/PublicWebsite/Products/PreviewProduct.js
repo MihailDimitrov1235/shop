@@ -26,10 +26,12 @@ import Files from "../../../components/PublicWebsite/products/detailsPage/Files"
 import ProductInformation from "../../../components/PublicWebsite/products/detailsPage/ProductInformation";
 import EditInformation from "../../../components/PublicWebsite/products/detailsPage/EditInformation";
 import { useSpring, animated } from '@react-spring/web';
-import { useGesture } from '@use-gesture/react';
+import { useGesture, useHover } from '@use-gesture/react';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import useAuth from "../../../hooks/useAuth";
+import ApproveDoalog from '../../../components/MainTable/ApproveDialog'
+import DoneIcon from '@mui/icons-material/Done';
 import useMessage from "../../../hooks/useMessage";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -53,6 +55,12 @@ const useStyles = makeStyles({
 });
 
 const PreviewProduct = () => {
+
+    const [{ approveWidth }, apiApprove] = useSpring(() => ({ approveWidth: '50px' }))
+
+    const bindApprove = useHover(({ hovering }) => {
+        apiApprove.start({ approveWidth: hovering ? '130px' : '50px' })
+    })
 
     const [product, setProduct] = useState({
         authors:[
@@ -201,6 +209,15 @@ const PreviewProduct = () => {
         setPrice(part.price);
     };
 
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleApprove = (id) => {
+        console.log(id[0])
+        console.log(product)
+        console.log(productBG)
+        console.log(productEN)
+    }
+
     const handleAddCart = () => {
         // const data = {
         //     'cart_id': user.cart.id,
@@ -219,6 +236,37 @@ const PreviewProduct = () => {
 
     return (
         <>
+        <Button sx={{ color: '#f1f1f1', display:'contents' }} onClick={() => setOpenDialog(true)}>
+            <animated.div {...bindApprove()} style={{
+                width: approveWidth,
+                height: '50px',
+                zIndex: '3',
+                right: 0,
+                position: 'fixed',
+                top: '50%',
+                borderRadius: ' 25px 0 0 25px',
+                background: '#96011c',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                paddingLeft: '10px'
+            }}>
+                <Box width={'100%'} display={'flex'} justifyContent={'start'} alignItems={'center'}>
+                
+                    <DoneIcon sx={{
+                        ml: 1,
+                        mr: 1,
+                        color: '#f1f1f1'
+                    }} />
+                    
+                        {t('approve')}
+                    
+                </Box>
+                
+            </animated.div>
+            </Button>
+
+            <ApproveDoalog approveId={Number(id)} setApproveId={() => { }} approveHandler={handleApprove} newRequest={() => { }} open={openDialog} setOpen={setOpenDialog} />
             <Container
                 maxWidth={"false"}
                 sx={{ width: "85%", margin: "0 auto", my: 5 }}
