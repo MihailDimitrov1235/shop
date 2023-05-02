@@ -32,6 +32,7 @@ import draftToHtml from 'draftjs-to-html';
 import useAuth from "../../../hooks/useAuth";
 import useMessage from "../../../hooks/useMessage";
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const useStyles = makeStyles({
     image: {
@@ -142,6 +143,12 @@ const PreviewProduct = () => {
         }else if(newValue === 'en'){
             setCurrentLongDesc(productEN.longDescription)
         }
+    }
+
+    const handleAddCategory = () => {
+        let newProduct = Object.assign({}, product);
+        newProduct.authors.push("")
+        setProduct(newProduct)
     }
 
     function handleDeleteCategory(index) {
@@ -409,7 +416,7 @@ const PreviewProduct = () => {
                         }}
                     >
                     {product.categories.map((category, index) => (
-                        <>
+                        <Box display={'flex'}>
                             <Chip
                                 sx={{
                                     mb: 1,
@@ -423,8 +430,12 @@ const PreviewProduct = () => {
                             <IconButton sx={{ height:'32px', width:'32px'}} color='error' onClick={() => handleDeleteCategory(index)}>
                                 <DeleteIcon/>
                             </IconButton>
-                        </>
+                        </Box>
                     ))}
+                        <Button sx={{height:'32px'}} color='inherit' onClick={handleAddCategory}>
+                            <Typography sx={{ fontSize:'0.875rem', mr:1}}>{t('add-category')}</Typography>
+                            <AddCircleOutlineIcon/>
+                        </Button>
                     </Stack>
                 </Box>
                 <Box

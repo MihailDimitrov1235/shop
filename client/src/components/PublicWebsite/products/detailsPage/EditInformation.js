@@ -73,7 +73,7 @@ export default function EditInformation({
                     }}
                 >
                     {authors.map((author, index) => (
-                        <>
+                        <Box display={'flex'}>
                             <Chip
                                 sx={{
                                     height:'32px',
@@ -84,10 +84,10 @@ export default function EditInformation({
                                 to={"/author/" + author.author_id}
                                 key={author.author_id}
                             />
-                            <IconButton sx={{ height:'32px', width:'32px'}} color='error' onClick={() => handleDeleteAuthor(index)}>
-                                <DeleteIcon/>
-                            </IconButton>
-                        </>
+                                <IconButton sx={{ height:'32px', width:'32px'}} color='error' onClick={() => handleDeleteAuthor(index)}>
+                                    <DeleteIcon/>
+                                </IconButton>
+                        </Box>
                     ))}
                     
                 </Stack>
