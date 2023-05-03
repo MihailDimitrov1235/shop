@@ -18,7 +18,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 
-import EditIcon from '@mui/icons-material/Edit';
+import UploadIcon from '@mui/icons-material/Upload';
 
 const useStyles = makeStyles({
     flexContainer: {
@@ -187,34 +187,34 @@ const PreviewAuthor = () => {
 
     return (
         <>
-        <Button sx={{ color: '#f1f1f1', display:'contents' }} onClick={() => setOpenDialog(true)}>
-            <animated.div {...bind()} style={{
-                width: approveWidth,
-                height: '50px',
-                zIndex: '3',
-                right: 0,
-                position: 'fixed',
-                top: '50%',
-                borderRadius: ' 25px 0 0 25px',
-                background: '#96011c',
-                overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                paddingLeft: '10px'
-            }}>
-                <Box width={'100%'} display={'flex'} justifyContent={'start'} alignItems={'center'}>
-                
-                    <DoneIcon sx={{
-                        ml: 1,
-                        mr: 1,
-                        color: '#f1f1f1'
-                    }} />
-                    
+            <Button sx={{ color: '#f1f1f1', display: 'contents' }} onClick={() => setOpenDialog(true)}>
+                <animated.div {...bind()} style={{
+                    width: approveWidth,
+                    height: '50px',
+                    zIndex: '3',
+                    right: 0,
+                    position: 'fixed',
+                    top: '50%',
+                    borderRadius: ' 25px 0 0 25px',
+                    background: '#96011c',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    paddingLeft: '10px'
+                }}>
+                    <Box width={'100%'} display={'flex'} justifyContent={'start'} alignItems={'center'}>
+
+                        <DoneIcon sx={{
+                            ml: 1,
+                            mr: 1,
+                            color: '#f1f1f1'
+                        }} />
+
                         {t('approve')}
-                    
-                </Box>
-                
-            </animated.div>
+
+                    </Box>
+
+                </animated.div>
             </Button>
 
             <ApproveDoalog approveId={Number(id)} setApproveId={() => { }} approveHandler={handleApprove} newRequest={() => { }} open={openDialog} setOpen={setOpenDialog} />
@@ -258,55 +258,42 @@ const PreviewAuthor = () => {
                                 width: { xs: '50%', md: '30%' },
                                 margin: { xs: '0 auto', md: '0 50px' }
                             }}>
-                                {/* <Button className='authorImg' component='label' sx={{
-                                    width: '100%',
-                                    position: 'absolute',
-                                    border: '10px solid white',
-                                    bottom: '10px',
-                                    overflow: 'hidden',
-                                    borderRadius: '50%',
-                                    aspectRatio: '1/1',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    p: 0
-                                }}>
-                                    <Avatar
-                                        src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
-                                        sx={{ width: '100%', height: '100%' }}
-                                    />
-                                    <input hidden accept="image/*" multiple type="file" />
-                                </Button> */}
                                 {edit ? (
-                                    <Badge
-                                        overlap='circular'
-                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                                        sx={{ aspectRatio: '1/1' }}
-                                        badgeContent={
-                                            <IconButton aria-label='upload picture' component='label'>
-                                                <input hidden accept="image/*" type="file" />
-                                                <EditIcon sx={{ fontSize: '32px' }} />
-                                            </IconButton>
-                                        }
-                                    >
-                                        <Box className='authorImg' sx={{
-                                            width: '100%',
+                                    <Button className='authorImg' component='label' sx={{
+                                        width: '100%',
+                                        position: 'absolute',
+                                        border: '10px solid white',
+                                        bottom: '10px',
+                                        overflow: 'hidden',
+                                        borderRadius: '50%',
+                                        aspectRatio: '1/1',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        p: 0,
+                                        background: 'white!important'
+                                    }}>
+                                        <UploadIcon sx={{
+                                            color: 'black',
                                             position: 'absolute',
-                                            border: '10px solid white',
-                                            bottom: '20px',
-                                            overflow: 'hidden',
-                                            borderRadius: '50%',
-                                            aspectRatio: '1/1',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center'
-                                        }}>
-                                            <Avatar
-                                                src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
-                                                sx={{ width: '100%', height: '100%' }}
-                                            />
-                                        </Box>
-                                    </Badge>
+                                            top: '50%',
+                                            left: '50%',
+                                            transform: 'translate(-50%, -50%)',
+                                            fontSize: 100
+                                        }}
+                                        />
+                                        <Avatar
+                                            src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
+                                            sx={{
+                                                width: '100%',
+                                                height: '100%',
+                                                '&:hover': {
+                                                    opacity: 0.5
+                                                }
+                                            }}
+                                        />
+                                        <input hidden accept="image/*" multiple type="file" />
+                                    </Button>
                                 ) : (
                                     <Box className='authorImg' sx={{
                                         width: '100%',
