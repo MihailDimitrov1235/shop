@@ -171,20 +171,20 @@ class RichTextEditor extends React.Component {
     }
   }
 
-  const BLOCK_TYPES = [
-    {label: 'H1', style: 'header-one'},
-    {label: 'H2', style: 'header-two'},
-    {label: 'H3', style: 'header-three'},
-    {label: 'H4', style: 'header-four'},
-    {label: 'H5', style: 'header-five'},
-    {label: 'H6', style: 'header-six'},
-    {label: 'Blockquote', style: 'blockquote'},
-    {label: 'UL', style: 'unordered-list-item'},
-    {label: 'OL', style: 'ordered-list-item'},
-    {label: 'Code Block', style: 'code-block'},
-  ];
-
   const BlockStyleControls = (props) => {
+    const { t } = useTranslation();
+    const BLOCK_TYPES = [
+      {label: t('h1'), style: 'header-one'},
+      {label: t('h2'), style: 'header-two'},
+      {label: t('h3'), style: 'header-three'},
+      {label: t('h4'), style: 'header-four'},
+      {label: t('h5'), style: 'header-five'},
+      {label: t('h6'), style: 'header-six'},
+      {label: t('quote'), style: 'blockquote'},
+      {label: t('ul'), style: 'unordered-list-item'},
+      {label: t('ol'), style: 'ordered-list-item'},
+      {label: t('code-block'), style: 'code-block'},
+    ];
     const {editorState} = props;
     const selection = editorState.getSelection();
     const blockType = editorState
@@ -207,16 +207,17 @@ class RichTextEditor extends React.Component {
     );
   };
 
-  var INLINE_STYLES = [
-    {label: 'Bold', style: 'BOLD'},
-    {label: 'Italic', style: 'ITALIC'},
-    {label: 'Underline', style: 'UNDERLINE'},
-    {label: 'Monospace', style: 'CODE'},
-  ];
-
   const InlineStyleControls = (props) => {
     const currentStyle = props.editorState.getCurrentInlineStyle();
     
+    const { t } = useTranslation();
+    const INLINE_STYLES = [
+      {label: t('bold'), style: 'BOLD'},
+      {label: t('italic'), style: 'ITALIC'},
+      {label: t('underline'), style: 'UNDERLINE'},
+      {label: 'Monospace', style: 'CODE'},
+    ];
+
     return (
       <div className="RichEditor-controls">
         {INLINE_STYLES.map((type) =>
