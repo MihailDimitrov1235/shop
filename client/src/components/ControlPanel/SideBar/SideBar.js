@@ -24,7 +24,6 @@ const SideBar = () => {
         { type: 'subMenu', icon: ComputerIcon, label: t('client-facing'), items: [
             { type: 'item', icon: null, href: '/admin/categories', label: t('categories') },
             { type: 'item', icon: null, href: '/admin/products', label: t('products') },
-            { type: 'item', icon: null, href: '/admin/users', label: t('users') },
             { type: 'item', icon: null, href: '/admin/transactions', label: t('transactions') },
         ]},
         { type: 'subMenu', icon: ShoppingBagIcon, label: t('sales'), items: [
@@ -35,6 +34,7 @@ const SideBar = () => {
         ]},
         { type: 'subMenu', icon: ManageAccountsIcon, label: t('management'), items: [
             { type: 'item', icon: null, href: '/admin/admins', label: t('admins') },
+            { type: 'item', icon: null, href: '/admin/users', label: t('users') },
             { type: 'item', icon: null, href: '/admin/authors', label: t('authors') },
             { type: 'item', icon: null, href: '/admin/requests', label: t('requests') },
         ]},
