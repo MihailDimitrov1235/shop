@@ -60,6 +60,7 @@ const Register = () => {
                             label={t('user')}
                         />
                         <Tab
+                            component={RouterLink}
                             sx={{
                                 backgroundColor: 'white',
                                 borderRadius: '10px 10px 0 0',
@@ -67,6 +68,7 @@ const Register = () => {
                             }}
                             value={'author'}
                             label={t('author')}
+                            to='/register/author'
                         />
                     </Tabs>
                     <Card sx={{ p: 3 }}>

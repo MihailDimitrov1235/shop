@@ -42,6 +42,8 @@ import RequestPage from './pages/ControlPanel/Requests/RequestPage';
 import RequestAuthor from './pages/ControlPanel/Requests/RequestAuthor';
 import RequestProduct from './pages/ControlPanel/Requests/RequestProduct';
 
+import RegisterAuthor from './pages/PublicWebsite/Author/RegisterAuthor';
+
 import PageLayout from './components/ControlPanel/PageLayout';
 
 import Page404 from './pages/Page404';
@@ -71,7 +73,13 @@ const routes = [
       },
       
       { path: 'login', element: <Login /> },
-      { path: 'register', element: <Register /> },
+      {
+        path: 'register',
+        children: [
+          { path: '', element: <Register /> },
+          { path: 'author', element: <RegisterAuthor /> }
+        ]
+      },
       { path: 'account', element: <Account /> },
       { path: 'cart', element: <Cart /> },
       // { path: '/', element: <Navigate to="/home" /> },
