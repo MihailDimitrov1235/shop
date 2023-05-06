@@ -2,9 +2,10 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, Button } from "@
 import * as Yup from 'yup';
 import FormBuilder from "../../../FormBuilder"
 import { useTranslation } from "react-i18next";
+import formData from '../../../FormBuilder/utils/formData';
 import AddIcon from '@mui/icons-material/Add';
 
-const EditPartDialog = ( { open, setOpen, onSubmit } ) => {
+const EditPartDialog = ( { open, setOpen } ) => {
 
     const {t} = useTranslation();
 
@@ -19,12 +20,24 @@ const EditPartDialog = ( { open, setOpen, onSubmit } ) => {
             
           ]
       
+        const onSubmit = (values, { setSubmitting }) => {
+        const data = formData(values, [], ['picture']);
+
+        console.log(data)
     
-      const validationSchema = Yup.object().shape({
+        // values.parts.forEach(function(obj, index) {
+        //     obj.uploader.forEach((file) => {
+        //     data.append("partsFiles["+index+"][uploader][]", file);
+        //     })
+        // });
+        }
+
+
+    const validationSchema = Yup.object().shape({
         parts: Yup.array().of(Yup.object().shape({
-          price: Yup.number().required(t('price-required'))
+            price: Yup.number().required(t('price-required'))
         }))
-      });
+    });
 
     return (
         <Dialog
