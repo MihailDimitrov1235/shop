@@ -65,6 +65,7 @@ const RegisterAuthor = () => {
             sold: 20,
         }
     });
+    const [file, setFile] = useState('');
     const [propsBG, setPropsBG] = useState({
         name: '',
         ocupation: '',
@@ -174,6 +175,12 @@ const RegisterAuthor = () => {
     const linkedinRegex = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm;
     const twitterRegex = /((?:https?:\/\/)?twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/;
 
+    const handleNewFileUpload = (e) => {
+        const { files: newFiles } = e.target;
+        if (newFiles.length) {
+            setFile(newFiles[0]);
+        }
+    };
 
     return (
         <>
@@ -273,7 +280,7 @@ const RegisterAuthor = () => {
                                         }}
                                         />
                                         <Avatar
-                                            src=''
+                                            src={file && URL.createObjectURL(file)}
                                             sx={{
                                                 width: '100%',
                                                 height: '100%',
@@ -282,7 +289,7 @@ const RegisterAuthor = () => {
                                                 }
                                             }}
                                         />
-                                        <input hidden accept="image/*" multiple type="file" />
+                                        <input hidden accept="image/*" type="file" onChange={handleNewFileUpload} />
                                     </Button>
                                 ) : (
                                     <Box className='authorImg' sx={{
