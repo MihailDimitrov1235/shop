@@ -25,6 +25,7 @@ import ProductDisplay from "../../../components/PublicWebsite/products/ProductDi
 import Files from "../../../components/PublicWebsite/products/detailsPage/Files";
 import ProductInformation from "../../../components/PublicWebsite/products/detailsPage/ProductInformation";
 import EditInformation from "../../../components/PublicWebsite/products/detailsPage/EditInformation";
+import EditPartDialog from "../../../components/PublicWebsite/products/detailsPage/EditPartDialog";
 import { useSpring, animated } from '@react-spring/web';
 import { useGesture, useHover } from '@use-gesture/react';
 import { convertToRaw } from 'draft-js';
@@ -174,9 +175,7 @@ const PreviewProduct = () => {
         onHover: ({ hovering }) => api({ x: hovering ? '-5px' : '0', y: hovering ? '-5px' : '0' }),
     })
 
-    const handleEditParts = () =>{
-
-    }
+    
 
     const classes = useStyles();
     const { id } = useParams();
@@ -209,7 +208,8 @@ const PreviewProduct = () => {
         setPrice(part.price);
     };
 
-    const [openDialog, setOpenDialog] = useState(false);
+    const [openApproveDialog, setOpenApproveDialog] = useState(false);
+    const [openEditPartsDialog, setOpenEditPartsDialog] = useState(false);
 
     const handleApprove = (id) => {
         console.log(id[0])
@@ -218,25 +218,13 @@ const PreviewProduct = () => {
         console.log(productEN)
     }
 
-    const handleAddCart = () => {
-        // const data = {
-        //     'cart_id': user.cart.id,
-        //     'product_id': id,
-        //     'part_id': part
-        // }
-
-        // cartService.addProduct(data)
-        // .then((res) => {
-        //     addMessage(t('added-to-cart'), 'success')
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // })
+    const handleSubmitParts = () =>{
+        console.log("yyyyyyyyyy")
     }
 
     return (
         <>
-        <Button sx={{ color: '#f1f1f1', display:'contents' }} onClick={() => setOpenDialog(true)}>
+        <Button sx={{ color: '#f1f1f1', display:'contents' }} onClick={() => setOpenApproveDialog(true)}>
             <animated.div {...bindApprove()} style={{
                 width: approveWidth,
                 height: '50px',
@@ -266,7 +254,20 @@ const PreviewProduct = () => {
             </animated.div>
             </Button>
 
-            <ApproveDoalog approveId={Number(id)} setApproveId={() => { }} approveHandler={handleApprove} newRequest={() => { }} open={openDialog} setOpen={setOpenDialog} />
+            <ApproveDoalog 
+                approveId={Number(id)} 
+                setApproveId={() => { }} 
+                approveHandler={handleApprove} 
+                newRequest={() => { }} 
+                open={openApproveDialog} 
+                setOpen={setOpenApproveDialog} 
+            />
+            <EditPartDialog 
+                open={openEditPartsDialog} 
+                setOpen={setOpenEditPartsDialog}
+                onSubmit={handleSubmitParts}
+            />
+
             <Container
                 maxWidth={"false"}
                 sx={{ width: "85%", margin: "0 auto", my: 5 }}
@@ -438,10 +439,20 @@ const PreviewProduct = () => {
                                                 x: x,
                                                 y: y
                                             }}>
-                                                <Button sx={{ display: edit? 'none' : 'block' }} disabled={!part} variant="contained" color="bordoRed" onClick={handleAddCart}>
+                                                <Button 
+                                                    sx={{ display: edit? 'none' : 'block' }} 
+                                                    disabled={!part} 
+                                                    variant="contained" 
+                                                    color="bordoRed"
+                                                >
                                                     {t("add-cart")}
                                                 </Button>
-                                                <Button sx={{ display: !edit? 'none' : 'block' }} variant="contained" color="bordoRed" onClick={handleEditParts}>
+                                                <Button 
+                                                    sx={{ display: !edit? 'none' : 'block' }} 
+                                                    variant="contained" 
+                                                    color="bordoRed" 
+                                                    onClick={() => setOpenEditPartsDialog(true)}
+                                                >
                                                     {t("edit-parts")}
                                                 </Button>
                                             </animated.div>
