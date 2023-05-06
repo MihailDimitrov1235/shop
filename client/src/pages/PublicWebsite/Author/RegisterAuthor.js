@@ -539,6 +539,7 @@ const RegisterAuthor = () => {
                                         placeholder={t('description')}
                                         value={descValue}
                                         multiline
+                                        rows={8}
                                         fullWidth
                                         onChange={handleDescChange}
                                         inputProps={{ style: { fontSize: '15px' } }}
