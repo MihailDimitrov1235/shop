@@ -236,6 +236,27 @@ const PreviewProduct = () => {
         console.log(productEN)
     }
 
+    let authorOptions = [
+        {author_id:1, label:'Josh'},
+        {author_id:2, label:'Josh'},
+        {author_id:3, label:'Josh'},
+        {author_id:4, label:'Josh'},
+        {author_id:5, label:'Josh'},
+        {author_id:6, label:'Bill Gates'},
+        {author_id:7, label:'Elon Musk'},
+        {author_id:8, label:'John Lennon'},
+    ]
+
+    let categoryOptions = [
+        {author_id:1, label:'Josh'},
+        {author_id:2, label:'Josh'},
+        {author_id:3, label:'Josh'},
+        {author_id:4, label:'Josh'},
+        {author_id:5, label:'Josh'},
+        {author_id:6, label:'Bill Gates'},
+        {author_id:7, label:'Elon Musk'},
+        {author_id:8, label:'John Lennon'},
+    ]
 
     return (
         <>
@@ -333,6 +354,7 @@ const PreviewProduct = () => {
                                     handleNameChange={handleNameChange}
                                     handleNameLangChange={handleNameLangChange}
                                     authors={product.authors}
+                                    authorOptions={authorOptions}
                                     productBG={productBG}
                                     productEN={productEN}
                                     setProductBG={setProductBG}
@@ -390,6 +412,7 @@ const PreviewProduct = () => {
                                                 handleNameChange={handleNameChange}
                                                 handleNameLangChange={handleNameLangChange}
                                                 authors={product.authors}
+                                                authorOptions={authorOptions}
                                                 productBG={productBG}
                                                 productEN={productEN}
                                                 setProductBG={setProductBG}
@@ -526,6 +549,7 @@ const PreviewProduct = () => {
                                 handleNameChange={handleNameChange}
                                 handleNameLangChange={handleNameLangChange}
                                 authors={product.authors}
+                                authorOptions={authorOptions}
                                 productBG={productBG}
                                 productEN={productEN}
                                 setProductBG={setProductBG}

@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const AutocompleteCheckboxes = ({ label, options, setValue }) => {
+const AutocompleteCheckboxes = ({ label, options, setValue}) => {
     const { t } = useTranslation();
 
     return (
