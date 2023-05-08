@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, IconButton, Avatar } from '@mui/material';
+import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, IconButton, Avatar, FormControl } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import RichTextEditor from '../../../FormBuilder/RichTextEditor';
+import AutocompleteCheckboxes from '../../../filters/AutocompleteCheckboxes';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function EditInformation({
     name, nameLang, handleNameChange, handleNameLangChange, 
-    authors, 
+    authors, authorOptions,
     productBG, productEN, setProductBG, setProductEN,
     product, setProduct
 }) {
@@ -72,21 +73,9 @@ export default function EditInformation({
                         mt: 2
                     }}
                 >
-                    {authors.map((author, index) => (
-                        <Box display={'flex'}>
-                            <Chip
-                                sx={{
-                                    height:'32px',
-                                    mb: 1,
-                                }}
-                                component={Box}
-                                label={author.name}
-                                to={"/author/" + author.author_id}
-                                key={author.author_id}
-                                onDelete={() => handleDeleteAuthor(index)}
-                            />
-                        </Box>
-                    ))}
+                    <FormControl fullWidth>
+                        <AutocompleteCheckboxes setValue options={authorOptions} label={t('authors')}/>
+                    </FormControl>
                     
                 </Stack>
                 <Button color='inherit' onClick={handleAddAuthor}>

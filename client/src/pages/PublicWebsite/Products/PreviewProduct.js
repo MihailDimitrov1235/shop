@@ -75,7 +75,24 @@ const PreviewProduct = () => {
             {category_id:3, name:'john lenan'},
         ],
         parts:[
+        
             {id:1, files:[
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'}
+            ], price:10},
+            {id:2, files:[
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'},
+                {path:'2wue.docx'}
+            ], price:10},
+            {id:3, files:[
                 {path:'2wue.docx'},
                 {path:'2wue.docx'},
                 {path:'2wue.docx'},
@@ -198,6 +215,7 @@ const PreviewProduct = () => {
 
     
     const [ files, setFiles ] = useState(product.parts[0].files);
+    // const [ partName, setPartName ] = useState(product.parts[0].name);
     const [ price, setPrice ] = useState(product.parts[0].price);
     const [ part, setPart ] = useState(product.parts[0].id);
 
@@ -218,9 +236,27 @@ const PreviewProduct = () => {
         console.log(productEN)
     }
 
-    const handleSubmitParts = () =>{
-        console.log("yyyyyyyyyy")
-    }
+    let authorOptions = [
+        {author_id:1, label:'Josh'},
+        {author_id:2, label:'Josh'},
+        {author_id:3, label:'Josh'},
+        {author_id:4, label:'Josh'},
+        {author_id:5, label:'Josh'},
+        {author_id:6, label:'Bill Gates'},
+        {author_id:7, label:'Elon Musk'},
+        {author_id:8, label:'John Lennon'},
+    ]
+
+    let categoryOptions = [
+        {author_id:1, label:'Josh'},
+        {author_id:2, label:'Josh'},
+        {author_id:3, label:'Josh'},
+        {author_id:4, label:'Josh'},
+        {author_id:5, label:'Josh'},
+        {author_id:6, label:'Bill Gates'},
+        {author_id:7, label:'Elon Musk'},
+        {author_id:8, label:'John Lennon'},
+    ]
 
     return (
         <>
@@ -265,7 +301,11 @@ const PreviewProduct = () => {
             <EditPartDialog 
                 open={openEditPartsDialog} 
                 setOpen={setOpenEditPartsDialog}
-                onSubmit={handleSubmitParts}
+                product={product}
+                setProduct={setProduct}
+                setFiles={setFiles}
+                setPart={setPart}
+                setPrice={setPrice}
             />
 
             <Container
@@ -298,7 +338,7 @@ const PreviewProduct = () => {
                             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                             //src="https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp"
                             src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/is8rDPGsGlcg/v1/-1x-1.jpg"
-                            //src={`${process.env.REACT_APP_ASSETS}/${product.files[0].path}`}
+                            //src={`${process.env.REACT_APP_ASSETS}/${product.files[0].name}`}
                         />
                     </Box>
 
@@ -314,6 +354,7 @@ const PreviewProduct = () => {
                                     handleNameChange={handleNameChange}
                                     handleNameLangChange={handleNameLangChange}
                                     authors={product.authors}
+                                    authorOptions={authorOptions}
                                     productBG={productBG}
                                     productEN={productEN}
                                     setProductBG={setProductBG}
@@ -371,6 +412,7 @@ const PreviewProduct = () => {
                                                 handleNameChange={handleNameChange}
                                                 handleNameLangChange={handleNameLangChange}
                                                 authors={product.authors}
+                                                authorOptions={authorOptions}
                                                 productBG={productBG}
                                                 productEN={productEN}
                                                 setProductBG={setProductBG}
@@ -507,6 +549,7 @@ const PreviewProduct = () => {
                                 handleNameChange={handleNameChange}
                                 handleNameLangChange={handleNameLangChange}
                                 authors={product.authors}
+                                authorOptions={authorOptions}
                                 productBG={productBG}
                                 productEN={productEN}
                                 setProductBG={setProductBG}
