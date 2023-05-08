@@ -26,8 +26,8 @@ class PostController extends Controller
 
     }
 
-    public function show()
+    public function getById($id)
     {
-        
+
     }
 }
