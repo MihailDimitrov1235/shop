@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import formData from '../../../FormBuilder/utils/formData';
 import AddIcon from '@mui/icons-material/Add';
 
-const EditPartDialog = ( { open, setOpen, product, setProduct } ) => {
+const EditPartDialog = ( { open, setOpen, product, setProduct, setPart, setFiles, setPrice } ) => {
 
     const {t} = useTranslation();
 
@@ -27,7 +27,7 @@ const EditPartDialog = ( { open, setOpen, product, setProduct } ) => {
           let newProduct = Object.assign({}, product);
           newProduct.parts = []
           values.parts.forEach((part, index) => {
-            let newPart = part
+            let newPart = Object.assign({}, part);
             newPart.files = []
             newPart.id = index + 1
             part.upload.forEach(file => {
@@ -38,6 +38,9 @@ const EditPartDialog = ( { open, setOpen, product, setProduct } ) => {
           console.log(product)
           setProduct(newProduct)
           console.log(newProduct)
+          setPrice(newProduct.parts[0].price)
+          setPart(newProduct.parts[0].id)
+          setFiles(newProduct.parts[0].files)
           setOpen(false)
         }
 

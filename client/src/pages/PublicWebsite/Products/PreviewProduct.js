@@ -215,7 +215,7 @@ const PreviewProduct = () => {
 
     
     const [ files, setFiles ] = useState(product.parts[0].files);
-    const [ partName, setPartName ] = useState(product.parts[0].name);
+    // const [ partName, setPartName ] = useState(product.parts[0].name);
     const [ price, setPrice ] = useState(product.parts[0].price);
     const [ part, setPart ] = useState(product.parts[0].id);
 
@@ -282,6 +282,9 @@ const PreviewProduct = () => {
                 setOpen={setOpenEditPartsDialog}
                 product={product}
                 setProduct={setProduct}
+                setFiles={setFiles}
+                setPart={setPart}
+                setPrice={setPrice}
             />
 
             <Container
