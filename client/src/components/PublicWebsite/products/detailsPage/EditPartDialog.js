@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import formData from '../../../FormBuilder/utils/formData';
 import AddIcon from '@mui/icons-material/Add';
 
-const EditPartDialog = ( { open, setOpen } ) => {
+const EditPartDialog = ( { open, setOpen, product, setProduct } ) => {
 
     const {t} = useTranslation();
 
@@ -14,22 +14,31 @@ const EditPartDialog = ( { open, setOpen } ) => {
     }
     const fields = [
               {type: 'array', name: 'parts', label: t('parts'), itemLabel: t('part'), fields: [
+                // { type: 'text', name: 'name', label: t('name') },
                 { type: 'number', name: 'price', label: t('price') },
-                { type: 'upload', name: 'uploader', label: t('files'), accept: '.jpg,.png,.jpeg,.docx,.pdf,.doc', multiple: true },
+                { type: 'upload', name: 'upload', label: t('files'), accept: '.jpg,.png,.jpeg,.docx,.pdf,.doc', multiple: true },
               ]}
             
           ]
       
         const onSubmit = (values, { setSubmitting }) => {
-        const data = formData(values, [], ['picture']);
+        // const data = formData(values, [], ['picture']);
 
-        console.log(data)
-    
-        // values.parts.forEach(function(obj, index) {
-        //     obj.uploader.forEach((file) => {
-        //     data.append("partsFiles["+index+"][uploader][]", file);
-        //     })
-        // });
+          let newProduct = Object.assign({}, product);
+          newProduct.parts = []
+          values.parts.forEach((part, index) => {
+            let newPart = part
+            newPart.files = []
+            newPart.id = index + 1
+            part.upload.forEach(file => {
+              newPart.files.push({'path':file.name})
+            });
+            newProduct.parts.push(newPart)
+          });
+          console.log(product)
+          setProduct(newProduct)
+          console.log(newProduct)
+          setOpen(false)
         }
 
 
