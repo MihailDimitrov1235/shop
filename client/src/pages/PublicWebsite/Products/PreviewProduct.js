@@ -16,7 +16,7 @@ import {
     Container,
     Stack,
     Chip,
-    IconButton,
+    Autocomplete,
 } from "@mui/material";
 import productService from "../../../services/product";
 import cartService from "../../../services/cart";
@@ -70,9 +70,9 @@ const PreviewProduct = () => {
             {author_id:8, name:'John Lennon'},
         ],
         categories:[
-            {category_id:1, name:'john lenan'},
-            {category_id:2, name:'john lenan'},
-            {category_id:3, name:'john lenan'},
+            {category_id:2, name:'Yellow'},
+            {category_id:3, name:'Chemistry'},
+            {category_id:4, name:'Biology'},
         ],
         parts:[
         
@@ -236,6 +236,12 @@ const PreviewProduct = () => {
         console.log(productEN)
     }
 
+    const handleSelectCategory = (event, value) => {
+        let newProduct = product
+        newProduct.categories = value
+        setProduct(newProduct)
+    }
+
     let authorOptions = [
         {author_id:1, name:'Josh'},
         {author_id:2, name:'Josh'},
@@ -248,14 +254,14 @@ const PreviewProduct = () => {
     ]
 
     let categoryOptions = [
-        {author_id:1, name:'Josh'},
-        {author_id:2, name:'Josh'},
-        {author_id:3, name:'Josh'},
-        {author_id:4, name:'Josh'},
-        {author_id:5, name:'Josh'},
-        {author_id:6, name:'Bill Gates'},
-        {author_id:7, name:'Elon Musk'},
-        {author_id:8, name:'John Lennon'},
+        {category_id:1, name:'Green'},
+        {category_id:2, name:'Yellow'},
+        {category_id:3, name:'Chemistry'},
+        {category_id:4, name:'Biology'},
+        {category_id:5, name:'Josh'},
+        {category_id:6, name:'Bill Gates'},
+        {category_id:7, name:'Elon Musk'},
+        {category_id:8, name:'John Lennon'},
     ]
 
     return (
@@ -505,38 +511,7 @@ const PreviewProduct = () => {
                         </Box>
                     </Card>
                 </Box>
-                <Box>
-                    <Stack
-                        direction="row"
-                        spacing={1}
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'left',
-                            flexWrap: 'wrap',
-                            mt: 5
-                        }}
-                    >
-                    {product.categories.map((category, index) => (
-                        <Box display={'flex'}>
-                            <Chip
-                                sx={{
-                                    mb: 1,
-                                }}
-                                component={!edit? Link : Box}
-                                label={category.name}
-                                to={"/products?category=" + category.category_id}
-                                clickable={!edit}
-                                key={category.category_id}
-                                onDelete={() => handleDeleteCategory(index)}
-                            />
-                        </Box>
-                    ))}
-                        <Button sx={{height:'32px'}} color='inherit' onClick={handleAddCategory}>
-                            <Typography sx={{ fontSize:'0.875rem', mr:1}}>{t('add-category')}</Typography>
-                            <AddIcon/>
-                        </Button>
-                    </Stack>
-                </Box>
+                
                 <Box
                     sx={{ display: { xs: 'none', md: "flex", lg: "none" }, flexDirection: "column" }}
                 >
@@ -566,6 +541,60 @@ const PreviewProduct = () => {
                         }
 
                     </Card>
+                </Box>
+                <Box>
+                    <Stack
+                        direction="row"
+                        spacing={1}
+                        sx={{
+                            display: !edit?'flex':'none',
+                            justifyContent: 'left',
+                            flexWrap: 'wrap',
+                            mt: 5
+                        }}
+                    >
+                    {product.categories.map((category, index) => (
+                        <Box display={'flex'}>
+                            <Chip
+                                sx={{
+                                    mb: 1,
+                                }}
+                                component={Link}
+                                label={category.name}
+                                to={"/products?category=" + category.category_id}
+                                key={category.category_id}
+                                onDelete={() => handleDeleteCategory(index)}
+                            />
+                        </Box>
+                    ))}
+                        <Button sx={{height:'32px'}} color='inherit' onClick={handleAddCategory}>
+                            <Typography sx={{ fontSize:'0.875rem', mr:1}}>{t('add-category')}</Typography>
+                            <AddIcon/>
+                        </Button>
+                    </Stack>
+                    <Stack spacing={3} sx={{ 
+                        width: '100%', 
+                        display: edit?'flex':'none', 
+                        flexWrap: 'wrap',
+                        mt: 4
+                    }}>
+                        <Autocomplete
+                            multiple
+                            id="tags-outlined"
+                            options={categoryOptions}
+                            getOptionLabel={(option) => option.name}
+                            isOptionEqualToValue={(option, value) => option.category_id === value.category_id}
+                            defaultValue={product.categories}
+                            onChange={handleSelectCategory}
+                            filterSelectedOptions
+                            renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                placeholder={t('categories')}
+                            />
+                            )}
+                        />
+                    </Stack>
                 </Box>
                 <Card sx={{ mt: 4 }}>
                     <CardContent>

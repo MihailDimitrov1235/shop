@@ -57,7 +57,7 @@ export default function EditInformation({
                 <TextField id='name' value={name} fullWidth onChange={handleNameChange}
                     inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
                 />
-                <Stack spacing={3} sx={{ width: 500 }}>
+                <Stack spacing={3} sx={{ width: '100%', mt:4 }}>
                     <Autocomplete
                         multiple
                         id="tags-outlined"
@@ -77,7 +77,7 @@ export default function EditInformation({
                     </Stack>
 
             </Box>
-            <Box sx={{ textAlign: "center", height: "100%", mt: 5 }}>
+            <Box sx={{ textAlign: "center", height: "100%", mt: 4 }}>
                 <Tabs value={descLang} onChange={handleDescLangChange}  indicatorColor='inherit' textColor='inherit'>
                     <Tab value={'bg'} label={t('bulgarian')}/>
                     <Tab value={'en'} label={t('english')}/>
