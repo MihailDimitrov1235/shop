@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, IconButton, Avatar, FormControl } from '@mui/material';
+import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, Autocomplete, Avatar, FormControl } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import RichTextEditor from '../../../FormBuilder/RichTextEditor';
@@ -16,18 +16,6 @@ export default function EditInformation({
 
     const [desc, setDesc] = useState(productBG.shortDescription)
     const [descLang, setDescLang] = useState('bg')
-
-    const handleAddAuthor = () => {
-        let newProduct = Object.assign({}, product);
-        newProduct.authors.push("")
-        setProduct(newProduct)
-    }
-
-    function handleDeleteAuthor( index ){
-        let newProduct = Object.assign({}, product);
-        newProduct.authors.splice(index, 1);
-        setProduct(newProduct)
-    }
 
     const handleDescChange = (editorState, markup) =>{
         setDesc(markup)
@@ -51,6 +39,12 @@ export default function EditInformation({
         }
     }
 
+    const handleSelectAuthor = (event, value) => {
+        let newProduct = product
+        newProduct.authors = value;
+        setProduct(newProduct)
+    }
+
     const { t, i18n } = useTranslation();
     return (
         <>
@@ -63,27 +57,27 @@ export default function EditInformation({
                 <TextField id='name' value={name} fullWidth onChange={handleNameChange}
                     inputProps={{ style: { textAlign: 'center', fontSize:'30px' }}}
                 />
-                <Stack
-                    direction="row"
-                    spacing={1}
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        flexWrap: 'wrap',
-                        mt: 2
-                    }}
-                >
-                    <FormControl fullWidth>
-                        <AutocompleteCheckboxes setValue options={authorOptions} label={t('authors')}/>
-                    </FormControl>
-                    
-                </Stack>
-                <Button color='inherit' onClick={handleAddAuthor}>
-                    <Typography sx={{ fontSize:'0.875rem', mr:1}}>{t('add-author')}</Typography>
-                    <AddIcon/>
-                </Button>
+                <Stack spacing={3} sx={{ width: '100%', mt:4 }}>
+                    <Autocomplete
+                        multiple
+                        id="tags-outlined"
+                        options={authorOptions}
+                        getOptionLabel={(option) => option.name}
+                        isOptionEqualToValue={(option, value) => option.author_id === value.author_id}
+                        defaultValue={authors}
+                        onChange={handleSelectAuthor}
+                        filterSelectedOptions
+                        renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            placeholder={t('authors')}
+                        />
+                        )}
+                    />
+                    </Stack>
+
             </Box>
-            <Box sx={{ textAlign: "center", height: "100%", mt: 5 }}>
+            <Box sx={{ textAlign: "center", height: "100%", mt: 4 }}>
                 <Tabs value={descLang} onChange={handleDescLangChange}  indicatorColor='inherit' textColor='inherit'>
                     <Tab value={'bg'} label={t('bulgarian')}/>
                     <Tab value={'en'} label={t('english')}/>
