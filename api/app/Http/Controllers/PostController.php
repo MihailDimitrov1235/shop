@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -13,7 +15,12 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-
+        Post::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'slug' => Str::slug($request->title),
+            //'image_path' => $newImageName
+        ]);
     }
 
     public function edit(Request $request, $id)
