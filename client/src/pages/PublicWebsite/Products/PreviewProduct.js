@@ -65,9 +65,9 @@ const PreviewProduct = () => {
 
     const [product, setProduct] = useState({
         authors:[
-            {author_id:1, name:'john lenan'},
-            {author_id:2, name:'john lenan'},
-            {author_id:3, name:'john lenan'},
+            {author_id:6, name:'Bill Gates'},
+            {author_id:7, name:'Elon Musk'},
+            {author_id:8, name:'John Lennon'},
         ],
         categories:[
             {category_id:1, name:'john lenan'},
@@ -237,25 +237,25 @@ const PreviewProduct = () => {
     }
 
     let authorOptions = [
-        {author_id:1, label:'Josh'},
-        {author_id:2, label:'Josh'},
-        {author_id:3, label:'Josh'},
-        {author_id:4, label:'Josh'},
-        {author_id:5, label:'Josh'},
-        {author_id:6, label:'Bill Gates'},
-        {author_id:7, label:'Elon Musk'},
-        {author_id:8, label:'John Lennon'},
+        {author_id:1, name:'Josh'},
+        {author_id:2, name:'Josh'},
+        {author_id:3, name:'Josh'},
+        {author_id:4, name:'Josh'},
+        {author_id:5, name:'Josh'},
+        {author_id:6, name:'Bill Gates'},
+        {author_id:7, name:'Elon Musk'},
+        {author_id:8, name:'John Lennon'},
     ]
 
     let categoryOptions = [
-        {author_id:1, label:'Josh'},
-        {author_id:2, label:'Josh'},
-        {author_id:3, label:'Josh'},
-        {author_id:4, label:'Josh'},
-        {author_id:5, label:'Josh'},
-        {author_id:6, label:'Bill Gates'},
-        {author_id:7, label:'Elon Musk'},
-        {author_id:8, label:'John Lennon'},
+        {author_id:1, name:'Josh'},
+        {author_id:2, name:'Josh'},
+        {author_id:3, name:'Josh'},
+        {author_id:4, name:'Josh'},
+        {author_id:5, name:'Josh'},
+        {author_id:6, name:'Bill Gates'},
+        {author_id:7, name:'Elon Musk'},
+        {author_id:8, name:'John Lennon'},
     ]
 
     return (
