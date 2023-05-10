@@ -46,6 +46,9 @@ import RegisterAuthor from './pages/PublicWebsite/Author/RegisterAuthor';
 
 import PageLayout from './components/ControlPanel/PageLayout';
 
+import BlogMainPage from './pages/Blog/BlogMainPage';
+import BlogPost from './pages/Blog/BlogPost';
+
 import Page404 from './pages/Page404';
 
 const routes = [
@@ -84,6 +87,10 @@ const routes = [
       { path: 'cart', element: <Cart /> },
       // { path: '/', element: <Navigate to="/home" /> },
       // { path: '*', element: <Navigate to="/404" /> }
+      { path: 'blog', children:[
+        {path: '', element: <BlogMainPage/>},
+        {path: ':id', element: <BlogPost/>}
+     ]},
     ]
   },
   {
