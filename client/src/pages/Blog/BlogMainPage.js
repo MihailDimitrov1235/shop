@@ -5,11 +5,11 @@ import BlogCard from '../../components/blog/BlogCard';
 import SearchIcon from '@mui/icons-material/Search';
 
 const props = [
-    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
 ]
 
 const BlogMainPage = () =>{
@@ -38,7 +38,7 @@ const BlogMainPage = () =>{
                 justifyContent:'center',
                 alignItems:'center',
             }}>
-                <TextField inputRef={searchRef} sx={{ width:'30%' }} label='search'/>
+                <TextField inputRef={searchRef} sx={{ width:'30%' }} label={t('search')}/>
                 <Button onClick={handleSearch} sx={{
                     backgroundColor:'#96011c',
                     height:'55px',

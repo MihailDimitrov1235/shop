@@ -1,6 +1,8 @@
 import { Box, Card, Typography, Chip, Stack } from "@mui/material"
 import { Link } from "react-router-dom"
 import { useTranslation } from 'react-i18next';
+import PersonIcon from '@mui/icons-material/Person';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const BlogCard = ( { post } ) => {
 
@@ -39,22 +41,37 @@ const BlogCard = ( { post } ) => {
                     }}>
                         <img style={{ width:'90%', borderRadius:'5px' }} src={post.image}/>
                     </Box>
-                    <Box sx={{ ml: '5%', mb: 1 }}>
-                        <Typography variant="subtitle1">
-                            {monthMap[month]} {day}, {year}
-                        </Typography>
-                    </Box>
                     <Box>
                         <Typography style={{ 
                             margin: '0 5%'
                             // textAlign:'center'
                              }} variant="h3">{post.title}</Typography>
                     </Box>
-                    <Stack direction={'row'} spacing={1} sx={{ ml: '5%', mb: 1, mt: 4 }} >
+                    <Box>
+                        <Typography style={{ 
+                            margin: '0 5%',
+                            marginBottom: '10px'
+                            }} variant="subtitle1">{post.description}</Typography>
+                    </Box>
+                    {/* <Stack direction={'row'} spacing={1} sx={{ ml: '5%', mb: 1, mt: 4 }} >
                         {post.categories.map( (category, idx) => (
                             <Chip sx={{ fontSize:'100%', background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category}/>
                         ))}
-                    </Stack>
+                    </Stack> */}
+                    <Box>
+                        <Box sx={{ display:'flex', ml: '5%', mb: 1 }}>
+                            <PersonIcon/>
+                            <Typography variant="subtitle1">
+                                {post.author}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display:'flex', ml: '5%', mb: 1 }}>
+                            <CalendarMonthIcon/>
+                            <Typography variant="subtitle1">
+                                {monthMap[month]} {day}, {year}
+                            </Typography>
+                        </Box>
+                    </Box>
                 </Card>
             </Link>
         </Box>
