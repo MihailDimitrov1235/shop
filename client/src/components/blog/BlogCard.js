@@ -46,13 +46,13 @@ const BlogCard = ( { post } ) => {
                     </Box>
                     <Box>
                         <Typography style={{ 
-                            margin: '0 5%   '
+                            margin: '0 5%'
                             // textAlign:'center'
                              }} variant="h3">{post.title}</Typography>
                     </Box>
                     <Stack direction={'row'} spacing={1} sx={{ ml: '5%', mb: 1, mt: 4 }} >
                         {post.categories.map( (category, idx) => (
-                            <Chip sx={{ fontSize:'18px', background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category}/>
+                            <Chip sx={{ fontSize:'100%', background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category}/>
                         ))}
                     </Stack>
                 </Card>
