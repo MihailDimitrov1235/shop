@@ -1,19 +1,22 @@
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import BlogCard from '../../components/blog/BlogCard';
 
 const props = [
-    {title: 'Some Title', categories:[1,5,6,2], slug:'some-slug', userId: 1, image:'https://wallpapersmug.com/download/1366x768/da1c36/windows-11-blue-violet-structure-microsoft-stock.jpeg'},
-    {title: 'Some Title', categories:[1,5,6,2], slug:'some-slug', userId: 1, image:'https://wallpapersmug.com/download/1366x768/da1c36/windows-11-blue-violet-structure-microsoft-stock.jpeg'},
-    {title: 'Some Title', categories:[1,5,6,2], slug:'some-slug', userId: 1, image:'https://wallpapersmug.com/download/1366x768/da1c36/windows-11-blue-violet-structure-microsoft-stock.jpeg'},
-    {title: 'Some Title', categories:[1,5,6,2], slug:'some-slug', userId: 1, image:'https://wallpapersmug.com/download/1366x768/da1c36/windows-11-blue-violet-structure-microsoft-stock.jpeg'},
-    {title: 'Some Title', categories:[1,5,6,2], slug:'some-slug', userId: 1, image:'https://wallpapersmug.com/download/1366x768/da1c36/windows-11-blue-violet-structure-microsoft-stock.jpeg'},
+    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    {date: '2022-05-03', categories:['fast', 'hot', 'sport'], title: 'Some Title', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
 ]
 
 const BlogMainPage = () =>{
     const { t } = useTranslation();
     return (
-        <Container>
+        <Box sx={{
+            ml: 18,
+            mr: 18,
+        }}>
             <Box
                 sx = {{
                     display:'flex',
@@ -32,7 +35,7 @@ const BlogMainPage = () =>{
                     </>
                 ))}
             </Box>
-        </Container>
+        </Box>
     )
 }
 
