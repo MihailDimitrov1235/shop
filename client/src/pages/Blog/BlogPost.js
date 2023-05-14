@@ -9,7 +9,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const post = {
     date: '2022-05-03', 
     description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", 
-    author:'John Lennon', 
+    author:{name: "John Lennon", id:3}, 
     title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet',
     text: `<h1>Inuyasha</h1><br><p>Sometimes I think back on my experience with Inuyasha and my conclusions about it have always been conflicted. It was the first anime that I watched whole heartedly, and it was the first thing that brought me into the realm of Japanese media and culture. I've come to love anime and manga, appreciate the history and the different styles and subtleties that come with every genre and now consider it a very large and colorful part of my life. Naturally I look back on Inuyasha with a sense of fondness,the yellow volumes and DVD's on my shelves only a small testament to the dedication I had to the story. However as I said, Inuyasha is something I think about with a degree of conflict. It was the work that introduced me to the magical world of Japanese television, however in its own right Inuyasha is the most chaotic and exasperating anime I've probably ever seen.
 
@@ -31,9 +31,12 @@ const BlogPost = () =>{
     const [writingComment, setWrittingComment] = useState(false)
     const newCommentRef = useRef(null)
     const handleSubmitComment = () => {
-        console.log(newCommentRef.current.value)
-        newCommentRef.current.value = ''
-        setWrittingComment(false)
+        if(newCommentRef.current.value){
+            console.log(newCommentRef.current.value)
+            newCommentRef.current.value = ''
+            setWrittingComment(false)
+        }
+        
     }
 
     const handleCommentPageChange = (event, page) => {
@@ -66,9 +69,9 @@ const BlogPost = () =>{
                 {/* Post Information */}
                 <Card sx={{ flex:1, mt:10, p:3}}>
                     <Typography variant="h5" sx={{ textAlign:'center' }}>{t('about-blog')}</Typography>
-                    <Box sx={{ mt:3, display:'flex', alignItems:'center' }}>
+                    <Box component={Link} to={"/profile/" + post.author.id} sx={{ mt:3, display:'flex', alignItems:'center' }}>
                         <PersonIcon/>
-                        <Typography variant="subtitle2" sx={{ ml:1 }}>{post.author}</Typography>
+                        <Typography variant="subtitle2" sx={{ ml:1 }}>{post.author.name}</Typography>
                     </Box>
                     <Box sx={{ mt:3, display:'flex', alignItems:'center' }}>
                         <CalendarMonthIcon/>

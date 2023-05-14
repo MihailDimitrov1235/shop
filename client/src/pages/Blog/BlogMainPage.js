@@ -1,8 +1,9 @@
-import { useRef } from 'react';
-import { Box, Typography, Container, TextField, Button, Pagination } from '@mui/material';
+import { useRef, useState } from 'react';
+import { Box, Typography, Container, TextField, Button, Pagination, Card, FormControlLabel, FormGroup, Checkbox } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import BlogCard from '../../components/blog/BlogCard';
 import SearchIcon from '@mui/icons-material/Search';
+import TuneIcon from '@mui/icons-material/Tune';
 
 const props = {
     pages: 10,
@@ -15,9 +16,23 @@ const props = {
     ]
 }
 
+const categories = [
+    {id:1, name:'chemestry'},
+    {id:2, name:'chemestry'},
+    {id:3, name:'chemestry'},
+    {id:4, name:'chemestry'},
+    {id:5, name:'chemestry'},
+    {id:6, name:'chemestry'},
+]
+
+
+
 const BlogMainPage = () =>{
 
+    const [checkedCategories,setCheckedCategories] = useState(new Set())
+
     const searchRef = useRef('')
+    const [filters, setFilters] = useState(false)
 
     const handleSearch = () =>{
         console.log(searchRef.current.value)
@@ -26,6 +41,17 @@ const BlogMainPage = () =>{
     const handlePageChange = (event, page) => {
         console.log(page);
       };
+    
+    const handleCheckedCategoriesChange = (event) => {
+        let newChecked = new Set([...checkedCategories])
+        if(event.target.checked){
+            newChecked.add(parseInt(event.target.id))
+        }else{
+            newChecked.delete(parseInt(event.target.id))
+        }
+        setCheckedCategories(newChecked)
+        console.log(newChecked)
+    }
 
     const { t } = useTranslation();
     return (
@@ -35,10 +61,11 @@ const BlogMainPage = () =>{
                     display:'flex',
                     justifyContent:'center',
                     alignItems:'center',
+                    flexDirection:'column',
                 }}
             >
-                <Typography variant='h1'>{t('blog-welcome-text')}</Typography>
-                
+                <Typography variant='h1'>{t('blog-welcome-title')}</Typography>
+                <Typography variant='subtitle1'>{t('blog-welcome-subtitle')}</Typography>
             </Box>
             <Box sx = {{
                 display:'flex',
@@ -56,7 +83,25 @@ const BlogMainPage = () =>{
                 }}>
                     <SearchIcon/>
                 </Button>
+                <Button onClick={ () => setFilters(!filters)} sx={{ 
+                    height:'55px',
+                    ml: 5,
+                    color:'black',
+                    border:'solid 1px #96011c',
+                }}>
+                    {t('filters')} <TuneIcon/>
+                </Button>
             </Box>
+            { filters && 
+            <Card sx={{mt:3, p:2}}>
+                <Typography variant='h5'>{t('categories')}</Typography>
+                <Box display={'flex'}>
+                        {categories.map(category => (
+                            <FormControlLabel control={<Checkbox checked={checkedCategories.has(category.id)} id={category.id} color={'bordoRed'} onChange={handleCheckedCategoriesChange} />} label={category.name}/>
+                        ))}
+                </Box>
+            </Card>
+            }
             <Box display={'flex'} flexWrap={'wrap'} justifyContent={'space-evenly'}>
                 
                 {props.posts.map( post => (
