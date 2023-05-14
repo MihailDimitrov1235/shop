@@ -1,5 +1,6 @@
 import { Box, Card, Typography, Container, Stack, Chip } from "@mui/material"
 import { useTranslation } from 'react-i18next';
+import Comment from "../../components/blog/Comment";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
@@ -8,9 +9,18 @@ const post = {
     description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", 
     author:'John Lennon', 
     title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet',
-    text: '<h1>This is the Title of my blog</h1><br><p>This is the first paragraph of my blog</p>',
+    text: `<h1>Inuyasha</h1><br><p>Sometimes I think back on my experience with Inuyasha and my conclusions about it have always been conflicted. It was the first anime that I watched whole heartedly, and it was the first thing that brought me into the realm of Japanese media and culture. I've come to love anime and manga, appreciate the history and the different styles and subtleties that come with every genre and now consider it a very large and colorful part of my life. Naturally I look back on Inuyasha with a sense of fondness,the yellow volumes and DVD's on my shelves only a small testament to the dedication I had to the story. However as I said, Inuyasha is something I think about with a degree of conflict. It was the work that introduced me to the magical world of Japanese television, however in its own right Inuyasha is the most chaotic and exasperating anime I've probably ever seen.
+
+    There are flaws in the overall composition. Things one might ask themselves like; why, if you KNEW you we're going to be trekking across feudal Japan for months on end, would you bring only one outfit? And more importantly why would it be your Junior High School uniform - i.e. a bright green miniskirt?
+    
+    Regardless, the story itself is very weak, as its the random plot arcs and ridiculous character relations that really make the show. To summarize, a young girl falls down a well at her family's shrine, only to be transported back in time to feudal Japan, where she frees a grumpy dog eared half demon man who is stuck to a tree (The result of a bad breakup) and ends up breaking a magical mystical artifact that then shatters into a bazillion pieces. Ditzy teenage girl and pissy dog demon guy now must work together to find all the shards of "The Sacred Jewel" before the bad guys do. Sure there's another load of subplots - pointless, funny and romantic alike - but we'll get to that.
+    Although the premise is simplistic it does expand further along in the story, but only if one likes the show enough initially to move on in the series through the 160 + episodes.
+    The subplots and the arcs are what make this series entertaining. (And also agonizing if the arc you're in bores you to tears) We'll have run ins with random demons and get mixed up with numerous characters who may or may not come and go. Each plot brings changes and the characters do a very good job of growing and evolving as a result. The series does, despite its episodic nature, still follow some sense of linearity. Development in the characters remain as they would in a real person. (This excludes the Inuyasha movies, unfortunately)
+    Despite all that, its still one of those series that makes it very easy to drop in at any time and figure things out eventually. I watched from the middle first before I decided I loved the show and went back to see the beginning - which was drastically different to me considering the amount of change that takes place from beginning to middle to end.
+    I can't go into detail very well considering the story, as there is so much of it its hard to find a place to start. The elements of the setting and time really come into play with the presence of the spirits and demons all of which offer a uniqueness all to its own. The multiple love triangle issues are superficial but also complex, so there is a degree of decent conflict in that regard. I also really appreciate personally how the development of the relationship between the two main characters, Inuyasha and Kagome, is gradual. </p>`,
     image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg',
     categories:['politics', 'chemistry'],
+    comments:[{userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}],
 }
 
 const BlogPost = () =>{
@@ -23,11 +33,14 @@ const BlogPost = () =>{
                 <Typography variant="h3" sx={{ my:4}}>{post.title}</Typography>
                 <Typography variant="subtitle1" sx={{ mb:4 }}>{post.description}</Typography>
             </Card> */}
-            <Box display={'flex'}>
+            <Box display={'flex'} sx={{ mb:3 }}>
                 {/* Main Content */}
                 <Card sx={{ flex:6, mt:10, mr:3, p:3 }}>
                     <Typography variant="h3" sx={{ mb:3}}>{post.title}</Typography>
-                    <Typography variant="subtitle1">{post.description}</Typography>
+                    <Typography variant="subtitle1" sx={{ mb: 5}}>{post.description}</Typography>
+                    <Box display={'flex'} justifyContent={'center'}>
+                        <img src={post.image}/>
+                    </Box>
                     <div
                     dangerouslySetInnerHTML={{
                         __html: post.text,
@@ -54,6 +67,13 @@ const BlogPost = () =>{
                     </Stack>
                 </Card>
             </Box>
+            {/* Comments */}
+            <Card>
+                <Typography variant="h3" sx={{ml:2, mt:1}}>{t('comment-section')}</Typography>
+                    {post.comments.map( comment => (
+                        <Comment props={comment} />
+                    ))}
+                </Card>
         </Container>
     )
 }
