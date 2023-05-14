@@ -41,6 +41,7 @@ const Navbar = (props) => {
     const items = [
         { type: 'link', title: t('home'), href: '/'},
         { type: 'link', title: t('products'), href: '/products' },
+        { type: 'link', title: t('blog'), href: '/blog' },
         { type: 'langSwitcher' },
         { type: 'divider', orientation: 'vertical' },
         {

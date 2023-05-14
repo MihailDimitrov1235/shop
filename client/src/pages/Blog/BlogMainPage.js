@@ -72,9 +72,13 @@ const BlogMainPage = () =>{
                     justifyContent:'center',
                     alignItems:'center',
                     flexDirection:'column',
+                    width:'40%',
+                    mx: 'auto',
+                    my: 4,
+                    textAlign:'center'
                 }}
             >
-                <Typography variant='h1'>{t('blog-welcome-title')}</Typography>
+                <Typography variant='h1' sx={{ mb:4 }}>{t('blog-welcome-title')}</Typography>
                 <Typography variant='subtitle1'>{t('blog-welcome-subtitle')}</Typography>
             </Box>
             <Box sx = {{
@@ -82,7 +86,7 @@ const BlogMainPage = () =>{
                 justifyContent:'center',
                 alignItems:'center',
             }}>
-                <TextField inputRef={searchRef} sx={{ width:'30%' }} label={t('search')}/>
+                <TextField inputRef={searchRef} color='bordoRed' sx={{ width:'30%' }} label={t('search')}/>
                 <Button onClick={handleSearch} sx={{
                     backgroundColor:'#96011c',
                     height:'55px',

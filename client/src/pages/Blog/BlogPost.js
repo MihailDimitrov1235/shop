@@ -70,7 +70,7 @@ const BlogPost = () =>{
 
                 {/* Post Information */}
                 <Card sx={{ flex:1, mt:10, p:3}}>
-                    <Typography variant="h5" sx={{ textAlign:'center' }}>{t('about-blog')}</Typography>
+                    <Typography variant="h5" sx={{ textAlign:'center' }}>{t('about-post')}</Typography>
                     <Box component={Link} to={"/profile/" + post.author.id} sx={{ mt:3, display:'flex', alignItems:'center' }}>
                         <PersonIcon/>
                         <Typography variant="subtitle2" sx={{ ml:1 }}>{post.author.name}</Typography>

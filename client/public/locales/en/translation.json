@@ -355,5 +355,38 @@
 
     "italic":"Italic",
 
-    "underline":"Underlined"
+    "underline":"Underlined",
+
+    "blog": "Blog",
+
+    "blog-welcome-title": "Step into the realm of scientific wonders. Discover, learn, and be amazed.",
+
+    "blog-welcome-subtitle": "Welcome to our captivating science blog, where curiosity meets knowledge! Prepare to embark on a journey through the captivating world of scientific wonders. From the depths of the cosmos to the inner workings of our bodies, we explore the vast realm of scientific discovery.",
+
+    "sort-by": "Sort by",
+
+    "dont-sort": "Don't sort",
+
+    "most-visited": "Most visited",
+
+    "newest": "Newest",
+
+    "oldest": "Oldest",
+
+    "about-post": "About the post",
+
+    "comment-section": "Comment section",
+
+    "write-comment": "Write a comment",
+
+    "report": "Report",
+
+    "read-more": "Read more",
+
+    "read-less": "Read less",
+
+    "comment": "comment",
+
+    "submit-comment": "Submit the comment"
+
 }
