@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { Box, Typography, Container, TextField, Button, Pagination, Card, FormControlLabel, FormGroup, Checkbox } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import { Box, Typography, Container, TextField, Button, Pagination, Card, FormControlLabel, RadioGroup, Radio, Checkbox } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import BlogCard from '../../components/blog/BlogCard';
 import SearchIcon from '@mui/icons-material/Search';
@@ -29,7 +30,12 @@ const categories = [
 
 const BlogMainPage = () =>{
 
-    const [checkedCategories,setCheckedCategories] = useState(new Set())
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const defaultCategory = searchParams.get('category');
+
+    const [checkedCategories,setCheckedCategories] = useState(new Set([parseInt(defaultCategory)]))
+    const [sortBy, setSortBy] = useState('none')
 
     const searchRef = useRef('')
     const [filters, setFilters] = useState(false)
@@ -51,6 +57,10 @@ const BlogMainPage = () =>{
         }
         setCheckedCategories(newChecked)
         console.log(newChecked)
+    }
+
+    const handleSortByChange = (event) =>{
+        setSortBy(event.target.value)
     }
 
     const { t } = useTranslation();
@@ -94,6 +104,20 @@ const BlogMainPage = () =>{
             </Box>
             { filters && 
             <Card sx={{mt:3, p:2}}>
+                <Typography variant='h5'>{t('sort-by')}</Typography>
+                <RadioGroup
+                    defaultValue={sortBy}
+                    onChange={handleSortByChange}
+                    sx={{
+                        display:'flex',
+                        flexDirection:'row',
+                    }}
+                >
+                    <FormControlLabel value="none" control={<Radio color='bordoRed' />} label={t('dont-sort')} />
+                    <FormControlLabel value="most-visited" control={<Radio color='bordoRed' />} label={t('most-visited')} />
+                    <FormControlLabel value="newest" control={<Radio color='bordoRed' />} label={t("newest")} />
+                    <FormControlLabel value="oldest" control={<Radio color='bordoRed' />} label={t("oldest")} />
+                </RadioGroup>
                 <Typography variant='h5'>{t('categories')}</Typography>
                 <Box display={'flex'}>
                         {categories.map(category => (

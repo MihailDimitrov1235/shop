@@ -21,12 +21,14 @@ const post = {
     Despite all that, its still one of those series that makes it very easy to drop in at any time and figure things out eventually. I watched from the middle first before I decided I loved the show and went back to see the beginning - which was drastically different to me considering the amount of change that takes place from beginning to middle to end.
     I can't go into detail very well considering the story, as there is so much of it its hard to find a place to start. The elements of the setting and time really come into play with the presence of the spirits and demons all of which offer a uniqueness all to its own. The multiple love triangle issues are superficial but also complex, so there is a degree of decent conflict in that regard. I also really appreciate personally how the development of the relationship between the two main characters, Inuyasha and Kagome, is gradual. </p>`,
     image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg',
-    categories:['politics', 'chemistry'],
+    categories:[{id:1, name:'politics'}, {id:2, name:'chemistry'}],
     commentPages:10,
     comments:[{userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}],
 }
 
 const BlogPost = () =>{
+
+
 
     const [writingComment, setWrittingComment] = useState(false)
     const newCommentRef = useRef(null)
@@ -80,7 +82,7 @@ const BlogPost = () =>{
                     <Typography variant="h6" sx={{ ml:1, mt:3, textAlign:'center' }}>{t('categories')}:</Typography>
                     <Stack direction={'row'} sx={{ justifyContent:'center', flexWrap:'wrap', mt:1 }} >
                         {post.categories.map( (category, idx) => (
-                            <Chip sx={{ fontSize:'100%', mb:1, background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category}/>
+                            <Chip clickable component={Link} to={`/blog?category=${encodeURIComponent(category.id)}`} sx={{ fontSize:'100%', mb:1, background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category.name}/>
                         ))}
                     </Stack>
                 </Card>
