@@ -97,10 +97,10 @@ const BlogMainPage = () =>{
                 mt:3
             }}>
                 <Pagination count={props.pages} 
-                size='large' 
-                variant='outlined' 
-                classes={{ root: classes.pagination }}
-                onChange={handlePageChange}
+                    size='large' 
+                    variant='outlined' 
+                    classes={{ root: classes.pagination }}
+                    onChange={handlePageChange}
                 />
             </Box>
         </Container>
