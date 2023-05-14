@@ -48,6 +48,7 @@ import PageLayout from './components/ControlPanel/PageLayout';
 
 import BlogMainPage from './pages/Blog/BlogMainPage';
 import BlogPost from './pages/Blog/BlogPost';
+import BlogCreate from './pages/Blog/BlogCreate';
 
 import Page404 from './pages/Page404';
 
@@ -90,7 +91,8 @@ const routes = [
       { path: 'blog', 
       children:[
         {path: '', element: <BlogMainPage/>},
-        {path: ':id', element: <BlogPost/>}
+        {path: ':id', element: <BlogPost/>},
+        {path: 'create', element: <BlogCreate/>}
      ]},
     ]
   },

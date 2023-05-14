@@ -26,7 +26,7 @@ const post = {
     comments:[{userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}],
 }
 
-const BlogPost = () =>{
+const BlogPost = ( ) =>{
 
 
 

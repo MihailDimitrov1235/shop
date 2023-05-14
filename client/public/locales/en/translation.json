@@ -387,6 +387,8 @@
 
     "comment": "comment",
 
-    "submit-comment": "Submit the comment"
+    "submit-comment": "Submit the comment",
+
+    "create-blog-welcome-text": "Create your post, preview it and submit it. Don't forget to add both bulgarian and english"
 
 }
