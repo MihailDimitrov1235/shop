@@ -3,32 +3,6 @@ import { Box, Typography, Container, TextField, Button, Pagination } from '@mui/
 import { useTranslation } from 'react-i18next';
 import BlogCard from '../../components/blog/BlogCard';
 import SearchIcon from '@mui/icons-material/Search';
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles((theme) => ({
-    pagination: {
-      '& .MuiPaginationItem-root': {
-        color: 'black', 
-        '&.Mui-selected': {
-          color: 'white', 
-          backgroundColor: '#96011c', 
-          '&:hover': {
-            backgroundColor: '#96011c', 
-          },
-        },
-        '&:hover': {
-          backgroundColor: '#96011c', 
-          color: 'white', 
-        },
-      },
-      '& .MuiPaginationItem-ellipsis':{
-        '&:hover': {
-            backgroundColor: 'transparent !important', 
-            color: 'inherit !important', 
-          },
-      }
-    },
-  }));  
 
 const props = {
     pages: 10,
@@ -42,8 +16,6 @@ const props = {
 }
 
 const BlogMainPage = () =>{
-
-    const classes = useStyles();
 
     const searchRef = useRef('')
 
@@ -99,7 +71,6 @@ const BlogMainPage = () =>{
                 <Pagination count={props.pages} 
                     size='large' 
                     variant='outlined' 
-                    classes={{ root: classes.pagination }}
                     onChange={handlePageChange}
                 />
             </Box>

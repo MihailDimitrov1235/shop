@@ -228,7 +228,35 @@ const theme = createTheme({
     },
     overline: {
       fontWeight: 500
-    }
+    },
+  },
+  components:{
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          '& .MuiPaginationItem-root': {
+            color: 'black', // Inactive page number color
+            '&.Mui-selected': {
+              color: 'white', // Active page number text color
+              backgroundColor: '#96011c', // Active page number background color
+              '&:hover': {
+                backgroundColor: '#96011c', // Hover background color
+              },
+            },
+            '&:hover': {
+              backgroundColor: '#96011c', // Hover background color
+              color: 'white', // Hover text color
+            },
+          },
+          '& .MuiPaginationItem-ellipsis': {
+            '&:hover': {
+              backgroundColor: 'transparent !important', // Disable hover effect on ellipsis
+              color: 'inherit !important', // Use default text color
+            },
+          },
+        },
+      },
+    },
   }
 });
 

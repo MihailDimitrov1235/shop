@@ -71,7 +71,7 @@ const Comment = ( {props} ) =>{
     return(
         <Box display={'flex'} sx={{p:2}}>
             <Box flex={1} sx={{mr:2}}>
-                <img src={userData.image}/>
+                <img style={{borderRadius:'5px'}} src={userData.image}/>
             </Box>
             <Box flex={11}>
                 <Box display={'flex'}>

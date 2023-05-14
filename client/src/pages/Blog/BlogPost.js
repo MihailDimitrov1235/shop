@@ -1,9 +1,10 @@
-import { Box, Card, Typography, Container, Stack, Chip } from "@mui/material"
+import { Box, Card, Typography, Container, Stack, Chip, Pagination } from "@mui/material"
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Comment from "../../components/blog/Comment";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { makeStyles } from '@mui/styles';
 
 const post = {
     date: '2022-05-03', 
@@ -21,10 +22,15 @@ const post = {
     I can't go into detail very well considering the story, as there is so much of it its hard to find a place to start. The elements of the setting and time really come into play with the presence of the spirits and demons all of which offer a uniqueness all to its own. The multiple love triangle issues are superficial but also complex, so there is a degree of decent conflict in that regard. I also really appreciate personally how the development of the relationship between the two main characters, Inuyasha and Kagome, is gradual. </p>`,
     image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg',
     categories:['politics', 'chemistry'],
+    commentPages:10,
     comments:[{userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}, {userId:1, commentId:1}],
 }
 
 const BlogPost = () =>{
+
+    const handleCommentPageChange = (event, page) => {
+        console.log(page);
+      };
 
     const { t } = useTranslation();
 
@@ -77,7 +83,15 @@ const BlogPost = () =>{
                     {post.comments.map( comment => (
                         <Comment props={comment} />
                     ))}
-                </Card>
+                <Box display={'flex'} justifyContent={'center'} sx={{ mb:2 }}>
+                    <Pagination count={post.commentPages} 
+                        size='medium' 
+                        variant='outlined' 
+                        onChange={handleCommentPageChange}
+                    />
+                </Box>
+                
+            </Card>
         </Container>
     )
 }
