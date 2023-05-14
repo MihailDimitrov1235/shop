@@ -389,6 +389,18 @@
 
     "submit-comment": "Submit the comment",
 
-    "create-blog-welcome-text": "Create your post, preview it and submit it. Don't forget to add both bulgarian and english"
+    "create-blog-welcome-text": "To create a new post fill the form, preview how it looks and create it. Don't forget to add both bulgarian and english.",
+
+    "title": "Title",
+
+    "subtitle": "Subtitle",
+
+    "submit": "Submit",
+
+    "create-post": "Create post",
+
+    "create-post-msg": "Are you sure you want to create a new post",
+
+    "yes": "Yes"
 
 }

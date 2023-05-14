@@ -59,7 +59,7 @@ const BlogPost = ( ) =>{
                     <Typography variant="h3" sx={{ mb:3}}>{post.title}</Typography>
                     <Typography variant="subtitle1" sx={{ mb: 5}}>{post.description}</Typography>
                     <Box display={'flex'} justifyContent={'center'}>
-                        <img src={post.image}/>
+                        <img width={'100%'} src={post.image}/>
                     </Box>
                     <div
                     dangerouslySetInnerHTML={{

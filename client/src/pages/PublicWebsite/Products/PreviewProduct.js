@@ -580,7 +580,6 @@ const PreviewProduct = () => {
                     }}>
                         <Autocomplete
                             multiple
-                            id="tags-outlined"
                             options={categoryOptions}
                             getOptionLabel={(option) => option.name}
                             isOptionEqualToValue={(option, value) => option.category_id === value.category_id}
