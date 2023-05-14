@@ -1,4 +1,5 @@
 import { Box, Card, Typography, Container, Stack, Chip } from "@mui/material"
+import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Comment from "../../components/blog/Comment";
 import PersonIcon from '@mui/icons-material/Person';
@@ -69,7 +70,10 @@ const BlogPost = () =>{
             </Box>
             {/* Comments */}
             <Card>
-                <Typography variant="h3" sx={{ml:2, mt:1}}>{t('comment-section')}</Typography>
+                <Box display={'flex'}>
+                    <Typography variant="h3" sx={{ flex:1, ml:2, mt:1}}>{t('comment-section')}</Typography>
+                    <Typography variant="subtitle1" sx={{ textAlign:'right', flex:1, mr:2, mt:1}}>{t('write-comment')}</Typography>
+                </Box>
                     {post.comments.map( comment => (
                         <Comment props={comment} />
                     ))}
