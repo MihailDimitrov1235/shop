@@ -1,10 +1,10 @@
-import { Box, Card, Typography, Container, Stack, Chip, Pagination } from "@mui/material"
+import { Box, Card, Typography, Container, Stack, Chip, Pagination, TextField, Button } from "@mui/material"
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Comment from "../../components/blog/Comment";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { makeStyles } from '@mui/styles';
 
 const post = {
     date: '2022-05-03', 
@@ -27,6 +27,14 @@ const post = {
 }
 
 const BlogPost = () =>{
+
+    const [writingComment, setWrittingComment] = useState(false)
+    const newCommentRef = useRef(null)
+    const handleSubmitComment = () => {
+        console.log(newCommentRef.current.value)
+        newCommentRef.current.value = ''
+        setWrittingComment(false)
+    }
 
     const handleCommentPageChange = (event, page) => {
         console.log(page);
@@ -76,10 +84,30 @@ const BlogPost = () =>{
             </Box>
             {/* Comments */}
             <Card>
+                
                 <Box display={'flex'}>
                     <Typography variant="h3" sx={{ flex:1, ml:2, mt:1}}>{t('comment-section')}</Typography>
-                    <Typography variant="subtitle1" sx={{ textAlign:'right', flex:1, mr:2, mt:1}}>{t('write-comment')}</Typography>
+                    <Button onClick={() => setWrittingComment(!writingComment)}>                    
+                        <Typography variant="subtitle1" sx={{ color:'black' , textAlign:'right', flex:1, mr:2, mt:1}}>{writingComment?t('stop-write-comment') :t('write-comment')}</Typography>
+                    </Button>
                 </Box>
+                {writingComment && 
+                <Box sx={{ mx:2 }}>
+                    <TextField
+                        inputRef={newCommentRef}  
+                        fullWidth
+                        color="primary"
+                        label= {t('comment')}
+                        multiline
+                    />
+                    <Box display={'flex'} justifyContent={'end'}>
+                        <Button sx={{ mt:1, color: 'black'}} onClick={handleSubmitComment}>
+                            {t('submit-comment')}
+                        </Button>
+                    </Box>
+                    
+                </Box>
+                }
                     {post.comments.map( comment => (
                         <Comment props={comment} />
                     ))}
