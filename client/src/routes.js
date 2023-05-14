@@ -87,7 +87,8 @@ const routes = [
       { path: 'cart', element: <Cart /> },
       // { path: '/', element: <Navigate to="/home" /> },
       // { path: '*', element: <Navigate to="/404" /> }
-      { path: 'blog', children:[
+      { path: 'blog', 
+      children:[
         {path: '', element: <BlogMainPage/>},
         {path: ':id', element: <BlogPost/>}
      ]},

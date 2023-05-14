@@ -53,11 +53,7 @@ const BlogCard = ( { post } ) => {
                             marginBottom: '10px'
                             }} variant="subtitle1">{post.description}</Typography>
                     </Box>
-                    {/* <Stack direction={'row'} spacing={1} sx={{ ml: '5%', mb: 1, mt: 4 }} >
-                        {post.categories.map( (category, idx) => (
-                            <Chip sx={{ fontSize:'100%', background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category}/>
-                        ))}
-                    </Stack> */}
+                    
                     <Box>
                         <Box sx={{ display:'flex', ml: '5%', mb: 1 }}>
                             <PersonIcon/>
@@ -72,6 +68,12 @@ const BlogCard = ( { post } ) => {
                             </Typography>
                         </Box>
                     </Box>
+                            
+                    <Stack direction={'row'} spacing={1} sx={{ ml: '5%', mb: 1, mt: 1 }} >
+                        {post.categories.map( (category, idx) => (
+                            <Chip sx={{ fontSize:'100%', background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category}/>
+                        ))}
+                    </Stack>
                 </Card>
             </Link>
         </Box>
