@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         Post::create([
             'title' => $request->input('title'),
-            'description' => $request->input('description'),
+            'subtitle' => $request->input('subtitle'),
             'slug' => Str::slug($request->title),
             //'image_path' => $newImageName
         ]);
