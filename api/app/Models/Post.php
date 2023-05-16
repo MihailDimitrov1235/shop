@@ -10,6 +10,11 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'slug',
+        'image_path'
+    ];
+
     public function trans() {
         return $this->hasMany(PostTrans::class);
     }

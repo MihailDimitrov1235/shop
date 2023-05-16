@@ -13,9 +13,7 @@ class PostTrans extends Model
 
     protected $fillable = [
         'title',
-        'slug',
         'subtitle',
         'post_id',
-        // 'image_path',
     ];
 }
