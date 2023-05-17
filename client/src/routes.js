@@ -42,6 +42,10 @@ import RequestPage from './pages/ControlPanel/Requests/RequestPage';
 import RequestAuthor from './pages/ControlPanel/Requests/RequestAuthor';
 import RequestProduct from './pages/ControlPanel/Requests/RequestProduct';
 
+import BlogTable from './pages/ControlPanel/Blog/BlogTable';
+import AddBlog from './pages/ControlPanel/Blog/AddBlog';
+import EditBlog from './pages/ControlPanel/Blog/EditBlog';
+
 import RegisterAuthor from './pages/PublicWebsite/Author/RegisterAuthor';
 
 import PageLayout from './components/ControlPanel/PageLayout';
@@ -145,6 +149,15 @@ const routes = [
           { path: '', element: <AuthorsTable />},
           { path: 'create', element: <AddAuthor />},
           { path: 'edit/:id', element: <EditAuthor/>},
+        ] 
+      },
+      {
+        path: 'blog',
+        element: <PageLayout title='blog' />,
+        children: [
+          { path: '', element: <BlogTable />},
+          { path: 'create', element: <AddBlog />},
+          { path: 'edit/:id', element: <EditBlog/>},
         ] 
       },
       {

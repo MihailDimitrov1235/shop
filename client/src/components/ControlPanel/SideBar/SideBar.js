@@ -25,6 +25,7 @@ const SideBar = () => {
             { type: 'item', icon: null, href: '/admin/categories', label: t('categories') },
             { type: 'item', icon: null, href: '/admin/products', label: t('products') },
             { type: 'item', icon: null, href: '/admin/transactions', label: t('transactions') },
+            { type: 'item', icon: null, href: '/admin/blog', label: t('blog') },
         ]},
         { type: 'subMenu', icon: ShoppingBagIcon, label: t('sales'), items: [
             { type: 'item', icon: null, href: '/products', label: 'Overview' },
