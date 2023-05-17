@@ -100,3 +100,6 @@ Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index']);
     Route::get('/{id}', [PostController::class, 'getById']);
 });
+
+// use App\Http\Controllers\CommentController;
+// Route::get('comment', [CommentController::class, 'index']);

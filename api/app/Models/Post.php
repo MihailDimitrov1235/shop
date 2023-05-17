@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\PostTrans;
+use App\Model\Comment;
 
 class Post extends Model
 {
@@ -17,6 +18,10 @@ class Post extends Model
 
     public function trans() {
         return $this->hasMany(PostTrans::class);
+    }
+
+    public function comments(): HasMany{
+        return $this->hasMany(Comment::class);
     }
     
 }
