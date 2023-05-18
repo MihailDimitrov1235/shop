@@ -12,7 +12,8 @@ use App\Http\Controllers\{
     StripeController,
     CartController,
     PostController,
-    CommentController
+    CommentController,
+    BloggerController,
 };
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -83,6 +84,11 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::put('/{id}', [CommentController::class, 'edit']);
     });
 
+    Route::prefix('bloggers')->group(function () {
+        Route::post('/', [BloggerController::class, 'store']);
+        Route::delete('/', [BloggerController::class, 'delete']);
+    });
+
     Route::post('/checkout/{id}', [StripeController::class, 'checkout']);
 });
 
@@ -110,4 +116,10 @@ Route::prefix('products')->group(function () {
 Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index']);
     Route::get('/{id}', [PostController::class, 'getById']);
+});
+
+Route::prefix('bloggers')->group(function () {
+    Route::get('/', [BloggerController::class, 'index']);
+    Route::get('/{id}', [BloggerController::class, 'getById']);
+    Route::put('/{id}', [BloggerController::class, 'edit']);
 });

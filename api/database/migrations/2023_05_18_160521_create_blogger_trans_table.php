@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('blogger_trans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('blogger_id')->constrained('bloggers')->onDelete('cascade');
+            $table->string('name');
+            $table->string('occupation');
+            $table->longText('description');
+            $table->string('lang');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{
     Blogger,
     BloggerTrans
@@ -11,8 +12,93 @@ use App\Models\{
 
 class BloggerController extends Controller
 {
-    // public function index(){}
-    public function getById($id){
+    public function index()
+    {
+        $query = Blogger::select(
+            'bloggers.id as id',
+            'bloggers.phone',
+            'bloggers.email',
+            'blogger_trans.name'
+        )
+        ->leftJoin('blogger_trans', function($q) {
+            $q->on('blogger_trans.blogger_id', 'bloggers.id');
+            $q->where('blogger_trans.lang', request()->query('lang'));
+        });
+        return $query->get();
+    }
+
+    public function store(Request $request)
+    {
+        $blogger_file = $request->file('image');
+        $image_path = $blogger_file->store('bloggers', 'public');
+
+        $blogger = Blogger::create([
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'links' => $request->links,
+            'image_path' => $image_path,
+        ]);
+        foreach(json_decode($request->lang, true) as $key=>$lang) {
+            BloggerTrans::create([
+                'name' => $lang['name'],
+                'occupation' => $lang['occupation'],
+                'description' => $lang['description'],
+                'blogger_id' => $blogger->id,
+                'lang' => $key
+            ]);
+        }
         
+        // return $blogger;
+    }
+
+    public function getById($id){
+        $blogger = Blogger::select(
+            'bloggers.id as id',
+            'bloggers.phone',
+            'bloggers.email',
+            'bloggers.links',
+            'bloggers.image_path',
+            'blogger_trans.name',
+            'blogger_trans.occupation',
+            'blogger_trans.description'
+        )
+        ->where('bloggers.id', $id)
+        ->leftJoin('blogger_trans', function($q) {
+            $q->on('blogger_trans.blogger_id', 'bloggers.id');
+            $q->where('blogger_trans.lang', request()->query('lang'));
+        });
+        return $blogger->get();
+    }
+
+    public function edit(Request $request, $id){
+        $blogger = Blogger::findOrFail($id);
+        $blogger->phone = $request->phone;
+        $blogger->email = $request->email;
+        $blogger->links = $request->links;
+
+
+        // TODO check if image is changed and change it if it is
+        foreach(json_decode($request->lang, true) as $key=>$lang) {
+            $bTrans = BloggerTrans::where([['blogger_id', $id], ['lang', $key]])->firstOrFail();
+            $bTrans->name = $lang['name'];
+            $bTrans->occupation = $lang['occupation'];
+            $bTrans->description = $lang['description'];
+
+            $bTrans->update();
+        }
+
+        $blogger->update();
+    }
+
+    public function delete(Request $request) {
+        $ids = $request->selected;
+
+        foreach($ids as $id) {
+            $blogger = Blogger::findOrFail($id);
+            Storage::delete('public/' . $blogger->image_path);
+            $blogger->delete();
+        }
+
+        return response()->json(['message' => 'Deleted'], 200);
     }
 }

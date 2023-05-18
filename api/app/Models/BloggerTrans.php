@@ -12,9 +12,10 @@ class BloggerTrans extends Model
     protected $table = 'blogger_trans';
 
     protected $fillable = [
+        'blogger_id',
         'name',
         'description',
-        'ocupation',
+        'occupation',
         'lang',
     ];
 }

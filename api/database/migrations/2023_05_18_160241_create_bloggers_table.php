@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bloggers', function (Blueprint $table) {
-            $table->id();
+            $table->id();   
+            $table->string('phone');
+            $table->string('email');
+            $table->json('links');
+            $table->string('image_path');
             $table->timestamps();
         });
     }
