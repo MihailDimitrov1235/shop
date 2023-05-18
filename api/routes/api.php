@@ -11,7 +11,8 @@ use App\Http\Controllers\{
     AuthorController,
     StripeController,
     CartController,
-    PostController
+    PostController,
+    CommentController
 };
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -76,7 +77,17 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::put('/{id}', [PostController::class, 'edit']);
     });
 
+    Route::prefix('comments')->group(function () {
+        Route::post('/', [CommentController::class, 'store']);
+        Route::delete('/{id}', [CommentController::class, 'delete']);
+        Route::put('/{id}', [CommentController::class, 'edit']);
+    });
+
     Route::post('/checkout/{id}', [StripeController::class, 'checkout']);
+});
+
+Route::prefix('comments')->group(function () {
+    Route::get('/{id}', [CommentController::class, 'index']);
 });
 
 Route::prefix('categories')->group(function () {
@@ -100,6 +111,3 @@ Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index']);
     Route::get('/{id}', [PostController::class, 'getById']);
 });
-
-// use App\Http\Controllers\CommentController;
-// Route::get('comment', [CommentController::class, 'index']);
