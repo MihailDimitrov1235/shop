@@ -1,21 +1,12 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Container, TextField, Button, Pagination, Card, FormControlLabel, RadioGroup, Radio, Checkbox } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import BlogCard from '../../components/blog/BlogCard';
+import blogService from '../../services/blog';
+
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
-
-const props = {
-    pages: 10,
-    posts:[
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-    ]
-}
 
 const categories = [
     {id:1, name:'chemestry'},
@@ -26,26 +17,41 @@ const categories = [
     {id:6, name:'chemestry'},
 ]
 
-
-
 const BlogMainPage = () =>{
-
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const defaultCategory = searchParams.get('category');
 
-    const [checkedCategories,setCheckedCategories] = useState(new Set([parseInt(defaultCategory)]))
-    const [sortBy, setSortBy] = useState('none')
+    const [posts, setPosts] = useState([
+        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
+    ]);
+    const [total, setTotal] = useState();
 
-    const searchRef = useRef('')
-    const [filters, setFilters] = useState(false)
+    const [checkedCategories,setCheckedCategories] = useState(new Set([parseInt(defaultCategory)]));
+    const [sortBy, setSortBy] = useState('none');
+
+    const searchRef = useRef('');
+    const [filters, setFilters] = useState(false);
+    const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        get()
+    }, [])
+
+    const get = () => {
+        //blogService.getPosts()
+    }
 
     const handleSearch = () =>{
         console.log(searchRef.current.value)
     }
 
     const handlePageChange = (event, page) => {
-        console.log(page);
+        setPage(page);
       };
     
     const handleCheckedCategoriesChange = (event) => {
@@ -106,7 +112,7 @@ const BlogMainPage = () =>{
                     {t('filters')} <TuneIcon/>
                 </Button>
             </Box>
-            { filters && 
+            {filters && 
             <Card sx={{mt:3, p:2}}>
                 <Typography variant='h5'>{t('sort-by')}</Typography>
                 <RadioGroup
@@ -131,17 +137,14 @@ const BlogMainPage = () =>{
             </Card>
             }
             <Box display={'flex'} flexWrap={'wrap'} justifyContent={'space-evenly'}>
-                
-                {props.posts.map( post => (
-                    <>
-                    <BlogCard post={post}/>
-                    </>
-                ))}
+                {posts.map((post, index) => <BlogCard post={post} key={index}/>)}
             </Box>
             <Box display={'flex'} justifyContent={'center'} sx={{
                 mt:3
             }}>
-                <Pagination count={props.pages} 
+                <Pagination
+                    page={page}
+                    count={total / 10} 
                     size='large' 
                     variant='outlined' 
                     onChange={handlePageChange}
