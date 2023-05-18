@@ -50,9 +50,9 @@ import RegisterAuthor from './pages/PublicWebsite/Author/RegisterAuthor';
 
 import PageLayout from './components/ControlPanel/PageLayout';
 
-import BlogMainPage from './pages/Blog/BlogMainPage';
-import BlogPost from './pages/Blog/BlogPost';
-import BlogCreate from './pages/Blog/BlogCreate';
+import BlogMainPage from './pages/PublicWebsite/Blog/BlogMainPage';
+import BlogPost from './pages/PublicWebsite/Blog/BlogPost';
+import BlogCreate from './pages/PublicWebsite/Blog/BlogCreate';
 
 import Page404 from './pages/Page404';
 

@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Container, TextField, Button, Pagination, Card, FormControlLabel, RadioGroup, Radio, Checkbox } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import BlogCard from '../../components/blog/BlogCard';
-import blogService from '../../services/blog';
+import BlogCard from '../../../components/blog/BlogCard';
+import blogService from '../../../services/blog';
 
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';

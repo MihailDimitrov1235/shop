@@ -2,7 +2,7 @@ import { Box, Card, Typography, Container, Stack, Chip, Pagination, TextField, B
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import Comment from "../../components/blog/Comment";
+import Comment from "../../../components/blog/Comment";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
