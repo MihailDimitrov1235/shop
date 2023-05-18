@@ -18,8 +18,20 @@ class PostController extends Controller
                         'posts.slug',
                         'posts.image_path',
                         'post_trans.title',
-                        'post_trans.description'
+                        'post_trans.description',
                     )
+                    ->with(['authors.author' => function ($query) {
+                        $query->select(
+                            'authors.id as id',
+                            // 'authors.phone',
+                            // 'authors.email',
+                            'author_trans.name',
+                        )->leftJoin('author_trans', function($q) {
+                            $q->on('author_trans.author_id', 'authors.id');
+                            $q->where('author_trans.lang', request()->query('lang'));
+                        });
+                    },
+                    ])
                     ->leftJoin('post_trans', function($q) {
                         $q->on('post_trans.post_id', 'posts.id');
                         $q->where('post_trans.lang', request()->query('lang'));

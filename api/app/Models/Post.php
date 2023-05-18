@@ -13,7 +13,8 @@ class Post extends Model
 
     protected $fillable = [
         'slug',
-        'image_path'
+        'image_path',
+        'author_id'
     ];
 
     public function trans() {
