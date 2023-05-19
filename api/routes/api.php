@@ -123,3 +123,22 @@ Route::prefix('bloggers')->group(function () {
     Route::get('/{id}', [BloggerController::class, 'getById']);
     Route::put('/{id}', [BloggerController::class, 'edit']);
 });
+
+// FOR TESTING !!!
+
+Route::prefix('comments')->group(function () {
+    Route::post('/', [CommentController::class, 'store']);
+    Route::delete('/{id}', [CommentController::class, 'delete']);
+    Route::put('/{id}', [CommentController::class, 'edit']);
+});
+
+Route::prefix('bloggers')->group(function () {
+    Route::post('/', [BloggerController::class, 'store']);
+    Route::delete('/', [BloggerController::class, 'delete']);
+});
+
+Route::prefix('posts')->group(function () {
+    Route::post('/', [PostController::class, 'store']);
+    Route::delete('/', [PostController::class, 'delete']);
+    Route::put('/{id}', [PostController::class, 'edit']);
+});

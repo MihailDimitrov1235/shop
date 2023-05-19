@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('slug');
             $table->string('image_path');
-             $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
+            $table->foreignId('blogger_id')->constrained('bloggers')->onDelete('cascade');
+            $table->bigInteger('visits');
             $table->timestamps();
         });
     }

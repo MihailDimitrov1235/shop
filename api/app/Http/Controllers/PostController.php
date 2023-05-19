@@ -17,21 +17,25 @@ class PostController extends Controller
                         'posts.id',
                         'posts.slug',
                         'posts.image_path',
+                        // 'posts.visits',
                         'post_trans.title',
                         'post_trans.description',
+                        // 'post_trans.content',
                     )
-                    ->with(['authors.author' => function ($query) {
-                        $query->select(
-                            'authors.id as id',
-                            // 'authors.phone',
-                            // 'authors.email',
-                            'author_trans.name',
-                        )->leftJoin('author_trans', function($q) {
-                            $q->on('author_trans.author_id', 'authors.id');
-                            $q->where('author_trans.lang', request()->query('lang'));
-                        });
-                    },
-                    ])
+                    // ->with(['bloggers.blogger' => function ($query) {
+                    //     $query->select(
+                    //         'bloggers.id as id',
+                    //         'bloggers.phone',
+                    //         'bloggers.email',
+                    //         'bloggers.links',
+                    //         'bloggers.image_path',
+                    //         'blogger_trans.name',
+                    //     )->leftJoin('blogger_trans', function($q) {
+                    //         $q->on('blogger_trans.blogger_id', 'bloggers.id');
+                    //         $q->where('blogger_trans.lang', request()->query('lang'));
+                    //     });
+                    // },
+                    // ])
                     ->leftJoin('post_trans', function($q) {
                         $q->on('post_trans.post_id', 'posts.id');
                         $q->where('post_trans.lang', request()->query('lang'));
@@ -50,18 +54,20 @@ class PostController extends Controller
     {
         $post_file = $request->file('image');
         $image_path = $post_file->store('posts', 'public');
-
         $post = Post::create([
-            'slug' => Str::slug($request->title), //title is not in request
-            'image_path' => $image_path
+            'slug' => Str::slug(json_decode($request->lang, true)['en']['title']),
+            'image_path' => $image_path,
+            'blogger_id' => $request->blogger_id,
+            'visits' => 0,
         ]);
 
         foreach(json_decode($request->lang, true) as $key=>$lang) {
             PostTrans::create([
-                'title' => $lang['name'],
+                'title' => $lang['title'],
                 'description' => $lang['description'],
+                'content' => $lang['content'],
                 'post_id' => $post->id,
-                'lang' => $key
+                'lang' => $key,
             ]);
         }
 
@@ -80,6 +86,11 @@ class PostController extends Controller
         Post::whereIn('id', $ids)->delete();
 
         return response()->json(['message' => 'Deleted'], 200);
+    }
+
+    public function incrementVisits($id){
+        $post = Post::findOrFail($id);
+        $post->visits = $post->visits + 1;
     }
 
     public function getById($id)

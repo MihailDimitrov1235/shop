@@ -14,6 +14,8 @@ class PostTrans extends Model
     protected $fillable = [
         'title',
         'description',
+        'content',
         'post_id',
+        'lang'
     ];
 }
