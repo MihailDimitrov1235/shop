@@ -18,38 +18,22 @@ class PostController extends Controller
                         'posts.id',
                         'posts.slug',
                         'posts.image_path',
-                        // 'posts.visits',
                         'post_trans.title',
                         'post_trans.description',
-                        // 'post_trans.content',
                     )
                     ->with([
                         'categories' => function ($query) {
                             $query->select(
-                                'post_category.category_id',
-                                'post_category.post_id',
+                                'post_categories.category_id',
+                                'post_categories.post_id',
                                 'category_trans.name'
                             )
                             ->leftJoin('category_trans', function($q) {
-                                $q->on('category_trans.category_id', 'post_category.category_id');
+                                $q->on('category_trans.category_id', 'post_categories.category_id');
                                 $q->where('category_trans.lang', request()->query('lang'));
                             });
                         },
                     ])
-                    // ->with(['bloggers.blogger' => function ($query) {
-                    //     $query->select(
-                    //         'bloggers.id as id',
-                    //         'bloggers.phone',
-                    //         'bloggers.email',
-                    //         'bloggers.links',
-                    //         'bloggers.image_path',
-                    //         'blogger_trans.name',
-                    //     )->leftJoin('blogger_trans', function($q) {
-                    //         $q->on('blogger_trans.blogger_id', 'bloggers.id');
-                    //         $q->where('blogger_trans.lang', request()->query('lang'));
-                    //     });
-                    // },
-                    // ])
                     ->leftJoin('post_trans', function($q) {
                         $q->on('post_trans.post_id', 'posts.id');
                         $q->where('post_trans.lang', request()->query('lang'));
@@ -110,12 +94,55 @@ class PostController extends Controller
     }
 
     public function incrementVisits($id){
-        $post = Post::findOrFail($id);
-        $post->visits = $post->visits + 1;
+        $post = Post::findOrFail($id); 
+        $post->visits = ($post->visits + 1);
+        $post->update();
+        return $post->visits;
     }
 
-    public function getById($id)
+    public function getById(Request $request, $id)
     {
+        $query = Post::select(
+            'posts.id',
+            'posts.slug',
+            'posts.image_path',
+            'posts.visits',
+            'posts.blogger_id',
+            'post_trans.title',
+            'post_trans.description',
+            'post_trans.content'
+        )
+        ->with([
+            'categories' => function ($query) {
+                $query->select(
+                    'post_categories.category_id',
+                    'post_categories.post_id',
+                    'category_trans.name'
+                )
+                ->leftJoin('category_trans', function($q) {
+                    $q->on('category_trans.category_id', 'post_categories.category_id');
+                    $q->where('category_trans.lang', request()->query('lang'));
+                });
+            },
+            'blogger' => function ($query) {
+                $query->select(
+                    'bloggers.id as id',
+                    'bloggers.phone',
+                    'bloggers.email',
+                    'bloggers.links',
+                    'bloggers.image_path',
+                    'blogger_trans.name',
+                )->leftJoin('blogger_trans', function($q) {
+                    $q->on('blogger_trans.blogger_id', 'bloggers.id');
+                    $q->where('blogger_trans.lang', request()->query('lang'));
+                });
+            },
+        ])
+        ->leftJoin('post_trans', function($q) {
+            $q->on('post_trans.post_id', 'posts.id');
+            $q->where('post_trans.lang', request()->query('lang'));
+        });
 
+        return $query->get();
     }
 }

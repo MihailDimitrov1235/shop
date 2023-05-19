@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Model\{
+use App\Models\{
+    Blogger,
     PostTrans, 
     Comment, 
     PostCategory
@@ -20,6 +21,10 @@ class Post extends Model
         'blogger_id',
         'visits'
     ];
+
+    public function blogger() {
+        return $this->BelongsTo(Blogger::class, 'blogger_id');
+    }
 
     public function trans() {
         return $this->hasMany(PostTrans::class);

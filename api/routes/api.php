@@ -141,4 +141,6 @@ Route::prefix('posts')->group(function () {
     Route::post('/', [PostController::class, 'store']);
     Route::delete('/', [PostController::class, 'delete']);
     Route::put('/{id}', [PostController::class, 'edit']);
+    Route::get('/{id}', [PostController::class, 'getById']);
+    Route::put('/visit/{id}', [PostController::class, 'incrementVisits']);
 });
