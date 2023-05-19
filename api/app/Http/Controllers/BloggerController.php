@@ -76,8 +76,13 @@ class BloggerController extends Controller
         $blogger->email = $request->email;
         $blogger->links = $request->links;
 
+        if($request->hasFile('image')){
+            Storage::delete('public/'.$blogger->image_path);
+            $blogger_file = $request->file('image');
+            $image_path = $blogger_file->store('bloggers', 'public');
+            $blogger->image_path = $image_path;
+        }
 
-        // TODO check if image is changed and change it if it is
         foreach(json_decode($request->lang, true) as $key=>$lang) {
             $bTrans = BloggerTrans::where([['blogger_id', $id], ['lang', $key]])->firstOrFail();
             $bTrans->name = $lang['name'];
@@ -88,6 +93,8 @@ class BloggerController extends Controller
         }
 
         $blogger->update();
+
+        return response()->json(['message' => 'Edited'], 200);
     }
 
     public function delete(Request $request) {

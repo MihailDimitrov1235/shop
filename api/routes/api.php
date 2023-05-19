@@ -134,13 +134,14 @@ Route::prefix('comments')->group(function () {
 
 Route::prefix('bloggers')->group(function () {
     Route::post('/', [BloggerController::class, 'store']);
+    Route::post('/{id}', [BloggerController::class, 'edit']); // can't send files via put
     Route::delete('/', [BloggerController::class, 'delete']);
 });
 
 Route::prefix('posts')->group(function () {
     Route::post('/', [PostController::class, 'store']);
     Route::delete('/', [PostController::class, 'delete']);
-    Route::put('/{id}', [PostController::class, 'edit']);
+    Route::post('/{id}', [PostController::class, 'edit']); 
     Route::get('/{id}', [PostController::class, 'getById']);
-    Route::put('/visit/{id}', [PostController::class, 'incrementVisits']);
+    Route::put('/visit/{id}', [PostController::class, 'incrementVisits']); 
 });

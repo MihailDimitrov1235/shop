@@ -76,12 +76,40 @@ class PostController extends Controller
             ]);
         }
 
-        return $post;
+        return response()->json(['message' => 'Created'], 200);
     }
 
     public function edit(Request $request, $id)
     {
-        $post = Post::findById($id);
+        $post = Post::findOrFail($id);
+        $post->slug = Str::slug(json_decode($request->lang, true)['en']['title']);
+
+        if($request->hasFile('image')){
+            Storage::delete('public/'.$post->image_path);
+            $post_file = $request->file('image');
+            $image_path = $post_file->store('posts', 'public');
+            $post->image_path = $image_path;
+        }
+
+        foreach(json_decode($request->lang, true) as $key=>$lang) {
+            $postTrans = PostTrans::where([['post_id', $id], ['lang', $key]])->firstOrFail();
+            $postTrans->title = $lang['title'];
+            $postTrans->description = $lang['description'];
+            $postTrans->content = $lang['content'];
+            $postTrans->update();
+        }
+
+        PostCategory::where('post_id', $id)->delete();
+        foreach(json_decode($request->categories, true) as $category) {
+            PostCategory::create([
+                'post_id' => $post->id,
+                'category_id' => $category['value']
+            ]);
+        }
+
+        $post->update();
+
+        return response()->json(['message' => 'Edited'], 200);
     }
 
     public function delete(Request $request)
