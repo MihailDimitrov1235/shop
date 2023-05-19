@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\{
     Post,
-    PostTrans
+    PostTrans,
+    PostCategory
 };
 
 class PostController extends Controller
@@ -22,6 +23,19 @@ class PostController extends Controller
                         'post_trans.description',
                         // 'post_trans.content',
                     )
+                    ->with([
+                        'categories' => function ($query) {
+                            $query->select(
+                                'post_category.category_id',
+                                'post_category.post_id',
+                                'category_trans.name'
+                            )
+                            ->leftJoin('category_trans', function($q) {
+                                $q->on('category_trans.category_id', 'post_category.category_id');
+                                $q->where('category_trans.lang', request()->query('lang'));
+                            });
+                        },
+                    ])
                     // ->with(['bloggers.blogger' => function ($query) {
                     //     $query->select(
                     //         'bloggers.id as id',
@@ -68,6 +82,13 @@ class PostController extends Controller
                 'content' => $lang['content'],
                 'post_id' => $post->id,
                 'lang' => $key,
+            ]);
+        }
+
+        foreach(json_decode($request->categories, true) as $category) {
+            PostCategory::create([
+                'post_id' => $post->id,
+                'category_id' => $category['value']
             ]);
         }
 
