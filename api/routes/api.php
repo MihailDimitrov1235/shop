@@ -145,3 +145,10 @@ Route::prefix('posts')->group(function () {
     Route::get('/{id}', [PostController::class, 'getById']);
     Route::put('/visit/{id}', [PostController::class, 'incrementVisits']); 
 });
+
+Route::prefix('products')->group(function () {
+    Route::post('/', [ProductController::class, 'store']);
+    Route::post('/upload', [ProductController::class, 'uploadFiles']);
+    Route::delete('/', [ProductController::class, 'delete']);
+    Route::put('/{id}', [ProductController::class, 'edit']);
+});

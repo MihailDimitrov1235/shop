@@ -74,7 +74,7 @@ class BloggerController extends Controller
         $blogger = Blogger::findOrFail($id);
         $blogger->phone = $request->phone;
         $blogger->email = $request->email;
-        $blogger->links = $request->links;
+        $blogger->links = json_decode($request->links, true);
 
         if($request->hasFile('image')){
             Storage::delete('public/'.$blogger->image_path);

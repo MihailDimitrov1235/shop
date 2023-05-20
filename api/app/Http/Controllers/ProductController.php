@@ -226,6 +226,60 @@ class ProductController extends Controller
         return $product;
     }
 
+    public function edit(Request $request, $id){
+
+        $product = Product::findOrFail($id);
+
+        
+
+        foreach(json_decode($request->lang, true) as $key=>$lang) {
+            $productTrans = ProductTrans::where([['product_id', $id], ['lang', $key]])->firstOrFail();
+            $productTrans->name = $lang['name'];
+            $productTrans->shortDescription = $lang['shortDescription'];
+            $productTrans->longDescription = $lang['longDescription'];
+            $productTrans->update();
+        }
+
+        ProductCategory::where('product_id', $id)->delete();
+        foreach(json_decode($request->category, true) as $category) {
+            ProductCategory::create([
+                'product_id' => $product->id,
+                'category_id' => $category['value']
+            ]);
+        }
+
+        ProductAuthor::where('product_id', $id)->delete();
+        foreach(json_decode($request->author, true) as $author) {
+            ProductAuthor::create([
+                'product_id' => $product->id,
+                'author_id' => $author['value']
+            ]);
+        }
+
+
+        if($request->hasFile('picture')){
+            //Storage::delete('public/'.$product->image_path);
+            $product_file = $request->file('picture');
+            $this->uploadProductFiles($product_file, Product::class, $product->id);
+        }
+        
+        if($request->has('parts')){
+            ProductPart::where('product_id', $id)->delete();
+            foreach(json_decode($request->parts) as $key=>$part) {
+                $createdPart = ProductPart::create([
+                    'price' => $part->price,
+                    'product_id' => $product->id
+                ]);
+    
+                $parts_file = $request->file('partsFiles.' . $key . '.uploader');
+    
+                $this->uploadProductFiles($parts_file, ProductPart::class, $createdPart->id);
+            }
+        }
+
+        return response()->json(['message' => 'Edited'], 200);
+    }
+
     public function delete(Request $request) {
         $ids = $request->selected;
 
