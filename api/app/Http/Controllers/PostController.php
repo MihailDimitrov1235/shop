@@ -174,6 +174,28 @@ class PostController extends Controller
         return $query->get();
     }
 
+    public function getRequests()
+    {
+        $query = Post::select(
+                        'posts.id',
+                        'post_trans.title',
+                        'posts.created_at'
+                    )
+                    ->where('approved', false)
+                    ->leftJoin('post_trans', function($q) {
+                        $q->on('post_trans.post_id', 'posts.id');
+                        $q->where('post_trans.lang', request()->query('lang'));
+                    });
+        
+        if(request()->query('total')) {
+            $posts = $query->paginate(request()->query('total'))->withQueryString();
+        }else {
+            $posts = $query->paginate(10)->withQueryString();
+        } 
+
+        return $posts;
+    }
+
     public function approve($id){
         $post = Post::findOrFail($id);
         $post->approved = true;

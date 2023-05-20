@@ -110,6 +110,20 @@ class BloggerController extends Controller
         return response()->json(['message' => 'Deleted'], 200);
     }
 
+    public function getRequests() {
+        $query = Blogger::select(
+            'bloggers.id as id',
+            'blogger_trans.name',
+            'bloggers.created_at'
+        )
+        ->where('bloggers.approved', false)
+        ->leftJoin('blogger_trans', function($q) {
+            $q->on('blogger_trans.blogger_id', 'bloggers.id');
+            $q->where('blogger_trans.lang', request()->query('lang'));
+        });
+        return $query->get();
+    }
+
     public function approve($id){
         $blogger = Blogger::findOrFail($id);
         $blogger->approved = true;
