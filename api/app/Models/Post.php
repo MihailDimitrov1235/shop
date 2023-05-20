@@ -19,7 +19,8 @@ class Post extends Model
         'slug',
         'image_path',
         'blogger_id',
-        'visits'
+        'visits',
+        'approved'
     ];
 
     public function blogger() {

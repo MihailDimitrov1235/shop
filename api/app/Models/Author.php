@@ -12,7 +12,8 @@ class Author extends Model
 
     protected $fillable = [
         'phone',
-        'email'
+        'email',
+        'approved'
     ];
 
     public function trans() {

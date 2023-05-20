@@ -17,6 +17,10 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
 
+    protected $fillable = [
+        'approved'
+    ];
+
     public function trans()
     {
         return $this->hasMany(ProductTrans::class);

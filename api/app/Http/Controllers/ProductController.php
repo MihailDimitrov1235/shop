@@ -318,4 +318,10 @@ class ProductController extends Controller
 
         return response($file_path, 201);
     }
+
+    public function approve($id){
+        $product = Product::findOrFail($id);
+        $product->approved = true;
+        $product->update();
+    }
 }

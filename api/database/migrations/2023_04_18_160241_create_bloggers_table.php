@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->json('links');
             $table->string('image_path');
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

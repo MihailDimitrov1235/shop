@@ -18,6 +18,7 @@ class BloggerController extends Controller
             'bloggers.id as id',
             'bloggers.phone',
             'bloggers.email',
+            'bloggers.approved',
             'blogger_trans.name'
         )
         ->leftJoin('blogger_trans', function($q) {
@@ -107,5 +108,11 @@ class BloggerController extends Controller
         }
 
         return response()->json(['message' => 'Deleted'], 200);
+    }
+
+    public function approve($id){
+        $blogger = Blogger::findOrFail($id);
+        $blogger->approved = true;
+        $blogger->update();
     }
 }

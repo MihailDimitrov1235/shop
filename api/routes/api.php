@@ -52,6 +52,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/upload', [ProductController::class, 'uploadFiles']);
         Route::delete('/', [ProductController::class, 'delete']);
         Route::put('/{id}', [ProductController::class, 'edit']);
+        Route::patch('/{id}', [ProductController::class, 'approve']);
     });
 
     Route::prefix('categories')->group(function () {
@@ -64,6 +65,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/', [AuthorController::class, 'store']);
         Route::delete('/', [AuthorController::class, 'delete']);
         Route::put('/{id}', [AuthorController::class, 'edit']);
+        Route::patch('/{id}', [AuthorController::class, 'approve']);
     });
 
     Route::prefix('cart')->group(function () {
@@ -76,6 +78,8 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/', [PostController::class, 'store']);
         Route::delete('/', [PostController::class, 'delete']);
         Route::put('/{id}', [PostController::class, 'edit']);
+        Route::put('/visit/{id}', [PostController::class, 'incrementVisits']); // dont know if clients should have access
+        Route::patch('/{id}', [PostController::class, 'approve']);
     });
 
     Route::prefix('comments')->group(function () {
@@ -87,6 +91,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('bloggers')->group(function () {
         Route::post('/', [BloggerController::class, 'store']);
         Route::delete('/', [BloggerController::class, 'delete']);
+        Route::put('/{id}', [BloggerController::class, 'edit']);
+        Route::patch('/{id}', [BloggerController::class, 'approve']);
     });
 
     Route::post('/checkout/{id}', [StripeController::class, 'checkout']);
@@ -121,7 +127,6 @@ Route::prefix('posts')->group(function () {
 Route::prefix('bloggers')->group(function () {
     Route::get('/', [BloggerController::class, 'index']);
     Route::get('/{id}', [BloggerController::class, 'getById']);
-    Route::put('/{id}', [BloggerController::class, 'edit']);
 });
 
 // FOR TESTING !!!
@@ -136,14 +141,15 @@ Route::prefix('bloggers')->group(function () {
     Route::post('/', [BloggerController::class, 'store']);
     Route::post('/{id}', [BloggerController::class, 'edit']); // can't send files via put
     Route::delete('/', [BloggerController::class, 'delete']);
+    Route::patch('/{id}', [BloggerController::class, 'approve']);
 });
 
 Route::prefix('posts')->group(function () {
     Route::post('/', [PostController::class, 'store']);
     Route::delete('/', [PostController::class, 'delete']);
     Route::post('/{id}', [PostController::class, 'edit']); 
-    Route::get('/{id}', [PostController::class, 'getById']);
     Route::put('/visit/{id}', [PostController::class, 'incrementVisits']); 
+    Route::patch('/{id}', [PostController::class, 'approve']);
 });
 
 Route::prefix('products')->group(function () {
@@ -151,4 +157,5 @@ Route::prefix('products')->group(function () {
     Route::post('/upload', [ProductController::class, 'uploadFiles']);
     Route::delete('/', [ProductController::class, 'delete']);
     Route::put('/{id}', [ProductController::class, 'edit']);
+    Route::patch('/{id}', [ProductController::class, 'approve']);
 });

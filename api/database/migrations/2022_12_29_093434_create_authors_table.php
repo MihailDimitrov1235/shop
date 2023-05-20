@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('phone');
             $table->string('email')->unique();
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

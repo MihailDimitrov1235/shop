@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image_path');
             $table->foreignId('blogger_id')->constrained('bloggers')->onDelete('cascade');
             $table->bigInteger('visits');
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

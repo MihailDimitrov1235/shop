@@ -149,4 +149,10 @@ class AuthorController extends Controller
 
         return $authors;
     }
+
+    public function approve($id){
+        $author = Author::findOrFail($id);
+        $author->approved = true;
+        $author->update();
+    }
 }

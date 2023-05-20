@@ -173,4 +173,10 @@ class PostController extends Controller
 
         return $query->get();
     }
+
+    public function approve($id){
+        $post = Post::findOrFail($id);
+        $post->approved = true;
+        $post->update();
+    }
 }

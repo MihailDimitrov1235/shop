@@ -13,7 +13,8 @@ class Blogger extends Model
         'phone',
         'email',
         'links',
-        'image_path'
+        'image_path',
+        'approved'
     ];
 
     public function trans() {
