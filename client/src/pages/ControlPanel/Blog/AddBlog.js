@@ -118,6 +118,7 @@ const AddBlog = () => {
             type: 'lang', name: 'lang', selectors: ['bg', 'en'], fields: [
                 { type: 'text', name: 'title', label: t('title') },
                 { type: 'text', name: 'subtitle', label: t('subtitle') },
+                { type: 'rich-text', name: 'description', label: t('description') }
             ]
         },
     ];
@@ -188,14 +189,6 @@ const AddBlog = () => {
                             onSubmit={onSubmit}
                             submitButton={submitButton}
                         />
-
-                        {/* LONG TEXT */}
-                        <Tabs value={textLang} onChange={handleTextLangChange} indicatorColor='bordoRed' textColor='bordoRed'>
-                            <Tab value={'bg'} label={t('bulgarian')} />
-                            <Tab value={'en'} label={t('english')} />
-                        </Tabs>
-                        <ReactQuill style={{ display: textLang === 'bg' ? 'block' : 'none' }} theme="snow" value={valueBG} onChange={setValueBG} modules={modules} />
-                        <ReactQuill style={{ display: textLang === 'en' ? 'block' : 'none' }} theme="snow" value={valueEN} onChange={setValueEN} modules={modules} />
                     </Box>
                 </PerfectScrollbar>
             </Card>
