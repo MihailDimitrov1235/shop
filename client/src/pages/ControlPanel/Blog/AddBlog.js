@@ -12,26 +12,7 @@ import * as Yup from 'yup';
 import FormBuilder from '../../../components/FormBuilder';
 
 const AddBlog = () => {
-    // const modules = {
-    //     toolbar: [
-    //         [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    //         [{ font: [] }],
-    //         [{ size: [] }],
-    //         [{ 'align': [] }],
-    //         [{ 'direction': 'rtl' }],
-    //         ["bold", "italic", "underline", "strike", "blockquote"],
-    //         [
-    //             { list: "ordered" },
-    //             { list: "bullet" },
-    //             { indent: "-1" },
-    //             { indent: "+1" }
-    //         ],
-    //         ["link", "image", "video"],
-    //         ['clean']
-    //     ]
-    // }
-
-    //const [open, setOpen] = useState(false);
+    const { i18n, t } = useTranslation();
     const [preview, setPreview] = useState(false);
     const [data, setData] = useState({
         image: '',
@@ -50,49 +31,6 @@ const AddBlog = () => {
         }
     });
 
-    // const handleClose = () => {
-    //     setOpen(false)
-    // }
-    // const handleAccept = () => {
-    //     console.log(titleBG)
-    //     console.log(titleEN)
-    //     console.log(subtitleBG)
-    //     console.log(subtitleEN)
-    //     console.log(image)
-    //     console.log(categories)
-    //     console.log(valueBG)
-    //     console.log(valueEN)
-    //     setOpen(false)
-    // }
-
-    // const handleImageUpload = (event) => {
-    //     setImage(URL.createObjectURL(event.target.files[0]))
-    // }
-
-    // const handleTextLangChange = (event, value) => {
-    //     setTextLang(value)
-    // }
-    // const handleTitleLangChange = (event, value) => {
-    //     setTitleLang(value)
-    // }
-    // const handleSubtitleLangChange = (event, value) => {
-    //     setSubtitleLang(value)
-    // }
-
-    const [titleBG, setTitleBG] = useState('');
-    const [titleEN, setTitleEN] = useState('');
-
-    const [subtitleBG, setSubtitleBG] = useState('');
-    const [subtitleEN, setSubtitleEN] = useState('');
-
-    const [image, setImage] = useState('')
-
-    const [valueBG, setValueBG] = useState('');
-    const [valueEN, setValueEN] = useState('');
-
-
-    const { i18n, t } = useTranslation();
-
     let categoryOptions = [
         { value: 1, label: 'Green' },
         { value: 2, label: 'Yellow' },
@@ -109,8 +47,7 @@ const AddBlog = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        console.log(valueBG)
-        setSubmitting(false)
+        setSubmitting(false);
     };
 
     const fields = [
@@ -179,7 +116,7 @@ const AddBlog = () => {
                     <Typography variant="h3" sx={{ mb: 3 }}>{i18n.language == 'bg' ? data.lang.bg.title : data.lang.en.title}</Typography>
                     <Typography variant="subtitle1" sx={{ mb: 5 }}>{i18n.language == 'bg' ? data.lang.bg.subtitle : data.lang.en.subtitle}</Typography>
                     <Box display={'flex'} justifyContent={'center'}>
-                        <img width={'100%'} src={image} />
+                        <img width={'100%'} src={data.image && URL.createObjectURL(data.image[0])} />
                     </Box>
                     <div
                         dangerouslySetInnerHTML={{
