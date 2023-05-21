@@ -1,20 +1,22 @@
-import { Box, Button, Card, Stack, Chip, Autocomplete, Container, Typography, Tabs, Tab, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, TextField } from "@mui/material";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import PersonIcon from '@mui/icons-material/Person';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Card, Stack, Chip, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import FormBuilder from '../../../components/FormBuilder';
+import formData from '../../../components/FormBuilder/utils/formData';
+import blogService from '../../../services/blog';
+import useMessage from '../../../hooks/useMessage';
+
+import PersonIcon from '@mui/icons-material/Person';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const AddBlog = () => {
     const { i18n, t } = useTranslation();
     const [preview, setPreview] = useState(false);
-    const [data, setData] = useState({
+    const [postData, setPostData] = useState({
         image: '',
         category: [],
         lang: {
@@ -30,6 +32,8 @@ const AddBlog = () => {
             }
         }
     });
+    const { addMessage } = useMessage();
+    const navigate = useNavigate();
 
     let categoryOptions = [
         { value: 1, label: 'Green' },
@@ -47,7 +51,17 @@ const AddBlog = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        setSubmitting(false);
+        const data = formData(values, [], ['image']);
+
+        blogService.createPost(data)
+            .then((res) => {
+                addMessage('Постът е създаден успешно', 'success');
+                navigate('/admin/blog');
+            })
+            .catch((error) => {
+                console.log(error);
+                setSubmitting(false);
+            })
     };
 
     const fields = [
@@ -67,7 +81,7 @@ const AddBlog = () => {
     };
 
     const handleOnChange = (values) => {
-        setData(values);
+        setPostData(values);
     }
 
     return (
@@ -113,14 +127,14 @@ const AddBlog = () => {
             <Box display={preview ? 'flex' : 'none'} sx={{ mb: 3 }}>
                 {/* Main Content */}
                 <Card sx={{ flex: 6, mr: 3, p: 3 }}>
-                    <Typography variant="h3" sx={{ mb: 3 }}>{i18n.language == 'bg' ? data.lang.bg.title : data.lang.en.title}</Typography>
-                    <Typography variant="subtitle1" sx={{ mb: 5 }}>{i18n.language == 'bg' ? data.lang.bg.subtitle : data.lang.en.subtitle}</Typography>
+                    <Typography variant="h3" sx={{ mb: 3 }}>{i18n.language == 'bg' ? postData.lang.bg.title : postData.lang.en.title}</Typography>
+                    <Typography variant="subtitle1" sx={{ mb: 5 }}>{i18n.language == 'bg' ? postData.lang.bg.subtitle : postData.lang.en.subtitle}</Typography>
                     <Box display={'flex'} justifyContent={'center'}>
-                        <img width={'100%'} src={data.image && URL.createObjectURL(data.image[0])} />
+                        <img width={'100%'} src={postData.image && URL.createObjectURL(postData.image[0])} />
                     </Box>
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: i18n.language == 'bg' ? data.lang.bg.description : data.lang.en.description,
+                            __html: i18n.language == 'bg' ? postData.lang.bg.description : postData.lang.en.description,
                         }}
                     />
                 </Card>
@@ -138,7 +152,7 @@ const AddBlog = () => {
                     </Box>
                     <Typography variant="h6" sx={{ ml: 1, mt: 3, textAlign: 'center' }}>{t('categories')}:</Typography>
                     <Stack direction={'row'} sx={{ justifyContent: 'center', flexWrap: 'wrap', mt: 1 }} >
-                        {data.category && data.category.map((c, idx) => (
+                        {postData.category && postData.category.map((c, idx) => (
                             <Chip sx={{ fontSize: '100%', mb: 1, background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={c.label} />
                         ))}
                     </Stack>

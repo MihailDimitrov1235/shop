@@ -19,8 +19,20 @@ function getPosts(pagination, filters, order, lang='bg') {
     });
 }
 
+function createPost(data) {
+    const url = `${servicesHelper.url}/posts`;
+
+    return axios.post(url, data, {
+        headers: {
+            ...servicesHelper.header(),
+            'Content-Type': 'multipart/form-data',
+        }
+    });
+}
+
 const blogService = {
     getPosts,
+    createPost
 }
 
 export default blogService;

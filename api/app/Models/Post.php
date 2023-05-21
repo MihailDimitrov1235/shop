@@ -18,7 +18,7 @@ class Post extends Model
     protected $fillable = [
         'slug',
         'image_path',
-        'blogger_id',
+        //'blogger_id',
         'visits',
         'approved'
     ];

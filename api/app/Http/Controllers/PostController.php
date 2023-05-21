@@ -19,7 +19,7 @@ class PostController extends Controller
                         'posts.slug',
                         'posts.image_path',
                         'post_trans.title',
-                        'post_trans.description',
+                        'post_trans.subtitle',
                     )
                     ->with([
                         'categories' => function ($query) {
@@ -51,32 +51,33 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post_file = $request->file('image');
-        $image_path = $post_file->store('posts', 'public');
+        $image_path = $post_file[0]->store('posts', 'public');
+
         $post = Post::create([
             'slug' => Str::slug(json_decode($request->lang, true)['en']['title']),
             'image_path' => $image_path,
             'blogger_id' => $request->blogger_id,
-            'visits' => 0,
+            'visits' => 0
         ]);
 
         foreach(json_decode($request->lang, true) as $key=>$lang) {
             PostTrans::create([
                 'title' => $lang['title'],
-                'description' => $lang['description'],
-                'content' => $lang['content'],
+                'subtitle' => $lang['subtitle'],
+                'content' => $lang['description'],
                 'post_id' => $post->id,
                 'lang' => $key,
             ]);
         }
 
-        foreach(json_decode($request->categories, true) as $category) {
+        foreach(json_decode($request->category, true) as $category) {
             PostCategory::create([
                 'post_id' => $post->id,
                 'category_id' => $category['value']
             ]);
         }
 
-        return response()->json(['message' => 'Created'], 200);
+        return $post;
     }
 
     public function edit(Request $request, $id)
