@@ -10,6 +10,7 @@ const RequestPage = () =>{
         <Box display={'flex'} justifyContent={'space-evenly'} flexWrap={'wrap'}>
             <RequestCard heading={t('authors')} image={'/static/images/requests/authors.jpg'} href={'authors'}/>
             <RequestCard heading={t('products')} image={'/static/images/requests/products.jpg'} href={'products'}/>
+            <RequestCard heading={t('posts')} image={'/static/images/requests/authors.jpg'} href={'posts'}/>
         </Box>
     )
 }

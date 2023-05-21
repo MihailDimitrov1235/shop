@@ -22,6 +22,7 @@ class PostController extends Controller
                         'post_trans.title',
                         'post_trans.subtitle',
                     )
+                    ->where('approved', true)
                     ->with([
                         'categories' => function ($query) {
                             $query->select(
@@ -210,9 +211,13 @@ class PostController extends Controller
         return $posts;
     }
 
-    public function approve($id){
-        $post = Post::findOrFail($id);
-        $post->approved = true;
-        $post->update();
+    public function approve(Request $request){
+        foreach($request->selected as $id){
+            $post = Post::findOrFail($id);
+            $post->approved = true;
+            $post->update();
+        }
+        
+        return response()->json(['message' => 'Approved'], 200);
     }
 }

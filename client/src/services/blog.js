@@ -39,10 +39,39 @@ function deletePosts(selected) {
     });
 }
 
+function getRequests(pagination, filters, order, lang='bg') {
+    let url = `${servicesHelper.url}/posts/requests?page=${pagination.page}&total=${pagination.total}&lang=${lang}`;
+
+    if(filters.length > 0) {
+        filters.forEach((filter) => {
+            url += `&${filter.label}=${filter.value}`
+        })
+    }
+
+    if(order.field && order.direction) {
+        url += `&field=${order.field}&direction=${order.direction}`;
+    }
+ 
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    });
+}
+
+function approvePosts(selected) {
+    const url = `${servicesHelper.url}/posts`;
+
+    return axios.put(url, {
+        selected: selected,
+        headers: servicesHelper.header()
+    });
+}
+
 const blogService = {
     getPosts,
+    getRequests,
     createPost,
-    deletePosts
+    deletePosts,
+    approvePosts
 }
 
 export default blogService;

@@ -4,21 +4,21 @@ import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'react-i18next';
 import useMessage from '../../../hooks/useMessage';
-import authorService from '../../../services/author';
+import blogService from '../../../services/blog';
 
 import MainTable from '../../../components/MainTable';
 
-const RequestAuthor = () =>{
+const RequestPost = () =>{
     const { t, i18n } = useTranslation();
     const [total, setTotal] = useState(0);
     const [data, setData] = useState([]);
     const { addMessage } = useMessage();
 
     const deleteHandler = (selected) => {
-        authorService.deleteAuthors(selected)
+        blogService.deletePosts(selected)
             .then((res) => {
                 console.log(res)
-                addMessage(t('author-deleted'), 'success')
+                addMessage(t('post-deleted'), 'success')
             })
             .catch((error) => {
                 console.log(error)
@@ -27,10 +27,10 @@ const RequestAuthor = () =>{
 
     const approveHandler = (selected) => {
         console.log(selected)
-        authorService.approveAuthors(selected)
+        blogService.approvePosts(selected)
             .then((res) => {
                 console.log(res)
-                addMessage(t('author-approved'), 'success')
+                addMessage(t('post-approved'), 'success')
             })
             .catch((error) => {
                 console.log(error)
@@ -43,7 +43,7 @@ const RequestAuthor = () =>{
             total: total || 10
         }
 
-        authorService.getRequests(pagination, filters, order, i18n.language)
+        blogService.getRequests(pagination, filters, order, i18n.language)
             .then((res) => {
                 setData(res.data.data);
                 setTotal(res.data.total);
@@ -88,7 +88,7 @@ const RequestAuthor = () =>{
                                 delete: true,
                                 edit: false,
                                 approve: true,
-                                previewHref: '/author/edit',
+                                previewHref: '/post/edit',
                             }}
                         />
                     </Box>
@@ -98,4 +98,4 @@ const RequestAuthor = () =>{
     )
 }
 
-export default RequestAuthor
+export default RequestPost

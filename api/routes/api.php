@@ -154,7 +154,7 @@ Route::prefix('posts')->group(function () {
     Route::post('/{id}', [PostController::class, 'edit']); 
     Route::put('/visit/{id}', [PostController::class, 'incrementVisits']); 
     Route::get('/requests', [PostController::class, 'getRequests']);
-    Route::patch('/{id}', [PostController::class, 'approve']);
+    Route::put('/', [PostController::class, 'approve']);
 });
 
 Route::prefix('products')->group(function () {
