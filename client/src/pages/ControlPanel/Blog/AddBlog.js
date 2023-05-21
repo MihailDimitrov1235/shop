@@ -1,5 +1,5 @@
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import FormBuilder from '../../../components/FormBuilder';
 import formData from '../../../components/FormBuilder/utils/formData';
 import blogService from '../../../services/blog';
+import categoryService from '../../../services/category';
 import useMessage from '../../../hooks/useMessage';
 
 import PersonIcon from '@mui/icons-material/Person';
@@ -32,22 +33,24 @@ const AddBlog = () => {
             }
         }
     });
+    const [categoryOptions, setCategoriesOptions] = useState([]);
     const { addMessage } = useMessage();
     const navigate = useNavigate();
 
-    let categoryOptions = [
-        { value: 1, label: 'Green' },
-        { value: 2, label: 'Yellow' },
-        { value: 3, label: 'Chemistry' },
-        { value: 4, label: 'Biology' },
-        { value: 5, label: 'Josh' },
-        { value: 6, label: 'Bill Gates' },
-        { value: 7, label: 'Elon Musk' },
-        { value: 8, label: 'John Lennon' },
-    ]
+    useEffect(() => {
+        categoryService.getAll(i18n.language)
+            .then((res) => {
+                const options = res.data.map((category) => ({ label: category.name, value: category.id }));
 
+                setCategoriesOptions(options);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [i18n.language])
+    
     const validationSchema = Yup.object().shape({
-        //name: Yup.string().max(255).required(t('name-required'))
+        category: Yup.string().max(255).required(t('category-required'))
     });
 
     const onSubmit = (values, { setSubmitting }) => {
