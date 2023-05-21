@@ -39,6 +39,18 @@ class PostController extends Controller
                         $q->where('post_trans.lang', request()->query('lang'));
                     });
         
+        if(request()->query('id')) {
+            $query->where('posts.id', 'LIKE', '%'.request()->query('id').'%');
+        }
+
+        if(request()->query('slug')) {
+            $query->where('slug', 'LIKE', '%'.request()->query('slug').'%');
+        }
+
+        if(request()->query('title')) {
+            $query->where('title', 'LIKE', '%'.request()->query('title').'%');
+        }
+
         if(request()->query('total')) {
             $posts = $query->paginate(request()->query('total'))->withQueryString();
         }else {
