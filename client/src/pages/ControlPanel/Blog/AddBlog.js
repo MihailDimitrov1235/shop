@@ -24,12 +24,12 @@ const AddBlog = () => {
             bg: {
                 title: '',
                 subtitle: '',
-                description: ''
+                content: ''
             },
             en: {
                 title: '',
                 subtitle: '',
-                description: ''
+                content: ''
             }
         }
     });
@@ -48,9 +48,22 @@ const AddBlog = () => {
                 console.log(error);
             })
     }, [i18n.language])
-    
+
     const validationSchema = Yup.object().shape({
-        category: Yup.string().max(255).required(t('category-required'))
+        image: Yup.array().required(t('image-required')),
+        category: Yup.array().required(t('category-required')),
+        lang: Yup.object({
+            bg: Yup.object({
+                title: Yup.string().max(255).required(t('title-required')),
+                subtitle: Yup.string().required(t('subtitle-required')),
+                content: Yup.string().required(t('content-required')),
+            }),
+            en: Yup.object({
+                title: Yup.string().max(255).required(t('title-required')),
+                subtitle: Yup.string().required(t('subtitle-required')),
+                content: Yup.string().required(t('content-required')),
+            })
+        })
     });
 
     const onSubmit = (values, { setSubmitting }) => {
@@ -74,7 +87,7 @@ const AddBlog = () => {
             type: 'lang', name: 'lang', selectors: ['bg', 'en'], fields: [
                 { type: 'text', name: 'title', label: t('title') },
                 { type: 'text', name: 'subtitle', label: t('subtitle') },
-                { type: 'rich-text', name: 'description', label: t('description') }
+                { type: 'rich-text', name: 'content', label: t('content') }
             ]
         },
     ];
@@ -137,26 +150,35 @@ const AddBlog = () => {
                     </Box>
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: i18n.language == 'bg' ? postData.lang.bg.description : postData.lang.en.description,
+                            __html: i18n.language == 'bg' ? postData.lang.bg.content : postData.lang.en.content,
                         }}
                     />
                 </Card>
 
                 {/* Post Information */}
                 <Card sx={{ flex: 1, p: 3 }}>
-                    <Typography variant="h5" sx={{ textAlign: 'center' }}>{t('about-post')}</Typography>
+                    <Typography variant='h5' sx={{ textAlign: 'center' }}>{t('about-post')}</Typography>
                     <Box sx={{ mt: 3, display: 'flex', alignItems: 'center' }}>
                         <PersonIcon />
-                        <Typography variant="subtitle2" sx={{ ml: 1 }}>{t('current-user-name')}</Typography>
+                        <Typography variant='subtitle2' sx={{ ml: 1 }}>{t('current-user-name')}</Typography>
                     </Box>
                     <Box sx={{ mt: 3, display: 'flex', alignItems: 'center' }}>
                         <CalendarMonthIcon />
-                        <Typography variant="subtitle2" sx={{ ml: 1 }}>{t('date')}</Typography>
+                        <Typography variant='subtitle2' sx={{ ml: 1 }}>{t('date')}</Typography>
                     </Box>
-                    <Typography variant="h6" sx={{ ml: 1, mt: 3, textAlign: 'center' }}>{t('categories')}:</Typography>
+                    <Typography variant='h6' sx={{ ml: 1, mt: 3, textAlign: 'center' }}>{t('categories')}:</Typography>
                     <Stack direction={'row'} sx={{ justifyContent: 'center', flexWrap: 'wrap', mt: 1 }} >
                         {postData.category && postData.category.map((c, idx) => (
-                            <Chip sx={{ fontSize: '100%', mb: 1, background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={c.label} />
+                            <Chip
+                                sx={{
+                                    fontSize: '100%',
+                                    mb: 1,
+                                    background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)',
+                                    color: 'white'
+                                }}
+                                label={c.label}
+                                key={idx}
+                            />
                         ))}
                     </Stack>
                 </Card>

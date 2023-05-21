@@ -76,7 +76,7 @@ class PostController extends Controller
             PostTrans::create([
                 'title' => $lang['title'],
                 'subtitle' => $lang['subtitle'],
-                'content' => $lang['description'],
+                'content' => $lang['content'],
                 'post_id' => $post->id,
                 'lang' => $key,
             ]);
