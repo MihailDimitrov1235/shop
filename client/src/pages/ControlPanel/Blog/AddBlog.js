@@ -55,7 +55,7 @@ const AddBlog = () => {
 
         blogService.createPost(data)
             .then((res) => {
-                addMessage('Постът е създаден успешно', 'success');
+                addMessage(t('blog-created'), 'success')
                 navigate('/admin/blog');
             })
             .catch((error) => {

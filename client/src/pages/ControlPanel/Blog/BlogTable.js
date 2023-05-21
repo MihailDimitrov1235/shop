@@ -47,10 +47,9 @@ const BlogTable = () => {
     }
 
     const deleteHandler = (selected) => {
-        blogService.deleteCategories(selected)
+        blogService.deletePosts(selected)
             .then((res) => {
-                console.log(res)
-                addMessage(t('category-deleted'), 'success')
+                addMessage(t('blog-deleted'), 'success')
             })
             .catch((error) => {
                 console.log(error)

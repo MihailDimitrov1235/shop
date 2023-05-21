@@ -30,9 +30,19 @@ function createPost(data) {
     });
 }
 
+function deletePosts(selected) {
+    const url = `${servicesHelper.url}/posts`;
+
+    return axios.delete(url, {
+        data: { selected: selected },
+        headers: servicesHelper.header()
+    });
+}
+
 const blogService = {
     getPosts,
-    createPost
+    createPost,
+    deletePosts
 }
 
 export default blogService;
