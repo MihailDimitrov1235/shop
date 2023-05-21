@@ -374,31 +374,57 @@ const MainTable = ({
                                                         </TableCell>
                                                     );
                                                 } else {
-                                                    let time
-                                                    if(heading.id === 'time'){
-                                                        if(value < 1){
-                                                            time = t('less-minute')
-                                                        }else if(value < 2){
-                                                            time = t('minute-ago')
-                                                        }else if(value < 60){
-                                                            time = t('ago') + value + ' ' + t('minutes-ago')
-                                                        }else if(value < 120){
-                                                            time = t('hour-ago')
-                                                        }else if(value < 1440){
-                                                            time = t('ago') + value % 60 + ' ' + t('hours-ago')
-                                                        }else if(value < 2880){
-                                                            time = t('day-ago')
+                                                    if(heading.id === 'created_at'){
+                                                        let currentDate = new Date().toISOString().match(/([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-2][0-9]):([0-5][0-9]):([0-5][0-9])/)
+                                                        let currentYear = parseInt(currentDate[1])
+                                                        let currentMonth = parseInt(currentDate[2])
+                                                        let currentDay = parseInt(currentDate[3])
+                                                        let currentHour = parseInt(currentDate[4])
+                                                        let currentMinute = parseInt(currentDate[5])
+                                                        let createdAtDate = value.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-2][0-9]):([0-5][0-9]):([0-5][0-9])/)
+                                                        let createdAtYear = parseInt(createdAtDate[1])
+                                                        let createdAtMonth = parseInt(createdAtDate[2])
+                                                        let createdAtDay = parseInt(createdAtDate[3])
+                                                        let createdAtHour = parseInt(createdAtDate[4])
+                                                        let createdAtMinute = parseInt(createdAtDate[5])
+
+                                                        let time
+
+                                                        if(currentYear > createdAtYear){
+                                                            let difference = currentYear - createdAtYear
+                                                            time = t('ago') + difference + ' ' + (difference==1? t('year-ago') : t('years-ago'))
+                                                        }else if(createdAtMonth > createdAtMonth){
+                                                            let difference = (currentMonth - createdAtMonth)
+                                                            time = t('ago') + difference + ' ' + (difference==1? t('month-ago') : t('months-ago'))
+                                                        }else if(currentDay > createdAtDay){
+                                                            let difference = currentDay - createdAtDay
+                                                            time = t('ago') + difference + ' ' + (difference==1? t('day-ago') : t('days-ago'))
+                                                        }else if(currentHour > createdAtHour){
+                                                            let difference = currentHour - createdAtHour
+                                                            time = t('ago') + difference + ' ' + (difference==1? t('hour-ago') : t('hours-ago'))
+                                                        }else if(currentMinute > createdAtMinute){
+                                                            let difference = currentMinute - createdAtMinute
+                                                            time = t('ago') + difference + ' ' + (difference==1? t('minute-ago') : t('minutes-ago'))
                                                         }else{
-                                                            time = t('ago') + value % 1440 + ' ' + t('days-ago')
+                                                            time = t('less-minute')
                                                         }
+                                                        return (
+                                                            <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
+                                                                <Tooltip title={time}>
+                                                                    <span>{time}</span>
+                                                                </Tooltip>
+                                                            </TableCell>
+                                                        );
+                                                    }else{
+                                                        return (
+                                                            <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
+                                                                <Tooltip title={value}>
+                                                                    <span>{value}</span>
+                                                                </Tooltip>
+                                                            </TableCell>
+                                                        );
                                                     }
-                                                    return (
-                                                        <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
-                                                            <Tooltip title={heading.id === 'time'? time : value}>
-                                                                <span>{heading.id === 'time'? time : value}</span>
-                                                            </Tooltip>
-                                                        </TableCell>
-                                                    );
+                                                    
                                                 }
                                             })}
                                             {options.previewHref && (

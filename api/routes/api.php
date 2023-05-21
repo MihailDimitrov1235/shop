@@ -66,7 +66,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/', [AuthorController::class, 'delete']);
         Route::put('/{id}', [AuthorController::class, 'edit']);
         Route::get('/requests', [AuthorController::class, 'getRequests']);
-        Route::patch('/{id}', [AuthorController::class, 'approve']);
+        Route::put('/', [AuthorController::class, 'approve']);
     });
 
     Route::prefix('cart')->group(function () {
@@ -164,4 +164,12 @@ Route::prefix('products')->group(function () {
     Route::put('/{id}', [ProductController::class, 'edit']);
     Route::get('/requests', [ProductController::class, 'getRequests']);
     Route::patch('/{id}', [ProductController::class, 'approve']);
+});
+
+Route::prefix('authors')->group(function () {
+    Route::post('/', [AuthorController::class, 'store']);
+    Route::delete('/', [AuthorController::class, 'delete']);
+    Route::put('/{id}', [AuthorController::class, 'edit']);
+    Route::get('/requests', [AuthorController::class, 'getRequests']);
+    Route::put('/', [AuthorController::class, 'approve']);
 });

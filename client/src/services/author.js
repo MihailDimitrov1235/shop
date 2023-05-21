@@ -60,11 +60,29 @@ function getAll(lang='bg') {
     })
 }
 
+function approveAuthors(selected) {
+    const url = `${servicesHelper.url}/authors`;
+
+    return axios.put(url, {
+        selected: selected,
+        headers: servicesHelper.header()
+    });
+}
+
+function getRequests( pagination, filters, order, lang='bg') {
+    const url = `${servicesHelper.url}/authors/requests?lang=${lang}`;
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    })
+}
+
 const adminService = {
     getAuthors,
+    getRequests,
     createAuthor,
     editAuthor,
     deleteAuthors,
+    approveAuthors,
     getAuthorById,
     getAll
 }

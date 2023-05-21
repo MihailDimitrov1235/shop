@@ -3,35 +3,38 @@ import { Helmet } from 'react-helmet';
 import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'react-i18next';
+import useMessage from '../../../hooks/useMessage';
+import authorService from '../../../services/author';
 
 import MainTable from '../../../components/MainTable';
 
 const RequestAuthor = () =>{
     const { t, i18n } = useTranslation();
     const [total, setTotal] = useState(0);
+    const [data, setData] = useState([]);
+    const { addMessage } = useMessage();
 
     const deleteHandler = (selected) => {
-        console.log(selected)
-        // authorService.deleteAuthors(selected)
-        //     .then((res) => {
-        //         console.log(res)
-        //         addMessage(t('author-deleted'), 'success')
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     })
+        authorService.deleteAuthors(selected)
+            .then((res) => {
+                console.log(res)
+                addMessage(t('author-deleted'), 'success')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     const approveHandler = (selected) => {
         console.log(selected)
-        // authorService.deleteAuthors(selected)
-        //     .then((res) => {
-        //         console.log(res)
-        //         addMessage(t('author-deleted'), 'success')
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     })
+        authorService.approveAuthors(selected)
+            .then((res) => {
+                console.log(res)
+                addMessage(t('author-deleted'), 'success')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     const newRequest = (page, total, filters = [], order = {}) => {
@@ -40,35 +43,27 @@ const RequestAuthor = () =>{
             total: total || 10
         }
 
-        // authorService.getAuthors(pagination, filters, order, i18n.language)
-        //     .then((res) => {
-        //         setData(res.data.data);
-        //         setTotal(res.data.total);
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     })
+        authorService.getRequests(pagination, filters, order, i18n.language)
+            .then((res) => {
+                setData(res.data.data);
+                setTotal(res.data.total);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
-    const data = [
-        {id: 1, name:"Mihail", time: 100}, //time in minutes
-        {id: 2, name:"Mihail", time: 1444},
-        {id: 3, name:"Mihail", time: 1100},
-        {id: 4, name:"Mihail", time: 9900},
-        {id: 5, name:"Mihail", time: 50},
-        {id: 6, name:"Mihail", time: 0.3},
-    ]
     
     const headings = [
         { id: 'id', label: t('author-id'), order: true },
         { id: 'name', label: t('name'), order: true },
-        { id: 'time', label: t('time-ago'), order: true },
+        { id: 'created_at', label: t('time-ago'), order: true },
     ];
 
     const headFilters = {
         'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('author-id') },
         'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('name') },
-        // 'time': { type: 'order', name: 'time', placeholder: t('search-in') + t('email') },
+        'created_at': { type: 'order', name: 'created_at' },
     }
 
     return(

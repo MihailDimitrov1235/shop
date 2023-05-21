@@ -297,17 +297,25 @@
 
     "less-minute":"Преди по-малко от минута",
 
-    "minute-ago":"Преди една минута",
+    "minute-ago":"минута",
 
     "minutes-ago":"минути",
 
-    "hour-ago":"Преди един час",
+    "hour-ago":"час",
 
     "hours-ago":"часа",
 
-    "day-ago":"Преди един ден",
+    "day-ago":"ден",
 
     "days-ago":"дни",
+
+    "month-ago":"месец",
+
+    "months-ago":"месеца",
+
+    "year-ago":"година",
+
+    "years-ago":"години",
 
     "ago":"Преди ",
     

@@ -16,8 +16,10 @@ class AuthorController extends Controller
                             'authors.id as id',
                             'authors.phone',
                             'authors.email',
+                            'authors.approved',
                             'author_trans.name',
                         )
+                        ->where('authors.approved', true)
                         ->leftJoin('author_trans', function($q) {
                             $q->on('author_trans.author_id', 'authors.id');
                             $q->where('author_trans.lang', request()->query('lang'));
@@ -176,9 +178,14 @@ class AuthorController extends Controller
         return $authors;
     }
 
-    public function approve($id){
-        $author = Author::findOrFail($id);
-        $author->approved = true;
-        $author->update();
+    public function approve(Request $request){
+
+        foreach($request->selected as $id){
+            $author = Author::findOrFail($id);
+            $author->approved = true;
+            $author->update();
+        }
+        
+        return response()->json(['message' => 'Approved'], 200);
     }
 }
