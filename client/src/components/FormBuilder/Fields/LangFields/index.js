@@ -4,8 +4,9 @@ import {
     Tabs,
     Tab
 } from '@mui/material';
-import TabPanel from '../TabPanel';
-import Fields from './index';
+import { getIn } from 'formik';
+import TabPanel from '../../TabPanel';
+import Fields from '../index';
 
 function a11yProps(index) {
     return {
@@ -20,7 +21,8 @@ const LangFields = ({ field, baseProps, values, touched, errors, setFieldValue }
     const langs = [
         { label: 'Български', slug: 'bg' },
         { label: 'English', slug: 'en' }
-    ]
+    ];
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
@@ -50,17 +52,18 @@ const LangFields = ({ field, baseProps, values, touched, errors, setFieldValue }
                 <TabPanel value={value} index={index} key={index}>
                     <Box>
                         {field.fields.map((f, i) => {
+                            const name = field.name + '.' + selector + '.' + f.name;
 
                             const props = {
                                 ...baseProps,
                                 label: f.label,
-                                name: field.name + '.' + selector + '.' + f.name,
+                                name: name,
                                 fullWidth: Object.hasOwn(f, 'fullWidth') ? f.fullWidth : true,
-                                //error: Boolean(touched[field.name][selector][f.name] && errors[field.name][selector][f.name]),
+                                error: Boolean(getIn(touched, name) && getIn(errors, name)),
                                 margin: Object.hasOwn(f, 'margin') ? f.margin : 'normal',
                                 value: values[field.name][selector][f.name],
                                 variant: Object.hasOwn(f, 'variant') ? f.variant : 'outlined',
-                                //helperText: touched[field.name] && errors[field.name],
+                                helperText: getIn(touched, name) && getIn(errors, name),
                                 key: index,
                                 color: 'bordoRed',
                             };
