@@ -18,6 +18,7 @@ class PostController extends Controller
                         'posts.id',
                         'posts.slug',
                         'posts.image_path',
+                        'posts.created_at',
                         'post_trans.title',
                         'post_trans.subtitle',
                     )

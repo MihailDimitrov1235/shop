@@ -18,18 +18,13 @@ const categories = [
 ]
 
 const BlogMainPage = () =>{
+    const { t, i18n } = useTranslation();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const defaultCategory = searchParams.get('category');
 
-    const [posts, setPosts] = useState([
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-        {date: '2022-05-03', categories:['politics', 'chemistry'], description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.", author:'John Lennon', title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet', slug:'some-slug', userId: 1, image:'https://c4.wallpaperflare.com/wallpaper/479/175/823/abstract-shapes-wallpaper-preview.jpg'},
-    ]);
-    const [total, setTotal] = useState();
+    const [posts, setPosts] = useState([]);
+    const [total, setTotal] = useState(0);
 
     const [checkedCategories,setCheckedCategories] = useState(new Set([parseInt(defaultCategory)]));
     const [sortBy, setSortBy] = useState('none');
@@ -40,10 +35,22 @@ const BlogMainPage = () =>{
 
     useEffect(() => {
         get()
-    }, [])
+    }, [i18n.language, page])
 
     const get = () => {
-        //blogService.getPosts()
+        const pagination = {
+            page: page || 1,
+            total: 10
+        }
+
+        blogService.getPosts(pagination, [], {}, i18n.language)
+        .then((res) => {
+            setPosts(res.data.data);
+            setTotal(res.data.total);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     const handleSearch = () =>{
@@ -68,8 +75,7 @@ const BlogMainPage = () =>{
     const handleSortByChange = (event) =>{
         setSortBy(event.target.value)
     }
-
-    const { t } = useTranslation();
+    
     return (
         <Container>
             <Box
@@ -144,7 +150,7 @@ const BlogMainPage = () =>{
             }}>
                 <Pagination
                     page={page}
-                    count={total / 10} 
+                    count={Math.ceil(total / 10) || 1} 
                     size='large' 
                     variant='outlined' 
                     onChange={handlePageChange}
