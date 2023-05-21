@@ -12,78 +12,24 @@ import * as Yup from 'yup';
 import FormBuilder from '../../../components/FormBuilder';
 
 const AddBlog = () => {
-    const useStyles = makeStyles({
-        flexContainer: {
-            justifyContent: 'end',
-        },
-    });
-
-    const modules = {
-        toolbar: [
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            [{ font: [] }],
-            [{ size: [] }],
-            [{ 'align': [] }],
-            [{ 'direction': 'rtl' }],
-            ["bold", "italic", "underline", "strike", "blockquote"],
-            [
-                { list: "ordered" },
-                { list: "bullet" },
-                { indent: "-1" },
-                { indent: "+1" }
-            ],
-            ["link", "image", "video"],
-            ['clean']
-        ]
-    }
-
-    const [open, setOpen] = useState(false);
-    const [preview, setPreview] = useState(false);
-
-    const handleClose = () => {
-        setOpen(false)
-    }
-    const handleAccept = () => {
-        console.log(titleBG)
-        console.log(titleEN)
-        console.log(subtitleBG)
-        console.log(subtitleEN)
-        console.log(image)
-        console.log(categories)
-        console.log(valueBG)
-        console.log(valueEN)
-        setOpen(false)
-    }
-
-    const handleImageUpload = (event) => {
-        setImage(URL.createObjectURL(event.target.files[0]))
-    }
-
-    const handleTextLangChange = (event, value) => {
-        setTextLang(value)
-    }
-    const handleTitleLangChange = (event, value) => {
-        setTitleLang(value)
-    }
-    const handleSubtitleLangChange = (event, value) => {
-        setSubtitleLang(value)
-    }
-
-    const [titleBG, setTitleBG] = useState('');
-    const [titleEN, setTitleEN] = useState('');
-    const [titleLang, setTitleLang] = useState('bg');
-
-    const [subtitleBG, setSubtitleBG] = useState('');
-    const [subtitleEN, setSubtitleEN] = useState('');
-    const [subtitleLang, setSubtitleLang] = useState('bg');
-
-    const [image, setImage] = useState('')
-
-    const [valueBG, setValueBG] = useState('');
-    const [valueEN, setValueEN] = useState('');
-    const [textLang, setTextLang] = useState('bg');
-
     const { i18n, t } = useTranslation();
+    const [preview, setPreview] = useState(false);
+    const [data, setData] = useState({
+        image: '',
+        category: [],
+        lang: {
+            bg: {
+                title: '',
+                subtitle: '',
+                description: ''
+            },
+            en: {
+                title: '',
+                subtitle: '',
+                description: ''
+            }
+        }
+    });
 
     let categoryOptions = [
         { value: 1, label: 'Green' },
@@ -96,19 +42,12 @@ const AddBlog = () => {
         { value: 8, label: 'John Lennon' },
     ]
 
-    const [categories, setCategories] = useState([]);
-
-    const handleSelectCategory = (event, value) => {
-        setCategories(value)
-    }
-
     const validationSchema = Yup.object().shape({
         //name: Yup.string().max(255).required(t('name-required'))
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        console.log(valueBG)
-        setSubmitting(false)
+        setSubmitting(false);
     };
 
     const fields = [
@@ -127,30 +66,15 @@ const AddBlog = () => {
         color: 'bordoRed'
     };
 
+    const handleOnChange = (values) => {
+        setData(values);
+    }
+
     return (
         <>
             <Helmet>
                 <title>{t('blog-create')} | {t('ban')}</title>
             </Helmet>
-            {/* <Dialog
-                open={open}
-                onClose={handleClose}
-            >
-                <DialogTitle>{t('create-post')}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {t('create-post-msg')}?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="inherit">
-                        {t('cancel')}
-                    </Button>
-                    <Button onClick={handleAccept} color="error">
-                        {t('yes')}
-                    </Button>
-                </DialogActions>
-            </Dialog> */}
 
             <Card sx={{ mt: 10, mb: 4, p: 2 }}>
                 <Box display={'flex'} justifyContent={'space-between'}>
@@ -162,15 +86,6 @@ const AddBlog = () => {
                             height: '55px',
                         }}>
                             {preview ? t('edit') : t('preview')}
-                        </Button>
-                        <Button onClick={() => setOpen(true)} sx={{
-                            height: '55px',
-                            backgroundColor: '#96011c',
-                            '&:hover': {
-                                backgroundColor: '#96011c',
-                            }
-                        }}>
-                            {t('create')}
                         </Button>
                     </Box>
                 </Box>
@@ -188,6 +103,7 @@ const AddBlog = () => {
                             validationSchema={validationSchema}
                             onSubmit={onSubmit}
                             submitButton={submitButton}
+                            handleOnChange={handleOnChange}
                         />
                     </Box>
                 </PerfectScrollbar>
@@ -197,14 +113,14 @@ const AddBlog = () => {
             <Box display={preview ? 'flex' : 'none'} sx={{ mb: 3 }}>
                 {/* Main Content */}
                 <Card sx={{ flex: 6, mr: 3, p: 3 }}>
-                    <Typography variant="h3" sx={{ mb: 3 }}>{i18n.language == 'bg' ? titleBG : titleEN}</Typography>
-                    <Typography variant="subtitle1" sx={{ mb: 5 }}>{i18n.language == 'bg' ? subtitleBG : subtitleEN}</Typography>
+                    <Typography variant="h3" sx={{ mb: 3 }}>{i18n.language == 'bg' ? data.lang.bg.title : data.lang.en.title}</Typography>
+                    <Typography variant="subtitle1" sx={{ mb: 5 }}>{i18n.language == 'bg' ? data.lang.bg.subtitle : data.lang.en.subtitle}</Typography>
                     <Box display={'flex'} justifyContent={'center'}>
-                        <img width={'100%'} src={image} />
+                        <img width={'100%'} src={data.image && URL.createObjectURL(data.image[0])} />
                     </Box>
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: i18n.language == 'bg' ? valueBG : valueEN,
+                            __html: i18n.language == 'bg' ? data.lang.bg.description : data.lang.en.description,
                         }}
                     />
                 </Card>
@@ -222,8 +138,8 @@ const AddBlog = () => {
                     </Box>
                     <Typography variant="h6" sx={{ ml: 1, mt: 3, textAlign: 'center' }}>{t('categories')}:</Typography>
                     <Stack direction={'row'} sx={{ justifyContent: 'center', flexWrap: 'wrap', mt: 1 }} >
-                        {categories.map((category, idx) => (
-                            <Chip sx={{ fontSize: '100%', mb: 1, background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category.name} />
+                        {data.category && data.category.map((c, idx) => (
+                            <Chip sx={{ fontSize: '100%', mb: 1, background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={c.label} />
                         ))}
                     </Stack>
                 </Card>

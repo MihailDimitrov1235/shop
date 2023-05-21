@@ -1,7 +1,8 @@
+import { Box, InputLabel } from '@mui/material';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const RichTextEditor = ({ name, modules, setFieldValue, value }) => {
+const RichTextEditor = ({ name, label, modules, setFieldValue, value }) => {
     if (!modules) {
         modules = {
             toolbar: [
@@ -28,12 +29,16 @@ const RichTextEditor = ({ name, modules, setFieldValue, value }) => {
     }
 
     return (
-        <ReactQuill
-            theme='snow'
-            value={value}
-            onChange={handleOnChange}
-            modules={modules}
-        />
+        <Box sx={{ my: 1 }}>
+            <InputLabel htmlFor='rich-text-editor' sx={{ pb: 1 }}>{label}</InputLabel>
+            <ReactQuill
+                id='rich-text-editor'
+                theme='snow'
+                value={value}
+                onChange={handleOnChange}
+                modules={modules}
+            />
+        </Box>
     );
 }
 
