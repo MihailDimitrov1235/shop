@@ -7,8 +7,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import { useTranslation } from 'react-i18next';
-import Gradient from './authorGradient.svg';
-import CreatedProducts from './CreatedProducts';
+import Gradient from './bloggerGradient.svg';
+import CreatedPosts from './CreatedPosts';
 
 const ContactBox = styled(Box)(() => ({
     display: 'flex',
@@ -29,19 +29,19 @@ const props = {
         'linkedin.com/in/mihail-d/',
     ],
     description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
-    products: [
-        { id: 1, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product1', description: 'Description1', sold: 10 },
-        { id: 2, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product2', description: 'Description2', sold: 10 },
-        { id: 3, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product3', description: 'Description3', sold: 10 },
-        { id: 4, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product4', description: 'Description4', sold: 10 },
+    posts: [
+        { id: 1, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product1', subtitle: 'Description1', visits: 10 },
+        { id: 2, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product2', subtitle: 'Description2', visits: 10 },
+        { id: 3, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product3', subtitle: 'Description3', visits: 10 },
+        { id: 4, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product4', subtitle: 'Description4', visits: 10 },
     ],
-    achievements: {
-        created: 30,
-        sold: 20,
-    }
+    // achievements: {
+    //     created: 30,
+    //     sold: 20,
+    // }
 }
 
-export default function AuthorPage() {
+export default function BloggerPage() {
 
     const { t } = useTranslation();
 
@@ -228,10 +228,10 @@ export default function AuthorPage() {
                         <Typography variant='subtitle2'>{props.description}</Typography>
                     </Box>
                     <Box display={'flex'} margin={'10px auto'}>
-                        <Typography variant='h2'>{t('created-products')}</Typography>
+                        <Typography variant='h2'>{t('created-posts')}</Typography>
                     </Box>
                     <Box display={'flex'}>
-                        <CreatedProducts products={props.products} />
+                        <CreatedPosts posts={props.posts} />
                     </Box>
                 </Card>
             </Container>

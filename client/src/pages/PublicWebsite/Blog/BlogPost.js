@@ -54,36 +54,42 @@ const BlogPost = () => {
                 <Typography variant="h3" sx={{ my:4}}>{post.title}</Typography>
                 <Typography variant="subtitle1" sx={{ mb:4 }}>{post.description}</Typography>
             </Card> */}
-            <Box display={'flex'} sx={{ mb: 3 }}>
-                {/* Main Content */}
-                <Card sx={{ flex: 6, mt: 10, mr: 3, p: 3 }}>
-                    <Typography variant='h3' sx={{ mb: 3 }}>{post.title}</Typography>
-                    <Typography variant='subtitle1' sx={{ mb: 5 }}>{post.subtitle}</Typography>
+            <Box sx={{ mb: 3, display: { md: 'block', lg: 'flex' } }}>
+        {/* Main Content */}
+        <Card sx={{ flex: 6, mt: 10, mr: 3, p: 3 }}>
+            <Typography variant='h3' sx={{ mb: 3 }}>{post.title}</Typography>
+            <Typography variant='subtitle1' sx={{ mb: 5 }}>{post.subtitle}</Typography>
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                        <img width={'100%'} src={`${process.env.REACT_APP_ASSETS}/${post.image_path}`} />
-                    </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                <img width={'100%'} src={`${process.env.REACT_APP_ASSETS}/${post.image_path}`} />
+            </Box>
 
-                    <div
-                        dangerouslySetInnerHTML={{
-                            __html: post.content,
-                        }}
-                    />
-                </Card>
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: post.content,
+                }}
+            />
+        </Card>
 
-                {/* Post Information */}
-                <Card sx={{ flex: 1, mt: 10, p: 3 }}>
-                    <Typography variant='h5' sx={{ textAlign: 'center' }}>{t('about-post')}</Typography>
-                    {/* <Box component={Link} to={'/profile/' + post.author.id} sx={{ mt: 3, display: 'flex', alignItems: 'center' }}>
+        {/* Post Information */}
+        <Card sx={{ flex: 1, mt: 10, p: 3 }}>
+            <Typography variant='h4' sx={{ textAlign: 'center' }}>{t('about-post')}</Typography>
+
+            <Box sx={{ display: { md: 'flex', lg: 'block' } }}>
+                <Box flex={1}>
+                    {/* <Box component={Link} to={"/profile/" + post.author.id} sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <PersonIcon />
-                        <Typography variant='subtitle2' sx={{ ml: 1 }}>{post.author.name}</Typography>
+                        <Typography variant="h6" sx={{ ml: 1 }}>{post.author.name}</Typography>
                     </Box> */}
-                    <Box sx={{ mt: 3, display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <CalendarMonthIcon />
-                        <Typography variant='subtitle2' sx={{ ml: 1 }}>{moment(post.created_at).format('DD.MM.YYYY')}</Typography>
+                        <Typography variant="h6" sx={{ ml: 1 }}>{moment(post.created_at).format('DD.MM.YYYY')}</Typography>
                     </Box>
-                    <Typography variant='h6' sx={{ ml: 1, mt: 3, textAlign: 'center' }}>{t('categories')}:</Typography>
-                    <Stack direction={'row'} sx={{ justifyContent: 'center', flexWrap: 'wrap', mt: 1 }} >
+                </Box>
+
+                <Box flex={1}>
+                    <Typography variant='h4' sx={{ ml: 1, mt: 3, textAlign: 'center' }}>{t('categories')}:</Typography>
+                    <Stack gap={1} direction={'row'} sx={{ justifyContent: 'center', flexWrap: 'wrap', mt: 1 }} >
                         {post.categories.map((category, idx) => (
                             <Chip
                                 clickable
@@ -95,48 +101,50 @@ const BlogPost = () => {
                             />
                         ))}
                     </Stack>
-                </Card>
-            </Box>
-
-            {/* Comments */}
-
-            <Typography
-                variant="h3"
-                sx={{
-                    textAlign: "center",
-                    position: "relative",
-                    ":after": {
-                        content: '""',
-                        position: "absolute",
-                        width: "10%",
-                        height: "3px",
-                        bottom: "-10px",
-                        left: "45%",
-                        borderBottom: "3px dashed",
-                        borderColor: "background.bordoRed",
-                    },
-                }}
-            >
-                {t('comment-section')}
-            </Typography>
-
-            <Card sx={{ p: 2, mt: 4 }}>
-                <Box>
-                    <TextField
-                        inputRef={newCommentRef}
-                        fullWidth
-                        label={t('comment')}
-                        multiline
-                        color='bordoRed'
-                    />
-                    <Box display={'flex'} justifyContent={'end'}>
-                        <Button sx={{ mt: 1 }} color='bordoRed' variant='text' onClick={handleSubmitComment}>
-                            {t('submit-comment')}
-                        </Button>
-                    </Box>
                 </Box>
+            </Box>
+        </Card>
+    </Box >
 
-                {/* {writingComment &&
+    {/* Comments */}
+
+    < Typography
+        variant="h3"
+        sx={{
+            textAlign: "center",
+            position: "relative",
+            ":after": {
+                content: '""',
+                position: "absolute",
+                width: "10%",
+                height: "3px",
+                bottom: "-10px",
+                left: "45%",
+                borderBottom: "3px dashed",
+                borderColor: "background.bordoRed",
+            },
+        }}
+    >
+        {t('comment-section')}
+    </Typography >
+
+    <Card sx={{ p: 2, mt: 4 }}>
+        <Box>
+            <TextField
+                inputRef={newCommentRef}
+                fullWidth
+                label={t('comment')}
+                multiline
+                color='bordoRed'
+            />
+            <Box display={'flex'} justifyContent={'end'}>
+                <Button sx={{ mt: 1 }} color='bordoRed' variant='text' onClick={handleSubmitComment}>
+                    {t('submit-comment')}
+                </Button>
+            </Box>
+        </Box>
+
+        {/* {writingComment &&
                     <Box sx={{ mx: 2 }}>
                         <TextField
                             inputRef={newCommentRef}
@@ -153,28 +161,28 @@ const BlogPost = () => {
 
                     </Box>
                 } */}
-            </Card>
+    </Card>
 
-            <Card sx={{ p: 2, mt: 4 }}>
-                {post.comments.length > 0 ? (
-                    <>
-                        {post.comments.map(comment => (
-                            <Comment props={comment} />
-                        ))}
+    <Card sx={{ p: 2, mt: 4 }}>
+        {post.comments.length > 0 ? (
+            <>
+                {post.comments.map(comment => (
+                    <Comment props={comment} />
+                ))}
 
-                        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                            <Pagination count={10}
-                                size='medium'
-                                variant='outlined'
-                                onChange={handleCommentPageChange}
-                            />
-                        </Box>
-                    </>
-                ) : (
-                    <Typography variant='h5' sx={{ textAlign: 'center', fontStyle: 'italic' }}>{t('no-comments')}</Typography>
-                )}
-            </Card>
-        </Container>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                    <Pagination count={10}
+                        size='medium'
+                        variant='outlined'
+                        onChange={handleCommentPageChange}
+                    />
+                </Box>
+            </>
+        ) : (
+            <Typography variant='h5' sx={{ textAlign: 'center', fontStyle: 'italic' }}>{t('no-comments')}</Typography>
+        )}
+    </Card>
+</Container >
     )
 }
 
