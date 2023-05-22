@@ -70,10 +70,10 @@ const PreviewAuthor = () => {
             { id: 3, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product3', subtitle: 'Description3', visits: 10 },
             { id: 4, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product4', subtitle: 'Description4', visits: 10 },
         ],
-        achievements: {
-            created: 30,
-            sold: 20,
-        }
+        // achievements: {
+        //     created: 30,
+        //     sold: 20,
+        // }
     });
     const [propsBG, setPropsBG] = useState({
         name: 'Михаил d',

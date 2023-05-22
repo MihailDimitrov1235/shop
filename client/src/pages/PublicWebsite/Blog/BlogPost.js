@@ -53,7 +53,7 @@ const BlogPost = ( ) =>{
                 <Typography variant="h3" sx={{ my:4}}>{post.title}</Typography>
                 <Typography variant="subtitle1" sx={{ mb:4 }}>{post.description}</Typography>
             </Card> */}
-            <Box display={'flex'} sx={{ mb:3 }}>
+            <Box sx={{ mb:3, display:{md:'block', lg:'flex'} }}>
                 {/* Main Content */}
                 <Card sx={{ flex:6, mt:10, mr:3, p:3 }}>
                     <Typography variant="h3" sx={{ mb:3}}>{post.title}</Typography>
@@ -70,21 +70,30 @@ const BlogPost = ( ) =>{
 
                 {/* Post Information */}
                 <Card sx={{ flex:1, mt:10, p:3}}>
-                    <Typography variant="h5" sx={{ textAlign:'center' }}>{t('about-post')}</Typography>
-                    <Box component={Link} to={"/profile/" + post.author.id} sx={{ mt:3, display:'flex', alignItems:'center' }}>
-                        <PersonIcon/>
-                        <Typography variant="subtitle2" sx={{ ml:1 }}>{post.author.name}</Typography>
+                    <Typography variant="h4" sx={{ textAlign:'center' }}>{t('about-post')}</Typography>
+                    <Box sx={{ display: {md:'flex', lg:'block'}}}>
+                        <Box flex={1}>
+                            <Box component={Link} to={"/profile/" + post.author.id} sx={{ mt:3, display:'flex', alignItems:'center', justifyContent:'center' }}>
+                                <PersonIcon/>
+                                <Typography variant="h6" sx={{ ml:1 }}>{post.author.name}</Typography>
+                            </Box>
+                            <Box sx={{ mt:3, display:'flex', alignItems:'center', justifyContent:'center' }}>
+                                <CalendarMonthIcon/>
+                                <Typography variant="h6" sx={{ ml:1 }}>{post.date}</Typography>
+                            </Box>
+                        </Box>
+                        
+                        <Box flex={1}>
+                            <Typography variant="h4" sx={{ ml:1, mt:3, textAlign:'center' }}>{t('categories')}:</Typography>
+                            <Stack gap={1} direction={'row'} sx={{ justifyContent:'center', flexWrap:'wrap', mt:1 }} >
+                                {post.categories.map( (category, idx) => (
+                                    <Chip clickable component={Link} to={`/blog?category=${encodeURIComponent(category.id)}`} sx={{ fontSize:'100%', mb:1, background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category.name}/>
+                                ))}
+                            </Stack>
+                        </Box>
                     </Box>
-                    <Box sx={{ mt:3, display:'flex', alignItems:'center' }}>
-                        <CalendarMonthIcon/>
-                        <Typography variant="subtitle2" sx={{ ml:1 }}>{post.date}</Typography>
-                    </Box>
-                    <Typography variant="h6" sx={{ ml:1, mt:3, textAlign:'center' }}>{t('categories')}:</Typography>
-                    <Stack direction={'row'} sx={{ justifyContent:'center', flexWrap:'wrap', mt:1 }} >
-                        {post.categories.map( (category, idx) => (
-                            <Chip clickable component={Link} to={`/blog?category=${encodeURIComponent(category.id)}`} sx={{ fontSize:'100%', mb:1, background:'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }} label={category.name}/>
-                        ))}
-                    </Stack>
+                    
+                    
                 </Card>
             </Box>
             {/* Comments */}
