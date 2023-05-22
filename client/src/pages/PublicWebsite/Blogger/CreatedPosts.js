@@ -10,10 +10,9 @@ import {
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-function CreatedProducts({ products }) {
+function CreatedPosts({ posts }) {
 
   const {t} = useTranslation();
- // products = products.products; // !!!!!!!!!!!!!!
   return (
     <Table>
       <TableHead>
@@ -49,9 +48,9 @@ function CreatedProducts({ products }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {products.map((product, index) => (
+        {posts.map((post, index) => (
           <Link
-            to={`/products/${product.id}`}
+            to={`/blog/${post.id}`}
             style={{
               display: "contents",
             }}
@@ -66,7 +65,7 @@ function CreatedProducts({ products }) {
                 sx={{ width: "25%", borderRadius: "15px", overFlow: "hidden" }}
               >
                 <img
-                  src={product.image}
+                  src={post.image}
                   style={{
                     borderRadius: "15px",
                     width: "100%",
@@ -79,7 +78,7 @@ function CreatedProducts({ products }) {
                   textAlign: "center",
                 }}
               >
-                <Typography variant="h5">{product.name}</Typography>
+                <Typography variant="h5">{post.title}</Typography>
               </TableCell>
               <TableCell
                 sx={{
@@ -88,7 +87,7 @@ function CreatedProducts({ products }) {
                 }}
               >
                 <Typography variant="subtitle2">
-                  {product.description}
+                  {post.subtitle}
                 </Typography>
               </TableCell>
               <TableCell
@@ -97,13 +96,13 @@ function CreatedProducts({ products }) {
                   textAlign: "center",
                 }}
               >
-                <Typography
+                {/* <Typography
                   sx={{
                     fontSize: "20px",
                   }}
                 >
-                  {product.sold}
-                </Typography>
+                  {post.visits}
+                </Typography> */}
               </TableCell>
             </TableRow>
           </Link>
@@ -113,4 +112,4 @@ function CreatedProducts({ products }) {
   );
 }
 
-export default CreatedProducts;
+export default CreatedPosts;

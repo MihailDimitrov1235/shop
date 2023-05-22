@@ -5,8 +5,8 @@ import ControlPanelLayout from './components/ControlPanel/ControlPanelLayout';
 import Landing from './pages/PublicWebsite/Landing';
 import Products from './pages/PublicWebsite/Products';
 import ProductPage from './pages/PublicWebsite/Products/Details';
-import AuthorPage from './pages/PublicWebsite/Author/AuthorPage';
-import PreviewAuthor from './pages/PublicWebsite/Author/PreviewAuthor';
+import BloggerPage from './pages/PublicWebsite/Blogger/BloggerPage';
+import PreviewBloggerPage from './pages/PublicWebsite/Blogger/PreviewBloggerPage';
 import Cart from './pages/PublicWebsite/Cart';
 import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
@@ -47,7 +47,7 @@ import BlogTable from './pages/ControlPanel/Blog/BlogTable';
 import AddBlog from './pages/ControlPanel/Blog/AddBlog';
 import EditBlog from './pages/ControlPanel/Blog/EditBlog';
 
-import RegisterAuthor from './pages/PublicWebsite/Author/RegisterAuthor';
+import RegisterAuthor from './pages/PublicWebsite/Blogger/RegisterBlogger';
 
 import PageLayout from './components/ControlPanel/PageLayout';
 
@@ -74,10 +74,10 @@ const routes = [
       },
 
       {
-        path: 'author',
+        path: 'blogger',
         children: [
-          { path: ':id', element: <AuthorPage /> },
-          { path: 'edit/:id', element: <PreviewAuthor /> },
+          { path: ':id', element: <BloggerPage /> },
+          { path: 'edit/:id', element: <PreviewBloggerPage /> },
         ]
       },
       

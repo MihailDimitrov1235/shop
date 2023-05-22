@@ -9,8 +9,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import { useTranslation } from 'react-i18next';
-import Gradient from './authorGradient.svg';
-import CreatedProducts from './CreatedProducts';
+import Gradient from './bloggerGradient.svg';
+import CreatedPosts from './CreatedPosts';
 import { useSpring, animated } from '@react-spring/web';
 import { useHover } from '@use-gesture/react';
 import ApproveDoalog from '../../../components/MainTable/ApproveDialog'
@@ -33,7 +33,7 @@ const ContactBox = styled(Box)(() => ({
     gap: '5px'
 }));
 
-const RegisterAuthor = () => {
+const PreviewAuthor = () => {
 
     const { id } = useParams();
 
@@ -57,24 +57,33 @@ const RegisterAuthor = () => {
     const [descLang, setDescLang] = useState('bg');
 
     const [props, setProps] = useState({
-        phone: '',
-        email: '',
-        links: [],
+        phone: '1234567890',
+        email: 'mighty.strong1235@gmail.com',
+        links: [
+            'facebook.com/misho',
+            'twitter.com/GothamChess',
+            'linkedin.com/in/mihail-d/',
+        ],
+        posts: [
+            { id: 1, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product1', subtitle: 'Description1', visits: 10 },
+            { id: 2, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product2', subtitle: 'Description2', visits: 10 },
+            { id: 3, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product3', subtitle: 'Description3', visits: 10 },
+            { id: 4, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product4', subtitle: 'Description4', visits: 10 },
+        ],
         achievements: {
             created: 30,
             sold: 20,
         }
     });
-    const [file, setFile] = useState('');
     const [propsBG, setPropsBG] = useState({
-        name: '',
-        ocupation: '',
-        description: '',
+        name: 'Михаил d',
+        ocupation: 'Student in the national highschool of sciences',
+        description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
     });
     const [propsEN, setPropsEN] = useState({
-        name: '',
-        ocupation: '',
-        description: '',
+        name: 'Mihail Dimitrov',
+        ocupation: 'Student in the national highschool of sciences',
+        description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
     });
 
     const handleApprove = (id) => {
@@ -175,12 +184,6 @@ const RegisterAuthor = () => {
     const linkedinRegex = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm;
     const twitterRegex = /((?:https?:\/\/)?twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/;
 
-    const handleNewFileUpload = (e) => {
-        const { files: newFiles } = e.target;
-        if (newFiles.length) {
-            setFile(newFiles[0]);
-        }
-    };
 
     return (
         <>
@@ -207,7 +210,7 @@ const RegisterAuthor = () => {
                             color: '#f1f1f1'
                         }} />
 
-                        {t('register')}
+                        {t('approve')}
 
                     </Box>
 
@@ -280,7 +283,7 @@ const RegisterAuthor = () => {
                                         }}
                                         />
                                         <Avatar
-                                            src={file && URL.createObjectURL(file)}
+                                            src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
                                             sx={{
                                                 width: '100%',
                                                 height: '100%',
@@ -289,7 +292,7 @@ const RegisterAuthor = () => {
                                                 }
                                             }}
                                         />
-                                        <input hidden accept="image/*" type="file" onChange={handleNewFileUpload} />
+                                        <input hidden accept="image/*" multiple type="file" />
                                     </Button>
                                 ) : (
                                     <Box className='authorImg' sx={{
@@ -327,7 +330,6 @@ const RegisterAuthor = () => {
                                         </Tabs>
                                         <TextField
                                             id='name'
-                                            placeholder={t('name')}
                                             value={nameValue}
                                             fullWidth
                                             onChange={handleNameChange}
@@ -352,7 +354,6 @@ const RegisterAuthor = () => {
                                         </Tabs>
                                         <TextField
                                             id='ocupation'
-                                            placeholder={t('ocupation')}
                                             value={ocupationValue}
                                             fullWidth
                                             onChange={handleOcupationChange}
@@ -416,7 +417,6 @@ const RegisterAuthor = () => {
                                         {edit ? (
                                             <TextField
                                                 id='phone'
-                                                placeholder={t('phone')}
                                                 defaultValue={props.phone}
                                                 size='small'
                                                 margin='dense'
@@ -438,7 +438,6 @@ const RegisterAuthor = () => {
                                         {edit ? (
                                             <TextField
                                                 id='email'
-                                                placeholder={t('email')}
                                                 defaultValue={props.email}
                                                 size='small'
                                                 margin='dense'
@@ -491,7 +490,6 @@ const RegisterAuthor = () => {
                                                 <Box sx={{ flexGrow: 1 }}>
                                                     <TextField
                                                         id='link'
-                                                        placeholder={t('link')}
                                                         value={link}
                                                         fullWidth
                                                         size='small'
@@ -543,10 +541,8 @@ const RegisterAuthor = () => {
                                     </Tabs>
                                     <TextField
                                         id='description'
-                                        placeholder={t('description')}
                                         value={descValue}
                                         multiline
-                                        rows={8}
                                         fullWidth
                                         onChange={handleDescChange}
                                         inputProps={{ style: { fontSize: '15px' } }}
@@ -565,6 +561,12 @@ const RegisterAuthor = () => {
                             </Box>
 
                         </Box>
+                        <Box display={'flex'} margin={'10px auto'}>
+                            <Typography variant='h3'>{t('created-products')}</Typography>
+                        </Box>
+                        <Box display={'flex'}>
+                            <CreatedPosts posts={props.posts} />
+                        </Box>
                     </Card>
                 </Container>
 
@@ -574,4 +576,4 @@ const RegisterAuthor = () => {
 
 }
 
-export default RegisterAuthor;
+export default PreviewAuthor;

@@ -9,8 +9,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import { useTranslation } from 'react-i18next';
-import Gradient from './authorGradient.svg';
-import CreatedProducts from './CreatedProducts';
+import Gradient from './bloggerGradient.svg';
+import CreatedPosts from './CreatedPosts';
 import { useSpring, animated } from '@react-spring/web';
 import { useHover } from '@use-gesture/react';
 import ApproveDoalog from '../../../components/MainTable/ApproveDialog'
@@ -33,7 +33,7 @@ const ContactBox = styled(Box)(() => ({
     gap: '5px'
 }));
 
-const PreviewAuthor = () => {
+const RegisterAuthor = () => {
 
     const { id } = useParams();
 
@@ -57,33 +57,24 @@ const PreviewAuthor = () => {
     const [descLang, setDescLang] = useState('bg');
 
     const [props, setProps] = useState({
-        phone: '1234567890',
-        email: 'mighty.strong1235@gmail.com',
-        links: [
-            'facebook.com/misho',
-            'twitter.com/GothamChess',
-            'linkedin.com/in/mihail-d/',
-        ],
-        products: [
-            { id: 1, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product1', description: 'Description1', sold: 10 },
-            { id: 2, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product2', description: 'Description2', sold: 10 },
-            { id: 3, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product3', description: 'Description3', sold: 10 },
-            { id: 4, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', name: 'Product4', description: 'Description4', sold: 10 },
-        ],
+        phone: '',
+        email: '',
+        links: [],
         achievements: {
             created: 30,
             sold: 20,
         }
     });
+    const [file, setFile] = useState('');
     const [propsBG, setPropsBG] = useState({
-        name: 'Михаил d',
-        ocupation: 'Student in the national highschool of sciences',
-        description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
+        name: '',
+        ocupation: '',
+        description: '',
     });
     const [propsEN, setPropsEN] = useState({
-        name: 'Mihail Dimitrov',
-        ocupation: 'Student in the national highschool of sciences',
-        description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
+        name: '',
+        ocupation: '',
+        description: '',
     });
 
     const handleApprove = (id) => {
@@ -184,6 +175,12 @@ const PreviewAuthor = () => {
     const linkedinRegex = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm;
     const twitterRegex = /((?:https?:\/\/)?twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/;
 
+    const handleNewFileUpload = (e) => {
+        const { files: newFiles } = e.target;
+        if (newFiles.length) {
+            setFile(newFiles[0]);
+        }
+    };
 
     return (
         <>
@@ -210,7 +207,7 @@ const PreviewAuthor = () => {
                             color: '#f1f1f1'
                         }} />
 
-                        {t('approve')}
+                        {t('register')}
 
                     </Box>
 
@@ -283,7 +280,7 @@ const PreviewAuthor = () => {
                                         }}
                                         />
                                         <Avatar
-                                            src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public'
+                                            src={file && URL.createObjectURL(file)}
                                             sx={{
                                                 width: '100%',
                                                 height: '100%',
@@ -292,7 +289,7 @@ const PreviewAuthor = () => {
                                                 }
                                             }}
                                         />
-                                        <input hidden accept="image/*" multiple type="file" />
+                                        <input hidden accept="image/*" type="file" onChange={handleNewFileUpload} />
                                     </Button>
                                 ) : (
                                     <Box className='authorImg' sx={{
@@ -330,6 +327,7 @@ const PreviewAuthor = () => {
                                         </Tabs>
                                         <TextField
                                             id='name'
+                                            placeholder={t('name')}
                                             value={nameValue}
                                             fullWidth
                                             onChange={handleNameChange}
@@ -354,6 +352,7 @@ const PreviewAuthor = () => {
                                         </Tabs>
                                         <TextField
                                             id='ocupation'
+                                            placeholder={t('ocupation')}
                                             value={ocupationValue}
                                             fullWidth
                                             onChange={handleOcupationChange}
@@ -417,6 +416,7 @@ const PreviewAuthor = () => {
                                         {edit ? (
                                             <TextField
                                                 id='phone'
+                                                placeholder={t('phone')}
                                                 defaultValue={props.phone}
                                                 size='small'
                                                 margin='dense'
@@ -438,6 +438,7 @@ const PreviewAuthor = () => {
                                         {edit ? (
                                             <TextField
                                                 id='email'
+                                                placeholder={t('email')}
                                                 defaultValue={props.email}
                                                 size='small'
                                                 margin='dense'
@@ -490,6 +491,7 @@ const PreviewAuthor = () => {
                                                 <Box sx={{ flexGrow: 1 }}>
                                                     <TextField
                                                         id='link'
+                                                        placeholder={t('link')}
                                                         value={link}
                                                         fullWidth
                                                         size='small'
@@ -541,8 +543,10 @@ const PreviewAuthor = () => {
                                     </Tabs>
                                     <TextField
                                         id='description'
+                                        placeholder={t('description')}
                                         value={descValue}
                                         multiline
+                                        rows={8}
                                         fullWidth
                                         onChange={handleDescChange}
                                         inputProps={{ style: { fontSize: '15px' } }}
@@ -561,12 +565,6 @@ const PreviewAuthor = () => {
                             </Box>
 
                         </Box>
-                        <Box display={'flex'} margin={'10px auto'}>
-                            <Typography variant='h3'>{t('created-products')}</Typography>
-                        </Box>
-                        <Box display={'flex'}>
-                            <CreatedProducts products={props.products} />
-                        </Box>
                     </Card>
                 </Container>
 
@@ -576,4 +574,4 @@ const PreviewAuthor = () => {
 
 }
 
-export default PreviewAuthor;
+export default RegisterAuthor;
