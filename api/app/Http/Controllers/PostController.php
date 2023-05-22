@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{
     Post,
     PostTrans,
@@ -130,7 +131,13 @@ class PostController extends Controller
     {
         $ids = $request->selected;
 
-        Post::whereIn('id', $ids)->delete();
+        foreach($ids as $id) {
+            $post = Post::findOrFail($id);
+
+            Storage::delete('public/' . $post->image_path);
+
+            $post->delete();
+        }
 
         return response()->json(['message' => 'Deleted'], 200);
     }
