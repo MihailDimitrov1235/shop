@@ -31,7 +31,7 @@ class Post extends Model
         return $this->hasMany(PostTrans::class);
     }
 
-    public function comments(): HasMany{
+    public function comments() {
         return $this->hasMany(Comment::class);
     }
     

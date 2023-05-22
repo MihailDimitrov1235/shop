@@ -124,7 +124,7 @@ Route::prefix('products')->group(function () {
 
 Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index']);
-    Route::get('/{id}', [PostController::class, 'getById']);
+    Route::get('/{slug}', [PostController::class, 'getBySlug']);
 });
 
 Route::prefix('bloggers')->group(function () {

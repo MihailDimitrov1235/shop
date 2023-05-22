@@ -66,12 +66,21 @@ function approvePosts(selected) {
     });
 }
 
+function getBySlug(slug, lang='bg') {
+    const url = `${servicesHelper.url}/posts/${slug}?lang=${lang}`;
+
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    });
+}
+
 const blogService = {
     getPosts,
     getRequests,
     createPost,
     deletePosts,
-    approvePosts
+    approvePosts,
+    getBySlug
 }
 
 export default blogService;

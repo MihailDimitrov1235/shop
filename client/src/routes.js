@@ -96,7 +96,7 @@ const routes = [
       { path: 'blog', 
       children:[
         {path: '', element: <BlogMainPage/>},
-        {path: ':id', element: <BlogPost/>},
+        {path: ':slug', element: <BlogPost/>},
         {path: 'create', element: <BlogCreate/>}
      ]},
     ]
