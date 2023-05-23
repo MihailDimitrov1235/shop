@@ -17,7 +17,6 @@ const RequestPost = () =>{
     const deleteHandler = (selected) => {
         blogService.deletePosts(selected)
             .then((res) => {
-                console.log(res)
                 addMessage(t('post-deleted'), 'success')
             })
             .catch((error) => {
@@ -26,10 +25,8 @@ const RequestPost = () =>{
     }
 
     const approveHandler = (selected) => {
-        console.log(selected)
         blogService.approvePosts(selected)
             .then((res) => {
-                console.log(res)
                 addMessage(t('post-approved'), 'success')
             })
             .catch((error) => {
@@ -55,8 +52,8 @@ const RequestPost = () =>{
 
     
     const headings = [
-        { id: 'id', label: t('author-id'), order: true },
-        { id: 'name', label: t('name'), order: true },
+        { id: 'id', label: t('post-id'), order: true },
+        { id: 'title', label: t('title'), order: true },
         { id: 'created_at', label: t('time-ago'), order: true },
     ];
 
