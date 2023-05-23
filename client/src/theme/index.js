@@ -291,14 +291,12 @@ const theme = createTheme({
             color: '#c0c0c0', // Replace 'darkred' with your desired hover color
           },
         },
-      },
-      defaultProps:{
-        sx: {
+        root: {
           fontSize: '100%',
           background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)',
-          color: 'white'
-        }
-      }
+          color: 'white',
+        },
+      },
     },
     MuiPagination: {
       styleOverrides: {
