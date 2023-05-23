@@ -47,7 +47,7 @@ const ProductList = () => {
         elevation={3}
         >
             <Box sx={{ display: 'flex', px: '30px', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Box sx={{ flex: 2 }}>
+                <Box sx={{ flex: 2, mt:3 }}>
                     <TextField
                         sx={{ m:0 }}
                         label={t('search')}

@@ -4,20 +4,12 @@ import { Box, Typography, Container, TextField, Button, Pagination, Card, FormCo
 import { useTranslation } from 'react-i18next';
 import BlogCard from '../../../components/blog/BlogCard';
 import blogService from '../../../services/blog';
+import categoryService from '../../../services/category';
 
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import ClearIcon from '@mui/icons-material/Clear';
 import ArticleIcon from '@mui/icons-material/Article';
-
-const categories = [
-    {id:1, name:'chemestry'},
-    {id:2, name:'chemestry'},
-    {id:3, name:'chemestry'},
-    {id:4, name:'chemestry'},
-    {id:5, name:'chemestry'},
-    {id:6, name:'chemestry'},
-]
 
 const BlogMainPage = () =>{
     const { t, i18n } = useTranslation();
@@ -34,6 +26,8 @@ const BlogMainPage = () =>{
     const searchRef = useRef('');
     const [filters, setFilters] = useState(false);
     const [page, setPage] = useState(1);
+
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         get()
@@ -53,6 +47,15 @@ const BlogMainPage = () =>{
         .catch((error) => {
             console.log(error);
         })
+
+        categoryService.getAll(i18n.language)
+            .then((res) => {
+                const options = res.data.map((el) => ({ label: el.name, value: el.id }));
+                setCategories(options);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     const handleSearch = () =>{
@@ -137,9 +140,9 @@ const BlogMainPage = () =>{
                     <FormControlLabel value="oldest" control={<Radio color='bordoRed' />} label={t("oldest")} />
                 </RadioGroup>
                 <Typography variant='h5'>{t('categories')}</Typography>
-                <Box display={'flex'}>
+                <Box display={'flex'} flexWrap={'wrap'}>
                         {categories.map(category => (
-                            <FormControlLabel control={<Checkbox checked={checkedCategories.has(category.id)} id={category.id} color={'bordoRed'} onChange={handleCheckedCategoriesChange} />} label={category.name}/>
+                            <FormControlLabel control={<Checkbox checked={checkedCategories.has(category.value)} id={category.value} color={'bordoRed'} onChange={handleCheckedCategoriesChange} />} label={category.label}/>
                         ))}
                 </Box>
             </Card>
