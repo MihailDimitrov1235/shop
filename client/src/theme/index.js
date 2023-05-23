@@ -282,6 +282,23 @@ const theme = createTheme({
         color:'bordoRed'
       }
     },
+    MuiChip:{
+      styleOverrides: {
+        deleteIcon: {
+          color: 'white', // Replace 'red' with your desired color
+          '&:hover': {
+            color: '#c0c0c0', // Replace 'darkred' with your desired hover color
+          },
+        },
+      },
+      defaultProps:{
+        sx: {
+          fontSize: '100%',
+          background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)',
+          color: 'white'
+        }
+      }
+    },
     MuiPagination: {
       styleOverrides: {
         root: {
