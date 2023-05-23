@@ -39,7 +39,7 @@ function HeroSection() {
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right',
                 backgroundSize: { xs: '100% 100%', md: 'auto' },
-                height: '100vh'
+                height: 'fit-content'
             }}>
 
                 <Container maxWidth={'false'} sx={{
