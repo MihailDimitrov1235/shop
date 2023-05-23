@@ -413,6 +413,10 @@
 
     "no-products": "No products coresponding to the search were found.",
 
-    "no-products-subtitle": "Try searching for something else."
+    "no-products-subtitle": "Try searching for something else.",
+
+    "no-posts": "No posts coresponding to the search were found.",
+
+    "no-posts-subtitle": "Try searching for something else."
 
 }

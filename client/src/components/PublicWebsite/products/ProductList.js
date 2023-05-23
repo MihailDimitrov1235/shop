@@ -92,8 +92,8 @@ const ProductList = () => {
                             </linearGradient>
                         </svg>
                         <Box position={'relative'}>
-                            <BiotechIcon sx={{ fontSize:'500px', mb:5, fill: "url(#linearColors)" }} />
-                            <ClearIcon sx={{background:'white', position:'absolute', bottom:'10px' , right:'35px', fontSize:'138px', mb:5, fill: "url(#linearColors)" }}></ClearIcon>
+                            <BiotechIcon sx={{ fontSize:'250px', mb:5, fill: "url(#linearColors)" }} />
+                            <ClearIcon sx={{background:'white', position:'absolute', bottom:'10px' , right:'35px', fontSize:'67px', mb:5, fill: "url(#linearColors)" }}></ClearIcon>
                         </Box>
 
                         <Typography sx={{ mb:4 }} textAlign={'center'} variant='h2'>{t('no-products')}</Typography>

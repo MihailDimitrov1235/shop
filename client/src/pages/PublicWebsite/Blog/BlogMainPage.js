@@ -7,6 +7,8 @@ import blogService from '../../../services/blog';
 
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
+import ClearIcon from '@mui/icons-material/Clear';
+import ArticleIcon from '@mui/icons-material/Article';
 
 const categories = [
     {id:1, name:'chemestry'},
@@ -142,20 +144,41 @@ const BlogMainPage = () =>{
                 </Box>
             </Card>
             }
-            <Box display={'flex'} flexWrap={'wrap'} justifyContent={'space-evenly'}>
-                {posts.map((post, index) => <BlogCard post={post} key={index}/>)}
-            </Box>
-            <Box display={'flex'} justifyContent={'center'} sx={{
-                mt:3
-            }}>
-                <Pagination
-                    page={page}
-                    count={Math.ceil(total / 10) || 1} 
-                    size='large' 
-                    variant='outlined' 
-                    onChange={handlePageChange}
-                />
-            </Box>
+            
+            {posts.length > 0? 
+            <>
+                <Box display={'flex'} flexWrap={'wrap'} justifyContent={'space-evenly'}>
+                    {posts.map((post, index) => <BlogCard post={post} key={index}/>)}
+                </Box>
+                <Box display={'flex'} justifyContent={'center'} sx={{
+                    mt:3
+                }}>
+                    <Pagination
+                        page={page}
+                        count={Math.ceil(total / 10) || 1} 
+                        size='large' 
+                        variant='outlined' 
+                        onChange={handlePageChange}
+                    />
+                </Box>
+                </>
+            :
+                <Box sx={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', p:10 }}>
+                    <svg width={0} height={0}>
+                        <linearGradient id="linearColors" x1={1} y1={0} x2={1} y2={1}>
+                            <stop offset={0} stopColor="rgba(219,18,41,1)" />
+                            <stop offset={1} stopColor="rgba(150,1,28,1)" />
+                        </linearGradient>
+                    </svg>
+                    <Box position={'relative'}>
+                        <ArticleIcon sx={{ fontSize:'250px', mb:5, fill: "url(#linearColors)" }} />
+                        <ClearIcon sx={{ borderRadius:'50%', background:'#f4f6f8', position:'absolute', bottom:'10px' , right:'5px', fontSize:'67px', mb:5, fill: "url(#linearColors)" }}></ClearIcon>
+                    </Box>
+
+                    <Typography sx={{ mb:4 }} textAlign={'center'} variant='h2'>{t('no-posts')}</Typography>
+                    <Typography textAlign={'center'} variant='heroSubtitle'>{t('no-posts-subtitle')}</Typography>
+                </Box>
+            }
         </Container>
     )
 }
