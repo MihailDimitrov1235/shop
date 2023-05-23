@@ -409,6 +409,10 @@
 
     "create-post-msg": "Are you sure you want to create a new post",
 
-    "yes": "Yes"
+    "yes": "Yes",
+
+    "no-products": "No products coresponding to the search were found.",
+
+    "no-products-subtitle": "Try searching for something else."
 
 }

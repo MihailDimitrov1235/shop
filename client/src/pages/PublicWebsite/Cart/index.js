@@ -14,50 +14,6 @@ import useMessage from '../../../hooks/useMessage';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
-const props = [
-    {
-        id: 1,
-        title: "Knifsy",
-        description: "This is a high-quality knife with a wood handle and a sharp blade.",
-        parts: [
-            { id: 1, price: 999, name: 'introduction' },
-            { id: 2, price: 990, name: 'part2' }
-        ],
-        image: "https://cdn.discordapp.com/attachments/1008571197572775966/1063814791317180526/Knifsy_lab_glass_filled_with_red_stuff_on_white_background_97def308-e59c-40f6-bab1-3b12137430ad.png"
-    },
-    {
-        id: 2,
-        title: "Knifsy",
-        description: "This is a high-quality knife with a wood handle and a sharp blade.",
-        parts: [
-            { id: 1, price: 999, name: 'introduction' },
-            { id: 2, price: 990, name: 'part2' }
-        ],
-        image: "https://cdn.discordapp.com/attachments/1008571197572775966/1063814791317180526/Knifsy_lab_glass_filled_with_red_stuff_on_white_background_97def308-e59c-40f6-bab1-3b12137430ad.png"
-    },
-    {
-        id: 3,
-        title: "Knifsy",
-        description: "This is a high-quality knife with a wood handle and a sharp blade.",
-        parts: [
-            { id: 1, price: 999, name: 'introduction' },
-            { id: 2, price: 990, name: 'part2' }
-        ],
-        image: "https://cdn.discordapp.com/attachments/1008571197572775966/1063814791317180526/Knifsy_lab_glass_filled_with_red_stuff_on_white_background_97def308-e59c-40f6-bab1-3b12137430ad.png"
-    },
-    {
-        id: 4,
-        title: "Knifsy",
-        description: "This is a high-quality knife with a wood handle and a sharp blade.",
-        parts: [
-            { id: 1, price: 999, name: 'introduction' },
-            { id: 2, price: 990, name: 'part2' }
-        ],
-        image: "https://cdn.discordapp.com/attachments/1008571197572775966/1063814791317180526/Knifsy_lab_glass_filled_with_red_stuff_on_white_background_97def308-e59c-40f6-bab1-3b12137430ad.png"
-    }
-
-];
-
 function Cart() {
     const { t, i18n } = useTranslation();
     const { user } = useAuth();

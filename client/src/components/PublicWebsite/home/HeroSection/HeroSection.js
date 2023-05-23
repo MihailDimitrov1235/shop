@@ -53,19 +53,20 @@ function HeroSection() {
                 }}>
                     <animated.div style={{ ...springs, flexBasis: '40%' }}>
                         <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-                            <Typography variant="h1" sx={{
-                                fontWeight:'bold',
+                            <Typography variant="hero" sx={{
                                 marginTop: '10px',
                                 marginBottom: '10px',
                             }}>
                                 {t('hero-title')}
-                            </Typography>
-                            <Typography variant="subtitle1" sx={{
-                                marginTop: '10px',
-                                marginBottom: '10px',
+                            </Typography> 
+                            <Box sx={{
+                                my:5
                             }}>
-                                {t('hero-desc')}
-                            </Typography>
+                                <Typography variant="heroSubtitle">
+                                    {t('hero-desc')}
+                                </Typography>
+                            </Box>
+                            
                             <Box display={'flex'} sx={{
                                 justifyContent:{xs:'center', md:'left'}
                             }}>

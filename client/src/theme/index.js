@@ -58,6 +58,42 @@ const theme = createTheme({
     '0 0 1px 0 rgba(0,0,0,0.31), 0 24px 36px -8px rgba(0,0,0,0.25)'
   ],
   typography: {
+    hero: {
+      fontWeight: 700,
+      '@media (min-width:0px)': { // xs
+        fontSize: '8.5vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '6.5vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '4.5vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '4.5vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '3.5vw',
+      },
+      letterSpacing: '-0.24px'
+    },
+    heroSubtitle: {
+      '@media (min-width:0px)': { // xs
+        fontSize: '3.7vw',
+      },
+      '@media (min-width:600px)': { // sm
+        fontSize: '2.7vw',
+      },
+      '@media (min-width:900px)': { // md
+        fontSize: '2vw',
+      },
+      '@media (min-width:1200px)': { // lg
+        fontSize: '1.4vw',
+      },
+      '@media (min-width:1536px)': { // xl
+        fontSize: '1.2vw',
+      },
+    },
     h1: {
       fontWeight: 500,
       '@media (min-width:0px)': { // xs
@@ -83,10 +119,10 @@ const theme = createTheme({
         fontSize: '7vw',
       },
       '@media (min-width:600px)': { // sm
-        fontSize: '4.8vw',
+        fontSize: '4.5vw',
       },
       '@media (min-width:900px)': { // md
-        fontSize: '3.8vw',
+        fontSize: '3.5vw',
       },
       '@media (min-width:1200px)': { // lg
         fontSize: '2.8vw',
@@ -231,6 +267,26 @@ const theme = createTheme({
     },
   },
   components:{
+    MuiNativeSelect:{
+      defaultProps:{
+        color:'bordoRed'
+      }
+    },
+    MuiSelect:{
+      defaultProps:{
+        color:'bordoRed'
+      }
+    },
+    MuiButton:{
+      defaultProps:{
+        color:'bordoRed'
+      }
+    },
+    MuiTextField:{
+      defaultProps:{
+        color:'bordoRed'
+      }
+    },
     MuiPagination: {
       styleOverrides: {
         root: {
