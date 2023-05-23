@@ -5,6 +5,8 @@ import { LoadingButton } from '@mui/lab';
 import { Container } from '@mui/system';
 import CartItem from './CartItem';
 import Header from './Header';
+import { useSpring, animated } from '@react-spring/web';
+import { useGesture } from '@use-gesture/react';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../../../hooks/useAuth';
 import cartService from '../../../services/cart';
@@ -72,6 +74,17 @@ function Cart() {
             window.location.replace(res.data.url);
         }
     };
+
+    const [{ x, y }, api] = useSpring(() => ({
+        x: "0",
+        y: "0",
+    }));
+
+    const bind = useGesture({
+        onHover: ({ hovering }) => api({ x: hovering ? '-5px' : '0', y: hovering ? '-5px' : '0' }),
+    })
+
+    
 
     return (
         <Container maxWidth={'false'} sx={{
@@ -141,15 +154,18 @@ function Cart() {
                             <Typography variant='h2' style={{ textAlign: 'center' }}>{t('your-cart-is-empty')}</Typography>
                             <Typography variant='p'>{t('empty-cart-message')}</Typography>
                         </Box>
-                        <Button
-                            variant='contained'
-                            color='bordoRed'
-                            startIcon={<ShoppingBagIcon />}
-                            component={RouterLink}
-                            to='/products'
-                        >
-                            {t('return-to-shop')}
-                        </Button>
+                        <animated.div style={{ x: x, y: y, textAlign:'center', width:'fit-content', margin:'0 auto'}}>
+                            <Button
+                                {...bind()}
+                                variant='contained'
+                                color='bordoRed'
+                                startIcon={<ShoppingBagIcon />}
+                                component={RouterLink}
+                                to='/products'
+                            >
+                                {t('return-to-shop')}
+                            </Button>
+                        </animated.div>
                     </Box>
                 )}
 

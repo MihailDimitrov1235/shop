@@ -16,10 +16,7 @@ const LanguageSwitcher = () => {
     return (
         <FormControl sx={{ minWidth: "min-content" }} fullWidth size="small">
             <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={i18n.language}
-                label="Age"
+                value={i18n.language? i18n.language : "bg"}
                 sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
                 onChange={handleChange}
             >
