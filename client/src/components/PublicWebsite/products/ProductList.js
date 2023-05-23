@@ -47,16 +47,17 @@ const ProductList = () => {
         elevation={3}
         >
             <Box sx={{ display: 'flex', px: '30px', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Box sx={{ flexGrow: 2 }}>
+                <Box sx={{ flex: 2 }}>
                     <TextField
+                        sx={{ m:0 }}
                         label={t('search')}
                         margin='normal'
                         variant='standard'
-                        color='bordoRed'
                     />
                 </Box>
-                <Box sx={{ width: '30%' }}>
+                <Box sx={{ flex:1 }}>
                     <Select
+                        sx={{ m:0, mt:'8px' }}
                         title={t('sort')}
                         options={options}
                         setValue={setSort}
@@ -95,8 +96,8 @@ const ProductList = () => {
                             <ClearIcon sx={{background:'white', position:'absolute', bottom:'10px' , right:'35px', fontSize:'138px', mb:5, fill: "url(#linearColors)" }}></ClearIcon>
                         </Box>
 
-                        <Typography textAlign={'center'} variant='h2'>{t('no-products')}</Typography>
-                        <Typography textAlign={'center'} variant='subtitle1'>{t('no-products-subtitle')}</Typography>
+                        <Typography sx={{ mb:4 }} textAlign={'center'} variant='h2'>{t('no-products')}</Typography>
+                        <Typography textAlign={'center'} variant='heroSubtitle'>{t('no-products-subtitle')}</Typography>
                     </Box>
                 }
                 

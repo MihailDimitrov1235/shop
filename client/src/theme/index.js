@@ -277,11 +277,6 @@ const theme = createTheme({
         color:'bordoRed'
       }
     },
-    MuiButton:{
-      defaultProps:{
-        color:'bordoRed'
-      }
-    },
     MuiTextField:{
       defaultProps:{
         color:'bordoRed'
