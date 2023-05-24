@@ -80,6 +80,7 @@ class AuthorController extends Controller
             AuthorTrans::create([
                 'name' => $lang['name'],
                 'author_id' => $author->id,
+                'user_id' => $request->user_id,
                 'lang' => $key
             ]);
         }

@@ -45,6 +45,7 @@ class BloggerController extends Controller
                 'occupation' => $lang['occupation'],
                 'description' => $lang['description'],
                 'blogger_id' => $blogger->id,
+                'user_id' => $request->user_id,
                 'lang' => $key
             ]);
         }
