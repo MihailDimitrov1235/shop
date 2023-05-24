@@ -58,7 +58,7 @@ const theme = createTheme({
     '0 0 1px 0 rgba(0,0,0,0.31), 0 24px 36px -8px rgba(0,0,0,0.25)'
   ],
   typography: {
-    fontFamily: ['Exo'],
+    //fontFamily: ['Exo'],
     hero: {
       fontWeight: 700,
       '@media (min-width:0px)': { // xs
