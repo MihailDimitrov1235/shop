@@ -45,10 +45,15 @@ class PostController extends Controller
                         'comments' => function ($query) {
                             $query->select(
                                 'comments.comment',
-                                'comments.user_id'
+                                'comments.user_id',
+                                'comments.id'                                
                             )
-                            ->leftJoin('users', function($q) {
-                                $q->on('users.id', 'comments.user_id');
+                            ->with('commentlikes', function($q) {
+                                $q->select(
+                                'commentlikes.commnet_id', 
+                                'commentlikes.user_id',
+                                'commentlikes.liked'
+                            )->where('commentlikes.comment_id', 'comments.id');
                             });
                         },
                     ]);                    
