@@ -40,23 +40,7 @@ class PostController extends Controller
                     ->leftJoin('post_trans', function($q) {
                         $q->on('post_trans.post_id', 'posts.id');
                         $q->where('post_trans.lang', request()->query('lang'));
-                    })
-                    ->with([
-                        'comments' => function ($query) {
-                            $query->select(
-                                'comments.comment',
-                                'comments.user_id',
-                                'comments.id'                                
-                            )
-                            ->with('commentlikes', function($q) {
-                                $q->select(
-                                'commentlikes.commnet_id', 
-                                'commentlikes.user_id',
-                                'commentlikes.liked'
-                            )->where('commentlikes.comment_id', 'comments.id');
-                            });
-                        },
-                    ]);                    
+                    });                    
         if(request()->query('id')) {
             $query->where('posts.id', 'LIKE', '%'.request()->query('id').'%');
         }
@@ -75,13 +59,13 @@ class PostController extends Controller
             $posts = $query->paginate(10)->withQueryString();
         } 
 
-        return $posts;
+        return $query->get();
     }
 
     public function store(Request $request)
     {
         $post_file = $request->file('image');
-        $image_path = $post_file[0]->store('posts', 'public');
+        $image_path = $post_file->store('posts', 'public');
 
         $post = Post::create([
             'slug' => Str::slug(json_decode($request->lang, true)['en']['title']),
@@ -89,6 +73,7 @@ class PostController extends Controller
             'blogger_id' => $request->blogger_id,
             'visits' => 0
         ]);
+
 
         foreach(json_decode($request->lang, true) as $key=>$lang) {
             PostTrans::create([
@@ -203,7 +188,21 @@ class PostController extends Controller
             //         $q->where('blogger_trans.lang', request()->query('lang'));
             //     });
             // },
-            'comments'
+            'comments' => function ($query) {
+                $query->select(
+                    'comments.comment',
+                    'comments.user_id',
+                    'comments.post_id',
+                    'comments.id'                                
+                )
+                ->with('comment_likes', function($q) {
+                    $q->select(
+                        'comment_likes.comment_id',
+                        'comment_likes.user_id', 
+                        'comment_likes.liked'
+                    );
+                });
+            }
         ])
         ->leftJoin('post_trans', function($q) {
             $q->on('post_trans.post_id', 'posts.id');

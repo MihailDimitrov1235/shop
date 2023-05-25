@@ -139,6 +139,9 @@ Route::prefix('comments')->group(function () {
     Route::post('/', [CommentController::class, 'store']);
     Route::delete('/{id}', [CommentController::class, 'delete']);
     Route::put('/{id}', [CommentController::class, 'edit']);
+    Route::patch('/like', [CommentLikesController::class, 'like']);
+    Route::patch('/dislike', [CommentLikesController::class, 'dislike']);
+    Route::delete('/clear', [CommentLikesController::class, 'delete']);
 });
 
 Route::prefix('bloggers')->group(function () {
@@ -173,10 +176,4 @@ Route::prefix('authors')->group(function () {
     Route::put('/{id}', [AuthorController::class, 'edit']);
     Route::get('/requests', [AuthorController::class, 'getRequests']);
     Route::put('/', [AuthorController::class, 'approve']);
-});
-//dont know if it should be public or not
-Route::prefix('comments')->group(function(){
-    Route::put('/like', [CommentLikesController::class, 'like']);
-    Route::put('/dislike', [CommentLikesController::class, 'dislike']);
-    Route::delete('/delete', [CommentLikesController::class, 'delete']);
 });
