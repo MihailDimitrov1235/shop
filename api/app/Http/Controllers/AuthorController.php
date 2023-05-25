@@ -7,7 +7,8 @@ use App\Models\{
     Author,
     AuthorTrans,
     User,
-    Role
+    Role,
+    Cart
 };
 
 class AuthorController extends Controller
