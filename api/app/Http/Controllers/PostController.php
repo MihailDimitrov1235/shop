@@ -195,6 +195,13 @@ class PostController extends Controller
                     'comments.post_id',
                     'comments.id'                                
                 )
+                ->with('user', function($q) {
+                    $q->select(
+                        'users.id',
+                        'users.name',
+                        // 'users.image_path'
+                    );
+                })
                 ->with('comment_likes', function($q) {
                     $q->select(
                         'comment_likes.comment_id',
