@@ -66,7 +66,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post_file = $request->file('image');
-        $image_path = $post_file->store('posts', 'public');
+        $image_path = $post_file[0]->store('posts', 'public');
 
         $post = Post::create([
             'slug' => Str::slug(json_decode($request->lang, true)['en']['title']),
