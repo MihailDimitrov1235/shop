@@ -40,7 +40,8 @@ class PostController extends Controller
                     ->leftJoin('post_trans', function($q) {
                         $q->on('post_trans.post_id', 'posts.id');
                         $q->where('post_trans.lang', request()->query('lang'));
-                    });                    
+                    });
+
         if(request()->query('id')) {
             $query->where('posts.id', 'LIKE', '%'.request()->query('id').'%');
         }
@@ -59,7 +60,7 @@ class PostController extends Controller
             $posts = $query->paginate(10)->withQueryString();
         } 
 
-        return $query->get();
+        return $posts;
     }
 
     public function store(Request $request)
