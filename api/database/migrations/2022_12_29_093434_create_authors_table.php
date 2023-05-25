@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');;
             $table->string('phone');
-            $table->string('email')->unique();
             $table->boolean('approved')->default(false);
             $table->timestamps();
         });

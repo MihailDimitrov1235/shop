@@ -12,7 +12,6 @@ class Author extends Model
 
     protected $fillable = [
         'phone',
-        'email',
         'approved'
     ];
 

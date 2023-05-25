@@ -11,7 +11,6 @@ class Blogger extends Model
 
     protected $fillable = [
         'phone',
-        'email',
         'links',
         'image_path',
         'approved'

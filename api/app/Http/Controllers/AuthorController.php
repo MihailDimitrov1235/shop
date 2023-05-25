@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{
     Author,
-    AuthorTrans
+    AuthorTrans,
+    User,
+    Role
 };
 
 class AuthorController extends Controller
@@ -70,9 +72,22 @@ class AuthorController extends Controller
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
+        $roleId = Role::where('name', 'Author')->first()->id;
+
+        $user = User::create([
+            'name' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role_id' => $roleId
+        ]);
+
+        Cart::create(['user_id' => $user->id]);
+
+        // $token = $user->createToken('authToken')->plainTextToken;
+
         $author = Author::create([
             'phone' => $request->phone,
-            'email' => $request->email
+            'user_id' => $user->id,
         ]);
 
         foreach($request->lang as $key=>$lang) {
@@ -80,13 +95,14 @@ class AuthorController extends Controller
             AuthorTrans::create([
                 'name' => $lang['name'],
                 'author_id' => $author->id,
-                'user_id' => $request->user_id,
                 'lang' => $key
             ]);
         }
 
 
         return response()->json(['author' => $author], 200); 
+
+        // return response()->json(['token' => $token, 'user' => $user], 200);
     }
 
     public function delete(Request $request)

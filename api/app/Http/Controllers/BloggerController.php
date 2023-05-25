@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\{
     Blogger,
-    BloggerTrans
+    BloggerTrans,
+    User,
+    Role
 };
 
 class BloggerController extends Controller
@@ -38,6 +40,7 @@ class BloggerController extends Controller
             'email' => $request->email,
             'links' => $request->links,
             'image_path' => $image_path,
+            'user_id' => $request->user_id,
         ]);
         foreach(json_decode($request->lang, true) as $key=>$lang) {
             BloggerTrans::create([
@@ -45,10 +48,14 @@ class BloggerController extends Controller
                 'occupation' => $lang['occupation'],
                 'description' => $lang['description'],
                 'blogger_id' => $blogger->id,
-                'user_id' => $request->user_id,
                 'lang' => $key
             ]);
         }
+
+        $user = User::getById($request->user_id);
+        $roleId = Role::where('name', 'Blogger')->first()->id;
+        $user->role = $roleId;
+        $user->update();
         
         // return $blogger;
     }
