@@ -14,6 +14,7 @@ use App\Http\Controllers\{
     PostController,
     CommentController,
     BloggerController,
+    CommentLikesController,
 };
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -172,4 +173,10 @@ Route::prefix('authors')->group(function () {
     Route::put('/{id}', [AuthorController::class, 'edit']);
     Route::get('/requests', [AuthorController::class, 'getRequests']);
     Route::put('/', [AuthorController::class, 'approve']);
+});
+//dont know if it should be public or not
+Route::prefix('comments')->group(function(){
+    Route::put('/like', [CommentLikesController::class, 'like']);
+    Route::put('/dislike', [CommentLikesController::class, 'dislike']);
+    Route::delete('/delete', [CommentLikesController::class, 'delete']);
 });
