@@ -229,9 +229,6 @@ class ProductController extends Controller
     public function edit(Request $request, $id){
 
         $product = Product::findOrFail($id);
-
-        
-
         foreach(json_decode($request->lang, true) as $key=>$lang) {
             $productTrans = ProductTrans::where([['product_id', $id], ['lang', $key]])->firstOrFail();
             $productTrans->name = $lang['name'];
@@ -258,12 +255,25 @@ class ProductController extends Controller
 
 
         if($request->hasFile('picture')){
-            //Storage::delete('public/'.$product->image_path);
+            Storage::delete('public/'.$product->files()->getFirst()->path);
             $product_file = $request->file('picture');
+            // $current_file = ProductFile::where([['parent_id', $product->id],['type', Product::class]]);
+            // Storage::delete('public/'.$current_file->path);
             $this->uploadProductFiles($product_file, Product::class, $product->id);
         }
-        
+
+        return response()->json(['message' => 'Edited'], 200);
+    }
+
+    public function editParts(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
         if($request->has('parts')){
+            // $product->files()->where('', '>', 1)->get()->each(function ($file) {
+            //     Storage::delete('public/' . $file->path);
+            //     $file->delete();
+            // });
             ProductPart::where('product_id', $id)->delete();
             foreach(json_decode($request->parts) as $key=>$part) {
                 $createdPart = ProductPart::create([
@@ -276,8 +286,6 @@ class ProductController extends Controller
                 $this->uploadProductFiles($parts_file, ProductPart::class, $createdPart->id);
             }
         }
-
-        return response()->json(['message' => 'Edited'], 200);
     }
 
     public function delete(Request $request) {
