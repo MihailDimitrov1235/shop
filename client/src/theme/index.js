@@ -5,6 +5,8 @@ const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
 
 const bordoRedColor = createColor('#96011c');
 
+const font =  "'Exo 2', sans-serif";
+
 const theme = createTheme({
   palette: {
     bordoRed: bordoRedColor,
@@ -57,8 +59,8 @@ const theme = createTheme({
     '0 0 1px 0 rgba(0,0,0,0.31), 0 22px 34px -8px rgba(0,0,0,0.25)',
     '0 0 1px 0 rgba(0,0,0,0.31), 0 24px 36px -8px rgba(0,0,0,0.25)'
   ],
-  typography: {
-    fontFamily: ['MD Nichrome'],
+  typography: { 
+    fontFamily: font,
     hero: {
       fontWeight: 700,
       '@media (min-width:0px)': { // xs
@@ -324,7 +326,55 @@ const theme = createTheme({
         },
       },
     },
-  }
+  },
+  // overrides: {
+  //   MuiCssBaseline: {
+  //     '@global': {
+  //       '@font-face': [
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Infra.otf") format("opentype")',
+  //           fontWeight: 100,
+  //         },
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Thin.otf") format("opentype")',
+  //           fontWeight: 200,
+  //         },
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Light.otf") format("opentype")',
+  //           fontWeight: 300,
+  //         },
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Regular.otf") format("opentype")',
+  //           fontWeight: 400,
+  //         },
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Dark.otf") format("opentype")',
+  //           fontWeight: 500,
+  //         },
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Bold.otf") format("opentype")',
+  //           fontWeight: 600,
+  //         },
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Black.otf") format("opentype")',
+  //           fontWeight: 700,
+  //         },
+  //         {
+  //           fontFamily: 'MDNichrome',
+  //           src: 'url("../fonts/MDNichromeTest-Ultra.otf") format("opentype")',
+  //           fontWeight: 800,
+  //         },
+  //       ]
+  //     },
+  //   },
+  // },
 });
 
 export default theme;

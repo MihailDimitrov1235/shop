@@ -5,6 +5,7 @@ import theme from './theme';
 import routes from './routes';
 import AuthProvider from './providers/AuthProvider';
 import MessageProvider from './providers/MessageProvider';
+import './App.css';
 
 function App() {
   const content = useRoutes(routes);
