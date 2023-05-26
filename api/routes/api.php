@@ -55,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/', [ProductController::class, 'delete']);
         Route::put('/{id}', [ProductController::class, 'edit']);
         Route::patch('/{id}', [ProductController::class, 'approve']);
+        Route::get('/similar', [ProductController::class, 'similarProducts']);
     });
 
     Route::prefix('categories')->group(function () {
@@ -179,3 +180,11 @@ Route::prefix('authors')->group(function () {
     Route::put('/', [AuthorController::class, 'approve']);
 });
 Route::post('visit', [PostController::class, 'visit']);
+Route::prefix('products')->group(function () {
+    Route::post('/', [ProductController::class, 'store']);
+    Route::post('/upload', [ProductController::class, 'uploadFiles']);
+    Route::delete('/', [ProductController::class, 'delete']);
+    Route::put('/{id}', [ProductController::class, 'edit']);
+    Route::patch('/{id}', [ProductController::class, 'approve']);
+    Route::get('/similar', [ProductController::class, 'similarProducts']);
+});

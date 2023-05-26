@@ -358,4 +358,20 @@ class ProductController extends Controller
         $product->approved = true;
         $product->update();
     }
+    public function similarProducts(Request $request)
+    {
+         $category_ids = $request->categories;
+
+         $query = Product::select(
+            'products.id',
+            'categories.category_id'
+         )
+            ->withCount([
+                'categories' => function ($q) use ($category_ids) {
+                        $q->whereIn('category_id', $category_ids);
+                }
+            ]);
+
+        return $query->get();
+    }
 }
