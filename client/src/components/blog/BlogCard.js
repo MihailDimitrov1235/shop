@@ -7,6 +7,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const BlogCard = ({ post }) => {
 
+    console.log(post)
     return (
         <Box sx={{
             flex: 1,
@@ -22,7 +23,7 @@ const BlogCard = ({ post }) => {
                         title={post.title}
                     />
                     <CardContent>
-                        <Stack direction={'row'} spacing={1}>
+                        <Stack direction={'row'} flexWrap={'wrap'} gap={1}>
                             {post.categories.map((category, idx) => (
                                 <Chip
                                     sx={{
@@ -46,7 +47,7 @@ const BlogCard = ({ post }) => {
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <PersonIcon />
                             <Typography variant="subtitle1">
-                                {post.author}
+                                {post.blogger.name}
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
