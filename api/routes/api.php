@@ -178,3 +178,4 @@ Route::prefix('authors')->group(function () {
     Route::get('/requests', [AuthorController::class, 'getRequests']);
     Route::put('/', [AuthorController::class, 'approve']);
 });
+Route::post('visit', [PostController::class, 'visit']);

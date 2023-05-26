@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\{
     Post,
     PostTrans,
-    PostCategory
+    PostCategory,
+    PostVisits
 };
 
 class PostController extends Controller
@@ -157,7 +158,6 @@ class PostController extends Controller
             'posts.id',
             'posts.slug',
             'posts.image_path',
-            'posts.visits',
             //'posts.blogger_id',
             'post_trans.title',
             'post_trans.subtitle',
@@ -175,6 +175,9 @@ class PostController extends Controller
                     $q->on('category_trans.category_id', 'post_categories.category_id');
                     $q->where('category_trans.lang', request()->query('lang'));
                 });
+            },
+            'visits' => function ($query) {
+                $query->get()->count();
             },
             // 'blogger' => function ($query) {
             //     $query->select(
@@ -250,5 +253,15 @@ class PostController extends Controller
         }
         
         return response()->json(['message' => 'Approved'], 200);
+    }
+    public function visit(Request $request)
+    {
+        $visit = PostVisits::where([['user_id', $request->user_id],['post_id', $request->post_id]]);
+        if($visit === null){
+            PostVisits::create([
+                'user_id' => $request->user_id,
+                'post_id' => $request->post_id
+            ]);
+        }
     }
 }

@@ -39,4 +39,8 @@ class Post extends Model
     {
         return $this->hasMany(PostCategory::class);
     }
+    public function visits()
+    {
+        return $this->hasMany(PostVisits::class);
+    }
 }
