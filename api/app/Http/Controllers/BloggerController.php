@@ -19,7 +19,6 @@ class BloggerController extends Controller
         $query = Blogger::select(
             'bloggers.id as id',
             'bloggers.phone',
-            'bloggers.email',
             'bloggers.approved',
             'blogger_trans.name'
         )
@@ -37,7 +36,6 @@ class BloggerController extends Controller
 
         $blogger = Blogger::create([
             'phone' => $request->phone,
-            'email' => $request->email,
             'links' => $request->links,
             'image_path' => $image_path,
             'user_id' => $request->user_id,

@@ -23,6 +23,7 @@ class PostController extends Controller
                         'posts.created_at',
                         'post_trans.title',
                         'post_trans.subtitle',
+                        'posts.blogger_id'
                     )
                     ->where('approved', true)
                     ->with([
@@ -37,6 +38,17 @@ class PostController extends Controller
                                 $q->where('category_trans.lang', request()->query('lang'));
                             });
                         },
+                        'blogger' => function ($query) {
+                            $query->select(
+                                'bloggers.id',
+                                'bloggers.image_path',
+                                'blogger_trans.name'
+                            )
+                            ->leftJoin('blogger_trans', function($q) {
+                                $q->on('blogger_trans.blogger_id', 'bloggers.id');
+                                $q->where('blogger_trans.lang', request()->query('lang'));
+                            });;
+                        }
                     ])
                     ->leftJoin('post_trans', function($q) {
                         $q->on('post_trans.post_id', 'posts.id');
@@ -73,7 +85,6 @@ class PostController extends Controller
             'slug' => Str::slug(json_decode($request->lang, true)['en']['title']),
             'image_path' => $image_path,
             'blogger_id' => $request->blogger_id,
-            'visits' => 0
         ]);
 
 
@@ -145,12 +156,12 @@ class PostController extends Controller
         return response()->json(['message' => 'Deleted'], 200);
     }
 
-    public function incrementVisits($id){
-        $post = Post::findOrFail($id); 
-        $post->visits = ($post->visits + 1);
-        $post->update();
-        return $post->visits;
-    }
+    // public function incrementVisits($id){
+    //     $post = Post::findOrFail($id); 
+    //     $post->visits = ($post->visits + 1);
+    //     $post->update();
+    //     return $post->visits;
+    // }
 
     public function getBySlug(Request $request, $slug)
     {

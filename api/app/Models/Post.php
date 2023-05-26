@@ -18,13 +18,13 @@ class Post extends Model
     protected $fillable = [
         'slug',
         'image_path',
-        //'blogger_id',
+        'blogger_id',
         'visits',
         'approved'
     ];
 
     public function blogger() {
-        return $this->BelongsTo(Blogger::class, 'blogger_id');
+        return $this->BelongsTo(Blogger::class);
     }
 
     public function trans() {
