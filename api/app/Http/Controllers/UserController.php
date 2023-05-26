@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{
     User,
     Role,
@@ -138,12 +139,45 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
+        if($request->hasFile('image')){
+            Storage::delete('public/'.$user->image_path);
+            $post_file = $request->file('image');
+            $image_path = $post_file->store('posts', 'public');
+            $user->image_path = $image_path;
+        }
+
         $user->update([
             'name' => $request->name,
             'email' => $request->email
         ]);
 
         return response()->json(['user' => $user], 200);
+    }
+
+    public function editPassoword(Request $request, $id)
+    {
+
+        $validator = validator($request->only('password'), 
+        [
+            'password' => 'required|string|min:8'
+        ],
+        [
+            'password' => 'password-change-error'
+        ]
+    );
+
+    if ($validator->fails()) {
+        return response(['errors' => $validator->errors()->all()], 422);
+    }
+
+    $user = User::findOrFail($id);
+
+    $user->update([
+        'password' => bcrypt($request->password)
+    ]);
+
+    return response()->json(['user' => $user], 200);
+
     }
 
     public function delete(Request $request)
