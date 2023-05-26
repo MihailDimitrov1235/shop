@@ -88,6 +88,10 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+
+        $avatar_file = $request->file('image');
+        $avatar_path = $avatar_file->store('users', 'public');
+
         $validator = validator($request->only('name', 'email', 'password'), 
             [
                 'name' => 'required|string',
@@ -109,7 +113,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role_id' => $roleId
+            'role_id' => $roleId,
+            'avatar_path' => $avatar_path
         ]);
 
         return response()->json(['user' => $user], 200);
