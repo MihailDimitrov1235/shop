@@ -358,19 +358,35 @@ class ProductController extends Controller
         $product->approved = true;
         $product->update();
     }
-    public function similarProducts(Request $request)
-    {
-         $category_ids = $request->categories;
 
-         $query = Product::select(
-            'products.id',
-            'categories.category_id'
-         )
-            ->withCount([
-                'categories' => function ($q) use ($category_ids) {
-                        $q->whereIn('category_id', $category_ids);
-                }
-            ]);
+    public function similarProducts($id)
+    {
+        $product = Product::findOrFail($id);
+        $category_ids = $product->categories()->get()->map(function ($category) {
+            return $category->category_id;
+        });
+
+        if($category_ids) {
+            $query = Product::select(
+                        'products.id',
+                        'product_trans.name as name',
+                        'product_trans.shortDescription'
+                    )
+                    ->whereNot('products.id', $id)
+                    ->with('files')
+                    ->withCount([
+                        'categories' => function ($q) use ($category_ids) {
+                                $q->whereIn('category_id', $category_ids);
+                        }
+                    ])
+                    ->leftJoin('product_trans', function($q) {
+                        $q->on('product_trans.product_id', 'products.id');
+                        $q->where('product_trans.lang', request()->query('lang'));
+                    })
+                    ->orderBy('categories_count', 'desc');
+        }else {
+            return [];
+        }
 
         return $query->get();
     }

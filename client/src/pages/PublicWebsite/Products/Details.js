@@ -325,7 +325,7 @@ const ProductPage = () => {
                 >
                     {t("simular-products")}
                 </Typography>
-                <ProductDisplay />
+                <ProductDisplay id={id} />
             </Container>
         </>
     );

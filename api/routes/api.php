@@ -55,7 +55,6 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/', [ProductController::class, 'delete']);
         Route::put('/{id}', [ProductController::class, 'edit']);
         Route::patch('/{id}', [ProductController::class, 'approve']);
-        Route::get('/similar', [ProductController::class, 'similarProducts']);
     });
 
     Route::prefix('categories')->group(function () {
@@ -125,6 +124,7 @@ Route::prefix('authors')->group(function () {
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
+    Route::get('/similar/{id}', [ProductController::class, 'similarProducts']);
     Route::get('/{id}', [ProductController::class, 'getById']);
 });
 

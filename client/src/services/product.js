@@ -67,13 +67,22 @@ function uploadFiles(data) {
     });
 }
 
+function similarProducts(id, lang='bg') {
+    const url = `${servicesHelper.url}/products/similar/${id}?lang=${lang}`;
+
+    return axios.get(url, {
+        headers: servicesHelper.header()
+    });
+}
+
 const productService = {
     getProducts,
     createProduct,
     editProduct,
     deleteProducts,
     getProductById,
-    uploadFiles
+    uploadFiles,
+    similarProducts
 }
 
 export default productService;

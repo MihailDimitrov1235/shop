@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import ProductCard from './ProductCard';
 import ProductCardTest from './ProductCardTest';
 import { Container } from '@mui/system';
 import productService from '../../../services/product';
@@ -56,28 +57,22 @@ const useStyles = makeStyles({
 
 
 
-const ProductDisplay = () => {
-
-
+const ProductDisplay = ({
+    id = null
+}) => {
     const classes = useStyles();
     const [products, setProducts] = useState([]);
     const { i18n } = useTranslation();
 
     useEffect(() => {
-        const pagination = {
-            page: 1,
-            total: 10
-        }
-
-        productService.getProducts(pagination, [], {}, i18n.language)
+        productService.similarProducts(id, i18n.language)
             .then((res) => {
-                setProducts(res.data.data);
-                //setTotal(res.data.total);
+                setProducts(res.data);
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             })
-    }, []);
+    }, [id, i18n.language]);
     return (
         <>
             {/* <animated.div {...bind()} style={{transform}}>
@@ -89,7 +84,7 @@ const ProductDisplay = () => {
                 spaceBetween={50}
                 slidesPerView={3}
                 style={{
-                    padding:'30px'
+                    padding: '30px'
                 }}
                 breakpoints={{
                     // when window width is >= 0px
@@ -113,12 +108,17 @@ const ProductDisplay = () => {
                 pagination={{
                     el: '.swiper-pagination',
                     clickable: true,
-                    
+
                 }}
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >
-                <SwiperSlide className="swiperFixedWidth300">
+                {products.map((product, index) => (
+                    <SwiperSlide className="swiperFixedWidth300" key={index}>
+                        <ProductCard product={product} />
+                    </SwiperSlide>
+                ))}
+                {/* <SwiperSlide className="swiperFixedWidth300">
                     <ProductCardTest />
                 </SwiperSlide>
                 <SwiperSlide className="swiperFixedWidth300">
@@ -138,7 +138,7 @@ const ProductDisplay = () => {
                 </SwiperSlide>
                 <SwiperSlide className="swiperFixedWidth300">
                     <ProductCardTest />
-                </SwiperSlide>
+                </SwiperSlide> */}
             </Swiper>
             <div className='swiper-button-container'>
                 <div className="icon-arrow-long-right swiper-button-next"></div>
