@@ -1,29 +1,41 @@
 import { useState, useRef, useEffect } from 'react';
-import { Box, Typography, IconButton, Button } from '@mui/material';
+import { Box, Typography, IconButton, Button, Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import 'moment/locale/bg';
 import { useTranslation } from 'react-i18next';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const Comment = ( {props} ) =>{
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    moment.locale(i18n.language);
 
     const userData = {
         id: props.userId,
-        name: 'Elon musk',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRD3XP0y2U4ZVpcGsaFUu-tmM7-aD0Luj6FgQgqdJc&s'
+        name: props.user.name,
+        image: props.user.avatar_path
     }
 
     const commentData = {
         id: props.commentId,
-        createdAt: '2 hours ago',
-        text:"Sometimes I think back on my experience with Inuyasha and my conclusions about it have always been conflicted. It was the first anime that I watched whole heartedly, and it was the first thing that brought me into the realm of Japanese media and culture. I've come to love anime and manga, appreciate the history and the different styles and subtleties that come with every genre and now consider it a very large and colorful part of my life. Naturally I look back on Inuyasha with a sense of fondness,the yellow volumes and DVD's on my shelves only a small testament to the dedication I Sometimes I think back on my experience with Inuyasha and my conclusions about it have always been conflicted. It was the first anime that I watched whole heartedly, and it was the first thing that brought me into the realm of Japanese media and culture. I've come to love anime and manga, appreciate the history and the different styles and subtleties that come with every genre and now consider it a very large and colorful part of my life. Naturally I look back on Inuyasha with a sense of fondness,the yellow volumes and DVD's on my shelves only a small testament to the dedication I "
+        createdAt: moment(props.created_at).fromNow(),
+        text: props.comment,
     }
 
     const [liked, setLiked] = useState(false)
     const [disliked, setDisliked] = useState(false)
-    const [likes, setLikes] = useState(3)
+    const [likes, setLikes] = useState(props.comment_likes.length)
+
+    props.comment_likes.forEach(element => {
+        if(element.liked){
+            // TODO CHECK ID OF CURRENT USER
+            setLikes(likes+1)
+        }else{
+            setLikes(likes-1)
+        }
+    });
 
     const textContainerRef = useRef(null)
     const [isLong, setIsLong] = useState(false)
@@ -70,8 +82,13 @@ const Comment = ( {props} ) =>{
 
     return(
         <Box display={'flex'} sx={{p:2}}>
+            
             <Box flex={1} sx={{mr:2}}>
-                <img style={{borderRadius:'5px'}} src={userData.image}/>
+            {userData.image? (
+                <Avatar sx={{width:'100%', color:'white', bgcolor:'#96011c'}} src={userData.image} variant='rounded'></Avatar>
+            ):(
+                <Avatar sx={{width:'100%', height:'100%', color:'white', bgcolor:'#96011c', overflow:'hidden', fontSize:'60px'}} variant='rounded'>{userData.name[0]}</Avatar>
+            )}
             </Box>
             <Box flex={11}>
                 <Box display={'flex'}>

@@ -36,6 +36,7 @@ class CommentController extends Controller
             'user_id' => $request->user_id,
             'post_id' => $request->post_id
         ]);
+        return $comment;
     }
 
     public function edit(Request $request, $id)

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Card, Typography, Container, Stack, Chip, Pagination, TextField, Button } from '@mui/material'
 import Comment from '../../../components/blog/Comment';
 import blogService from '../../../services/blog';
+import commentService from '../../../services/comment';
 import moment from 'moment';
 
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,7 +13,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const BlogPost = () => {
     const { slug } = useParams();
     const { t, i18n } = useTranslation();
-    const [writingComment, setWrittingComment] = useState(false);
     const [post, setPost] = useState({
         title: '',
         subtitle: '',
@@ -24,7 +24,7 @@ const BlogPost = () => {
     })
     const newCommentRef = useRef(null);
 
-    useEffect(() => {
+    function newRequest(){
         blogService.getBySlug(slug, i18n.language)
             .then((res) => {
                 setPost(res.data);
@@ -33,13 +33,29 @@ const BlogPost = () => {
             .catch((error) => {
                 console.log(error);
             })
+    }
+
+    useEffect(() => {
+        newRequest()
     }, [i18n.language])
 
     const handleSubmitComment = () => {
         if (newCommentRef.current.value) {
-            console.log(newCommentRef.current.value)
+            let data = {
+                'user_id':1,
+                'post_id':post.id,
+                'comment':newCommentRef.current.value
+            }
+            commentService.createComment(data)
+                .then((res) => {
+                    console.log(res.data);
+                    newRequest();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+
             newCommentRef.current.value = ''
-            setWrittingComment(false)
         }
 
     }
@@ -50,10 +66,6 @@ const BlogPost = () => {
 
     return (
         <Container>
-            {/* <Card sx={{ mt:10, px:3 }}>
-                <Typography variant="h3" sx={{ my:4}}>{post.title}</Typography>
-                <Typography variant="subtitle1" sx={{ mb:4 }}>{post.description}</Typography>
-            </Card> */}
             <Box sx={{ mb: 3, display: { md: 'block', lg: 'flex' } }}>
                 {/* Main Content */}
                 <Card sx={{ flex: 6, mt: 10, mr: 3, p: 3 }}>
@@ -78,9 +90,9 @@ const BlogPost = () => {
                     <Box sx={{ display: { md: 'flex', lg: 'block' } }}>
                         <Box flex={1}>
                             {/* <Box component={Link} to={"/profile/" + post.author.id} sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <PersonIcon />
-                        <Typography variant="h6" sx={{ ml: 1 }}>{post.author.name}</Typography>
-                    </Box> */}
+                                <PersonIcon />
+                                <Typography variant="h6" sx={{ ml: 1 }}>{post.author.name}</Typography>
+                            </Box> */}
                             <Box sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <CalendarMonthIcon />
                                 <Typography variant="h6" sx={{ ml: 1 }}>{moment(post.created_at).format('DD.MM.YYYY')}</Typography>
