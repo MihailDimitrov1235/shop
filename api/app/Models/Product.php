@@ -18,7 +18,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'approved'
+        'active'
     ];
 
     public function trans()
