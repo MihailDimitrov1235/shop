@@ -9,8 +9,11 @@ import {
     Tooltip
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ProductCard = ({ product }) => {
+    const { t } = useTranslation();
+
     const {
         id,
         name = "Lizard",
@@ -43,7 +46,9 @@ const ProductCard = ({ product }) => {
                     width: "auto",
                     fontSize: "12px",
                     marginTop: '30px',
-                }}>More details</Button>
+                }}>
+                    {t('more-details')}
+                </Button>
             </CardActions>
         </Card>
     );

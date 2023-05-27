@@ -11,16 +11,17 @@ import {
 import { Link } from 'react-router-dom';
 import { animated, useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
+import { useTranslation } from 'react-i18next';
 
 function DisplayCard({ product }) {
-
-    const [{transform}, api] = useSpring( () => ({
+    const { t } = useTranslation();
+    const [{ transform }, api] = useSpring(() => ({
         transform: 'scale(1)',
 
     }));
 
     const bind = useGesture({
-        onHover: ({ hovering }) => api({transform:hovering ? 'scale(1.1)': 'scale(1)'}),
+        onHover: ({ hovering }) => api({ transform: hovering ? 'scale(1.1)' : 'scale(1)' }),
     })
 
     const {
@@ -30,8 +31,8 @@ function DisplayCard({ product }) {
         files = [{ path: 'https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp' }]
     } = product;
 
-    return(
-        <animated.div {...bind()} style={{transform}}>
+    return (
+        <animated.div {...bind()} style={{ transform }}>
             <Card sx={{ height: '330px', marginLeft: 'auto', marginRight: 'auto' }}>
                 <CardActionArea component={Link} to={`/products/${id}`} >
                     <CardMedia
@@ -47,7 +48,7 @@ function DisplayCard({ product }) {
                     </Typography>
                     <Tooltip title={shortDescription}>
                         <Typography variant='body2' color='text.secondary'>
-                            {shortDescription}
+                            <div dangerouslySetInnerHTML={{ __html: shortDescription }} />
                         </Typography>
                     </Tooltip>
                 </CardContent>
@@ -56,7 +57,9 @@ function DisplayCard({ product }) {
                         width: 'auto',
                         fontSize: "12px",
                         marginTop: '30px',
-                    }}>More details</Button>
+                    }}>
+                        {t('more-details')}
+                    </Button>
                 </CardActions>
             </Card>
         </animated.div>
