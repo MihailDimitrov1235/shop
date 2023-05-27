@@ -166,7 +166,6 @@ const routes = [
         element: <PageLayout title='requests' />,
         children: [
           { path: '', element: <RequestPage />},
-          { path: 'authors', element: <RequestAuthor />},
           { path: 'products', element: <RequestProduct/>},
           { path: 'posts', element: <RequestPost/>},
         ] 

@@ -67,8 +67,6 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/', [AuthorController::class, 'store']);
         Route::delete('/', [AuthorController::class, 'delete']);
         Route::put('/{id}', [AuthorController::class, 'edit']);
-        Route::get('/requests', [AuthorController::class, 'getRequests']);
-        Route::put('/', [AuthorController::class, 'approve']);
     });
 
     Route::prefix('cart')->group(function () {
