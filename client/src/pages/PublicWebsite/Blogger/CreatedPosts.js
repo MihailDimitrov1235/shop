@@ -50,7 +50,7 @@ function CreatedPosts({ posts }) {
       <TableBody>
         {posts.map((post, index) => (
           <Link
-            to={`/blog/${post.id}`}
+            to={`/blog/${post.slug}`}
             style={{
               display: "contents",
             }}
@@ -96,13 +96,13 @@ function CreatedPosts({ posts }) {
                   textAlign: "center",
                 }}
               >
-                {/* <Typography
+                <Typography
                   sx={{
                     fontSize: "20px",
                   }}
                 >
-                  {post.visits}
-                </Typography> */}
+                  {post.visits_count}
+                </Typography>
               </TableCell>
             </TableRow>
           </Link>

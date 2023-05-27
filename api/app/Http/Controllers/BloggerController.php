@@ -95,11 +95,15 @@ class BloggerController extends Controller
             'posts' => function ($query) {
                 $query->select(
                     'posts.id',
+                    'posts.slug',
                     'posts.image_path',
                     'posts.blogger_id',
                     'post_trans.title',
                     'post_trans.subtitle'
                 )
+                ->withCount([
+                    'visits'
+                ])
                 ->leftJoin('post_trans', function($q) {
                     $q->on('post_trans.post_id', 'posts.id');
                     $q->where('post_trans.lang', request()->query('lang'));

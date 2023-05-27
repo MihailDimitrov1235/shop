@@ -175,6 +175,9 @@ class PostController extends Controller
             'post_trans.content'
         )
         ->where('slug', $slug)
+        ->withCount([
+            'visits'
+        ])
         ->with([
             'categories' => function ($query) {
                 $query->select(
@@ -187,9 +190,7 @@ class PostController extends Controller
                     $q->where('category_trans.lang', request()->query('lang'));
                 });
             },
-            'visits' => function ($query) {
-                $query->get()->count();
-            },
+                
             'blogger' => function ($query) {
                 $query->select(
                     'bloggers.id as id',
@@ -266,7 +267,7 @@ class PostController extends Controller
     public function visit(Request $request)
     {
         $visit = PostVisits::where([['user_id', $request->user_id],['post_id', $request->post_id]]);
-        if($visit === null){
+        if(!$visit->exists()){
             PostVisits::create([
                 'user_id' => $request->user_id,
                 'post_id' => $request->post_id

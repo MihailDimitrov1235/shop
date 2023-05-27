@@ -19,9 +19,11 @@ import commentService from "../../../services/comment";
 import moment from "moment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import useMessage from "../../../hooks/useMessage";
+import useAuth from "../../../hooks/useAuth";
 
 const BlogPost = () => {
     const { slug } = useParams();
+    const { user } = useAuth();
     const { t, i18n } = useTranslation();
     const [post, setPost] = useState({
         title: "",
@@ -50,6 +52,19 @@ const BlogPost = () => {
                 console.log(error);
             });
     }
+
+    useEffect(() => {
+      if(user && post){
+        blogService.visit({ user_id: user.id, post_id: post.id})
+        .then((res) => {
+            console.log(res.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+      }
+      
+  }, [user, post]);
 
     useEffect(() => {
         newRequest();
@@ -169,6 +184,22 @@ const BlogPost = () => {
                                 <CalendarMonthIcon />
                                 <Typography variant="h6" sx={{ ml: 1 }}>
                                     {moment(post.created_at).format("DD.MM.YYYY")}
+                                </Typography>
+                            </Box>
+                            <Box
+                                sx={{
+                                    mt: 3,
+                                    display: "flex",
+                                    flexDirection: 'column',
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <Typography variant="h6" sx={{ ml: 1 }}>
+                                    {t("visits")}:
+                                </Typography>
+                                <Typography variant="h6" sx={{ ml: 1 }}>
+                                    {post.visits_count}
                                 </Typography>
                             </Box>
                         </Box>

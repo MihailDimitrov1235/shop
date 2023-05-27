@@ -74,13 +74,22 @@ function getBySlug(slug, lang='bg') {
     });
 }
 
+function visit(data) {
+    const url = `${servicesHelper.url}/posts/visit`;
+
+    return axios.post(url, data, {
+        headers: servicesHelper.header()
+    });
+}
+
 const blogService = {
     getPosts,
     getRequests,
     createPost,
     deletePosts,
     approvePosts,
-    getBySlug
+    getBySlug,
+    visit
 }
 
 export default blogService;
