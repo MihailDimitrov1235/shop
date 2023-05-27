@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import ProductCard from './ProductCard';
-import ProductCardTest from './ProductCardTest';
-import { Container } from '@mui/system';
-import productService from '../../../services/product';
+import DisplayCard from './DisplayCard';
+import productService from '../../../../services/product';
 import { useTranslation } from 'react-i18next';
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -115,7 +112,7 @@ const ProductDisplay = ({
             >
                 {products.map((product, index) => (
                     <SwiperSlide className="swiperFixedWidth300" key={index}>
-                        <ProductCard product={product} />
+                        <DisplayCard product={product} />
                     </SwiperSlide>
                 ))}
                 {/* <SwiperSlide className="swiperFixedWidth300">
