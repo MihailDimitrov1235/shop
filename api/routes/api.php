@@ -89,6 +89,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::prefix('comments')->group(function () {
         Route::post('/', [CommentController::class, 'store']);
+        Route::patch('/like', [CommentLikesController::class, 'like']);
+        Route::patch('/dislike', [CommentLikesController::class, 'dislike']);
+        Route::delete('/clear', [CommentLikesController::class, 'clear']);
         Route::delete('/{id}', [CommentController::class, 'delete']);
         Route::put('/{id}', [CommentController::class, 'edit']);
     });
@@ -139,11 +142,11 @@ Route::prefix('bloggers')->group(function () {
 
 Route::prefix('comments')->group(function () {
     Route::post('/', [CommentController::class, 'store']);
-    Route::delete('/{id}', [CommentController::class, 'delete']);
-    Route::put('/{id}', [CommentController::class, 'edit']);
     Route::patch('/like', [CommentLikesController::class, 'like']);
     Route::patch('/dislike', [CommentLikesController::class, 'dislike']);
-    Route::delete('/clear', [CommentLikesController::class, 'delete']);
+    Route::delete('/clear', [CommentLikesController::class, 'clear']);
+    Route::delete('/{id}', [CommentController::class, 'delete']);
+    Route::put('/{id}', [CommentController::class, 'edit']);
 });
 
 Route::prefix('bloggers')->group(function () {
