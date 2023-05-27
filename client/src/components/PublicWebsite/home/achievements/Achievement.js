@@ -24,7 +24,7 @@ function Achievement(props) {
                     <img style={{objectFit:'cover', width:'100%'}} src='https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/calibre-1000/resources/images/design/Watch_Variation_06_qggoom_c_scale,w_1977.webp' />
                 </Box>
                 <Box flex={1} sx={{
-                    textAlign:!props.reverse? 'center' : 'left',
+                    textAlign:{md:'center', lg:!props.reverse? 'center' : 'left'},
                 }}>
                     <Box sx={{ 
                         p:{lg:0, xl:10}, 
