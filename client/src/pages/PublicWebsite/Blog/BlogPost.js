@@ -30,20 +30,24 @@ const BlogPost = () => {
         image_path: "",
         created_at: "",
         categories: [],
-        comments: [],
         blogger: {
             id: 0,
             name: "",
             image_path: "",
         },
     });
+    const [comments, setComments] = useState([]);
+    const [commentsTotal, setCommentsTotal] = useState(0);
     const newCommentRef = useRef(null);
     const { addMessage } = useMessage();
 
     function newRequest() {
         blogService.getBySlug(slug, i18n.language)
             .then((res) => {
-                setPost(res.data);
+                setPost(res.data.post);
+
+                setComments(res.data.comments.data);
+                setCommentsTotal(res.data.comments.total);
                 console.log(res.data);
             })
             .catch((error) => {
@@ -254,15 +258,15 @@ const BlogPost = () => {
             </Card>
 
             <Card sx={{ p: 2, mt: 4 }}>
-                {post.comments.length > 0 ? (
+                {comments.length > 0 ? (
                     <>
-                        {post.comments.map((comment) => (
-                            <Comment props={comment} />
+                        {comments.map((comment, index) => (
+                            <Comment props={comment} key={index} />
                         ))}
 
                         <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
                             <Pagination
-                                count={10}
+                                count={Math.ceil(commentsTotal / 10) || 1}
                                 size="medium"
                                 variant="outlined"
                                 onChange={handleCommentPageChange}
