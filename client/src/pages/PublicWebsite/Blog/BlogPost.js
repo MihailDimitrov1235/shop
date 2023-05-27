@@ -96,7 +96,9 @@ const BlogPost = () => {
                                 {post.blogger.image_path? (
                                     <Avatar sx={{ aspectRatio:'1/1', height:'auto', width:'100%', color:'white', bgcolor:'#96011c'}} src={`${process.env.REACT_APP_ASSETS}/${post.blogger.image_path}`} variant='rounded'></Avatar>
                                 ):(
-                                    <Avatar sx={{ aspectRatio:'1/1', height:'auto', width:'100%', color:'white', bgcolor:'#96011c', overflow:'hidden', fontSize:'60px'}} variant='rounded'>{post.blogger.name[0]}</Avatar>
+                                    post.blogger.name &&(
+                                        <Avatar sx={{ aspectRatio:'1/1', height:'auto', width:'100%', color:'white', bgcolor:'#96011c', overflow:'hidden', fontSize:'60px'}} variant='rounded'>{post.blogger.name[0].toUpperCase()}</Avatar>
+                                    )
                                 )}
                                 <Typography variant='h4'>{post.blogger.name}</Typography>
                             </Box>
