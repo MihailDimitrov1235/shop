@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Box, Card, Typography, Container, Stack, Chip, Pagination, TextField, Button } from '@mui/material'
+import { Box, Card, Typography, Container, Stack, Chip, Pagination, TextField, Button, Avatar } from '@mui/material'
 import Comment from '../../../components/blog/Comment';
 import blogService from '../../../services/blog';
 import commentService from '../../../services/comment';
 import moment from 'moment';
-
-import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const BlogPost = () => {
@@ -20,7 +18,12 @@ const BlogPost = () => {
         image_path: '',
         created_at: '',
         categories: [],
-        comments: []
+        comments: [],
+        blogger: {
+            id:0,
+            name:'',
+            image_path:''
+            }
     })
     const newCommentRef = useRef(null);
 
@@ -89,10 +92,14 @@ const BlogPost = () => {
 
                     <Box sx={{ display: { md: 'flex', lg: 'block' } }}>
                         <Box flex={1}>
-                            {/* <Box component={Link} to={"/profile/" + post.author.id} sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <PersonIcon />
-                                <Typography variant="h6" sx={{ ml: 1 }}>{post.author.name}</Typography>
-                            </Box> */}
+                            <Box component={Link} textAlign={'center'} to={"/profile/" + post.blogger.id} sx={{ mt: 3, display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center' }}>
+                                {post.blogger.image_path? (
+                                    <Avatar sx={{ aspectRatio:'1/1', height:'auto', width:'100%', color:'white', bgcolor:'#96011c'}} src={`${process.env.REACT_APP_ASSETS}/${post.blogger.image_path}`} variant='rounded'></Avatar>
+                                ):(
+                                    <Avatar sx={{ aspectRatio:'1/1', height:'auto', width:'100%', color:'white', bgcolor:'#96011c', overflow:'hidden', fontSize:'60px'}} variant='rounded'>{post.blogger.name[0]}</Avatar>
+                                )}
+                                <Typography variant='h4'>{post.blogger.name}</Typography>
+                            </Box>
                             <Box sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <CalendarMonthIcon />
                                 <Typography variant="h6" sx={{ ml: 1 }}>{moment(post.created_at).format('DD.MM.YYYY')}</Typography>
@@ -106,7 +113,7 @@ const BlogPost = () => {
                                     <Chip
                                         clickable
                                         component={Link}
-                                        to={`/blog?category=${encodeURIComponent(category.id)}`}
+                                        to={`/blog?category=${encodeURIComponent(category.category_id)}`}
                                         sx={{ fontSize: '100%', mb: 1, background: 'linear-gradient(90deg, rgba(185,0,0,1) 0%, rgba(106,20,0,1) 100%)', color: 'white' }}
                                         label={category.name}
                                         key={idx}

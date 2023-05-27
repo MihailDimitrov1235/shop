@@ -169,7 +169,7 @@ class PostController extends Controller
             'posts.id',
             'posts.slug',
             'posts.image_path',
-            //'posts.blogger_id',
+            'posts.blogger_id',
             'post_trans.title',
             'post_trans.subtitle',
             'post_trans.content'
@@ -190,19 +190,16 @@ class PostController extends Controller
             'visits' => function ($query) {
                 $query->get()->count();
             },
-            // 'blogger' => function ($query) {
-            //     $query->select(
-            //         'bloggers.id as id',
-            //         'bloggers.phone',
-            //         'bloggers.email',
-            //         'bloggers.links',
-            //         'bloggers.image_path',
-            //         'blogger_trans.name',
-            //     )->leftJoin('blogger_trans', function($q) {
-            //         $q->on('blogger_trans.blogger_id', 'bloggers.id');
-            //         $q->where('blogger_trans.lang', request()->query('lang'));
-            //     });
-            // },
+            'blogger' => function ($query) {
+                $query->select(
+                    'bloggers.id as id',
+                    'bloggers.image_path',
+                    'blogger_trans.name',
+                )->leftJoin('blogger_trans', function($q) {
+                    $q->on('blogger_trans.blogger_id', 'bloggers.id');
+                    $q->where('blogger_trans.lang', request()->query('lang'));
+                });
+            },
             'comments' => function ($query) {
                 $query->select(
                     'comments.comment',
