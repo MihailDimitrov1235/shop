@@ -358,7 +358,7 @@ const MainTable = ({
 
                                                                 {value.map((element, index) => {
                                                                     const name = element[heading.arrayId][heading.selector];
-                                                                    console.log(typeof (name));
+
                                                                     return (
                                                                         <Grid item key={index}>
                                                                             <Tooltip title={name}>
