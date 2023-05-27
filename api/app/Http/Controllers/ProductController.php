@@ -327,6 +327,7 @@ class ProductController extends Controller
         return response($file_path, 201);
     }
 
+<<<<<<< HEAD
 
     // public function getRequests() {
     //     $query = Product::select(
@@ -359,6 +360,8 @@ class ProductController extends Controller
     //     $product->update();
     // }
 
+=======
+>>>>>>> 7bc81659f3823d714e3f4593438334451f235fdd
     public function similarProducts($id)
     {
         $product = Product::findOrFail($id);

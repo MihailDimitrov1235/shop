@@ -226,16 +226,17 @@ const MainTable = ({
                                 open={openDeleteDialog}
                                 setOpen={setOpenDeleteDialog}
                             />
-
-                            <ApproveDialog
-                                approveId={approveId}
-                                setApproveId={setApproveId}
-                                approveHandler={approveHandler}
-                                newRequest={newRequest}
-                                open={openApproveDialog}
-                                setOpen={setOpenApproveDialog}
-                            />
                         </>
+                    )}
+                    {options.approve && (
+                        <ApproveDialog
+                            approveId={approveId}
+                            setApproveId={setApproveId}
+                            approveHandler={approveHandler}
+                            newRequest={newRequest}
+                            open={openApproveDialog}
+                            setOpen={setOpenApproveDialog}
+                        />
                     )}
                     {options.add && (
                         <Button
@@ -261,7 +262,7 @@ const MainTable = ({
                     <EnhancedTableHead
                         searches={searches}
                         handleSearchChange={handleSearchChange}
-                        preview={!options.previewHref? false : true}
+                        preview={!options.previewHref ? false : true}
                         approve={options.approve}
                         options={options}
                         classes={classes}
@@ -326,9 +327,6 @@ const MainTable = ({
                                     const isItemSelected = isSelected(row.id);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
-                                    console.log(row);
-
-
                                     return (
                                         <TableRow
                                             hover
@@ -360,7 +358,7 @@ const MainTable = ({
 
                                                                 {value.map((element, index) => {
                                                                     const name = element[heading.arrayId][heading.selector];
-                                                                    console.log(typeof (name));
+
                                                                     return (
                                                                         <Grid item key={index}>
                                                                             <Tooltip title={name}>
@@ -374,7 +372,7 @@ const MainTable = ({
                                                         </TableCell>
                                                     );
                                                 } else {
-                                                    if(heading.id === 'created_at'){
+                                                    if (heading.id === 'created_at') {
                                                         let currentDate = new Date().toISOString().match(/([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-2][0-9]):([0-5][0-9]):([0-5][0-9])/)
                                                         let currentYear = parseInt(currentDate[1])
                                                         let currentMonth = parseInt(currentDate[2])
@@ -390,22 +388,22 @@ const MainTable = ({
 
                                                         let time
 
-                                                        if(currentYear > createdAtYear){
+                                                        if (currentYear > createdAtYear) {
                                                             let difference = currentYear - createdAtYear
-                                                            time = t('ago') + difference + ' ' + (difference==1? t('year-ago') : t('years-ago'))
-                                                        }else if(createdAtMonth > createdAtMonth){
+                                                            time = t('ago') + difference + ' ' + (difference == 1 ? t('year-ago') : t('years-ago'))
+                                                        } else if (createdAtMonth > createdAtMonth) {
                                                             let difference = (currentMonth - createdAtMonth)
-                                                            time = t('ago') + difference + ' ' + (difference==1? t('month-ago') : t('months-ago'))
-                                                        }else if(currentDay > createdAtDay){
+                                                            time = t('ago') + difference + ' ' + (difference == 1 ? t('month-ago') : t('months-ago'))
+                                                        } else if (currentDay > createdAtDay) {
                                                             let difference = currentDay - createdAtDay
-                                                            time = t('ago') + difference + ' ' + (difference==1? t('day-ago') : t('days-ago'))
-                                                        }else if(currentHour > createdAtHour){
+                                                            time = t('ago') + difference + ' ' + (difference == 1 ? t('day-ago') : t('days-ago'))
+                                                        } else if (currentHour > createdAtHour) {
                                                             let difference = currentHour - createdAtHour
-                                                            time = t('ago') + difference + ' ' + (difference==1? t('hour-ago') : t('hours-ago'))
-                                                        }else if(currentMinute > createdAtMinute){
+                                                            time = t('ago') + difference + ' ' + (difference == 1 ? t('hour-ago') : t('hours-ago'))
+                                                        } else if (currentMinute > createdAtMinute) {
                                                             let difference = currentMinute - createdAtMinute
-                                                            time = t('ago') + difference + ' ' + (difference==1? t('minute-ago') : t('minutes-ago'))
-                                                        }else{
+                                                            time = t('ago') + difference + ' ' + (difference == 1 ? t('minute-ago') : t('minutes-ago'))
+                                                        } else {
                                                             time = t('less-minute')
                                                         }
                                                         return (
@@ -415,7 +413,7 @@ const MainTable = ({
                                                                 </Tooltip>
                                                             </TableCell>
                                                         );
-                                                    }else{
+                                                    } else {
                                                         return (
                                                             <TableCell key={heading.id} align={heading.align} style={{ maxHeight: "20px", overflow: "hidden" }}>
                                                                 <Tooltip title={value}>
@@ -424,7 +422,7 @@ const MainTable = ({
                                                             </TableCell>
                                                         );
                                                     }
-                                                    
+
                                                 }
                                             })}
                                             {options.previewHref && (
@@ -439,9 +437,9 @@ const MainTable = ({
                                             {options.approve && (
                                                 <>
                                                     <TableCell align={options.align}>
-                                                            <IconButton color='success' onClick={() => handleApproveClick(row['id'])}>
-                                                                <VerifiedIcon />
-                                                            </IconButton>
+                                                        <IconButton color='success' onClick={() => handleApproveClick(row['id'])}>
+                                                            <VerifiedIcon />
+                                                        </IconButton>
                                                     </TableCell>
                                                 </>
                                             )}

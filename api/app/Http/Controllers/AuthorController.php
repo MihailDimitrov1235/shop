@@ -155,41 +155,4 @@ class AuthorController extends Controller
 
         return $authors;
     }
-
-    // public function getRequests()
-    // {
-    //     $query = Author::select(
-    //                         'authors.id as id',
-    //                         'author_trans.name',
-    //                         'authors.created_at'
-    //                     )
-    //                     ->where('authors.approved', false)
-    //                     ->leftJoin('author_trans', function($q) {
-    //                         $q->on('author_trans.author_id', 'authors.id');
-    //                         $q->where('author_trans.lang', request()->query('lang'));
-    //                     });
-
-    //     if(request()->has(['field', 'direction'])){
-    //         $query->orderBy(request()->query('field'), request()->query('direction'));
-    //     }
-
-    //     if(request()->query('total')) {
-    //         $authors = $query->paginate(request()->query('total'))->withQueryString();
-    //     }else {
-    //         $authors = $query->paginate(10)->withQueryString();
-    //     }
-
-    //     return $authors;
-    // }
-
-    // public function approve(Request $request){
-
-    //     foreach($request->selected as $id){
-    //         $author = Author::findOrFail($id);
-    //         $author->approved = true;
-    //         $author->update();
-    //     }
-        
-    //     return response()->json(['message' => 'Approved'], 200);
-    // }
 }

@@ -54,7 +54,6 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/upload', [ProductController::class, 'uploadFiles']);
         Route::delete('/', [ProductController::class, 'delete']);
         Route::put('/{id}', [ProductController::class, 'edit']);
-        Route::patch('/{id}', [ProductController::class, 'approve']);
     });
 
     Route::prefix('categories')->group(function () {
@@ -67,8 +66,6 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/', [AuthorController::class, 'store']);
         Route::delete('/', [AuthorController::class, 'delete']);
         Route::put('/{id}', [AuthorController::class, 'edit']);
-        Route::get('/requests', [AuthorController::class, 'getRequests']);
-        Route::put('/', [AuthorController::class, 'approve']);
     });
 
     Route::prefix('cart')->group(function () {
