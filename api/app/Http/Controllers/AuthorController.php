@@ -19,10 +19,8 @@ class AuthorController extends Controller
                             'authors.id as id',
                             'authors.phone',
                             'authors.email',
-                            'authors.approved',
                             'author_trans.name',
                         )
-                        ->where('authors.approved', true)
                         ->leftJoin('author_trans', function($q) {
                             $q->on('author_trans.author_id', 'authors.id');
                             $q->where('author_trans.lang', request()->query('lang'));
@@ -158,31 +156,31 @@ class AuthorController extends Controller
         return $authors;
     }
 
-    public function getRequests()
-    {
-        $query = Author::select(
-                            'authors.id as id',
-                            'author_trans.name',
-                            'authors.created_at'
-                        )
-                        ->where('authors.approved', false)
-                        ->leftJoin('author_trans', function($q) {
-                            $q->on('author_trans.author_id', 'authors.id');
-                            $q->where('author_trans.lang', request()->query('lang'));
-                        });
+    // public function getRequests()
+    // {
+    //     $query = Author::select(
+    //                         'authors.id as id',
+    //                         'author_trans.name',
+    //                         'authors.created_at'
+    //                     )
+    //                     ->where('authors.approved', false)
+    //                     ->leftJoin('author_trans', function($q) {
+    //                         $q->on('author_trans.author_id', 'authors.id');
+    //                         $q->where('author_trans.lang', request()->query('lang'));
+    //                     });
 
-        if(request()->has(['field', 'direction'])){
-            $query->orderBy(request()->query('field'), request()->query('direction'));
-        }
+    //     if(request()->has(['field', 'direction'])){
+    //         $query->orderBy(request()->query('field'), request()->query('direction'));
+    //     }
 
-        if(request()->query('total')) {
-            $authors = $query->paginate(request()->query('total'))->withQueryString();
-        }else {
-            $authors = $query->paginate(10)->withQueryString();
-        }
+    //     if(request()->query('total')) {
+    //         $authors = $query->paginate(request()->query('total'))->withQueryString();
+    //     }else {
+    //         $authors = $query->paginate(10)->withQueryString();
+    //     }
 
-        return $authors;
-    }
+    //     return $authors;
+    // }
 
     // public function approve(Request $request){
 

@@ -18,8 +18,6 @@ const SideBarContent = ({ items, ml = 20 }) => {
 
     const marginL = ml + 'px'
 
-    console.log(marginL)
-
     return (
         <>
             {items.map((item, index) => {
