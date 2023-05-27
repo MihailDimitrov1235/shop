@@ -1,14 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
 import { Box, Typography, IconButton, Button, Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
+import commentService from '../../services/comment';
 import moment from 'moment';
 import 'moment/locale/bg';
 import { useTranslation } from 'react-i18next';
+import useAuth from '../../hooks/useAuth';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const Comment = ( {props} ) =>{
 
+    const { user } = useAuth();
     const { t, i18n } = useTranslation();
     moment.locale(i18n.language);
 
@@ -19,23 +22,81 @@ const Comment = ( {props} ) =>{
     }
 
     const commentData = {
-        id: props.commentId,
+        id: props.id,
         createdAt: moment(props.created_at).fromNow(),
         text: props.comment,
     }
 
     const [liked, setLiked] = useState(false)
     const [disliked, setDisliked] = useState(false)
-    const [likes, setLikes] = useState(props.comment_likes.length)
+    const [likes, setLikes] = useState(0)
 
-    props.comment_likes.forEach(element => {
-        if(element.liked){
-            // TODO CHECK ID OF CURRENT USER
-            setLikes(likes+1)
-        }else{
-            setLikes(likes-1)
+    const likeData = {
+        user_id:1,
+        comment_id:props.id
+    }
+
+    useEffect(() => {
+        if(user){
+            props.comment_likes.forEach(element => {
+                if(element.liked){
+                    if(user.id == element.user_id){
+                        setLiked(true)
+                    }
+                }else{
+                    if(user.id == element.user_id){
+                        setDisliked(true)
+                    }
+                }
+            });
         }
-    });
+        
+        }, [user]);
+
+        useEffect(() => {
+            let currentLikes = 0
+            console.log("cock")
+            props.comment_likes.forEach(element => {
+                if(element.liked){
+                    currentLikes+=1
+                }else{
+                    currentLikes-=1
+                }
+            });
+            setLikes(currentLikes);
+            }, []);
+
+    function like() {
+        commentService.like(likeData)
+        .then((res) => {
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
+    function dislike() {
+        commentService.dislike(likeData)
+        .then((res) => {
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
+    function clear() {
+        commentService.clearLike(likeData)
+        .then((res) => {
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
+    
 
     const textContainerRef = useRef(null)
     const [isLong, setIsLong] = useState(false)
@@ -51,10 +112,13 @@ const Comment = ( {props} ) =>{
 
 
     const handleLike = () =>{
+        
         if(liked){
+            clear()
             setLiked(false)
             setLikes(likes-1)
         }else{
+            like()
             setLiked(true)
             if(disliked){
                 setLikes(likes+2)
@@ -67,9 +131,11 @@ const Comment = ( {props} ) =>{
     
     const handleDislike = () =>{
         if(disliked){
+            clear()
             setDisliked(false)
             setLikes(likes+1)
         }else{
+            dislike()
             setDisliked(true)
             if(liked){
                 setLiked(false)
@@ -85,7 +151,7 @@ const Comment = ( {props} ) =>{
             
             <Box flex={1} sx={{mr:2}}>
             {userData.image? (
-                <Avatar sx={{width:'100%', color:'white', bgcolor:'#96011c'}} src={userData.image} variant='rounded'></Avatar>
+                <Avatar sx={{width:'100%', color:'white', bgcolor:'#96011c'}} src={`${process.env.REACT_APP_ASSETS}/${userData.image}`} variant='rounded'></Avatar>
             ):(
                 <Avatar sx={{width:'100%', height:'100%', color:'white', bgcolor:'#96011c', overflow:'hidden', fontSize:'60px'}} variant='rounded'>{userData.name[0]}</Avatar>
             )}

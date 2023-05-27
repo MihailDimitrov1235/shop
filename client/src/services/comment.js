@@ -44,11 +44,39 @@ function deleteComment(id) {
     });
 }
 
+function like(data) {
+    const url = `${servicesHelper.url}/comments/like`;
+
+    return axios.patch(url, data, {
+        headers: servicesHelper.header()
+    });
+}
+
+function dislike(data) {
+    const url = `${servicesHelper.url}/comments/dislike`;
+
+    return axios.patch(url, data, {
+        headers: servicesHelper.header()
+    });
+}
+
+function clearLike(data) {
+    const url = `${servicesHelper.url}/comments/clear`;
+
+    return axios.delete(url,{
+        data:data,
+        headers: servicesHelper.header()
+    });
+}
+
 const commentService = {
     getComments,
     createComment,
     editComment,
     deleteComment,
+    like,
+    dislike,
+    clearLike
 }
 
 export default commentService;
