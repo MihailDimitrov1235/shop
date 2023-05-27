@@ -74,7 +74,7 @@ const routes = [
       },
 
       {
-        path: 'blogger',
+        path: 'profile',
         children: [
           { path: ':id', element: <BloggerPage /> },
           { path: 'edit/:id', element: <PreviewBloggerPage /> },

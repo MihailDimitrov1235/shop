@@ -43,7 +43,7 @@ function CreatedPosts({ posts }) {
               textAlign: "center",
             }}
           >
-            <Typography variant="h5">{t('numbers-sold')}</Typography>
+            <Typography variant="h5">{t('visits')}</Typography>
           </TableCell>
         </TableRow>
       </TableHead>
@@ -65,7 +65,7 @@ function CreatedPosts({ posts }) {
                 sx={{ width: "25%", borderRadius: "15px", overFlow: "hidden" }}
               >
                 <img
-                  src={post.image}
+                  src={`${process.env.REACT_APP_ASSETS}/${post.image_path}`}
                   style={{
                     borderRadius: "15px",
                     width: "100%",

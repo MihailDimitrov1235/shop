@@ -9,7 +9,8 @@ use App\Models\{
     Blogger,
     BloggerTrans,
     User,
-    Role
+    Role,
+    BloggerLinks
 };
 
 class BloggerController extends Controller
@@ -36,10 +37,15 @@ class BloggerController extends Controller
 
         $blogger = Blogger::create([
             'phone' => $request->phone,
-            'links' => $request->links,
             'image_path' => $image_path,
             'user_id' => $request->user_id,
         ]);
+        foreach($request->links as $key=>$link) {
+            BloggerLinks::create([
+                'blogger_id' => $blogger->id,
+                'link' => $link
+            ]);
+        }
         foreach(json_decode($request->lang, true) as $key=>$lang) {
             BloggerTrans::create([
                 'name' => $lang['name'],
@@ -50,20 +56,19 @@ class BloggerController extends Controller
             ]);
         }
 
-        $user = User::getById($request->user_id);
+        $user = User::findOrFail($request->user_id);
         $roleId = Role::where('name', 'Blogger')->first()->id;
-        $user->role = $roleId;
+        $user->role_id = $roleId;
         $user->update();
         
-        // return $blogger;
+        return $blogger;
     }
 
     public function getById($id){
         $blogger = Blogger::select(
             'bloggers.id as id',
+            'bloggers.user_id',
             'bloggers.phone',
-            'bloggers.email',
-            'bloggers.links',
             'bloggers.image_path',
             'blogger_trans.name',
             'blogger_trans.occupation',
@@ -73,7 +78,34 @@ class BloggerController extends Controller
         ->leftJoin('blogger_trans', function($q) {
             $q->on('blogger_trans.blogger_id', 'bloggers.id');
             $q->where('blogger_trans.lang', request()->query('lang'));
-        });
+        })
+        ->with([
+            'user' => function ($query) {
+                $query->select(
+                    'users.id',
+                    'users.email'
+                );
+            },
+            'links' => function ($query) {
+                $query->select(
+                    'blogger_links.blogger_id',
+                    'blogger_links.link'
+                );
+            },
+            'posts' => function ($query) {
+                $query->select(
+                    'posts.id',
+                    'posts.image_path',
+                    'posts.blogger_id',
+                    'post_trans.title',
+                    'post_trans.subtitle'
+                )
+                ->leftJoin('post_trans', function($q) {
+                    $q->on('post_trans.post_id', 'posts.id');
+                    $q->where('post_trans.lang', request()->query('lang'));
+                });
+            }
+        ]);
         return $blogger->get();
     }
 
@@ -81,7 +113,6 @@ class BloggerController extends Controller
         $blogger = Blogger::findOrFail($id);
         $blogger->phone = $request->phone;
         $blogger->email = $request->email;
-        $blogger->links = json_decode($request->links, true);
 
         if($request->hasFile('image')){
             Storage::delete('public/'.$blogger->image_path);
@@ -99,6 +130,14 @@ class BloggerController extends Controller
             $bTrans->update();
         }
 
+        BloggerLinks::where('blogger_id', $id)->delete();
+        foreach($request->links as $key=>$link) {
+            BloggerLinks::create([
+                'blogger_id' => $blogger->id,
+                'link' => $link
+            ]);
+        }
+
         $blogger->update();
 
         return response()->json(['message' => 'Edited'], 200);
@@ -111,6 +150,8 @@ class BloggerController extends Controller
             $blogger = Blogger::findOrFail($id);
             Storage::delete('public/' . $blogger->image_path);
             $blogger->delete();
+            BloggerLinks::where('blogger_id', $id)->delete();
+            BloggerTrans::where('blogger_id', $id)->delete();
         }
 
         return response()->json(['message' => 'Deleted'], 200);

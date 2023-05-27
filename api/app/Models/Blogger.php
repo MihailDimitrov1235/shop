@@ -11,12 +11,24 @@ class Blogger extends Model
 
     protected $fillable = [
         'phone',
-        'links',
+        'user_id',
         'image_path',
         'approved'
     ];
 
     public function trans() {
         return $this->hasMany(BloggerTrans::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function links() {
+        return $this->hasMany(BloggerLinks::class);
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
     }
 }

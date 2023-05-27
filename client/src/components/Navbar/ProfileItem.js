@@ -19,6 +19,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import PersonIcon from '@mui/icons-material/Person';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import StoreIcon from '@mui/icons-material/Store';
 import LogoutIcon from '@mui/icons-material/Logout';
 import userService from '../../services/user';
 import useAuth from '../../hooks/useAuth';
@@ -65,7 +66,7 @@ const ProfileItem = () => {
 
     if(user && user.role_id === 1) {
         if(isInAdmin) {
-            items.splice(1, 0, { type: 'link', title: t('store'), href: '/', icon: DashboardIcon });
+            items.splice(1, 0, { type: 'link', title: t('store'), href: '/', icon: StoreIcon });
         }else {
             items.splice(1, 0, { type: 'link', title: t('dashboard'), href: '/admin', icon: DashboardIcon });
         }
@@ -75,7 +76,7 @@ const ProfileItem = () => {
         <Box>
             <Tooltip title={t('profile')}>
                 <Button variant='text' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" />
+                    <Avatar alt="AuthorImage" />
                     <Typography variant='span' component='span' sx={{ ml: 1 }}>{user && user.name}</Typography>
                 </Button>
             </Tooltip>

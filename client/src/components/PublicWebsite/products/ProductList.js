@@ -46,18 +46,19 @@ const ProductList = () => {
         }}
         elevation={3}
         >
-            <Box sx={{ display: 'flex', px: '30px', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', px: 4, justifyContent: 'space-between', alignItems: 'center', pt:4 }}>
                 <Box sx={{ flex: 2 }}>
                     <TextField
                         sx={{ m:0 }}
                         label={t('search')}
                         margin='normal'
-                        variant='standard'
+                        variant='outlined'
                     />
                 </Box>
                 <Box sx={{ flex:1 }}>
                     <Select
                         sx={{ m:0, mt:'8px' }}
+                        variant='outlined'
                         title={t('sort')}
                         options={options}
                         setValue={setSort}

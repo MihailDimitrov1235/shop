@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Container, Box, Typography, Card, styled } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import bloggerService from '../../../services/blogger';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LinkIcon from '@mui/icons-material/Link';
@@ -17,38 +19,34 @@ const ContactBox = styled(Box)(() => ({
     gap: '5px'
 }));
 
-
-const props = {
-    name: 'Mihail Dimitrov',
-    ocupation: 'Student in the national highschool of sciences',
-    phone: '1234567890',
-    email: 'mighty.strong1235@gmail.com',
-    links: [
-        'facebook.com/misho',
-        'twitter.com/GothamChess',
-        'linkedin.com/in/mihail-d/',
-    ],
-    description: "Lorem ipsum dolor sfiuwegtf qw79egfqgw ew67o 8o7wqg8o7 ftwg8oe 7gf8ow7qeg f67owetgqf67 qit amet, consectetur adipiscing elit. Ut id purus ante. Ut vena, euismod et ante vel, consectetur accumsan diam. Aenean iaculis posuere odio, sit amet pulvinar mauris convallis non. Curabitur tempor ultrices eros, mattis mollis sapien pharetra vel. Incongue vulputate. Nam non diam pellentesque, lacinia ex eget, tristique sem.",
-    posts: [
-        { id: 1, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product1', subtitle: 'Description1', visits: 10 },
-        { id: 2, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product2', subtitle: 'Description2', visits: 10 },
-        { id: 3, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product3', subtitle: 'Description3', visits: 10 },
-        { id: 4, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80', title: 'Product4', subtitle: 'Description4', visits: 10 },
-    ],
-    // achievements: {
-    //     created: 30,
-    //     sold: 20,
-    // }
-}
-
 export default function BloggerPage() {
-
-    const { t } = useTranslation();
+    const [props, setProps] = useState({
+        name: '',
+        ocupation: '',
+        phone: '',
+        email: '',
+        links: [],
+        description: '',
+        posts: [],
+        user: {}
+    })
+    const { id } = useParams()
+    const { t, i18n } = useTranslation();
 
     const facebookRegex = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/;
     const linkedinRegex = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm;
     const twitterRegex = /((?:https?:\/\/)?twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/;
 
+    useEffect(() => {
+        bloggerService.getById(id, i18n.language)
+            .then((res) => {
+                setProps(res.data[0]);
+                console.log(res.data[0])
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
 
     return (
         <Box position='relative' >
@@ -88,7 +86,7 @@ export default function BloggerPage() {
                                     alignItems: 'center',
 
                                 }}>
-                                    <img width={'100%'} height={'100%'} src='https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl90hcenj8183939tqyaa4oyxsx/public' />
+                                    <img width={'100%'} height={'100%'} src={`${process.env.REACT_APP_ASSETS}/${props.image_path}`} />
                                 </Box>
 
                             {/* <Box sx={{
@@ -119,7 +117,7 @@ export default function BloggerPage() {
                             py: 3,
                         }} >
                             <Typography variant='h1' marginBottom={'20px'} textAlign='center'>{props.name}</Typography>
-                            <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >{props.ocupation}</Typography>
+                            <Typography variant='subtitle1' marginBottom={'30px'} textAlign='center' >{props.occupation}</Typography>
                         </Box>
                     </Card>
                 </Container>
@@ -173,7 +171,7 @@ export default function BloggerPage() {
                                     <EmailIcon />
                                     <Box sx={{ flexGrow: 1 }}>
                                         <Typography variant='subtitle1'>
-                                            {props.email}
+                                            {props.user.email}
                                         </Typography>
                                     </Box>
                                 </ContactBox>
@@ -202,14 +200,14 @@ export default function BloggerPage() {
                             <Box className='authorLinks' sx={{ mt: 3 }}>
                                 {props.links.map((link, index) => (
                                     <Box sx={{ display: 'flex', alignItems: 'center', my: 1 }} key={index}>
-                                        {facebookRegex.exec(link) ? <FacebookIcon />
-                                            : linkedinRegex.exec(link) ? <LinkedInIcon />
-                                                : twitterRegex.exec(link) ? <TwitterIcon />
+                                        {facebookRegex.exec(link.link) ? <FacebookIcon />
+                                            : linkedinRegex.exec(link.link) ? <LinkedInIcon />
+                                                : twitterRegex.exec(link.link) ? <TwitterIcon />
                                                     : <LinkIcon />
                                         }
 
                                     
-                                        <Typography>{link}</Typography>
+                                        <Typography>{link.link}</Typography>
                                     </Box>
                                 ))}
                                 </Box>

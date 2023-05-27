@@ -11,6 +11,7 @@ use App\Models\{
     AuthorTrans,
     Blogger,
     BloggerTrans,
+    BloggerLinks,
     User,
     Role,
     Cart
@@ -80,8 +81,7 @@ class UserSeeder extends Seeder
         ]);
         Blogger::create([
             'phone' => "0878787878",
-            'links' => "{}",
-            'image_path' => "image_path",
+            'image_path' => null,
             'user_id' => 3,
         ]);
         BloggerTrans::create([
@@ -97,6 +97,14 @@ class UserSeeder extends Seeder
             'description' => "BloggerDescription",
             'blogger_id' => 1,
             'lang' => "en"
+        ]);
+        BloggerLinks::create([
+            'blogger_id' => 1,
+            'link' => "link one"
+        ]);
+        BloggerLinks::create([
+            'blogger_id' => 1,
+            'link' => "link two"
         ]);
         Cart::create(['user_id' => 3]);
 

@@ -42,7 +42,6 @@ function AuthorsTable() {
             .then((res) => {
                 setData(res.data.data);
                 setTotal(res.data.total);
-                console.log(res.data)
             })
             .catch((error) => {
                 console.log(error)

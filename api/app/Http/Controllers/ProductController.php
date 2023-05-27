@@ -328,36 +328,36 @@ class ProductController extends Controller
     }
 
 
-    public function getRequests() {
-        $query = Product::select(
-                            'products.id',
-                            'product_trans.name as name',
-                            'products.created_at'
-                        )
-                        ->where('products.approved', false)
-                        ->leftJoin('product_trans', function($q) {
-                            $q->on('product_trans.product_id', 'products.id');
-                            $q->where('product_trans.lang', request()->query('lang'));
-                        });
+    // public function getRequests() {
+    //     $query = Product::select(
+    //                         'products.id',
+    //                         'product_trans.name as name',
+    //                         'products.created_at'
+    //                     )
+    //                     ->where('products.approved', false)
+    //                     ->leftJoin('product_trans', function($q) {
+    //                         $q->on('product_trans.product_id', 'products.id');
+    //                         $q->where('product_trans.lang', request()->query('lang'));
+    //                     });
 
-        if(request()->has(['field', 'direction'])){
-            $query->orderBy(request()->query('field'), request()->query('direction'));
-        }
+    //     if(request()->has(['field', 'direction'])){
+    //         $query->orderBy(request()->query('field'), request()->query('direction'));
+    //     }
 
-        if(request()->query('total')) {
-            $products = $query->paginate(request()->query('total'))->withQueryString();
-        }else {
-            $products = $query->paginate(10)->withQueryString();
-        } 
+    //     if(request()->query('total')) {
+    //         $products = $query->paginate(request()->query('total'))->withQueryString();
+    //     }else {
+    //         $products = $query->paginate(10)->withQueryString();
+    //     } 
 
-        return $products;
-    }
+    //     return $products;
+    // }
 
-    public function approve($id){
-        $product = Product::findOrFail($id);
-        $product->approved = true;
-        $product->update();
-    }
+    // public function approve($id){
+    //     $product = Product::findOrFail($id);
+    //     $product->approved = true;
+    //     $product->update();
+    // }
 
     public function similarProducts($id)
     {

@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bloggers', function (Blueprint $table) {
-            $table->id();   
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');;
-            $table->string('phone');
-            $table->string('image_path');
-            $table->boolean('approved')->default(false);
+        Schema::create('blogger_links', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('blogger_id')->constrained('bloggers')->onDelete('cascade');
+            $table->string('link');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bloggers');
+        Schema::dropIfExists('blogger_links');
     }
 };
