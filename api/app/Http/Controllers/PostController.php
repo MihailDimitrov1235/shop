@@ -84,7 +84,8 @@ class PostController extends Controller
         $post = Post::create([
             'slug' => Str::slug(json_decode($request->lang, true)['en']['title']),
             'image_path' => $image_path,
-            'blogger_id' => $request->blogger_id,
+            // 'blogger_id' => $request->blogger_id,
+            'blogger_id' => 1,
         ]);
 
 
@@ -201,36 +202,41 @@ class PostController extends Controller
                     $q->where('blogger_trans.lang', request()->query('lang'));
                 });
             },
-            'comments' => function ($query) {
-                $query->select(
-                    'comments.comment',
-                    'comments.user_id',
-                    'comments.post_id',
-                    'comments.id',
-                    'comments.created_at'                                
-                )
-                ->with('user', function($q) {
-                    $q->select(
-                        'users.id',
-                        'users.name',
-                        'users.avatar_path'
-                    );
-                })
-                ->with('comment_likes', function($q) {
-                    $q->select(
-                        'comment_likes.comment_id',
-                        'comment_likes.user_id', 
-                        'comment_likes.liked'
-                    );
-                });
-            }
+            // 'comments' => function ($query) {
+            //     $query->select(
+            //         'comments.comment',
+            //         'comments.user_id',
+            //         'comments.post_id',
+            //         'comments.id',
+            //         'comments.created_at'                                
+            //     )
+            //     ->with('user', function($q) {
+            //         $q->select(
+            //             'users.id',
+            //             'users.name',
+            //             'users.avatar_path'
+            //         );
+            //     })
+            //     ->with('comment_likes', function($q) {
+            //         $q->select(
+            //             'comment_likes.comment_id',
+            //             'comment_likes.user_id', 
+            //             'comment_likes.liked'
+            //         );
+            //     });
+            // }
         ])
         ->leftJoin('post_trans', function($q) {
             $q->on('post_trans.post_id', 'posts.id');
             $q->where('post_trans.lang', request()->query('lang'));
         });
 
-        return $query->first();
+        $post = $query->first();
+        
+        return [
+            'post' => $post,
+            'comments' => $post->commentsPaginated
+        ];
     }
 
     public function getRequests()
