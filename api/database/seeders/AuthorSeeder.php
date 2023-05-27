@@ -18,9 +18,9 @@ class AuthorSeeder extends Seeder
      */
     public function run()
     {
-        // Author::factory()
-        //     ->count(10)
-        //     ->has(AuthorTrans::factory(2)->sequence([ 'lang' => 'bg' ], ['lang' => 'en']), 'trans')
-        //     ->create();
+        Author::factory()
+            ->count(10)
+            ->has(AuthorTrans::factory(2)->sequence([ 'lang' => 'bg' ], ['lang' => 'en']), 'trans')
+            ->create();
     }
 }

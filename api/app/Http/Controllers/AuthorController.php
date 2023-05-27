@@ -73,21 +73,9 @@ class AuthorController extends Controller
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
-        $roleId = Role::where('name', 'Author')->first()->id;
-
-        $user = User::create([
-            'name' => $request->username,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role_id' => $roleId
-        ]);
-
-        Cart::create(['user_id' => $user->id]);
-
-        // $token = $user->createToken('authToken')->plainTextToken;
-
         $author = Author::create([
             'phone' => $request->phone,
+            'email' => $request->email,
             'user_id' => $user->id,
         ]);
 
@@ -196,14 +184,14 @@ class AuthorController extends Controller
         return $authors;
     }
 
-    public function approve(Request $request){
+    // public function approve(Request $request){
 
-        foreach($request->selected as $id){
-            $author = Author::findOrFail($id);
-            $author->approved = true;
-            $author->update();
-        }
+    //     foreach($request->selected as $id){
+    //         $author = Author::findOrFail($id);
+    //         $author->approved = true;
+    //         $author->update();
+    //     }
         
-        return response()->json(['message' => 'Approved'], 200);
-    }
+    //     return response()->json(['message' => 'Approved'], 200);
+    // }
 }

@@ -39,26 +39,35 @@ class UserSeeder extends Seeder
 
         Cart::create(['user_id' => 1]);
 
-        // AUTHOR
+        // // AUTHOR
+        // User::create([
+        //     'name' => 'author',
+        //     'email' => 'author@author.com',
+        //     'password' => Hash::make('author123'),
+        //     'role_id' => Role::where('name', 'Author')->first()->id
+        // ]);
+        // Author::create([
+        //     'phone' => "0808080808",
+        //     'user_id' => 2,
+        // ]);
+        // AuthorTrans::create([
+        //     'name' => "Име на автора",
+        //     'author_id' => 1,
+        //     'lang' => 'bg'
+        // ]);
+        // AuthorTrans::create([
+        //     'name' => "AuthorName",
+        //     'author_id' => 1,
+        //     'lang' => "en"
+        // ]);
+        // Cart::create(['user_id' => 2]);
+
+        // NORMAL USER
         User::create([
-            'name' => 'author',
-            'email' => 'author@author.com',
-            'password' => Hash::make('author123'),
-            'role_id' => Role::where('name', 'Author')->first()->id
-        ]);
-        Author::create([
-            'phone' => "0808080808",
-            'user_id' => 2,
-        ]);
-        AuthorTrans::create([
-            'name' => "Име на автора",
-            'author_id' => 1,
-            'lang' => 'bg'
-        ]);
-        AuthorTrans::create([
-            'name' => "AuthorName",
-            'author_id' => 1,
-            'lang' => "en"
+            'name' => 'Miroslav',
+            'email' => 'zevs8@abv.bg',
+            'password' => Hash::make('password'),
+            'role_id' => Role::where('name', 'User')->first()->id
         ]);
         Cart::create(['user_id' => 2]);
 
@@ -91,15 +100,7 @@ class UserSeeder extends Seeder
         ]);
         Cart::create(['user_id' => 3]);
 
-        // NORMAL USER
-        User::create([
-            'name' => 'Miroslav',
-            'email' => 'zevs8@abv.bg',
-            'password' => Hash::make('password'),
-            'role_id' => Role::where('name', 'User')->first()->id
-        ]);
 
-        Cart::create(['user_id' => 4]);
 
         User::factory()->hasCart()->count(50)->create();
     }

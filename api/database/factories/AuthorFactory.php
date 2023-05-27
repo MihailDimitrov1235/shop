@@ -18,6 +18,7 @@ class AuthorFactory extends Factory
     {
         return [
             'phone' => fake()->phoneNumber(),
+            'email' => fake()->email(),
         ];
     }
 }
