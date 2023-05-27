@@ -39,7 +39,6 @@ import Success from './pages/PublicWebsite/Payments/Success';
 import Cancellation from './pages/PublicWebsite/Payments/Cancellation';
 
 import RequestPage from './pages/ControlPanel/Requests/RequestPage';
-import RequestProduct from './pages/ControlPanel/Requests/RequestProduct';
 import RequestPost from './pages/ControlPanel/Requests/RequestPost';
 
 import BlogTable from './pages/ControlPanel/Blog/BlogTable';
@@ -165,7 +164,6 @@ const routes = [
         element: <PageLayout title='requests' />,
         children: [
           { path: '', element: <RequestPage />},
-          { path: 'products', element: <RequestProduct/>},
           { path: 'posts', element: <RequestPost/>},
         ] 
       },
