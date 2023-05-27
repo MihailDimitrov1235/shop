@@ -53,7 +53,7 @@ const ProductPage = () => {
 
     const classes = useStyles();
     const { id } = useParams();
-    const [product, setProduct] = useState({ authors: [], files: [ { path: '' } ], parts: [] });
+    const [product, setProduct] = useState({ authors: [], categories: [], files: [ { path: '' } ], parts: [] });
     const { t, i18n } = useTranslation();
     const { user } = useAuth();
     const navigate = useNavigate();
@@ -70,7 +70,6 @@ const ProductPage = () => {
                     setFiles(part.files)
                     setPrice(part.price)
                 }
-                console.log(res.data.parts.length);
             })
             .catch((error) => {
                 navigate('/products');
@@ -105,8 +104,6 @@ const ProductPage = () => {
             console.log(error);
         })
     }
-
-    const categories = [{ category_id:1, name: 'biologiq'}, { category_id:2, name: 'himiq'}, { category_id:3, name: 'gotin'}]
 
     return (
         <>
@@ -250,7 +247,7 @@ const ProductPage = () => {
                             mt: 5
                         }}
                     >
-                    {categories.map(category => (
+                    {product.categories.map(category => (
                         <Chip
                             sx={{
                                 mb: 1,
