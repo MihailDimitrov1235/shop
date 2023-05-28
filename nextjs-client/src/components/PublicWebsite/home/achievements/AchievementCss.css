@@ -1,0 +1,18 @@
+.achievement {
+  border: 2px dotted #96011c;
+}
+
+.achievement-content {
+  position: relative;
+  height: 200px;
+  /* width: 400px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topText {
+  position: relative;
+  background-color: #f4f6f8;
+  padding: 0 10px;
+}
