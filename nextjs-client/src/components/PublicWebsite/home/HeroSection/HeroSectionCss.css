@@ -3,7 +3,7 @@
     animation: moveUpDown 3s ease-in-out infinite;
   }
   
-  @keyframes moveUpDown {
+  /* @keyframes moveUpDown {
     0% {
       transform: translateY(0);
     }
@@ -13,4 +13,4 @@
     100% {
       transform: translateY(0);
     }
-  }
+  } */

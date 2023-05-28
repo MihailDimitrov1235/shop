@@ -1,32 +1,32 @@
 import React from 'react';
 import { Box, Typography, Button, CardMedia, Hidden } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';    
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/system';
 import './HeroSectionCss.css';
-import { useSpring, animated } from '@react-spring/web';
-import { useGesture } from '@use-gesture/react';
-import { useTranslation } from 'react-i18next';
-import Rive from 'rive-react';
+// import { useSpring, animated } from '@react-spring/web';
+// import { useGesture } from '@use-gesture/react';
+// import { useTranslation } from 'react-i18next';
+// import Rive from 'rive-react';
 
-function HeroSection() {
+function HeroSection( ) {
 
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
 
-    const [{ x, y }, api] = useSpring(() => ({
-        x: "0",
-        y: "0",
-    }));
+    // const [{ x, y }, api] = useSpring(() => ({
+    //     x: "0",
+    //     y: "0",
+    // }));
 
-    const bind = useGesture({
-        onHover: ({ hovering }) => api({ x: hovering ? '-5px' : '0', y: hovering ? '-5px' : '0' }),
-    })
+    // const bind = useGesture({
+    //     onHover: ({ hovering }) => api({ x: hovering ? '-5px' : '0', y: hovering ? '-5px' : '0' }),
+    // })
 
-    const springs = useSpring({
-        from: { opacity: 0, y: 150 },
-        to: { opacity: 1, y: 0 },
-    })
-
+    // const springs = useSpring({
+    //     from: { opacity: 0, y: 150 },
+    //     to: { opacity: 1, y: 0 },
+    // })
+    
     return (
         <>
             <Hidden mdUp>
@@ -51,7 +51,7 @@ function HeroSection() {
                     width: '85%',
                     margin: '0 auto'
                 }}>
-                    <animated.div style={{ ...springs, flexBasis: '40%' }}>
+                    {/* <animated.div style={{ ...springs, flexBasis: '40%' }}> */}
                         <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
                             <Typography variant="hero" sx={{
                                 marginTop: '10px',
@@ -70,21 +70,21 @@ function HeroSection() {
                             <Box display={'flex'} sx={{
                                 justifyContent:{xs:'center', md:'left'}
                             }}>
-                                <animated.div style={{ x: x, y: y, textAlign:'center', width:'fit-content'}}>
-                                    <Button {...bind()} variant="contained" color="bordoRed" component={Link} to="/products" >
+                                {/* <animated.div style={{ x: x, y: y, textAlign:'center', width:'fit-content'}}> */}
+                                    <Button  variant="contained" color="bordoRed" component={Link} to="/products" >
                                         <Typography variant='subtitle2'>
                                             {t('hero-button')}
                                         </Typography>
                                     </Button>
-                                </animated.div>
+                                {/* </animated.div> */}
                             </Box>
                         </Box>
-                    </animated.div>
-                    <animated.div style={{ ...springs }}>
+                    {/* </animated.div> */}
+                    {/* <animated.div style={{ ...springs }}> */}
                         <Box sx={{ height: { xs: '50vh', sm: '70vh', md: '700px', lg: '900px' }, width: { xs: '100%', md: '50vw' }}}>
-                            <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" />
+                            {/* <Rive src="/static/images/lab_equipment_bubbles.riv" stateMachines="State Machine 1" /> */}
                         </Box>
-                    </animated.div>
+                    {/* </animated.div> */}
                 </Container>
             </Box>
         </>
