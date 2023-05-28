@@ -28,8 +28,6 @@ import EditInformation from "../../../components/PublicWebsite/products/detailsP
 import EditPartDialog from "../../../components/PublicWebsite/products/detailsPage/EditPartDialog";
 import { useSpring, animated } from '@react-spring/web';
 import { useGesture, useHover } from '@use-gesture/react';
-import { convertToRaw } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
 import useAuth from "../../../hooks/useAuth";
 import ApproveDoalog from '../../../components/MainTable/ApproveDialog'
 import DoneIcon from '@mui/icons-material/Done';
