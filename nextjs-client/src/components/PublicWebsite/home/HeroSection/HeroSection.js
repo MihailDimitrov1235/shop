@@ -6,7 +6,8 @@ import { Container } from '@mui/system';
 import './HeroSectionCss.css';
 // import { useSpring, animated } from '@react-spring/web';
 // import { useGesture } from '@use-gesture/react';
-// import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'next-i18next';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // import Rive from 'rive-react';
 
 function HeroSection( ) {
@@ -29,6 +30,7 @@ function HeroSection( ) {
     
     return (
         <>
+            {/* <Box>{t('blog')}</Box> */}
             <Hidden mdUp>
                 <Box style={{ height: '300px' }}>
                     <img src='/static/images/HomeTop.svg' />
@@ -90,5 +92,11 @@ function HeroSection( ) {
         </>
     );
 };
+
+// export async function getServerSideProps({ locale }) {
+//     return {
+//         props: {}
+//     }
+// }
 
 export default HeroSection;

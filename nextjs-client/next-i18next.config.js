@@ -31,9 +31,9 @@
 
 // export default i18n;
 
-module.exports={
-  i18n: {
-    locales: ['en', 'bg'],
-    defaultLocale: 'bg',
-  }
-}
+// module.exports={
+//   i18n: {
+//     locales: ['en', 'bg'],
+//     defaultLocale: 'bg',
+//   }
+// }
