@@ -5,7 +5,7 @@ import { useTranslation } from '../i18n'
 import { Footer } from './components/Footer'
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // import { useState } from 'react';
-import HeroSection from './components/PublicWebsite/home/HeroSection';
+// import HeroSection from '../src/components/PublicWebsite/home/HeroSection/HeroSection';
 // import ProductDisplay from '../components/PublicWebsite/products/ProductDisplay';
 // import InformationSection from '../components/PublicWebsite//home/InformationSection';
 // import Achievements from '../components/PublicWebsite/home/achievements/Achevements';
@@ -23,10 +23,9 @@ async function Home({ params: { lng } }) {
     
     return (
         <>
-        {/* <Footer lng={lng}/> */}
+        <Footer lng={lng}/>
         {/* <Box>{t('blog')}</Box> */}
-        <h1>hero</h1>
-            <HeroSection /> 
+            {/* <HeroSection />  */}
             {/* <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, position: 'relative' }}>
                 <ProductDisplay />
             </Container>
