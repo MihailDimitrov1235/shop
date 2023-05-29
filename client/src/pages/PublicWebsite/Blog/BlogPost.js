@@ -48,7 +48,6 @@ const BlogPost = () => {
 
                 setComments(res.data.comments.data);
                 setCommentsTotal(res.data.comments.total);
-                console.log(res.data);
             })
             .catch((error) => {
                 console.log(error);
