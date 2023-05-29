@@ -19,7 +19,6 @@ const Home = () => {
     
     // const [flipped, setFlipped] = useState(false)
 
-    
     return (
         <>
         {/* <Box>{t('blog')}</Box> */}

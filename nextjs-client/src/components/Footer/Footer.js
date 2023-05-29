@@ -3,16 +3,17 @@ import {
     Container,
     Typography
 } from '@mui/material';
-import topSvg from './Vector.svg';
-import { useTranslation } from 'react-i18next';
-import './style.css';
+import topSvg from '../../../public/static/images/Footer.svg';
+import { useTranslation } from 'next-i18next';
+import styles from './Footer.module.css';
+import Image from 'next/image';
 
 const Footer = () => {
     const { t } = useTranslation();
     return (
         <footer style={{ marginTop: '50px' }}>
             <Box sx={{ display: 'flex' }}>
-                <img style={{ width: '100%' }} src={topSvg} alt="curve" />
+                <Image style={{ width: '100%' }} src={topSvg} alt="curve" />
             </Box>
 
             <Box sx={{ background: 'linear-gradient(180deg, rgba(219,18,41,1) 0%, rgba(150,1,28,1) 100%)' }}>
@@ -76,14 +77,14 @@ const Footer = () => {
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: { xs: 'column', md: 'row' } }}>
                             <Typography sx={{
-                                width:'50%',
+                                flex:1,
                                 textAlign:'center'
                             }} variant='p' color={'white'}>{t('copyright')}</Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', p: '10px', width: '50%' }}>
-                            <img src="/static/images/icons/FacebookIcon.png" className='footerIcon' />
-                            <img src="/static/images/icons/TwitterIcon.png" className='footerIcon' />
-                            <img src="/static/images/icons/InstagramIcon.png" className='footerIcon' />
-                            <img src="/static/images/icons/YoutubeIcon.png" className='footerIcon' />
+                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', p: '10px', flex:1}}>
+                                <img src="/static/images/icons/FacebookIcon.png" className={styles.footerIcon} />
+                                <img src="/static/images/icons/TwitterIcon.png" className={styles.footerIcon} />
+                                <img src="/static/images/icons/InstagramIcon.png" className={styles.footerIcon} />
+                                <img src="/static/images/icons/YoutubeIcon.png" className={styles.footerIcon} />
                         </Box>
                     </Box>
                 </Container>

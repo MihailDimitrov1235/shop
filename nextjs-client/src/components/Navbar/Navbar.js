@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
+// import { Link as RouterLink } from 'react-router-dom';
 import {
     AppBar,
     Toolbar,
@@ -9,7 +10,7 @@ import {
 import Logo from '../Logo';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { styled } from '@mui/material/styles';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import HamburgerMenu from './HamburgerMenu';
 import useAuth from '../../hooks/useAuth';
 import NavbarContent from './NavbarContent';
@@ -71,7 +72,6 @@ const Navbar = (props) => {
             marginx: 0
         })
     }
-
     return (
         <AppBar
             elevation={0}
@@ -79,16 +79,18 @@ const Navbar = (props) => {
             {...props}
         >
             <Toolbar sx={{ height: 64, display: 'flex', justifyContent: 'space-between', width: { sm: '100%', md: '85%' }, margin: { sm: 'none', md: '0 auto' } }}>
-                <RouterLink to="/">
+                <Link href="/">
                     <Logo />
-                </RouterLink>
+                </Link>
                 <Box sx={{ justifyContent: 'space-between', display: { xs: 'none', md: 'flex' } }}>
-                    {items.map((item, index) => (
+                    {items.map((item, index) => {
+                        return(
                         <NavbarContent item={item} key={index} />
-                    ))}
+                    )})}
+                    
                 </Box>
 
-                <HamburgerMenu items={items} />
+                {/* <HamburgerMenu items={items} /> */}
             </Toolbar>
         </AppBar>
     );

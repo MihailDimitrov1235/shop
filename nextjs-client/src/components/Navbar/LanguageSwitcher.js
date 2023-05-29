@@ -1,8 +1,10 @@
 import { Select, MenuItem, Box, FormControl } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 const LanguageSwitcher = () => {
     const { i18n } = useTranslation();
+    const router = useRouter();
 
     const languageArr = [
         { code: 'en', img: '/static/flags/en.jpeg', label: 'English' },
@@ -10,7 +12,11 @@ const LanguageSwitcher = () => {
     ];
 
     const handleChange = (event) => {
-        i18n.changeLanguage(event.target.value);
+        const selectedLanguage = event.target.value;
+
+        i18n.changeLanguage(selectedLanguage);
+
+        router.push(router.pathname, router.asPath, { locale: selectedLanguage });
     }
 
     return (

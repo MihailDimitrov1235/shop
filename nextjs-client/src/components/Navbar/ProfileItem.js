@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-    Link as RouterLink,
-    useNavigate,
-    matchPath,
-    useLocation
-} from 'react-router-dom';
+import { useRouter } from 'next/router';
 import {
     Box,
     Tooltip,
@@ -29,12 +24,13 @@ const ProfileItem = () => {
     const { t } = useTranslation();
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
-    const location = useLocation();
+    const location = useRouter();
 
-    const isInAdmin = !!matchPath({
-        path: '/admin',
-        end: false
-    }, location.pathname);
+    const isInAdmin = false
+    // const isInAdmin = !!matchPath({
+    //     path: '/admin',
+    //     end: false
+    // }, location.pathname);
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -47,21 +43,21 @@ const ProfileItem = () => {
     const items = [
         { type: 'link', title: t('account'), href: isInAdmin ? '/admin/account' : '/account', icon: PersonIcon },
         { type: 'divider' },
-        { type: 'button', title: t('logout'), href: '/logout', icon: LogoutIcon, handler: () => {
-            userService.logout()
-            .then((res) => {
-                setUser(null);
-                localStorage.removeItem('refresh-token');
-                navigate('/', { replace: true });
-            })
-            .catch((err) => {
-                if(err.message === 'Unauthorized') {
-                    setUser(null);
-                    localStorage.removeItem('refresh-token');
-                    navigate('/login');
-                }
-            })
-        }}
+        // { type: 'button', title: t('logout'), href: '/logout', icon: LogoutIcon, handler: () => {
+        //     userService.logout()
+        //     .then((res) => {
+        //         setUser(null);
+        //         localStorage.removeItem('refresh-token');
+        //         navigate('/', { replace: true });
+        //     })
+        //     .catch((err) => {
+        //         if(err.message === 'Unauthorized') {
+        //             setUser(null);
+        //             localStorage.removeItem('refresh-token');
+        //             navigate('/login');
+        //         }
+        //     })
+        // }}
     ];
 
     if(user && user.role_id === 1) {
@@ -135,12 +131,12 @@ const ProfileItem = () => {
                     
                     return (
                         <MenuItem
-                            component={RouterLink}
+                            component={Link}
                             {...(type === 'button' ? { onClick: (e) => {
                                 e.preventDefault();
                                 item.handler();
                             }} : { onClick: handleCloseUserMenu } )}
-                            to={href}
+                            href={href}
                             sx={{ width: '100%' }}
                             key={index}
                         >

@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 import { styled } from '@mui/material';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
@@ -43,7 +43,7 @@ const MessageWrapper = styled('div')({
     right: 5
 })
 
-const MainLayout = () => {
+const MainLayout = (props) => {
     return (
         <MainLayoutRoot>
             <Navbar />
@@ -53,7 +53,7 @@ const MainLayout = () => {
                         <MessageWrapper>
                             <Message />
                         </MessageWrapper>
-                        <Outlet />
+                            {props.children}
                         <Footer />
                     </MainLayoutContent>
                 </MainLayoutContainer>

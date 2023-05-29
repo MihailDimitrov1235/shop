@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import {
-    Link as RouterLink,
-    matchPath,
-    useLocation
-} from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useGesture } from '@use-gesture/react';
@@ -15,12 +12,9 @@ const NavItem = ({
     title,
     ...rest
 }) => {
-    const location = useLocation();
+    const { pathname } = useRouter();
 
-    const active = href ? !!matchPath({
-        path: href,
-        end: true
-    }, location.pathname) : false;
+    const active = href === pathname;
 
     const [isHovering, setIsHovering] = useState(false);
 
@@ -43,7 +37,7 @@ const NavItem = ({
     return (
         <Button
             ref={ref}
-            component={RouterLink}
+            component={Link}
             sx={{
                 display: 'flex',
                 justifyContent: 'space-evenly',
@@ -70,7 +64,7 @@ const NavItem = ({
                 //     mr: 1
                 // },
             }}
-            to={href}
+            href={href}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
             {...rest}

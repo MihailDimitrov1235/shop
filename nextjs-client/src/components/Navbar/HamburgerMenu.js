@@ -6,14 +6,14 @@ import {
     Drawer,
     ListItem
 } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from "@mui/icons-material/Close";
 import NavbarContent from './NavbarContent';
 
 const HamburgerMenu = ({ items }) => {
     const [open, setOpen] = useState(false);
-    const location = useLocation();
+    const location = useRouter();
 
     useEffect(() => {
         setOpen(false);
