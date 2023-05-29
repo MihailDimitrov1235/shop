@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import HeroSection from '../src/components/PublicWebsite/home/HeroSection/HeroSection';
 // import ProductDisplay from '../components/PublicWebsite/products/ProductDisplay';
 import InformationSection from '../src/components/PublicWebsite//home/InformationSection';
-// import Achievements from '../components/PublicWebsite/home/achievements/Achevements';
+import Achievements from '../src//components/PublicWebsite/home/achievements/Achevements';
 
 const Home = () => {
     // const { locale, locales, push } = useRouter();
@@ -26,7 +26,7 @@ const Home = () => {
                 <ProductDisplay />
             </Container> */}
             <InformationSection />
-            {/* <Achievements /> */}
+            <Achievements />
         </>
     );
 }

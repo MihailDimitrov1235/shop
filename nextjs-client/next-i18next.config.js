@@ -32,6 +32,10 @@
 // export default i18n;
 
 module.exports={
+  webpack(config) {
+    config.infrastructureLogging = { debug: /PackFileCache/ }
+    return config;
+  },
   i18n: {
     locales: ['en', 'bg'],
     defaultLocale: 'bg',

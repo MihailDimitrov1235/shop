@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Button, CardMedia, Card, Grid, Container } from '@mui/material';
 import Achievement from './Achievement';
 import InventoryIcon from '@mui/icons-material/Inventory';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 function Achievements() {
 
