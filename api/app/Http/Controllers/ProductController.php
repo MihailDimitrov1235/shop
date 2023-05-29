@@ -327,41 +327,6 @@ class ProductController extends Controller
         return response($file_path, 201);
     }
 
-<<<<<<< HEAD
-
-    // public function getRequests() {
-    //     $query = Product::select(
-    //                         'products.id',
-    //                         'product_trans.name as name',
-    //                         'products.created_at'
-    //                     )
-    //                     ->where('products.approved', false)
-    //                     ->leftJoin('product_trans', function($q) {
-    //                         $q->on('product_trans.product_id', 'products.id');
-    //                         $q->where('product_trans.lang', request()->query('lang'));
-    //                     });
-
-    //     if(request()->has(['field', 'direction'])){
-    //         $query->orderBy(request()->query('field'), request()->query('direction'));
-    //     }
-
-    //     if(request()->query('total')) {
-    //         $products = $query->paginate(request()->query('total'))->withQueryString();
-    //     }else {
-    //         $products = $query->paginate(10)->withQueryString();
-    //     } 
-
-    //     return $products;
-    // }
-
-    // public function approve($id){
-    //     $product = Product::findOrFail($id);
-    //     $product->approved = true;
-    //     $product->update();
-    // }
-
-=======
->>>>>>> 7bc81659f3823d714e3f4593438334451f235fdd
     public function similarProducts($id)
     {
         $product = Product::findOrFail($id);
