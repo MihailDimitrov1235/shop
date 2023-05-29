@@ -1,9 +1,9 @@
 import { Container, Box } from '@mui/material';
 import { useRouter } from 'next/router';
-import { UseTranslation, useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // import { useState } from 'react';
-// import HeroSection from '../src/components/PublicWebsite/home/HeroSection/HeroSection';
+import HeroSection from '../src/components/PublicWebsite/home/HeroSection/HeroSection';
 // import ProductDisplay from '../components/PublicWebsite/products/ProductDisplay';
 // import InformationSection from '../components/PublicWebsite//home/InformationSection';
 // import Achievements from '../components/PublicWebsite/home/achievements/Achevements';
@@ -22,8 +22,8 @@ const Home = () => {
     
     return (
         <>
-        <Box>{t('blog')}</Box>
-            {/* <HeroSection /> */}
+        {/* <Box>{t('blog')}</Box> */}
+            <HeroSection />
             {/* <Container maxWidth={'false'} sx={{ width: '85%', margin: '0 auto', my: 10, position: 'relative' }}>
                 <ProductDisplay />
             </Container>
