@@ -32,7 +32,7 @@ const Comment = ( {props} ) =>{
     const [likes, setLikes] = useState(0)
 
     const likeData = {
-        user_id:1,
+        user_id: user && user.id,
         comment_id:props.id
     }
 
@@ -176,9 +176,9 @@ const Comment = ( {props} ) =>{
                 </Box>
                 {isLong && <Button sx={{ color:'#777777' }} onClick={ () => setFullLength(!fullLength)}>{fullLength? t('read-less') : t('read-more')}</Button>}
                 <Box display={'flex'} alignItems={'center'}>
-                    <IconButton onClick={handleLike}><ThumbUpIcon sx={{ color: liked?'#96011c': 'inherit'}}/></IconButton>
+                    <IconButton onClick={handleLike}><ThumbUpIcon sx={{ color: liked ? '#96011c' : 'inherit'}}/></IconButton>
                     <Typography variant="subtitle1">{likes}</Typography>
-                    <IconButton onClick={handleDislike}><ThumbDownIcon sx={{ color: disliked?'#96011c': 'inherit'}}/></IconButton>
+                    <IconButton onClick={handleDislike}><ThumbDownIcon sx={{ color: disliked ? '#96011c' : 'inherit'}}/></IconButton>
                     <Button sx={{ml:'auto'}}><Typography sx={{ color:'#96011c' }} variant="subtitle2">{t('report')}</Typography></Button>
                 </Box>
 
