@@ -2,13 +2,20 @@ import {
     Box,
     Typography
 } from '@mui/material';
+import { useState } from 'react';
 import { Container } from '@mui/system';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useSpring, animated } from '@react-spring/web'
-import './styles.css';
+import styles from './InformationSection.module.css';
+import classNames from 'classnames';
 
-const InformationSection = ( flipped, setFlipped ) => {
+const InformationSection = ( ) => {
+
+    const backStyles = classNames(styles.image, styles.back);
+    const frontStyles = classNames(styles.image, styles.front);
+
+    const [flipped, setFlipped] = useState(false)
 
     const { transform, opacity } = useSpring({
         opacity: flipped ? 1 : 0,
@@ -69,22 +76,22 @@ const InformationSection = ( flipped, setFlipped ) => {
                         </Typography>
                     </Box>
 
-                    <Container className={'container'} onClick={() => setFlipped(state => !state)}>
+                    <Container className={styles.container} onClick={() => setFlipped(state => !state)}>
                         <animated.div
-                            className={'image back'}
+                            className={backStyles}
                             style={{ opacity: opacity.to(o => 1 - o), transform }}
                         >
-                            <img className='informationImg' src="https://www.bas.bg/wp-content/uploads/2017/10/Ban_Zgrada_Tzentr_Vhod-1024x615.jpg"/>
+                            <img className={styles.informationImg} src="https://www.bas.bg/wp-content/uploads/2017/10/Ban_Zgrada_Tzentr_Vhod-1024x615.jpg"/>
                         </animated.div>
                         <animated.div
-                            className={'image front'}
+                            className={frontStyles}
                             style={{
                             opacity,
                             transform,
                             rotateX: '180deg',
                             }}
                         >
-                            <img className='informationImg' src="https://www.uni-sofia.bg/var/ezwebin_site/storage/images/media/images/18_a2/1327379-1-bul-BG/18_a.jpg"/>
+                            <img className={styles.informationImg} src="https://www.uni-sofia.bg/var/ezwebin_site/storage/images/media/images/18_a2/1327379-1-bul-BG/18_a.jpg"/>
                         </animated.div>
                     </Container>
                 </Container>
