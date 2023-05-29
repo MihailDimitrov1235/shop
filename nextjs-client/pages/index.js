@@ -1,5 +1,3 @@
-import { Container, Box } from '@mui/material';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // import { useState } from 'react';
@@ -9,15 +7,7 @@ import InformationSection from '../src/components/PublicWebsite//home/Informatio
 import Achievements from '../src//components/PublicWebsite/home/achievements/Achevements';
 
 const Home = () => {
-    // const { locale, locales, push } = useRouter();
-    // const [isMounted, setIsMounted] = useState(false);
     const { t } = useTranslation()
-
-    // useEffect(() => {
-    //     setIsMounted(true);
-    // }, []);
-    
-    // const [flipped, setFlipped] = useState(false)
 
     return (
         <>
@@ -32,11 +22,11 @@ const Home = () => {
 }
 
 export async function getServerSideProps({ locale }) {
-    return {
-        props: {
-            ... (await serverSideTranslations(locale))
-        }
-    }
+  return {
+      props: {
+          ... (await serverSideTranslations(locale))
+      }
+  }
 }
 
 export default Home;

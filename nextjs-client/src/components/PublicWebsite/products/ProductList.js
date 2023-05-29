@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, Container, Grid, Box, Typography, linearGradient } from '@mui/material';
 import ProductCard from './ProductCard';
 import productService from '../../../services/product';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';

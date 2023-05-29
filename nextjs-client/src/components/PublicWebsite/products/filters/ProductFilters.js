@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, Typography } from '@mui/material';
 import FilterCard from './FilterCard';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import AutocompleteCheckboxes from '../../../filters/AutocompleteCheckboxes';
 import categoryService from '../../../../services/category';
 import authorService from '../../../../services/author';
