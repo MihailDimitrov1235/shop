@@ -7,6 +7,7 @@ import {
     Pagination as PaginationMUI
 } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'next-i18next';
 
 const Pagination = ({
     total,
@@ -15,6 +16,8 @@ const Pagination = ({
     rows,
     setRows
 }) => {
+
+    const { t } = useTranslation()
     const handleRowsChange = (event) => {
         setRows(event.target.value);
     };
@@ -27,7 +30,7 @@ const Pagination = ({
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap', float: 'right', mt: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Typography component='span'>
-                    Елементи на страница:
+                    {t('elements-on-page')}:
                 </Typography>
                 <FormControl variant='standard' size='small'>
                     <Select
