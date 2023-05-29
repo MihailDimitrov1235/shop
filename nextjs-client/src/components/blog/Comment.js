@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Box, Typography, IconButton, Button, Avatar } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import commentService from '../../services/comment';
 import moment from 'moment';
 import 'moment/locale/bg';

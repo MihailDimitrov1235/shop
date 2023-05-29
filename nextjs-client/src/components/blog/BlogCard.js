@@ -1,5 +1,5 @@
 import { Box, Card, CardMedia, CardContent, CardActions, Typography, Chip, Stack } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import moment from 'moment';
 
 import PersonIcon from '@mui/icons-material/Person';
@@ -15,7 +15,7 @@ const BlogCard = ({ post }) => {
             maxWidth: { xs: '80%', sm: '45%', md: '30%' },
             mt: 4
         }}>
-            <Link to={post.slug}>
+            <Link href={post.slug}>
                 <Card sx={{ borderRadius: 4 }}>
                     <CardMedia
                         sx={{ height: 200 }}
