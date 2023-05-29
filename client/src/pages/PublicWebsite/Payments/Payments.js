@@ -2,8 +2,8 @@ import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, PaymentElement, CardElement, PayButtonElement } from '@stripe/react-stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
+// import { Elements, PaymentElement, CardElement, PayButtonElement } from '@stripe/react-stripe-js';
 
 const stripePromise = loadStripe('pk_test_51MBFWyKHDivJN7JNeeQzpBW01h7AXlGSKOVxisYjac5EoBgv7nAwfS9IunUZqjHdPXCrXBizVVepjhaUbvGO0rwM00B9rpWzi4');
 
@@ -22,9 +22,9 @@ function Payments() {
             <Card sx={{ p: 2 }}>
                 <PerfectScrollbar>
                     <Box>
-                        <Elements stripe={stripePromise}>
+                        {/* <Elements stripe={stripePromise}>
                             <CardElement />
-                        </Elements>
+                        </Elements> */}
                         <button>
                                 Pay
                             </button>

@@ -11,7 +11,6 @@ import Cart from './pages/PublicWebsite/Cart';
 import Login from './pages/PublicWebsite/Login';
 import Register from './pages/PublicWebsite/Register';
 import Account from './pages/PublicWebsite/Account';
-import Payments from './pages/PublicWebsite/Payments/Payments';
 
 import Dashboard from './pages/ControlPanel/Dashboard';
 

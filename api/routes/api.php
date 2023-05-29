@@ -78,7 +78,6 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('/', [PostController::class, 'store']);
         Route::delete('/', [PostController::class, 'delete']);
         Route::put('/{id}', [PostController::class, 'edit']);
-        Route::put('/visit/{id}', [PostController::class, 'incrementVisits']); // dont know if clients should have access
         Route::patch('/{id}', [PostController::class, 'approve']);
         Route::get('/requests', [PostController::class, 'getRequests']);
     });
@@ -148,7 +147,7 @@ Route::prefix('comments')->group(function () {
 
 Route::prefix('bloggers')->group(function () {
     Route::post('/', [BloggerController::class, 'store']);
-    Route::post('/{id}', [BloggerController::class, 'edit']); // can't send files via put
+    Route::post('/{id}', [BloggerController::class, 'edit']);
     Route::delete('/', [BloggerController::class, 'delete']);
     Route::patch('/{id}', [BloggerController::class, 'approve']);
     Route::get('/requests', [BloggerController::class, 'getRequests']);
@@ -157,8 +156,8 @@ Route::prefix('bloggers')->group(function () {
 Route::prefix('posts')->group(function () {
     Route::post('/', [PostController::class, 'store']);
     Route::delete('/', [PostController::class, 'delete']);
+    Route::post('/visit', [PostController::class, 'visit']);
     Route::post('/{id}', [PostController::class, 'edit']); 
-    Route::put('/visit/{id}', [PostController::class, 'incrementVisits']); 
     Route::get('/requests', [PostController::class, 'getRequests']);
     Route::put('/', [PostController::class, 'approve']);
 });
@@ -179,7 +178,6 @@ Route::prefix('authors')->group(function () {
     Route::get('/requests', [AuthorController::class, 'getRequests']);
     Route::put('/', [AuthorController::class, 'approve']);
 });
-Route::post('visit', [PostController::class, 'visit']);
 Route::prefix('products')->group(function () {
     Route::post('/', [ProductController::class, 'store']);
     Route::post('/upload', [ProductController::class, 'uploadFiles']);

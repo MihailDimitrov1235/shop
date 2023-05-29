@@ -1,0 +1,423 @@
+{
+    "cart": "Cart",
+
+    "home": "Home",
+
+    "products": "Products",
+
+    "sign-in": "Sign in",
+
+    "profile": "Profile",
+
+    "account": "Account",
+
+    "dashboard": "Dashboard",
+
+    "logout": "Logout",
+
+    "store": "Store",
+
+    "email": "Email",
+
+    "password": "Password",
+
+    "ban": "BAS",
+
+    "sign-in-text": "Enter email and password to log in",
+
+    "no-account": "Don't have an account?",
+
+    "sign-up": "Sign Up",
+
+    "email-required": "Email is required",
+
+    "email-invalid": "Email is invalid",
+
+    "password-required": "Password is required",
+
+    "name": "Name",
+
+    "repeat-password": "Repeat password",
+
+    "have-account": "Have an account?",
+
+    "sign-up-text": "Enter your registration details",
+
+    "name-required": "Name is required",
+
+    "password-invalid": "Password must be at least 8 characters long",
+
+    "passwords-not-match": "Passwords do not match",
+
+    "dashboard-text": "Welcome to your Dashboard",
+
+    "product-id": "Product ID",
+
+    "author-ids": "Author IDs",
+
+    "short-description": "Short Description",
+
+    "long-description": "Long Description",
+
+    "category-ids": "Category IDs",
+
+    "parts": "Parts",
+
+    "parts-count": "Number of parts",
+
+    "created-at": "Created At",
+
+    "updated-at": "Updated At",
+
+    "product-name": "Product Name",
+
+    "authors": "Authors",
+
+    "add": "Add",
+
+    "remove": "Remove",
+
+    "create": "Create",
+
+    "user-id": "User ID",
+
+    "email-verified-at": "Email Verified At",
+
+    "purchase-ids": "Purchase IDs",
+
+    "create-user": "Create a new user",
+
+    "create-user-text": "text",
+
+    "create-user-title": "Create User",
+
+    "admin-id": "Admin ID",
+
+    "username": "Username",
+
+    "role": "Role",
+
+    "create-admin": "Create a new admin",
+
+    "create-admin-text": "text",
+
+    "create-admin-title": "Create Admin",
+
+    "create-product": "Create a new Product",
+
+    "create-product-text": "text",
+
+    "create-product-title": "Create Product",
+
+    "category": "Category",
+
+    "search-in": "Search in ",
+
+    "delete-msg": "Are you sure you want to delete",
+
+    "rows": " rows",
+
+    "cancel": "Cancel",
+
+    "delete": "Delete",
+
+    "rows-per-page": "Rows per page",
+
+    "author-required": "Аuthor is required",
+
+    "short-description-required": "Short description is required",
+
+    "long-description-required": "Long description is required",
+
+    "category-required": "Category is required",
+
+    "parts-required": "Number of parts is required",
+
+    "delete-selected": "Delete selected",
+
+    "profile-edit-information": "The information can be edited",
+
+    "upload-picture": "Upload picture",
+
+    "upload-files": "Upload files",
+
+    "upload-file": "Upload a file",
+    
+    "save": "Save",
+
+    "users": "Users",
+
+    "edit": "Edit",
+
+    "user-deleted": "User deleted successfully",
+
+    "user-created": "User created successfully",
+
+    "email-registered-error": "Email is already registered",
+
+    "users-create": "Create user",
+
+    "user-edited": "User edited successfully",
+
+    "users-edit": "Edit user",
+
+    "admins": "Admins",
+
+    "admins-create": "Create admin",
+
+    "admins-edit": "Edit admin",
+
+    "management": "Management",
+
+    "sales": "Sales",
+
+    "client-facing": "Client Facing",
+
+    "transactions": "Transactions",
+
+    "categories": "Categories",
+
+    "category-create": "Create category",
+
+    "category-edit": "Edit category",
+
+    "category-created": "Category created successfully",
+
+    "category-edited": "Category edited successfully",
+
+    "category-deleted": "Category deleted successfully",
+
+    "no-records": "No records",
+
+    "category-id": "Category ID",
+
+    "author-id": "Author ID",
+
+    "product": "Product",
+
+    "next": "Next",
+
+    "picture": "Picture",
+
+    "to-upload": "To Upload",
+
+    "files": "Files",
+
+    "part": "Part",
+
+    "price": "Price",
+
+    "drag-and-drop-files": "Drag and drop your files or",
+
+    "sort":"Sorting",
+
+    "sort-newest":"Newest first",
+
+    "sort-oldest":"Oldest first",
+    
+    "filters":"Filters",
+    
+    "search":"Search",
+
+    "add-cart":"ADD TO CART",
+
+    "description":"Description",
+
+    "simular-products":"Simular Products",
+
+    "hero-title":"The best website to buy scientific papers",
+
+    "hero-desc":"Webstore by the Bulgarian Academy of Sciences which sells highly researched and developed scientific papers. After a purchase of the full product you are free to use it in your own or your company's projects.",
+
+    "hero-button":"SHOP NOW",
+
+    "information-title":"What is Lorem Ipsum?",
+    
+    "information-desc":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    
+    "achievements":"Our achievements",
+
+    "copyright":"© 2023 Bulgarian Academy of Sciences | Some rights reserved | Cookie Policy",
+
+    "home-title":"Home",
+
+    "products-title":"Products",
+
+    "cart-title":"Cart",
+
+    "item":"Item",
+
+    "total":"Total",
+
+    "recieve":"You will recieve",
+
+    "and-more":"And more...",
+
+    "bgn":"BGN",
+
+    "all-files":"All files:",
+
+    "purchases": "Purchases",
+
+    "settings": "Settings",
+
+    "products-created": "Products created",
+
+    "created-products": "Created products",
+
+    "contact-info": "Contact information",
+
+    "image": "Image",
+
+    "numbers-sold": "Numbers sold",
+
+    "your-cart":"Your cart",
+
+    "no-items-in-cart":"You don't have any items in your cart.",
+
+    "subtotal":"Subtotal",
+
+    "taxes":"Taxes",
+
+    "grandtotal":"GrandTotal",
+
+    "checkout":"Checkout",
+
+    "total-price":"Total price",
+
+    "profile-subtitle":"The information can be edited",
+
+    "parts-owned":"Owned parts",
+
+    "requests":"Requests",
+
+    "time-ago":"Time passed",
+
+    "less-minute":"Less than a minute ago",
+
+    "minute-ago":"minute ago",
+
+    "minutes-ago":"minutes ago",
+
+    "hour-ago":"hour ago",
+
+    "hours-ago":"hours ago",
+
+    "day-ago":"day ago",
+
+    "days-ago":"days ago",
+
+    "month-ago":"month ago",
+
+    "months-ago":"months ago",
+
+    "year-ago":"year ago",
+
+    "years-ago":"years ago",
+
+    "ago":"",
+    
+    "approve":"Аpprove",
+
+    "approve-msg":"Are your sure you want to approve",
+
+    "bulgarian":"Bulgarian",
+
+    "english":"English",
+
+    "preview":"Preview",
+
+    "user": "User",
+
+    "author": "Author",
+
+    "links": "Links",
+
+    "your-cart-is-empty": "Your cart is empty",
+
+    "empty-cart-message": "You must items before you proceed to check out",
+
+    "return-to-shop": "Return to shop",
+
+    "h1":"Heading 1",
+
+    "h2":"Heading 2",
+
+    "h3":"Heading 3",
+
+    "h4":"Heading 4",
+
+    "h5":"Heading 5",
+
+    "h6":"Heading 6",
+
+    "quote":"Quote",
+
+    "ul":"UL",
+
+    "ol":"OL",
+
+    "code-block":"CodeBlock",
+
+    "bold":"Bold",
+
+    "italic":"Italic",
+
+    "underline":"Underlined",
+
+    "blog": "Blog",
+
+    "blog-welcome-title": "Step into the realm of scientific wonders. Discover, learn, and be amazed.",
+
+    "blog-welcome-subtitle": "Welcome to our captivating science blog, where curiosity meets knowledge! Prepare to embark on a journey through the captivating world of scientific wonders. From the depths of the cosmos to the inner workings of our bodies, we explore the vast realm of scientific discovery.",
+
+    "sort-by": "Sort by",
+
+    "dont-sort": "Don't sort",
+
+    "most-visited": "Most visited",
+
+    "newest": "Newest",
+
+    "oldest": "Oldest",
+
+    "about-post": "About the post",
+
+    "comment-section": "Comment section",
+
+    "write-comment": "Write a comment",
+
+    "report": "Report",
+
+    "read-more": "Read more",
+
+    "read-less": "Read less",
+
+    "comment": "comment",
+
+    "submit-comment": "Submit the comment",
+
+    "create-blog-welcome-text": "To create a new post fill the form, preview how it looks and create it. Don't forget to add both bulgarian and english.",
+
+    "title": "Title",
+
+    "subtitle": "Subtitle",
+
+    "submit": "Submit",
+
+    "create-post": "Create post",
+
+    "create-post-msg": "Are you sure you want to create a new post",
+
+    "yes": "Yes",
+
+    "no-products": "No products coresponding to the search were found.",
+
+    "no-products-subtitle": "Try searching for something else.",
+
+    "no-posts": "No posts coresponding to the search were found.",
+
+    "no-posts-subtitle": "Try searching for something else.",
+
+    "more-details": "More details"
+}
