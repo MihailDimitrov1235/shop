@@ -60,13 +60,22 @@ function getAll(lang='bg') {
     })
 }
 
+async function getAllAsync(lang='bg') {
+    const url = `${servicesHelper.url}/categories/all?lang=${lang}`;
+
+    return await axios.get(url, {
+        headers: servicesHelper.header()
+    })
+}
+
 const categoryService = {
     getCategories,
     createCategory,
     editCategory,
     deleteCategories,
     getCategoryById,
-    getAll
+    getAll,
+    getAllAsync
 }
 
 export default categoryService;

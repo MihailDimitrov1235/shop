@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import BlogCard from '../../src/components/blog/BlogCard';
 import blogService from '../../src/services/blog';
 import categoryService from '../../src/services/category';
+import axios from 'axios';
 
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
@@ -12,15 +13,14 @@ import ClearIcon from '@mui/icons-material/Clear';
 import ArticleIcon from '@mui/icons-material/Article';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-const BlogMainPage = () => {
-    console.log(process.env.REACT_APP_API_ENDPOINT)
+const BlogMainPage = ( {data} ) => {
     const { t, i18n } = useTranslation();
     const router = useRouter();
     const { category } = router.query
     const defaultCategory = category;
 
-    const [posts, setPosts] = useState([]);
-    const [total, setTotal] = useState(0);
+    const [posts, setPosts] = useState(data.posts);
+    const [total, setTotal] = useState(data.total);
 
     const [checkedCategories, setCheckedCategories] = useState(new Set([parseInt(defaultCategory)]));
     const [sortBy, setSortBy] = useState('none');
@@ -29,7 +29,7 @@ const BlogMainPage = () => {
     const [filters, setFilters] = useState(false);
     const [page, setPage] = useState(1);
 
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState(data.categories);
 
     useEffect(() => {
         get()
@@ -190,10 +190,44 @@ const BlogMainPage = () => {
 
 export const getServerSideProps = async ({ locale }) => {
     const translations = await serverSideTranslations(locale, ['common']);
-  
+    const pagination = {
+        page: 1,
+        total: 10
+      };
+      let data
+    
+      try {
+        const url1 = `${process.env.REACT_APP_API_ENDPOINT}/categories/all?lang=${locale}`;
+        let url = `${process.env.REACT_APP_API_ENDPOINT}/posts?page=${pagination.page}&total=${pagination.total}&lang=${locale}`;
+
+        const blogResponse = await axios.get(url);
+        const categoryResponse = await axios.get(url1);
+    
+        const posts = blogResponse.data.data;
+        const total = blogResponse.data.total;
+        const options = categoryResponse.data.map((el) => ({
+          label: el.name,
+          value: el.id
+        }));
+        data = {
+            posts: posts,
+            total: total,
+            categories: options
+        }
+
+      } catch (error) {
+        console.log(error);
+        data = {
+            posts: [],
+            total: 0,
+            categories: []
+        }
+      }
+    console.log(data)
     return {
       props: {
         ...translations,
+        data
         // Other props you want to pass to the page component
       },
     };
