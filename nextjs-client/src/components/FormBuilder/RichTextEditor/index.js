@@ -1,7 +1,7 @@
 import React from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils, convertToRaw, convertFromHTML, ContentState } from "draft-js";
 import draftToHtml from 'draftjs-to-html';
-import "./index.css";
+import "./RichTextEditor.module.css";
 import "../../../../node_modules/draft-js/dist/Draft.css";
 import { useTranslation } from 'react-i18next';
 

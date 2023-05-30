@@ -1,7 +1,7 @@
 import { makeStyles } from '@mui/styles';
 import DisplayCard from './DisplayCard';
 import productService from '../../../../services/product';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
@@ -14,7 +14,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import './styles.css'
+import './ProductDisplay.module.css'
+import { useRouter } from 'next/router';
 
 
 const useStyles = makeStyles({
@@ -51,13 +52,12 @@ const useStyles = makeStyles({
     },
 });
 
-export async function getServerSideProps(context) {
-    // const { id } = context.query;
-    id = null
-    const similarProducts = await productService.similarProducts(id, i18n.language)
+export async function getServerSideProps() {
+    id = 0
+    // const similarProducts = await productService.similarProducts(id, i18n.language)
     return {
       props: {
-        products,
+        products: similarProducts,
       },
     };
   }
@@ -107,7 +107,7 @@ const ProductDisplay = ({
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >
-                {products.map((product, index) => (
+                {products && products.map((product, index) => (
                     <SwiperSlide className="swiperFixedWidth300" key={index}>
                         <DisplayCard product={product} />
                     </SwiperSlide>

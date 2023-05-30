@@ -11,6 +11,7 @@ import { appWithTranslation } from 'next-i18next';
 import MainLayout from '@/components/MainLayout';
 import ControlPanelLayout from '@/components/ControlPanel/ControlPanelLayout';
 import { useRouter } from 'next/router';
+import 'react-quill/dist/quill.snow.css';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

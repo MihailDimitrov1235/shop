@@ -1,6 +1,11 @@
 import { Box, InputLabel } from '@mui/material';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+// import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic'
+
+const ReactQuill = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+})
 
 const RichTextEditor = ({ name, label, modules, setFieldValue, value }) => {
     if (!modules) {

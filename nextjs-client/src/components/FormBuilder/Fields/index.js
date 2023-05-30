@@ -4,7 +4,7 @@ import {
     MenuItem,
     Divider
 } from '@mui/material';
-import RichTextEditor from '../RichTextEditor';
+// import RichTextEditor from '../RichTextEditor';
 import RichText from './RichTextEditor';
 import LangFields from './LangFields';
 import FileUpload from './FileUpload';
@@ -21,13 +21,13 @@ const Fields = ({ field, baseProps, setFieldValue, values, touched, errors, upda
                 />
             )}
 
-            {field.type === 'multiline' && (
+            {/* {field.type === 'multiline' && (
                 <RichTextEditor
                     rows={field.rows || 2}
                     setFieldValue={setFieldValue}
                     {...baseProps}
                 />
-            )}
+            )} */}
 
             {field.type === 'rich-text' && (
                 <RichText
