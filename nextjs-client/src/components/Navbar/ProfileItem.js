@@ -38,21 +38,21 @@ const ProfileItem = () => {
     const items = [
         { type: 'link', title: t('account'), href: isInAdmin ? '/admin/account' : '/account', icon: PersonIcon },
         { type: 'divider' },
-        // { type: 'button', title: t('logout'), href: '/logout', icon: LogoutIcon, handler: () => {
-        //     userService.logout()
-        //     .then((res) => {
-        //         setUser(null);
-        //         localStorage.removeItem('refresh-token');
-        //         navigate('/', { replace: true });
-        //     })
-        //     .catch((err) => {
-        //         if(err.message === 'Unauthorized') {
-        //             setUser(null);
-        //             localStorage.removeItem('refresh-token');
-        //             navigate('/login');
-        //         }
-        //     })
-        // }}
+        { type: 'button', title: t('logout'), href: '/logout', icon: LogoutIcon, handler: () => {
+            userService.logout()
+            .then((res) => {
+                setUser(null);
+                localStorage.removeItem('refresh-token');
+                navigate('/', { replace: true });
+            })
+            .catch((err) => {
+                if(err.message === 'Unauthorized') {
+                    setUser(null);
+                    localStorage.removeItem('refresh-token');
+                    navigate('/login');
+                }
+            })
+        }}
     ];
 
     if(user && user.role_id === 1) {

@@ -1,5 +1,6 @@
 import React from "react";
-import { Sidebar, useProSidebar, Menu } from 'react-pro-sidebar';
+import { useState } from "react";
+import { Sidebar, Menu } from 'react-pro-sidebar';
 import { Box, useTheme, IconButton } from "@mui/material";
 import SideBarContent from "./SideBarContent";
 import { useTranslation } from 'next-i18next';
@@ -12,7 +13,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 const SideBar = () => {
     const theme = useTheme();
-    const { collapseSidebar } = useProSidebar();
+    const [collapsed, setCollapsed] = useState(false)
     const hoverStyle = {
         backgroundColor: `${theme.palette.background.paper}`,
         color: `${theme.palette.primary.contrastText}`,
@@ -47,9 +48,9 @@ const SideBar = () => {
             display: 'flex',
             height: '100%',
         }}>
-            <Sidebar backgroundColor={theme.palette.background.paper} width="250px">
+            <Sidebar collapsed={collapsed} backgroundColor={theme.palette.background.paper} width="250px">
                 <Box p={1} height="auto" pl="18px" pr="auto" backgroundColor={theme.palette.primary.contrastText}>
-                    <IconButton onClick={() => collapseSidebar()}>
+                    <IconButton onClick={() => setCollapsed(!collapsed)}>
                         <MenuIcon sx={{ color: theme.palette.primary.main }} />
                     </IconButton>
                 </Box>

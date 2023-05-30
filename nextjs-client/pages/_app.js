@@ -32,7 +32,7 @@ function MyApp(props) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <GlobalStyles />
-        {[`/admin`].includes(router.asPath)? 
+        {router.asPath.includes('/admin')? 
           <ControlPanelLayout>
             <Component {...pageProps} />
           </ControlPanelLayout>

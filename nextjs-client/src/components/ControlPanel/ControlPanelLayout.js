@@ -36,9 +36,7 @@ const ControlPanelLayoutContent = styled('div')({
 const ControlPanelLayout = () => {
     return (
         <ControlPanelLayoutRoot>
-            <ProSidebarProvider>
                 <SideBar />
-            </ProSidebarProvider>
             <ControlPanelLayoutWrapper>
                 <TopBar />
                 <ControlPanelLayoutContainer>
