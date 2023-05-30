@@ -21,7 +21,7 @@ const SideBarContent = ({ items, ml = 20 }) => {
                     if(!item.icon){
                         return(
                             <MenuItem
-                                routerLink={<Link href={href} />}
+                                component={<Link href={href} />}
                                 key={index}
                                 active={isActive(href)}
                                 style={{
@@ -35,7 +35,7 @@ const SideBarContent = ({ items, ml = 20 }) => {
                     }
                     return (
                         <MenuItem
-                            routerLink={<Link href={href} />}
+                            component={<Link href={href} />}
                             key={index}
                             icon={<item.icon/>}
                             active={isActive(href)}
