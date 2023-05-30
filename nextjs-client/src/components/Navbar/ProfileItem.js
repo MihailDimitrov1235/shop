@@ -18,19 +18,14 @@ import StoreIcon from '@mui/icons-material/Store';
 import LogoutIcon from '@mui/icons-material/Logout';
 import userService from '../../services/user';
 import useAuth from '../../hooks/useAuth';
+import Link from 'next/link';
 
 const ProfileItem = () => {
     const [anchorElUser, setAnchorElUser] = useState(null);
     const { t } = useTranslation();
     const { user, setUser } = useAuth();
-    const navigate = useNavigate();
     const location = useRouter();
-
-    const isInAdmin = false
-    // const isInAdmin = !!matchPath({
-    //     path: '/admin',
-    //     end: false
-    // }, location.pathname);
+    const isInAdmin = ([`/admin`].includes(location.pathname))
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);

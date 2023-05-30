@@ -1,19 +1,13 @@
 import { MenuItem, SubMenu } from 'react-pro-sidebar';
 import PropTypes from 'prop-types';
-import {
-    Link,
-    matchPath,
-    useLocation
-} from "react-router-dom";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const SideBarContent = ({ items, ml = 20 }) => {
-    const location = useLocation();
+    const location = useRouter();
 
     const isActive = (href) => {
-        return href ? !!matchPath({
-            path: href,
-            end: false
-        }, location.pathname) : false;
+        return href === location.pathname;
     }
 
     const marginL = ml + 'px'
@@ -27,7 +21,7 @@ const SideBarContent = ({ items, ml = 20 }) => {
                     if(!item.icon){
                         return(
                             <MenuItem
-                                routerLink={<Link to={href} />}
+                                routerLink={<Link href={href} />}
                                 key={index}
                                 active={isActive(href)}
                                 style={{
@@ -41,7 +35,7 @@ const SideBarContent = ({ items, ml = 20 }) => {
                     }
                     return (
                         <MenuItem
-                            routerLink={<Link to={href} />}
+                            routerLink={<Link href={href} />}
                             key={index}
                             icon={<item.icon/>}
                             active={isActive(href)}

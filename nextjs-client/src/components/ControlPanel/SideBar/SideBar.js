@@ -2,7 +2,7 @@ import React from "react";
 import { Sidebar, useProSidebar, Menu } from 'react-pro-sidebar';
 import { Box, useTheme, IconButton } from "@mui/material";
 import SideBarContent from "./SideBarContent";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';

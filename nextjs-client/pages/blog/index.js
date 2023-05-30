@@ -223,7 +223,6 @@ export const getServerSideProps = async ({ locale }) => {
             categories: []
         }
       }
-    console.log(data)
     return {
       props: {
         ...translations,
