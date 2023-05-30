@@ -11,6 +11,8 @@ import { appWithTranslation } from 'next-i18next';
 import MainLayout from '@/components/MainLayout';
 import ControlPanelLayout from '@/components/ControlPanel/ControlPanelLayout';
 import { useRouter } from 'next/router';
+import AuthProvider from '@/providers/AuthProvider';
+import MessageProvider from '@/providers/MessageProvider';
 import 'react-quill/dist/quill.snow.css';
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -32,15 +34,19 @@ function MyApp(props) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <GlobalStyles />
-        {router.asPath.includes('/admin')? 
-          <ControlPanelLayout>
-            <Component {...pageProps} />
-          </ControlPanelLayout>
-          :
-          <MainLayout>
-            <Component {...pageProps} />
-          </MainLayout>
-        }
+        <AuthProvider>
+          <MessageProvider>
+            {router.asPath.includes('/admin') ?
+              <ControlPanelLayout>
+                <Component {...pageProps} />
+              </ControlPanelLayout>
+              :
+              <MainLayout>
+                <Component {...pageProps} />
+              </MainLayout>
+            }
+          </MessageProvider>
+        </AuthProvider>
       </ThemeProvider>
     </CacheProvider>
   );
