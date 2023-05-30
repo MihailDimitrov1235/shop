@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import GlobalStyles from '@/components/GlobalStyles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
@@ -30,24 +30,26 @@ function MyApp(props) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
         <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"></link>
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <GlobalStyles />
-        <AuthProvider>
-          <MessageProvider>
-            {router.asPath.includes('/admin') ?
-              <ControlPanelLayout>
-                <Component {...pageProps} />
-              </ControlPanelLayout>
-              :
-              <MainLayout>
-                <Component {...pageProps} />
-              </MainLayout>
-            }
-          </MessageProvider>
-        </AuthProvider>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <GlobalStyles />
+          <AuthProvider>
+            <MessageProvider>
+              {router.asPath.includes('/admin') ?
+                <ControlPanelLayout>
+                  <Component {...pageProps} />
+                </ControlPanelLayout>
+                :
+                <MainLayout>
+                  <Component {...pageProps} />
+                </MainLayout>
+              }
+            </MessageProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </CacheProvider>
   );
 }
