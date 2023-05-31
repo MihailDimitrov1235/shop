@@ -8,7 +8,7 @@ const ControlPanelLayoutRoot = styled('div')(
     ({ theme }) => ({
         backgroundColor: theme.palette.background.default,
         display: 'flex',
-        height: '100%',
+        height: '100vh',
         overflow: 'hidden',
         width: '100%'
     })
@@ -33,7 +33,7 @@ const ControlPanelLayoutContent = styled('div')({
     overflow: 'auto'
 });
 
-const ControlPanelLayout = () => {
+const ControlPanelLayout = (props) => {
     return (
         <ControlPanelLayoutRoot>
                 <SideBar />
@@ -41,7 +41,7 @@ const ControlPanelLayout = () => {
                 <TopBar />
                 <ControlPanelLayoutContainer>
                     <ControlPanelLayoutContent>
-                        <Outlet />
+                        {props.children}
                     </ControlPanelLayoutContent>
                 </ControlPanelLayoutContainer>
             </ControlPanelLayoutWrapper>

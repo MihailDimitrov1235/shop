@@ -48,13 +48,17 @@ const SideBar = () => {
             display: 'flex',
             height: '100%',
         }}>
-            <Sidebar collapsed={collapsed} backgroundColor={theme.palette.background.paper} width="250px">
+            <Sidebar rootStyles={{
+                '.css-udx2ky': {
+                    overflow:'hidden'
+                },
+            }} style={{height: '100%'}} collapsed={collapsed} backgroundColor={theme.palette.background.paper} width="250px">
                 <Box p={1} height="auto" pl="18px" pr="auto" backgroundColor={theme.palette.primary.contrastText}>
                     <IconButton onClick={() => setCollapsed(!collapsed)}>
                         <MenuIcon sx={{ color: theme.palette.primary.main }} />
                     </IconButton>
                 </Box>
-                <Menu menuItemStyles={{
+                <Menu style={{height: '100%'}} menuItemStyles={{
                     subMenuContent:()=>{
                         return{
                             overflow:'visible'
