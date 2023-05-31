@@ -2,13 +2,13 @@ import FormBuilder from "../../FormBuilder";
 import * as Yup from 'yup';
 import userService from '../../../services/user';
 import { useTranslation } from 'next-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/router";
 import useAuth from '../../../hooks/useAuth';
 
 const UserForm = () => {
     const { setUser } = useAuth();
     const { t } = useTranslation();
-    const navigate = useNavigate();
+    const router = useRouter();
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().max(255).required(t('name-required')),
@@ -23,7 +23,7 @@ const UserForm = () => {
                 localStorage.setItem('refresh-token', res.data.token);
                 const user = res.data.user;
                 setUser(user);
-                navigate('/', { replace: true });
+                router.push('/');
             })
             .catch((err) => {
                 setSubmitting(false);

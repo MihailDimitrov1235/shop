@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
                     component="img"
                     alt={name}
                     height="150"
-                    image={`${process.env.REACT_APP_ASSETS}/${files[0].path}`}
+                    image={files[0]? `${process.env.REACT_APP_ASSETS}/${files[0].path}` : ''}
                 />
             </CardActionArea>
             <CardContent sx={{ height: '100px', overflow: 'hidden' }}>

@@ -125,7 +125,7 @@ const ProductPage = () => {
                             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                             //src="https://files.porsche.com/filestore/image/multimedia/none/carrange-flyout-911/small/3cf76e8c-6694-11e9-80c4-005056bbdc38;sQ;twebp;c1696;gc/porsche-small.webp"
                             //src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/is8rDPGsGlcg/v1/-1x-1.jpg"
-                            src={`${process.env.REACT_APP_ASSETS}/${product.files[0].path}`}
+                            src={product.files[0]? `${process.env.REACT_APP_ASSETS}/${product.files[0].path}` : ''}
                         />
                     </Box>
 

@@ -1,5 +1,5 @@
 import { Box, Typography, Stack, Chip, Avatar } from '@mui/material';
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
 export default function ProductInformation({name, authors, desc}) {
     return (
@@ -24,7 +24,7 @@ export default function ProductInformation({name, authors, desc}) {
                             avatar={author.image?<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" /> : <Avatar>{author.name[0].toUpperCase()}</Avatar>}
                             component={Link}
                             label={author.name}
-                            to={"/author/" + author.author_id}
+                            href={"/author/" + author.author_id}
                             clickable
                             key={author.author_id}
                         />

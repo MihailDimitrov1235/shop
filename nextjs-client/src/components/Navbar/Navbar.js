@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-// import { Link as RouterLink } from 'react-router-dom';
 import {
     AppBar,
     Toolbar,
@@ -21,7 +20,7 @@ const Navbar = (props) => {
     const [cartItems, setCartItems] = useState(0);
 
     useEffect(() => {
-        if(user) {
+        if(user && user.cart) {
             setCartItems(user.cart.products.length);
         }
     }, [user])
