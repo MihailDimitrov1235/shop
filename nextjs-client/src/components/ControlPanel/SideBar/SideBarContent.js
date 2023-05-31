@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 const SideBarContent = ({ items, ml = 20 }) => {
     const location = useRouter();
+    const url = location.pathname
 
     const isActive = (href) => {
         return href === location.pathname;

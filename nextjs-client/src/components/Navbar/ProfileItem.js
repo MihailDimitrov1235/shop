@@ -25,7 +25,7 @@ const ProfileItem = () => {
     const { t } = useTranslation();
     const { user, setUser } = useAuth();
     const location = useRouter();
-    const isInAdmin = ([`/admin`].includes(location.pathname))
+    const isInAdmin = location.pathname.includes('/admin')
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);

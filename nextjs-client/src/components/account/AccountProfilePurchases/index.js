@@ -11,7 +11,7 @@ import {
     Collapse,
     Card
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import Row from './Row';
 
 const products = [
