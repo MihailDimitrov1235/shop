@@ -59,7 +59,7 @@ const ProfileItem = () => {
         if(isInAdmin) {
             items.splice(1, 0, { type: 'link', title: t('store'), href: '/', icon: StoreIcon });
         }else {
-            items.splice(1, 0, { type: 'link', title: t('dashboard'), href: '/admin', icon: DashboardIcon });
+            items.splice(1, 0, { type: 'link', title: t('dashboard'), href: '/admin/dashboard', icon: DashboardIcon });
         }
     }
 

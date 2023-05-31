@@ -5,7 +5,7 @@ import { ReactComponent as WordIcon } from '../../../../assets/icons/word.svg';
 import { ReactComponent as ExcelIcon } from '../../../../assets/icons/excel.svg';
 import { ReactComponent as ImageIcon } from '../../../../assets/icons/image.svg';
 import { useTrail, animated } from '@react-spring/web'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 

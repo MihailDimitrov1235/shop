@@ -34,7 +34,7 @@ function MyApp(props) {
           <GlobalStyles />
           <AuthProvider>
             <MessageProvider>
-              {router.asPath.includes('/admin') ?
+              {router.pathname.includes('/admin') ?
                 <ControlPanelLayout>
                   <Component {...pageProps} />
                 </ControlPanelLayout>
