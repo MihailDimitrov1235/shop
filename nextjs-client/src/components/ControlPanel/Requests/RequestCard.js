@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Box, Typography, Card, CardMedia } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useSpring, animated } from '@react-spring/web';
 import { useHover } from '@use-gesture/react';
 
@@ -36,7 +36,7 @@ const RequestCard = ({ heading, image, href}) =>{
 
     return(
             <Box sx={containerSx}>
-                <Link to={href}>
+                <Link href={href}>
                     <animated.div {...bind()} style={{ 
                         width: widthFront, 
                         height:widthFront,

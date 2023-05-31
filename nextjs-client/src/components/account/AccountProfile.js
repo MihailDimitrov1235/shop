@@ -14,7 +14,7 @@ import {
     ListItemText
 } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 import HomeIcon from '@mui/icons-material/Home';
 import ShopTwoIcon from '@mui/icons-material/ShopTwo';

@@ -17,7 +17,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteDialog from './DeleteDialog';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {

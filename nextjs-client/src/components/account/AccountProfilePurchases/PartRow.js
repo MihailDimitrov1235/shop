@@ -7,7 +7,7 @@ import {
   NativeSelect,
 } from "@mui/material";
 import DownloadIcon from '@mui/icons-material/Download';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 function PartRow( {part} ){
 

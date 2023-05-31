@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import FormBuilder from '../FormBuilder';
 import * as Yup from 'yup';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import useAuth from '../../hooks/useAuth';
 import { Formik } from 'formik';
 

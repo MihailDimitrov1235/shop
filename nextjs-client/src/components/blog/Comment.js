@@ -4,7 +4,7 @@ import Link from 'next/link';
 import commentService from '../../services/comment';
 import moment from 'moment';
 import 'moment/locale/bg';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import useAuth from '../../hooks/useAuth';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';

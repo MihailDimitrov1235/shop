@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle, DialogContent, DialogContentText, Button } from "@mui/material"
 import * as Yup from 'yup';
 import FormBuilder from "../../../FormBuilder"
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import formData from '../../../FormBuilder/utils/formData';
 import AddIcon from '@mui/icons-material/Add';
 

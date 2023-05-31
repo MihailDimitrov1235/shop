@@ -7,7 +7,9 @@ const nextConfig = {
         REACT_APP_API_ENDPOINT: process.env.REACT_APP_API_ENDPOINT,
         REACT_APP_API_HEADER: process.env.REACT_APP_API_HEADER,
         REACT_APP_ASSETS: process.env.REACT_APP_ASSETS
-    }
+    },
+    compiler: {
+        // Enables the styled-components SWC transform
+        styledComponents: true
+      }
 }
-
-module.exports = nextConfig

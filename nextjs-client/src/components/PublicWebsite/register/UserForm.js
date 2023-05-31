@@ -1,7 +1,7 @@
 import FormBuilder from "../../FormBuilder";
 import * as Yup from 'yup';
 import userService from '../../../services/user';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 

@@ -8,10 +8,10 @@ import {
     CardActionArea,
     Tooltip
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { animated, useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 function DisplayCard({ product }) {
     const { t } = useTranslation();
@@ -34,7 +34,7 @@ function DisplayCard({ product }) {
     return (
         <animated.div {...bind()} style={{ transform }}>
             <Card sx={{ height: '330px', marginLeft: 'auto', marginRight: 'auto' }}>
-                <CardActionArea component={Link} to={`/products/${id}`} >
+                <CardActionArea component={Link} href={`/products/${id}`} >
                     <CardMedia
                         component='img'
                         alt={name}
@@ -53,7 +53,7 @@ function DisplayCard({ product }) {
                     </Tooltip>
                 </CardContent>
                 <CardActions>
-                    <Button variant='contained' color='bordoRed' component={Link} to={`/products/${id}`} style={{
+                    <Button variant='contained' color='bordoRed' component={Link} href={`/products/${id}`} style={{
                         width: 'auto',
                         fontSize: "12px",
                         marginTop: '30px',

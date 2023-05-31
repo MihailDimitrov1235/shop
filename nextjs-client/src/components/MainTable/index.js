@@ -16,7 +16,7 @@ import {
     Grid,
 } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import EnhancedTableHead from './EnhancedTableHead';
 import DeleteDialog from './DeleteDialog';
@@ -240,12 +240,12 @@ const MainTable = ({
                     )}
                     {options.add && (
                         <Button
-                            component={RouterLink}
+                            component={Link}
                             variant="contained"
                             color="bordoRed"
                             textcolor="bordoRed"
                             startIcon={<AddIcon />}
-                            to="create"
+                            href="create"
                         >
                             {t('add')}
                         </Button>
@@ -427,11 +427,11 @@ const MainTable = ({
                                             })}
                                             {options.previewHref && (
                                                 <TableCell align={options.align}>
-                                                    <RouterLink to={`${options.previewHref}/${row.id}`}>
+                                                    <Link href={`${options.previewHref}/${row.id}`}>
                                                         <IconButton color='info'>
                                                             <PreviewIcon />
                                                         </IconButton>
-                                                    </RouterLink>
+                                                    </Link>
                                                 </TableCell>
                                             )}
                                             {options.approve && (
@@ -445,11 +445,11 @@ const MainTable = ({
                                             )}
                                             {options.edit && (
                                                 <TableCell align={options.align}>
-                                                    <RouterLink to={`edit/${row.id}`}>
+                                                    <Link href={`edit/${row.id}`}>
                                                         <IconButton>
                                                             <EditIcon />
                                                         </IconButton>
-                                                    </RouterLink>
+                                                    </Link>
                                                 </TableCell>
                                             )}
                                             {options.delete && (

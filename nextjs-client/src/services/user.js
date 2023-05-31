@@ -37,6 +37,9 @@ function register(data) {
 
 function profile() {
     const url = `${servicesHelper.url}/users/profile`;
+    console.log(process.env.REACT_APP_API_ENDPOINT)
+    console.log(servicesHelper.url)
+    
 
     return axios.get(url, {
         headers: servicesHelper.header()

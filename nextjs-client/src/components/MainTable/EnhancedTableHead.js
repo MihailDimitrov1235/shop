@@ -8,7 +8,7 @@ import {
     Box,
 } from '@mui/material';
 import { withStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 const TableHead = withStyles(theme => ({
