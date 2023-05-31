@@ -17,7 +17,8 @@ import {
 } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import EnhancedTableHead from './EnhancedTableHead';
 import DeleteDialog from './DeleteDialog';
 import ApproveDialog from './ApproveDialog';
@@ -77,6 +78,7 @@ const MainTable = ({
 }) => {
     const classes = useStyles();
     const { t, i18n } = useTranslation();
+    const router = useRouter();
 
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
@@ -245,7 +247,7 @@ const MainTable = ({
                             color="bordoRed"
                             textcolor="bordoRed"
                             startIcon={<AddIcon />}
-                            href="create"
+                            href={router.pathname + "/create"}
                         >
                             {t('add')}
                         </Button>
@@ -445,7 +447,7 @@ const MainTable = ({
                                             )}
                                             {options.edit && (
                                                 <TableCell align={options.align}>
-                                                    <Link href={`edit/${row.id}`}>
+                                                    <Link href={`${router.pathname}/edit/${row.id}`}>
                                                         <IconButton>
                                                             <EditIcon />
                                                         </IconButton>

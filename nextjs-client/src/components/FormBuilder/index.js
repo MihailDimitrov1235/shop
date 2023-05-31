@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import Fields from './Fields';
 import FormObserver from './FormObserver';
 import TabPanel from './TabPanel';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 function a11yProps(index) {
     return {

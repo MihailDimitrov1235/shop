@@ -7,7 +7,7 @@ const ReactQuill = dynamic(import('react-quill'), {
   loading: () => <p>Loading ...</p>,
 })
 
-const RichTextEditor = ({ style, name, label, modules, setFieldValue, value }) => {
+const RichTextEditor = ({ name, label, modules, setFieldValue, value }) => {
     if (!modules) {
         modules = {
             toolbar: [

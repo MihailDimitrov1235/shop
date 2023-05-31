@@ -21,13 +21,13 @@ const Fields = ({ field, baseProps, setFieldValue, values, touched, errors, upda
                 />
             )}
 
-            {/* {field.type === 'multiline' && (
-                <RichTextEditor
-                    rows={field.rows || 2}
+            {field.type === 'multiline' && (
+                <RichText
+                    value={values}
                     setFieldValue={setFieldValue}
                     {...baseProps}
                 />
-            )} */}
+            )}
 
             {field.type === 'rich-text' && (
                 <RichText

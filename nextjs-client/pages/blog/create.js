@@ -1,6 +1,7 @@
 import { Box, Button, Card, Stack, Chip, Autocomplete, Container, Typography, Tabs, Tab, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, TextField } from "@mui/material"
 import { makeStyles } from '@mui/styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import categoryService from "@/services/category";
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
@@ -19,6 +20,20 @@ const BlogCreate = () =>{
             justifyContent: 'end',
         },
     });
+
+    const [categoryOptions, setCategoryOptions] = useState([])
+
+    useEffect(() => {
+        categoryService.getAll(i18n.language)
+        .then((res) => {
+            const options = res.data.map((el) => ({ label: el.name, value: el.id }));
+            setCategoryOptions(options);
+            console.log(options)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }, [])
 
     const modules = {
           toolbar: [
@@ -86,17 +101,6 @@ const BlogCreate = () =>{
     const [textLang, setTextLang] = useState('bg');
     
     const { i18n, t } = useTranslation();
-
-    let categoryOptions = [
-        {id:1, name:'Green'},
-        {id:2, name:'Yellow'},
-        {id:3, name:'Chemistry'},
-        {id:4, name:'Biology'},
-        {id:5, name:'Josh'},
-        {id:6, name:'Bill Gates'},
-        {id:7, name:'Elon Musk'},
-        {id:8, name:'John Lennon'},
-    ]
 
     const [categories, setCategories] = useState([]);
 
@@ -186,8 +190,8 @@ const BlogCreate = () =>{
                         <Autocomplete
                             multiple
                             options={categoryOptions}
-                            getOptionLabel={(option) => option.name}
-                            isOptionEqualToValue={(option, value) => option.id === value.id}
+                            getOptionLabel={(option) => option.label}
+                            isOptionEqualToValue={(option, value) => option.value === value.value}
                             onChange={handleSelectCategory}
                             filterSelectedOptions
                             renderInput={(params) => (

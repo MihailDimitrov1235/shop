@@ -13,6 +13,7 @@ import ControlPanelLayout from '@/components/ControlPanel/ControlPanelLayout';
 import { useRouter } from 'next/router';
 import AuthProvider from '@/providers/AuthProvider';
 import MessageProvider from '@/providers/MessageProvider';
+import PageLayout from "@/components/ControlPanel/PageLayout";
 import 'react-quill/dist/quill.snow.css';
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -36,7 +37,9 @@ function MyApp(props) {
             <MessageProvider>
               {router.pathname.includes('/admin') ?
                 <ControlPanelLayout>
+                  <PageLayout>
                   <Component {...pageProps} />
+                  </PageLayout>
                 </ControlPanelLayout>
                 :
                 router.pathname === '/404'?

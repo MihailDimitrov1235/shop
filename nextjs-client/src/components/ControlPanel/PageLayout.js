@@ -2,19 +2,19 @@ import {
     Box,
     Typography,
     Divider,
-    Breadcrumbs,
-    Link
+    Breadcrumbs
 } from "@mui/material";
-import { Outlet, useLocation, Link as RouterLink, useParams } from 'react-router-dom';
+import Link from "next/link";
+import { useRouter } from "next/router";
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import Message from "../Message";
 
-const PageLayout = ({ title }) => {
+const PageLayout = ({ title, children }) => {
     const { t } = useTranslation();
-    const location = useLocation();
-    const params = useParams();
-    const parts = location.pathname.split('/').filter(x => x && !Object.values(params).includes(x)).slice(1);
+    const router = useRouter();
+    const params = router.query;
+    const parts = router.pathname.split('/').filter(x => x && !Object.values(params).includes(x)).slice(1);
 
     return (
         <Box sx={{
@@ -37,11 +37,11 @@ const PageLayout = ({ title }) => {
                             } else {
                                 return (
                                     <Link
-                                        component={RouterLink}
+                                        component={Link}
                                         variant='h4'
                                         underline='none'
                                         color='text.black'
-                                        to=''
+                                        href=''
                                         key={index}
                                     >
                                         {t(el)}
@@ -57,7 +57,7 @@ const PageLayout = ({ title }) => {
             </Box>
             {/* CONTENT */}
             <Box sx={{ pb: 5 }} height={"100%"} width={"100%"} ml={"auto"} mr={"auto"}>
-                <Outlet />
+                {children}
             </Box>
         </Box>
     );
