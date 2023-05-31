@@ -39,9 +39,12 @@ function MyApp(props) {
                   <Component {...pageProps} />
                 </ControlPanelLayout>
                 :
-                <MainLayout>
+                router.pathname === '/404'?
                   <Component {...pageProps} />
-                </MainLayout>
+                  :
+                  <MainLayout>
+                    <Component {...pageProps} />
+                  </MainLayout>
               }
             </MessageProvider>
           </AuthProvider>

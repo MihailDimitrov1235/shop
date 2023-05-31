@@ -5,7 +5,7 @@ export default function Page404(){
     return (
         <>
             <h1>404</h1>
-            <h2>{router.asPath} not found</h2>
+            <h2> not found</h2>
         </>
     )
 }

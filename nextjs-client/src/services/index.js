@@ -1,4 +1,4 @@
-const url = process.env.REACT_APP_API_ENDPOINT;
+const url = 'http://127.0.0.1:8000/api';
 
 const token = () => {
     return localStorage.getItem('refresh-token');
