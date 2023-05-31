@@ -1,13 +1,13 @@
 import { Box, Card, CardMedia, CardContent, CardActions, Typography, Chip, Stack } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const BlogCard = ({ post }) => {
-
-    console.log(post)
+    const router = useRouter()
     return (
         <Box sx={{
             flex: 1,
@@ -15,7 +15,7 @@ const BlogCard = ({ post }) => {
             maxWidth: { xs: '80%', sm: '45%', md: '30%' },
             mt: 4
         }}>
-            <Link href={post.slug}>
+            <Link href={router.pathname + '/' + post.slug}>
                 <Card sx={{ borderRadius: 4 }}>
                     <CardMedia
                         sx={{ height: 200 }}

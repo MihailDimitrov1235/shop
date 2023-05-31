@@ -158,7 +158,7 @@ const Comment = ( {props} ) =>{
             </Box>
             <Box flex={11}>
                 <Box display={'flex'}>
-                    <Link to={"/profile/" + userData.id}>
+                    <Link href={"/profile/" + userData.id}>
                         <Typography variant='h6' sx={{flex:1}}>{userData.name}</Typography>
                     </Link>
                     <Typography sx={{flex:1}} textAlign={'right'}>{commentData.createdAt}</Typography>
