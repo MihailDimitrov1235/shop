@@ -2,6 +2,7 @@ import { Box, IconButton, Typography } from "@mui/material";
 // import SalesLine from "./Charts/SalesLine";
 import DownloadIcon from '@mui/icons-material/Download';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Dashboard = () =>{
     const { t } = useTranslation();
@@ -32,5 +33,13 @@ const Dashboard = () =>{
         </Box>
     );
 }
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ... (await serverSideTranslations(locale))
+        }
+    }
+  }
 
 export default Dashboard;
