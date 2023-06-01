@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import productService from '@/src/services/product';
-import useMessage from '@/src/hooks/useMessage';
-import { Helmet } from 'react-helmet';
+import useMessage from '@/hooks/useMessage';
+import categoryService from '@/services/category';
 
 import MainTable from '@/components/MainTable';
 
-function ProductTable() {
+function CategoriesTable() {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
     const { t, i18n } = useTranslation();
@@ -20,17 +20,13 @@ function ProductTable() {
     }, []);
 
     const headings = [
-        { id: 'id', label: t('product-id'), order: true },
-        { id: 'name', label: t('product-name'), order: true },
-        { id: 'authors', label: t('authors'), order: false, arrayId: 'author', selector: 'name' },
-        { id: 'categories', label: t('categories'), order: false, arrayId: 'category', selector: 'name' }
+        { id: 'id', label: t('category-id'), order: true },
+        { id: 'name', label: t('name'), order: true },
     ];
 
     const headFilters = {
-        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('product-id') },
-        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('product-name') },
-        'authors': { type: 'search', name: 'authors', placeholder: t('search-in') + t('authors') },
-        'categories': { type: 'search', name: 'categories', placeholder: t('search-in') + t('categories') }
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('category-id') },
+        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('name') },
     }
 
     const newRequest = (page, total, filters = [], order = {}) => {
@@ -39,7 +35,7 @@ function ProductTable() {
             total: total || 10
         }
 
-        productService.getProducts(pagination, filters, order, i18n.language)
+        categoryService.getCategories(pagination, filters, order, i18n.language)
             .then((res) => {
                 setData(res.data.data);
                 setTotal(res.data.total);
@@ -50,10 +46,10 @@ function ProductTable() {
     }
 
     const deleteHandler = (selected) => {
-      productService.deleteProducts(selected)
+        categoryService.deleteCategories(selected)
             .then((res) => {
                 console.log(res)
-                addMessage(t('product-deleted'), 'success')
+                addMessage(t('category-deleted'), 'success')
             })
             .catch((error) => {
                 console.log(error)
@@ -63,7 +59,7 @@ function ProductTable() {
     return (
         <>
             <Helmet>
-                <title>{t('products')} | {t('ban')}</title>
+                <title>{t('categories')} | {t('ban')}</title>
             </Helmet>
             <Card sx={{ p: 2 }}>
                 <PerfectScrollbar>
@@ -97,4 +93,4 @@ export async function getServerSideProps({ locale }) {
     }
   }
 
-export default ProductTable;
+export default CategoriesTable;
