@@ -37,6 +37,7 @@ const PageLayout = ({ title, children }) => {
                             if (index + 1 === parts.length) {
                                 return <Typography color='text.black' variant='h4' key={index}>{t(el)}</Typography>
                             } else {
+                                console.log(path)
                                 return (
                                     <Typography component={Link} href={path} color='text.black' variant='h4'>
                                         {t(el)}
