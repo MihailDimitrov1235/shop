@@ -419,5 +419,9 @@
 
     "no-posts-subtitle": "Try searching for something else.",
 
-    "more-details": "More details"
+    "more-details": "More details",
+
+    "page-not-found": "Page was not found",
+
+    "go-back-to-store": "Go back to the store"
 }

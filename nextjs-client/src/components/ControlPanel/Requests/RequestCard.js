@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { Box, Typography, Card, CardMedia } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSpring, animated } from '@react-spring/web';
 import { useHover } from '@use-gesture/react';
 
 const RequestCard = ({ heading, image, href}) =>{
+
+    const router = useRouter()
 
     const [{ widthFront, rightFront }, apiFront] = useSpring(() => ({ widthFront: '100%', rightFront: '0' }))
     const [{ widthBack }, apiBack] = useSpring(() => ({ widthBack: '100%'}))
@@ -36,7 +39,7 @@ const RequestCard = ({ heading, image, href}) =>{
 
     return(
             <Box sx={containerSx}>
-                <Link href={href}>
+                <Link href={router.asPath + '/' + href}>
                     <animated.div {...bind()} style={{ 
                         width: widthFront, 
                         height:widthFront,

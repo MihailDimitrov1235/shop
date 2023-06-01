@@ -3,16 +3,16 @@ import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import productService from '@/src/services/product';
-import useMessage from '@/src/hooks/useMessage';
+import userService from '@/services/user';
+import useMessage from '@/hooks/useMessage';
 import { Helmet } from 'react-helmet';
 
 import MainTable from '@/components/MainTable';
 
-function ProductTable() {
+function UsersTable() {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const { addMessage } = useMessage();
 
     useEffect(() => {
@@ -20,17 +20,15 @@ function ProductTable() {
     }, []);
 
     const headings = [
-        { id: 'id', label: t('product-id'), order: true },
-        { id: 'name', label: t('product-name'), order: true },
-        { id: 'authors', label: t('authors'), order: false, arrayId: 'author', selector: 'name' },
-        { id: 'categories', label: t('categories'), order: false, arrayId: 'category', selector: 'name' }
+        { id: 'id', label: t('user-id'), order: true },
+        { id: 'name', label: t('name'), order: true },
+        { id: 'email', label: t('email'), order: true },
     ];
 
     const headFilters = {
-        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('product-id') },
-        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('product-name') },
-        'authors': { type: 'search', name: 'authors', placeholder: t('search-in') + t('authors') },
-        'categories': { type: 'search', name: 'categories', placeholder: t('search-in') + t('categories') }
+        'id': { type: 'search', name: 'id', placeholder: t('search-in') + t('user-id') },
+        'name': { type: 'search', name: 'name', placeholder: t('search-in') + t('name') },
+        'email': { type: 'search', name: 'email', placeholder: t('search-in') + t('email') }
     }
 
     const newRequest = (page, total, filters = [], order = {}) => {
@@ -39,7 +37,7 @@ function ProductTable() {
             total: total || 10
         }
 
-        productService.getProducts(pagination, filters, order, i18n.language)
+        userService.getUsers(pagination, filters, order)
             .then((res) => {
                 setData(res.data.data);
                 setTotal(res.data.total);
@@ -50,10 +48,10 @@ function ProductTable() {
     }
 
     const deleteHandler = (selected) => {
-      productService.deleteProducts(selected)
+        userService.deleteUsers(selected)
             .then((res) => {
                 console.log(res)
-                addMessage(t('product-deleted'), 'success')
+                addMessage(t('user-deleted'), 'success')
             })
             .catch((error) => {
                 console.log(error)
@@ -63,7 +61,7 @@ function ProductTable() {
     return (
         <>
             <Helmet>
-                <title>{t('products')} | {t('ban')}</title>
+                <title>{t('users')} | {t('ban')}</title>
             </Helmet>
             <Card sx={{ p: 2 }}>
                 <PerfectScrollbar>
@@ -97,4 +95,4 @@ export async function getServerSideProps({ locale }) {
     }
   }
 
-export default ProductTable;
+export default UsersTable;

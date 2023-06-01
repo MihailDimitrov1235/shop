@@ -32,16 +32,20 @@ const PageLayout = ({ title, children }) => {
                         // }}
                     >
                         {parts.map((el, index, parts) => {
-                            const path = index === 0 ? '' : router.pathname.split(el)[0];
+                            
+                            
 
                             if (index + 1 === parts.length) {
                                 return <Typography color='text.black' variant='h4' key={index}>{t(el)}</Typography>
                             } else {
-                                console.log(path)
+                                const path = router.pathname.split(el)[0] + '/' + el;
                                 return (
-                                    <Typography component={Link} href={path} color='text.black' variant='h4'>
-                                        {t(el)}
-                                    </Typography>
+                                    
+                                    <Link href={path}>
+                                        <Typography key={index} color='text.black' variant='h4'>
+                                            {t(el)}
+                                        </Typography>
+                                    </Link>
                                     // <Link
                                     //     component={Link}
                                     //     variant='h4'

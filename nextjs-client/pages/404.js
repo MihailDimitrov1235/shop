@@ -5,11 +5,11 @@ import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { t } from "i18next"
 
 export default function Page404(){
     const router = useRouter()
     const { t } = useTranslation()
+    console.log(t('page-not-found'))
 
     const [{ x, y }, api] = useSpring(() => ({
         x: "0",
