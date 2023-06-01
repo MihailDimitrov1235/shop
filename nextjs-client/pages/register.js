@@ -26,9 +26,9 @@ const Register = () => {
     const { t } = useTranslation();
     const [mode, setMode] = useState('user');
 
-    const handleModeTabChange = (event, newValue) => {
-        setMode(newValue);
-    };
+    // const handleModeTabChange = (event, newValue) => {
+    //     setMode(newValue);
+    // };
 
     const classes = useStyles();
 
