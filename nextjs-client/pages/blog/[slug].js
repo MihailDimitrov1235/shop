@@ -16,33 +16,21 @@ import {
     Avatar,
 } from "@mui/material";
 import Comment from "@/components/blog/Comment";
-import blogService from "../../src/services/blog";
-import commentService from "../../src/services/comment";
+import blogService from "@/services/blog";
+import commentService from "@/services/comment";
 import moment from "moment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import useMessage from "../../src/hooks/useMessage";
-import useAuth from "../../src/hooks/useAuth";
+import useMessage from "@/hooks/useMessage";
+import useAuth from "@/hooks/useAuth";
 
-const BlogPost = () => {
+const BlogPost = ( {data} ) => {
     const router = useRouter()
     const { slug } = router.query;
     const { user } = useAuth();
     const { t, i18n } = useTranslation();
-    const [post, setPost] = useState({
-        title: "",
-        subtitle: "",
-        content: "",
-        image_path: "",
-        created_at: "",
-        categories: [],
-        blogger: {
-            id: 0,
-            name: "",
-            image_path: "",
-        },
-    });
-    const [comments, setComments] = useState([]);
-    const [commentsTotal, setCommentsTotal] = useState(0);
+    const [post, setPost] = useState(data.post);
+    const [comments, setComments] = useState(data.comments.data);
+    const [commentsTotal, setCommentsTotal] = useState(data.comments.total);
     const newCommentRef = useRef(null);
     const { addMessage } = useMessage();
 
@@ -319,10 +307,24 @@ const BlogPost = () => {
     );
 };
 
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps({ locale, params }) {
+
+    const { slug } = params
+    let data = {}
+    try{
+        const blogResponse = await blogService.getBySlug(slug, locale)
+        data = {
+            post: blogResponse.data.post,
+            comments: blogResponse.data.comments
+        }
+    }catch(error){
+        console.log(error)
+    }
+
     return {
         props: {
-            ... (await serverSideTranslations(locale))
+            ... (await serverSideTranslations(locale)),
+            data
         }
     }
   }
