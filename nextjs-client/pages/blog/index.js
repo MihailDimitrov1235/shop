@@ -14,6 +14,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const BlogMainPage = ( {data} ) => {
+    // const [ loading, setLoading ] = useState()
     const { t, i18n } = useTranslation();
     const router = useRouter();
     const { category } = router.query
@@ -32,7 +33,8 @@ const BlogMainPage = ( {data} ) => {
     const [categories, setCategories] = useState(data.categories);
 
     useEffect(() => {
-        get()
+        // setLoading(false)
+        // get()
     }, [i18n.language, page])
 
     const get = () => {

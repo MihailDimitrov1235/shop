@@ -11,6 +11,8 @@ import { appWithTranslation } from 'next-i18next';
 import MainLayout from '@/components/MainLayout';
 import ControlPanelLayout from '@/components/ControlPanel/ControlPanelLayout';
 import { useRouter } from 'next/router';
+// import Router from 'next/router';
+import NextNProgress from 'nextjs-progressbar';
 import AuthProvider from '@/providers/AuthProvider';
 import MessageProvider from '@/providers/MessageProvider';
 import PageLayout from "@/components/ControlPanel/PageLayout";
@@ -20,7 +22,15 @@ import 'react-quill/dist/quill.snow.css';
 const clientSideEmotionCache = createEmotionCache();
 
 function MyApp(props) {
+  // const [loading, setLoading] = React.useState(false)
+  // const LoadingContext = React.createContext()
   const router = useRouter()
+  // Router.events.on("routeChangeStart", (url) => {
+  //   setLoading(true)
+  // })
+  // Router.events.on("routeChangeComplete", (url) => {
+  //   setLoading(false)
+  // })
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
@@ -35,20 +45,23 @@ function MyApp(props) {
           <GlobalStyles />
           <AuthProvider>
             <MessageProvider>
-              {router.pathname.includes('/admin') ?
-                <ControlPanelLayout>
-                  <PageLayout>
-                  <Component {...pageProps} />
-                  </PageLayout>
-                </ControlPanelLayout>
-                :
-                router.pathname === '/404'?
-                  <Component {...pageProps} />
-                  :
-                  <MainLayout>
+              <NextNProgress color="#96011c" height={4} showOnShallow={true} />
+              {/* <LoadingContext.Provider value={loading}> */}
+                {router.pathname.includes('/admin') ?
+                  <ControlPanelLayout>
+                    <PageLayout>
                     <Component {...pageProps} />
-                  </MainLayout>
-              }
+                    </PageLayout>
+                  </ControlPanelLayout>
+                  :
+                  router.pathname === '/404'?
+                    <Component {...pageProps} />
+                    :
+                    <MainLayout>
+                      <Component {...pageProps} />
+                    </MainLayout>
+                }
+              {/* </LoadingContext.Provider> */}
             </MessageProvider>
           </AuthProvider>
         </ThemeProvider>
