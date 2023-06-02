@@ -8,7 +8,7 @@ import {
   Button,
   Box
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function DeleteDialog({ selected, setSelected }) {
   const [open, setOpen] = useState(false);

@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router-dom';
 import { styled } from '@mui/material';
 import { ProSidebarProvider } from "react-pro-sidebar";
 import TopBar from './TopBar/TopBar';

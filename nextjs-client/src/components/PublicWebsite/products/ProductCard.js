@@ -8,7 +8,6 @@ import {
     CardActionArea,
     Tooltip
 } from '@mui/material';
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 

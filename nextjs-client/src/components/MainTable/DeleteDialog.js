@@ -6,7 +6,7 @@ import {
     DialogActions,
     Button,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 const DeleteDialog = ({

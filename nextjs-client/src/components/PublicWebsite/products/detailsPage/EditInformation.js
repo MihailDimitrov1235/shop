@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Typography, Stack, Chip, TextField, Tab, Tabs, Button, Autocomplete, Avatar, FormControl } from '@mui/material';
 import Link from 'next/link';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import RichTextEditor from '@/components/FormBuilder/Fields/RichTextEditor';
 import AutocompleteCheckboxes from '../../../filters/AutocompleteCheckboxes';
 import AddIcon from '@mui/icons-material/Add';

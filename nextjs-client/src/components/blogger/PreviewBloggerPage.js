@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { makeStyles } from '@mui/styles';
 import { Container, Box, Typography, Card, TextField, Tab, Tabs, Button, IconButton, styled, Avatar, Badge } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -8,7 +8,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import Gradient from './bloggerGradient.svg';
 import CreatedPosts from './CreatedPosts';
 import { useSpring, animated } from '@react-spring/web';
@@ -35,7 +35,8 @@ const ContactBox = styled(Box)(() => ({
 
 const PreviewAuthor = () => {
 
-    const { id } = useParams();
+    const router = useRouter()
+    const { id } = router.query;
 
     const [{ approveWidth }, apiApprove] = useSpring(() => ({ approveWidth: '50px' }))
 

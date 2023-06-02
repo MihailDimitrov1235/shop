@@ -1,5 +1,4 @@
 import {
-  Box,
   Typography,
   Table,
   TableBody,
@@ -7,8 +6,8 @@ import {
   TableCell,
   TableRow,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import Link from "next/link";
+import { useTranslation } from 'next-i18next';
 
 function CreatedPosts({ posts }) {
 
@@ -50,7 +49,7 @@ function CreatedPosts({ posts }) {
       <TableBody>
         {posts.map((post, index) => (
           <Link
-            to={`/blog/${post.slug}`}
+            href={`/blog/${post.slug}`}
             style={{
               display: "contents",
             }}

@@ -15,7 +15,7 @@ import {
 import PartRow from "./PartRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 function Row({ product }) {
   const { t } = useTranslation();

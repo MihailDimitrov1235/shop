@@ -4,7 +4,6 @@ import {
     MenuItem,
     Divider
 } from '@mui/material';
-// import RichTextEditor from '../RichTextEditor';
 import RichText from './RichTextEditor';
 import LangFields from './LangFields';
 import FileUpload from './FileUpload';

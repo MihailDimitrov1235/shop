@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button, CardMedia, Hidden } from '@mui/material';
 import Link from 'next/link';
-// import { makeStyles } from '@mui/styles';    
-// import { Link } from 'react-router-dom';
 import { Container } from '@mui/system';
 // import './HeroSectionCss.css';
 import { useSpring, animated } from '@react-spring/web';

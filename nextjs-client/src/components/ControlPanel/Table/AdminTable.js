@@ -12,7 +12,8 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import EnhancedTableHead from './EnhancedTableHead';
-import { Link as RouterLink } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteDialog from './DeleteDialog';
 import EditIcon from '@mui/icons-material/Edit';
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function AdminTable(props) {
+  const router = useRouter()
   const classes = useStyles();
   const { rows, columns, checkbox, editOption, deleteOption, dense, searches, handleSearchChange, order, orderBy, handleRequestSort, handleRowClick } = props;
   const [selected, setSelected] = React.useState([]);
@@ -83,12 +85,12 @@ function AdminTable(props) {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mb: 3 }}>
         <DeleteDialog selected={selected} setSelected={setSelected} />
         <Button
-          component={RouterLink}
+          component={Link}
           variant="contained"
           color="bordoRed"
           textcolor="bordoRed"
           startIcon={<AddIcon />}
-          to="create"
+          href={router.pathname + "/create"}
         >
           {t('add')}
         </Button>

@@ -1,12 +1,10 @@
 import FormBuilder from "../../FormBuilder";
 import * as Yup from 'yup';
 import userService from '../../../services/user';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'next-i18next';
 
 const AuthorForm = () => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().max(255).required(t('name-required')),
