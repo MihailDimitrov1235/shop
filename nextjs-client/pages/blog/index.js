@@ -196,35 +196,29 @@ export const getServerSideProps = async ({ locale }) => {
         page: 1,
         total: 10
       };
-      let data
-    
-      try {
-        const url1 = `${process.env.REACT_APP_API_ENDPOINT}/categories/all?lang=${locale}`;
-        let url = `${process.env.REACT_APP_API_ENDPOINT}/posts?page=${pagination.page}&total=${pagination.total}&lang=${locale}`;
+        let posts
+        let total
+        let options
 
-        const blogResponse = await axios.get(url);
-        const categoryResponse = await axios.get(url1);
+    try {
+        const postResponse = await blogService.getPosts(pagination, [], {}, locale);
+        posts = postResponse.data.data;
+        total = postResponse.data.total;
+    } catch (error) {
+        console.log(error);
+    }
     
-        const posts = blogResponse.data.data;
-        const total = blogResponse.data.total;
-        const options = categoryResponse.data.map((el) => ({
-          label: el.name,
-          value: el.id
-        }));
-        data = {
+    try {
+        const categoryResponse = await categoryService.getAll(locale);
+        options = categoryResponse.data.map((el) => ({ label: el.name, value: el.id }));
+    } catch (error) {
+        console.log(error);
+    }
+        const data = {
             posts: posts,
             total: total,
             categories: options
         }
-
-      } catch (error) {
-        console.log(error);
-        data = {
-            posts: [],
-            total: 0,
-            categories: []
-        }
-      }
     return {
       props: {
         ...translations,

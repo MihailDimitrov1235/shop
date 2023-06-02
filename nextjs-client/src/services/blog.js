@@ -15,7 +15,7 @@ function getPosts(pagination, filters, order, lang='bg') {
     }
  
     return axios.get(url, {
-        headers: servicesHelper.header()
+        // headers: servicesHelper.header()
     });
 }
 
@@ -70,7 +70,7 @@ function getBySlug(slug, lang='bg') {
     const url = `${servicesHelper.url}/posts/${slug}?lang=${lang}`;
 
     return axios.get(url, {
-        headers: servicesHelper.header()
+        // headers: servicesHelper.header()
     });
 }
 
