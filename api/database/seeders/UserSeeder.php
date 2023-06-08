@@ -81,7 +81,7 @@ class UserSeeder extends Seeder
         ]);
         Blogger::create([
             'phone' => "0878787878",
-            'image_path' => null,
+            'image_path' => '',
             'user_id' => 3,
         ]);
         BloggerTrans::create([

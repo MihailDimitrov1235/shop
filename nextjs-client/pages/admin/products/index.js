@@ -3,8 +3,8 @@ import { Box, Card } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import productService from '@/src/services/product';
-import useMessage from '@/src/hooks/useMessage';
+import productService from '@/services/product';
+import useMessage from '@/hooks/useMessage';
 import { Helmet } from 'react-helmet';
 
 import MainTable from '@/components/MainTable';
